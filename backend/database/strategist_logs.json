@@ -1,0 +1,208 @@
+{
+  "logs": [
+    {
+      "timestamp": "2026-01-14T19:26:15.719022",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "AJUSTEMENT_PERFORMANCE",
+        "agent": "fibo1",
+        "changes": [
+          "fibo_tolerance_pct: 2.5 -> 2.0"
+        ],
+        "reason": "Winrate faible (0%) et pertes (-41.11 EUR) - resserrer les entrees",
+        "analysis": {
+          "recent_trades": 10,
+          "wins": 0,
+          "losses": 10,
+          "winrate": 0.0,
+          "total_profit": -41.11,
+          "decision": "REDUIRE_TOLERANCE"
+        },
+        "timestamp": "2026-01-14T19:26:15.719022"
+      },
+      "reason": "Agent fibo1: Winrate faible (0%) et pertes (-41.11 EUR) - resserrer les entrees"
+    },
+    {
+      "timestamp": "2026-01-14T19:16:32.935230",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo3",
+        "changes": [
+          "fibo_tolerance_pct: 2.0 -> 2.5"
+        ],
+        "reason": "Inactivite pendant 29473576 min",
+        "timestamp": "2026-01-14T19:16:32.930722"
+      },
+      "reason": "Agent fibo3: Reduction agressive des seuils (Inactivite)"
+    },
+    {
+      "timestamp": "2026-01-14T19:16:32.929722",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo2",
+        "changes": [
+          "fibo_tolerance_pct: 2.0 -> 2.5"
+        ],
+        "reason": "Inactivite pendant 29473576 min",
+        "timestamp": "2026-01-14T19:16:32.922725"
+      },
+      "reason": "Agent fibo2: Reduction agressive des seuils (Inactivite)"
+    },
+    {
+      "timestamp": "2026-01-14T19:16:32.922725",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo1",
+        "changes": [
+          "fibo_tolerance_pct: 2.0 -> 2.5"
+        ],
+        "reason": "Inactivite pendant 29473576 min",
+        "timestamp": "2026-01-14T19:16:32.922725"
+      },
+      "reason": "Agent fibo1: Reduction agressive des seuils (Inactivite)"
+    },
+    {
+      "timestamp": "2026-01-14T19:10:37.674715",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo3",
+        "changes": [
+          "fibo_tolerance_pct: 1.5 -> 2.0"
+        ],
+        "reason": "Inactivite pendant 29473570 min",
+        "timestamp": "2026-01-14T19:10:37.669207"
+      },
+      "reason": "Agent fibo3: Reduction agressive des seuils (Inactivite)"
+    },
+    {
+      "timestamp": "2026-01-14T19:10:37.669207",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo2",
+        "changes": [
+          "fibo_tolerance_pct: 1.5 -> 2.0"
+        ],
+        "reason": "Inactivite pendant 29473570 min",
+        "timestamp": "2026-01-14T19:10:37.662696"
+      },
+      "reason": "Agent fibo2: Reduction agressive des seuils (Inactivite)"
+    },
+    {
+      "timestamp": "2026-01-14T19:10:37.661696",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo1",
+        "changes": [
+          "fibo_tolerance_pct: 1.5 -> 2.0"
+        ],
+        "reason": "Inactivite pendant 29473570 min",
+        "timestamp": "2026-01-14T19:10:37.661696"
+      },
+      "reason": "Agent fibo1: Reduction agressive des seuils (Inactivite)"
+    },
+    {
+      "timestamp": "2026-01-14T19:07:38.752998",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo3",
+        "changes": [
+          "fibo_tolerance_pct: 1 -> 1.5"
+        ],
+        "reason": "Inactivite pendant 22 min",
+        "timestamp": "2026-01-14T19:07:38.746491"
+      },
+      "reason": "Agent fibo3: Reduction agressive des seuils (Inactivite)"
+    },
+    {
+      "timestamp": "2026-01-14T19:07:38.745492",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo2",
+        "changes": [
+          "fibo_tolerance_pct: 1 -> 1.5"
+        ],
+        "reason": "Inactivite pendant 22 min",
+        "timestamp": "2026-01-14T19:07:38.738492"
+      },
+      "reason": "Agent fibo2: Reduction agressive des seuils (Inactivite)"
+    },
+    {
+      "timestamp": "2026-01-14T19:07:38.738492",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo1",
+        "changes": [
+          "fibo_tolerance_pct: 1 -> 1.5"
+        ],
+        "reason": "Inactivite pendant 22 min",
+        "timestamp": "2026-01-14T19:07:38.738492"
+      },
+      "reason": "Agent fibo1: Reduction agressive des seuils (Inactivite)"
+    },
+    {
+      "timestamp": "2026-01-14T13:16:23.988964",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo3",
+        "changes": [
+          "fibo_level: 0.382 -> 0.236"
+        ],
+        "reason": "Inactivite pendant 23 min",
+        "timestamp": "2026-01-14T13:16:23.988964"
+      },
+      "reason": "Agent fibo3: Reduction agressive des seuils (Inactivite)"
+    },
+    {
+      "timestamp": "2026-01-14T12:53:05.454383",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo3",
+        "changes": [
+          "fibo_level: 0.5 -> 0.382"
+        ],
+        "reason": "Inactivite pendant 16 min",
+        "timestamp": "2026-01-14T12:53:05.454383"
+      },
+      "reason": "Agent fibo3: Reduction agressive des seuils (Inactivite)"
+    },
+    {
+      "timestamp": "2026-01-14T12:31:21.002623",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo3",
+        "changes": [
+          "fibo_level: 0.618 -> 0.5"
+        ],
+        "reason": "Inactivite pendant 16 min",
+        "timestamp": "2026-01-14T12:31:20.996166"
+      },
+      "reason": "Agent fibo3: Reduction agressive des seuils (Inactivite)"
+    },
+    {
+      "timestamp": "2026-01-14T12:31:20.996166",
+      "type": "ACTION_EXECUTED",
+      "details": {
+        "action": "REDUIRE_SEUILS_INACTIVITE",
+        "agent": "fibo2",
+        "changes": [
+          "fibo_level: 0.382 -> 0.236"
+        ],
+        "reason": "Inactivite pendant 16 min",
+        "timestamp": "2026-01-14T12:31:20.995163"
+      },
+      "reason": "Agent fibo2: Reduction agressive des seuils (Inactivite)"
+    }
+  ]
+}

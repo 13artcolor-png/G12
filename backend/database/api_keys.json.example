@@ -1,0 +1,39 @@
+{
+    "keys": [
+        {
+            "id": "key_1",
+            "name": "bloc1",
+            "key": "YOUR_API_KEY_HERE",
+            "provider": "openai",
+            "model": "openai/gpt-4o"
+        },
+        {
+            "id": "key_2",
+            "name": "bloc2",
+            "key": "YOUR_API_KEY_HERE",
+            "provider": "google",
+            "model": "google/gemini-2.5-flash"
+        },
+        {
+            "id": "key_3",
+            "name": "bloc3",
+            "key": "YOUR_API_KEY_HERE",
+            "provider": "alibaba",
+            "model": "alibaba/qwen3-max"
+        },
+        {
+            "id": "key_4",
+            "name": "strategist",
+            "key": "YOUR_API_KEY_HERE",
+            "provider": "anthropic",
+            "model": "anthropic/claude-sonnet-4-20250514"
+        },
+        {
+            "id": "key_5",
+            "name": "groq1",
+            "key": "YOUR_GROQ_API_KEY_HERE",
+            "provider": "groq",
+            "model": "llama-3.3-70b-versatile"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+2026-01-11 13:16:49,193 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:49,194 - INFO - Action sur commande: /start
+2026-01-11 13:16:49,463 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:49,463 - INFO - Message texte ignoré: test
+2026-01-11 13:16:49,463 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:49,464 - INFO - Message texte ignoré: test
+2026-01-11 13:16:49,464 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:49,464 - INFO - Action sur commande: /status
+2026-01-11 13:16:49,739 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:49,740 - INFO - Action sur commande: /pnl
+2026-01-11 13:16:50,058 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:50,058 - INFO - Action sur commande: /pnl
+2026-01-11 13:16:50,347 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:50,348 - INFO - Action sur commande: /status
+2026-01-11 13:16:50,626 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:50,627 - INFO - Action sur commande: /status
+2026-01-11 13:16:50,909 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:50,909 - INFO - Action sur commande: /pnl
+2026-01-11 13:16:51,220 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:51,221 - INFO - Action sur commande: /pnl
+2026-01-11 13:16:51,499 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:51,499 - INFO - Action sur commande: /status
+2026-01-11 13:16:51,790 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:51,790 - INFO - Action sur commande: /status
+2026-01-11 13:16:52,071 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:52,071 - INFO - Action sur commande: /status
+2026-01-11 13:16:52,352 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:16:52,352 - INFO - Action sur commande: /status
+2026-01-11 13:26:17,708 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:26:17,709 - INFO - Action sur commande: /status
+2026-01-11 13:26:35,441 - INFO - Check sender: 7017086030 vs config: 7017086030
+2026-01-11 13:26:35,442 - INFO - Action sur commande: /pnl
+2026-01-13 09:56:00,874 - ERROR - Erreur polling: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-01-13 09:59:16,079 - ERROR - Erreur polling: HTTPSConnectionPool(host='api.telegram.org', port=443): Max retries exceeded with url: /bot8405765435:AAEs_Gkv9jOqmwwOWr6NJDFJpavsUQot2Ao/getUpdates?offset=1&timeout=5 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00000222B334DC70>: Failed to establish a new connection: [WinError 10065] Une opération a été tentée sur un hôte impossible à atteindre'))

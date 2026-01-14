@@ -1,0 +1,31 @@
+# Fichiers temporaires
+_ul
+nul
+tmpclaude*
+*.tmp
+status_output.json
+
+# Fichiers personnels
+perso.txt
+
+# Secrets et credentials (NE JAMAIS COMMITER)
+backend/database/api_keys.json
+backend/database/mt5_accounts_runtime.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+venv/
+
+# Debug
+debug_output.txt
+debug_error.txt
+
+# IDE
+.vscode/
+.idea/
+
+# Logs volumineux (garder les configs)
+backend/database/sessions/archive_*/

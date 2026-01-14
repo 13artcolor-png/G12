@@ -1,0 +1,29 @@
+============================================================
+RAPPORT DE SESSION ULTRA COMPLET - G12
+============================================================
+ID: 20260114_003245
+Durée: 612 min
+P&L Final: -2997.48 EUR
+Win Rate: 55.6% (9 trades)
+
+--- ANALYSE DE PERFORMANCE ---
+Meilleur Agent: fibo2
+Pire Agent: fibo1
+Meilleur Horaire: 6h
+
+--- POINTS FORTS ---
++ Excellent Win Rate global
+
+--- POINTS FAIBLES ---
+- Agent fibo1 en échec total
+
+--- MODIFICATIONS STRATÉGISTE ---
+Total d'actions exécutées: 0
+
+--- DETAILS PAR AGENT ---
+  FIBO1: -12.30 EUR | 0/3 wins
+  FIBO2: +7.60 EUR | 5/6 wins
+
+============================================================
+FIN DU RAPPORT
+============================================================

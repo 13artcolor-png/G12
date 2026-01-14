@@ -1,0 +1,11 @@
+{
+  "max_spread_points": 2100,
+  "spread_check_enabled": true,
+  "tp_pct": 0.25,
+  "sl_pct": 0.5,
+  "trailing_enabled": false,
+  "trailing_start_pct": 0.2,
+  "trailing_distance_pct": 0.1,
+  "break_even_enabled": true,
+  "break_even_pct": 0.15
+}

@@ -1,0 +1,3504 @@
+{
+  "errors": [
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T19:38:11.624643"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T18:33:10.583743"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T16:12:39.121558"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T15:36:41.469080"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T15:21:10.885908"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T15:14:50.132298"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T15:06:26.008752"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T15:03:32.503868"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T15:03:17.487600"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T15:01:29.778584"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T15:01:23.759530"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:58:54.941432"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:58:34.903869"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:57:30.343888"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:53:39.306166"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:53:25.291388"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:52:46.690993"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:52:24.668495"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:51:33.727975"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:51:25.718240"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:50:20.612225"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:50:02.593057"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:49:06.177327"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:48:44.152040"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:47:57.607957"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:46:30.904972"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:46:14.889587"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:45:08.354740"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:43:43.874721"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:42:35.764094"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:39:22.436079"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:37:19.706971"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:36:10.702631"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:34:59.399679"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:34:09.286930"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T14:33:45.261098"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:32:55.493462"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T14:30:01.679106"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:24:31.083170"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:21:48.008723"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:21:29.986970"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:20:25.609099"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:20:12.552257"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:19:05.346225"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:18:43.320705"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T14:18:25.287183"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:17:41.015662"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:17:22.793178"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T14:17:00.771764"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:16:06.493567"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:15:44.458897"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T14:15:20.402234"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:14:34.572787"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:14:12.549203"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:12:32.864189"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:12:10.637557"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:08:11.799054"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:07:16.267991"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:06:54.248434"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:05:51.957519"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:05:33.938488"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:05:04.579227"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:04:48.561651"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:03:54.176216"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:03:42.159880"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:02:29.524348"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:02:07.370718"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:01:31.547163"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T14:01:15.528224"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T14:00:13.142521"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:59:57.124350"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:58:57.200078"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:58:35.179094"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:56:50.316858"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:55:58.210104"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:54:05.452307"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:52:33.518336"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:52:11.415957"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:51:28.778783"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:51:14.764957"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:50:12.236263"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:50:02.225300"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:49:09.722617"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:48:51.706093"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:47:45.425443"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:47:21.394358"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:46:11.097415"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:45:04.609217"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:44:44.384538"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T13:44:25.194275"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:43:00.655473"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:42:38.635861"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:41:21.384294"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:39:31.371477"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:39:09.329008"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:38:21.644466"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:37:25.160982"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:35:12.892342"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:31:00.641350"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo3",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T13:30:09.260704"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:28:40.858873"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:22:56.930472"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:21:24.306112"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:20:31.874002"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:19:49.347425"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:18:38.600264"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:17:34.261845"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:14:49.422950"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:13:57.129770"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:12:53.257132"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:11:54.765552"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:10:25.257098"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:09:28.551930"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:06:55.760540"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:06:16.647922"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:05:39.021895"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T13:02:03.904346"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:59:55.134619"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:59:22.467742"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:56:37.708405"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:52:59.434376"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T12:52:13.104348"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:51:10.618776"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T12:50:52.587900"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:50:18.927162"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T12:50:12.910721"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:49:43.113122"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:48:45.595317"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T12:48:32.548425"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:47:39.936622"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T12:47:33.914161"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:46:56.790167"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T12:46:50.773798"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:46:18.075406"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T12:46:02.047179"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:45:01.420157"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T12:44:55.398132"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:44:16.173734"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T12:44:10.156468"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:41:06.895074"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:39:44.664926"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo2",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T12:34:34.305120"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T12:33:03.894322"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T12:28:59.559347"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo1",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-14T12:28:14.726812"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T10:19:51.028787"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T10:19:18.514213"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T10:09:53.404425"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T10:07:20.267066"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T10:06:47.714307"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T10:05:29.038971"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T10:02:49.084656"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T09:56:01.339759"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T09:54:38.113525"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T09:51:00.282676"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T09:50:16.160684"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T09:48:54.453542"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T09:48:09.056978"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T09:24:59.095179"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-14T00:59:37.311068"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T00:57:20.367615"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T00:29:00.310686"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-14T00:28:20.715246"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T23:47:50.491756"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T20:02:09.648143"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T19:34:49.353151"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T19:34:17.122804"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T18:54:35.633086"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T18:38:13.947629"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T18:37:10.889508"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T18:36:05.941043"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T18:31:20.798896"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T18:29:26.962800"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T18:21:14.366610"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T18:12:04.001645"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T18:11:26.846896"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T18:07:02.385012"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T18:05:53.191710"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T18:05:43.177033"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T18:01:49.159710"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T17:46:45.045440"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T17:43:15.342539"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T17:41:55.989549"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T17:27:28.111169"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T17:27:14.090515"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T17:20:01.366318"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T17:18:24.646435"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T17:16:04.302629"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T17:15:07.047798"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T17:10:17.970873"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T17:06:13.049474"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T17:05:01.371382"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T17:02:04.678644"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T17:01:56.666632"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T17:01:41.722617"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T16:59:24.528039"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T16:59:16.105920"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T16:59:02.086836"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T16:57:50.028891"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T16:56:59.235620"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T16:56:53.203121"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T16:56:20.020041"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T16:56:07.002526"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T16:54:09.889995"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T16:47:51.895858"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T16:45:14.461035"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T16:42:30.623873"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T16:40:01.683559"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T16:36:45.395948"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T16:36:33.376503"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T16:33:17.097579"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T16:32:29.822776"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T16:29:47.573552"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T16:28:24.229500"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T16:27:01.659792"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T16:19:43.452122"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T16:11:01.223116"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T16:01:31.007474"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T15:57:43.826849"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T15:56:20.585908"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T15:33:39.845878"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T15:26:52.739400"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T15:23:54.010251"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T15:01:46.205925"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T15:00:20.596046"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:59:41.390244"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:58:27.281035"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:42:27.925304"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:39:14.877311"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:34:25.689739"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T14:34:11.457039"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T14:32:59.164091"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T14:32:53.145004"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:30:26.919680"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T14:30:12.900124"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:26:50.418246"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:25:51.333711"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T14:25:41.322112"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:24:46.085463"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T14:24:36.073909"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:23:33.648836"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T14:23:30.488513"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:21:29.832535"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:20:04.208342"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:19:07.787084"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T14:19:02.313632"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:17:07.256049"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:15:51.781056"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T14:15:41.769668"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:13:22.352601"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T14:12:01.016497"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:10:52.795797"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T14:10:41.772611"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:09:43.159474"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:05:42.982380"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T14:00:21.547619"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T14:00:05.527373"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:58:47.298522"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T13:58:44.284864"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:57:36.209440"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T13:57:20.185125"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:56:22.273231"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:55:17.656340"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:52:03.181009"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:51:08.892299"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:50:21.061217"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:49:05.946668"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:47:46.128032"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:46:40.118624"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:45:36.297371"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:44:30.979317"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:43:39.781468"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:40:29.901327"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:38:20.896570"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:37:21.712911"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:35:24.773229"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T13:35:14.745901"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:33:26.069253"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:31:28.621549"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:30:24.743316"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:29:33.609006"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T13:29:23.593274"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:28:22.707446"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:27:14.772539"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T13:27:08.765575"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:26:13.377806"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:23:17.642611"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:22:05.692106"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T13:21:59.678508"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:18:17.401308"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:16:33.334757"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:15:50.349414"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:06:27.343516"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T13:06:02.304901"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:04:57.184995"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T13:02:29.646937"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T13:02:18.632093"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:58:59.528445"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:56:55.021750"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T12:56:49.012396"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T12:49:24.567474"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:47:31.491251"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T12:47:22.500444"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:46:21.323228"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T12:46:15.310394"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T12:46:05.283041"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:44:34.800569"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T12:44:24.685047"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T12:44:16.674810"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:43:07.628693"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T12:42:59.697427"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:41:59.586101"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T12:41:39.557740"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:40:58.349946"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T12:40:49.322277"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:37:06.051600"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:35:30.088668"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:33:58.042142"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:32:29.831068"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:29:32.654573"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:28:16.474825"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:27:19.391254"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:23:19.903535"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:18:59.594251"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:17:59.482314"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:16:32.726961"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:14:49.272375"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:12:27.970419"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:08:56.395025"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:07:46.312517"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:06:27.168594"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:05:25.378338"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T12:05:11.363641"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:03:06.987708"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T12:03:03.881726"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:02:18.610184"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:01:01.531924"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T12:00:04.400469"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:58:21.732769"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:57:41.639109"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:56:32.065824"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:55:52.547637"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:54:39.418686"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:53:40.978913"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:52:46.525533"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:51:55.780668"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:50:33.584499"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T11:50:13.563880"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T11:47:25.254944"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T11:46:00.464327"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:44:50.653557"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:42:10.928782"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:38:28.629698"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:37:52.788043"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:37:02.691928"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:35:44.461239"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:35:05.234163"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:34:20.555423"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:32:27.107694"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:31:46.776314"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T11:31:34.265441"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:31:00.429380"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:30:16.122125"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:28:51.071449"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:23:24.497952"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:21:40.822761"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:20:54.586791"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:19:41.723348"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:18:23.395558"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:17:37.560110"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:15:49.327142"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:13:51.628623"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-13T11:13:41.618839"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:13:01.173479"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:12:02.246216"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:09:44.076540"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:06:40.923236"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:02:30.626335"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-13T11:01:23.282053"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T10:46:04.868372"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T10:42:48.640820"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T10:29:02.145012"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T10:15:22.320964"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T10:08:04.078471"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T10:04:17.144024"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T10:02:14.688607"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec BUY pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-13T10:01:17.147609"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:44:13.292087"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:43:42.869728"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:42:14.523317"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:39:16.542311"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:37:23.779286"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:36:23.076538"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:35:50.392061"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:34:01.381479"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:30:26.338692"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:29:35.593821"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:27:22.722908"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:26:17.617742"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:25:13.636154"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:23:59.756421"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-12T00:22:00.837339"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:20:56.021392"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-12T00:18:20.807833"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:17:50.181052"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:15:46.902133"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:14:42.247611"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-12T00:13:36.702107"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:11:59.184215"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:11:01.672768"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:10:29.051312"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:09:26.782764"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-12T00:06:48.824666"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-12T00:04:55.049978"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-12T00:04:09.468269"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-12T00:04:02.389090"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-12T00:02:38.422940"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-12T00:02:29.896665"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-12T00:02:01.224862"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-12T00:01:59.057689"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-12T00:01:50.143462"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-12T00:01:14.399805"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-12T00:00:32.832129"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-12T00:00:04.135476"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:59:57.219574"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:59:27.831680"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:59:20.283539"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:58:44.243880"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:58:15.727611"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:58:10.678603"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:58:01.919103"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:57:34.195430"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:57:27.398292"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:57:21.397374"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:56:54.611425"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:56:26.669940"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:55:49.724573"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:55:12.022325"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:52:52.428680"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:52:19.658247"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:51:47.622712"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:51:40.436891"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:51:04.754026"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:50:28.266862"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:49:59.606881"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:49:51.841879"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:48:56.812444"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:48:46.861554"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:48:18.310421"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:47:49.394981"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:46:17.176846"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:45:09.175040"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:45:04.415802"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:44:31.505926"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:44:25.317330"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:43:52.610540"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:43:24.701313"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:41:18.948860"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:40:44.632422"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:40:09.538603"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:39:34.476576"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:37:57.353163"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:37:50.901716"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:37:20.356965"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:36:53.680136"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:36:46.779279"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:36:16.366488"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:35:49.173415"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:35:42.893748"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:34:37.342074"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:34:05.897135"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:33:02.923079"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:32:58.341751"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:32:24.221181"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:32:22.188571"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:31:19.047636"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:30:16.542919"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour momentum",
+      "agent_id": "fibo1",
+      "context": null,
+      "timestamp": "2026-01-11T23:30:07.627663"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:29:36.572139"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:28:58.189518"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:27:56.984855"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:27:52.546180"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:27:19.918563"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:26:44.198815"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:25:14.357521"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:24:39.443425"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:24:05.936312"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:23:29.428521"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:23:00.684883"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:22:29.974104"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:21:29.132101"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:20:55.740874"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:20:02.771662"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:19:27.997974"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:19:22.786405"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:18:53.083448"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:17:04.373956"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour liquidation",
+      "agent_id": "fibo3",
+      "context": null,
+      "timestamp": "2026-01-11T23:16:30.122713"
+    },
+    {
+      "type": "trade_execution",
+      "message": "Echec SELL pour fibo",
+      "agent_id": "fibo2",
+      "context": null,
+      "timestamp": "2026-01-11T23:16:23.296802"
+    },
+    {
+      "type": "trading_loop",
+      "message": "unsupported format string passed to NoneType.__format__",
+      "agent_id": null,
+      "context": null,
+      "timestamp": "2026-01-11T23:15:00.170890"
+    }
+  ]
+}

@@ -1,0 +1,2465 @@
+{
+  "session_id": "20260114_003245",
+  "start_time": "2026-01-14T00:32:45.027077",
+  "end_time": "2026-01-14T10:45:25.621988",
+  "duration_minutes": 612,
+  "balance_start": 2997.48,
+  "balance_end": 2997.48,
+  "pnl": 0.0,
+  "summary": {
+    "best_agent": "fibo2",
+    "worst_agent": "fibo1",
+    "best_hour": "6",
+    "strong_points": [
+      "Excellent Win Rate global"
+    ],
+    "weak_points": [
+      "Agent fibo1 en échec total"
+    ],
+    "strategist_changes_count": 0,
+    "global_win_rate": 55.6,
+    "total_profit": -4.7
+  },
+  "stats": {
+    "total_trades": 9,
+    "winning_trades": 5,
+    "losing_trades": 4,
+    "win_rate": 55.6,
+    "total_profit": -4.7,
+    "avg_profit": -0.52,
+    "max_profit": 2.6,
+    "max_loss": -4.48,
+    "by_agent": {
+      "fibo1": {
+        "trades": 3,
+        "profit": -12.3,
+        "wins": 0
+      },
+      "fibo2": {
+        "trades": 6,
+        "profit": 7.6,
+        "wins": 5
+      }
+    }
+  },
+  "trades": [
+    {
+      "agent": "fibo1",
+      "ticket": 187956493,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95548.87,
+      "profit": -3.44,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T03:08:16"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 187956505,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95575.5,
+      "profit": -4.38,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T03:08:18"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 187956506,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95581.03,
+      "profit": -4.48,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T03:08:18"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 187946447,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95900.65,
+      "profit": 1.73,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T02:00:03"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 187951557,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95336.0,
+      "profit": -2.52,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T02:30:26"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 187956495,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95519.2,
+      "profit": 2.35,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T03:08:16"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 187956668,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95587.37,
+      "profit": 1.9300000000000002,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T03:09:02"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 187956830,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95617.45,
+      "profit": 1.51,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T03:10:15"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 187995785,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95658.55,
+      "profit": 2.6,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T06:56:00"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "decision_20260114_102308_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre le 0.5 et 0",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95097.5,
+        "fibo1_1m": -0.0011,
+        "funding": 0.004136
+      },
+      "timestamp": "2026-01-14T10:23:08.005242"
+    },
+    {
+      "id": "decision_20260114_102208_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du niveau 0.5 Fibo",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95120.5,
+        "fibo1_1m": 0.0116,
+        "funding": 0.004104
+      },
+      "timestamp": "2026-01-14T10:22:08.162730"
+    },
+    {
+      "id": "decision_20260114_102111_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix sur niveau 0.5 Fibo mais manque de",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95128.5,
+        "fibo1_1m": 0.0284,
+        "funding": 0.004104
+      },
+      "timestamp": "2026-01-14T10:21:11.127178"
+    },
+    {
+      "id": "decision_20260114_102040_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix entre 0.5 et 0.382 Fibo",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95110.5,
+        "fibo1_1m": 0.0473,
+        "funding": 0.004043
+      },
+      "timestamp": "2026-01-14T10:20:40.391433"
+    },
+    {
+      "id": "decision_20260114_101937_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur niveau 0.5 Fibo en",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95109.0,
+        "fibo1_1m": 0.0463,
+        "funding": 0.004043
+      },
+      "timestamp": "2026-01-14T10:19:37.766633"
+    },
+    {
+      "id": "decision_20260114_101912_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement 0",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95109.0,
+        "fibo1_1m": 0.0442,
+        "funding": 0.004043
+      },
+      "timestamp": "2026-01-14T10:19:12.493636"
+    },
+    {
+      "id": "decision_20260114_101839_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre les niveaux Fibo clÃ©s, la structure",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95095.0,
+        "fibo1_1m": 0.0705,
+        "funding": 0.0039889999999999995
+      },
+      "timestamp": "2026-01-14T10:18:39.709406"
+    },
+    {
+      "id": "decision_20260114_101418_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "FILTRE CONSENSUS: Agent voulait BUY mais le consensus est bullish (70%)",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95062.0,
+        "fibo1_1m": 0.0779,
+        "funding": 0.00385
+      },
+      "timestamp": "2026-01-14T10:14:18.465627"
+    },
+    {
+      "id": "decision_20260114_101330_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "FILTRE CONSENSUS: Agent voulait BUY mais le consensus est bullish (70%)",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95018.0,
+        "fibo1_1m": 0.0495,
+        "funding": 0.00385
+      },
+      "timestamp": "2026-01-14T10:13:30.424453"
+    },
+    {
+      "id": "decision_20260114_101245_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "FILTRE CONSENSUS: Agent voulait BUY mais le consensus est bullish (70%)",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95042.0,
+        "fibo1_1m": 0.0727,
+        "funding": 0.00385
+      },
+      "timestamp": "2026-01-14T10:12:45.813858"
+    },
+    {
+      "id": "decision_20260114_101157_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre le 0.5 et le",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95063.5,
+        "fibo1_1m": 0.0958,
+        "funding": 0.0038099999999999996
+      },
+      "timestamp": "2026-01-14T10:11:57.037933"
+    },
+    {
+      "id": "decision_20260114_101039_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "FILTRE CONSENSUS: Agent voulait BUY mais le consensus est bullish (70%)",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94969.0,
+        "fibo1_1m": 0.0949,
+        "funding": 0.0037830000000000003
+      },
+      "timestamp": "2026-01-14T10:10:39.436785"
+    },
+    {
+      "id": "decision_20260114_100942_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94989.5,
+        "fibo1_1m": 0.1265,
+        "funding": 0.0037540000000000004
+      },
+      "timestamp": "2026-01-14T10:09:42.445923"
+    },
+    {
+      "id": "decision_20260114_100857_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "FILTRE CONSENSUS: Agent voulait BUY mais le consensus est bullish (70%)",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94957.5,
+        "fibo1_1m": 0.0685,
+        "funding": 0.0037540000000000004
+      },
+      "timestamp": "2026-01-14T10:08:57.577890"
+    },
+    {
+      "id": "decision_20260114_100817_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le 0.61",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94979.5,
+        "fibo1_1m": 0.0854,
+        "funding": 0.0037540000000000004
+      },
+      "timestamp": "2026-01-14T10:08:17.597385"
+    },
+    {
+      "id": "decision_20260114_100711_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix a atteint le niveau de retracement 0.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94961.0,
+        "fibo1_1m": 0.059,
+        "funding": 0.0036990000000000005
+      },
+      "timestamp": "2026-01-14T10:07:11.130237"
+    },
+    {
+      "id": "decision_20260114_100641_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement 0.61",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94913.0,
+        "fibo1_1m": 0.0053,
+        "funding": 0.003619
+      },
+      "timestamp": "2026-01-14T10:06:41.704330"
+    },
+    {
+      "id": "decision_20260114_100610_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "FILTRE CONSENSUS: Agent voulait BUY mais le consensus est bullish (70%)",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94902.5,
+        "fibo1_1m": -0.019,
+        "funding": 0.0035840000000000004
+      },
+      "timestamp": "2026-01-14T10:06:10.258174"
+    },
+    {
+      "id": "decision_20260114_100520_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur 0.618 Fibo en tendance ha",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94890.5,
+        "fibo1_1m": 0.0063,
+        "funding": 0.0035840000000000004
+      },
+      "timestamp": "2026-01-14T10:05:20.129384"
+    },
+    {
+      "id": "decision_20260114_100435_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix sous 0.618 Fibo,",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94876.5,
+        "fibo1_1m": -0.0032,
+        "funding": 0.0035840000000000004
+      },
+      "timestamp": "2026-01-14T10:04:35.216431"
+    },
+    {
+      "id": "decision_20260114_100404_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix proche du 0.618 Fibo en",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94893.5,
+        "fibo1_1m": 0.0084,
+        "funding": 0.0035859999999999998
+      },
+      "timestamp": "2026-01-14T10:04:04.991168"
+    },
+    {
+      "id": "decision_20260114_100328_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sous le 0.61",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94889.0,
+        "fibo1_1m": -0.0053,
+        "funding": 0.0035859999999999998
+      },
+      "timestamp": "2026-01-14T10:03:28.739102"
+    },
+    {
+      "id": "decision_20260114_100248_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix retrace sur le niveau 0.61",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94904.5,
+        "fibo1_1m": 0.0011,
+        "funding": 0.003573
+      },
+      "timestamp": "2026-01-14T10:02:48.067246"
+    },
+    {
+      "id": "decision_20260114_100200_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.618 Fibo",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94881.0,
+        "fibo1_1m": -0.019,
+        "funding": 0.003573
+      },
+      "timestamp": "2026-01-14T10:02:00.949681"
+    },
+    {
+      "id": "decision_20260114_100121_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix sous le 0.618 Fibo",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94907.5,
+        "fibo1_1m": -0.0137,
+        "funding": 0.003573
+      },
+      "timestamp": "2026-01-14T10:01:21.444261"
+    },
+    {
+      "id": "decision_20260114_100029_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Biais global neutre et momentum baissier contredis",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94884.0,
+        "fibo1_1m": 0.0053,
+        "funding": 0.0035169999999999997
+      },
+      "timestamp": "2026-01-14T10:00:29.264178"
+    },
+    {
+      "id": "decision_20260114_095954_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sous le 0.618 F",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94883.5,
+        "fibo1_1m": -0.0421,
+        "funding": 0.0034990000000000004
+      },
+      "timestamp": "2026-01-14T09:59:54.743369"
+    },
+    {
+      "id": "decision_20260114_095838_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le 0.618 F",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94904.0,
+        "fibo1_1m": -0.0211,
+        "funding": 0.003461
+      },
+      "timestamp": "2026-01-14T09:58:38.333485"
+    },
+    {
+      "id": "decision_20260114_095810_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sous le 0.61",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94896.0,
+        "fibo1_1m": -0.0169,
+        "funding": 0.003461
+      },
+      "timestamp": "2026-01-14T09:58:10.496344"
+    },
+    {
+      "id": "decision_20260114_095657_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le 0.618",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94919.0,
+        "fibo1_1m": 0.019,
+        "funding": 0.0034260000000000002
+      },
+      "timestamp": "2026-01-14T09:56:57.584629"
+    },
+    {
+      "id": "decision_20260114_095547_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur niveau Fibonacci 0.618",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94880.5,
+        "fibo1_1m": -0.0221,
+        "funding": 0.0034130000000000002
+      },
+      "timestamp": "2026-01-14T09:55:47.956340"
+    },
+    {
+      "id": "decision_20260114_095510_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.618 Fibo",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94889.5,
+        "fibo1_1m": -0.0169,
+        "funding": 0.00338
+      },
+      "timestamp": "2026-01-14T09:55:10.335796"
+    },
+    {
+      "id": "decision_20260114_095436_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94911.0,
+        "fibo1_1m": 0.0053,
+        "funding": 0.00338
+      },
+      "timestamp": "2026-01-14T09:54:36.106799"
+    },
+    {
+      "id": "decision_20260114_095407_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le 0.61",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94923.5,
+        "fibo1_1m": -0.0105,
+        "funding": 0.00338
+      },
+      "timestamp": "2026-01-14T09:54:07.927626"
+    },
+    {
+      "id": "decision_20260114_095346_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.618 F",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94912.5,
+        "fibo1_1m": -0.0221,
+        "funding": 0.00338
+      },
+      "timestamp": "2026-01-14T09:53:46.053540"
+    },
+    {
+      "id": "decision_20260114_095314_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.618 F",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94905.5,
+        "fibo1_1m": -0.0337,
+        "funding": 0.00338
+      },
+      "timestamp": "2026-01-14T09:53:14.585205"
+    },
+    {
+      "id": "decision_20260114_095232_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix proche du 0.618 Fibo mais",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94911.0,
+        "fibo1_1m": -0.04,
+        "funding": 0.003375
+      },
+      "timestamp": "2026-01-14T09:52:32.522930"
+    },
+    {
+      "id": "decision_20260114_095139_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.61",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94911.5,
+        "fibo1_1m": -0.039,
+        "funding": 0.0033720000000000004
+      },
+      "timestamp": "2026-01-14T09:51:39.936388"
+    },
+    {
+      "id": "decision_20260114_095059_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur le 0.618 Fibo (Golden",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94899.0,
+        "fibo1_1m": -0.0695,
+        "funding": 0.003383
+      },
+      "timestamp": "2026-01-14T09:50:59.087450"
+    },
+    {
+      "id": "decision_20260114_095006_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur 0.618 Fibo (",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94925.0,
+        "fibo1_1m": -0.0337,
+        "funding": 0.003383
+      },
+      "timestamp": "2026-01-14T09:50:06.139055"
+    },
+    {
+      "id": "decision_20260114_094930_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le 0.618",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94934.0,
+        "fibo1_1m": -0.02,
+        "funding": 0.003383
+      },
+      "timestamp": "2026-01-14T09:49:30.221890"
+    },
+    {
+      "id": "decision_20260114_094853_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement 0.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94924.5,
+        "fibo1_1m": -0.0274,
+        "funding": 0.003404
+      },
+      "timestamp": "2026-01-14T09:48:53.456973"
+    },
+    {
+      "id": "decision_20260114_094803_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur retracement 0.618 Fibo en",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94948.5,
+        "fibo1_1m": 0.0011,
+        "funding": 0.003401
+      },
+      "timestamp": "2026-01-14T09:48:03.043961"
+    },
+    {
+      "id": "decision_20260114_094718_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le 0.618",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94948.5,
+        "fibo1_1m": -0.0411,
+        "funding": 0.003401
+      },
+      "timestamp": "2026-01-14T09:47:18.509144"
+    },
+    {
+      "id": "decision_20260114_094648_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur 0.618 Fibo",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 94957.0,
+        "sl": 94487.19,
+        "tp": 95199.405
+      },
+      "timestamp": "2026-01-14T09:46:48.783109"
+    },
+    {
+      "id": "decision_20260114_094635_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur 0.618 Fibo",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94962.0,
+        "fibo1_1m": -0.019,
+        "funding": 0.003388
+      },
+      "timestamp": "2026-01-14T09:46:35.750452"
+    },
+    {
+      "id": "decision_20260114_094550_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement 0.6",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 94974.0,
+        "sl": 94487.19,
+        "tp": 95199.405
+      },
+      "timestamp": "2026-01-14T09:45:50.034756"
+    },
+    {
+      "id": "decision_20260114_094548_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement 0.6",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94962.0,
+        "fibo1_1m": -0.0221,
+        "funding": 0.003388
+      },
+      "timestamp": "2026-01-14T09:45:48.718268"
+    },
+    {
+      "id": "decision_20260114_094529_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur le 0.618 Fibo (Golden",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 94979.0,
+        "sl": 94474.255,
+        "tp": 95186.3725
+      },
+      "timestamp": "2026-01-14T09:45:29.785882"
+    },
+    {
+      "id": "decision_20260114_094523_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur le 0.618 Fibo (Golden",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94949.0,
+        "fibo1_1m": -0.0789,
+        "funding": 0.003388
+      },
+      "timestamp": "2026-01-14T09:45:23.650104"
+    },
+    {
+      "id": "decision_20260114_094444_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le retracement 0.618",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 94961.0,
+        "sl": 94470.7725,
+        "tp": 95182.86374999999
+      },
+      "timestamp": "2026-01-14T09:44:44.010352"
+    },
+    {
+      "id": "decision_20260114_094442_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le retracement 0.618",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94945.5,
+        "fibo1_1m": -0.081,
+        "funding": 0.0033599999999999997
+      },
+      "timestamp": "2026-01-14T09:44:42.469679"
+    },
+    {
+      "id": "decision_20260114_094412_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur 0.618 Fibo (Golden Ratio",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 94958.0,
+        "sl": 94475.25,
+        "tp": 95187.375
+      },
+      "timestamp": "2026-01-14T09:44:12.825709"
+    },
+    {
+      "id": "decision_20260114_094402_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur 0.618 Fibo (Golden Ratio",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94950.0,
+        "fibo1_1m": -0.0695,
+        "funding": 0.003365
+      },
+      "timestamp": "2026-01-14T09:44:02.693412"
+    },
+    {
+      "id": "decision_20260114_094323_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur 0.618 Fibo en tendance ha",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 94954.0,
+        "sl": 94468.285,
+        "tp": 95180.3575
+      },
+      "timestamp": "2026-01-14T09:43:23.022095"
+    },
+    {
+      "id": "decision_20260114_094321_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur 0.618 Fibo en tendance ha",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94943.0,
+        "fibo1_1m": -0.0789,
+        "funding": 0.003365
+      },
+      "timestamp": "2026-01-14T09:43:21.808263"
+    },
+    {
+      "id": "decision_20260114_094302_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur le 0.618 Fibo (Golden",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 94950.0,
+        "sl": 94510.075,
+        "tp": 95222.4625
+      },
+      "timestamp": "2026-01-14T09:43:02.642378"
+    },
+    {
+      "id": "decision_20260114_094256_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur le 0.618 Fibo (Golden",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94985.0,
+        "fibo1_1m": -0.0389,
+        "funding": 0.003365
+      },
+      "timestamp": "2026-01-14T09:42:56.519048"
+    },
+    {
+      "id": "decision_20260114_094147_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix sur 0.618 Fibo haussier",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94990.0,
+        "fibo1_1m": -0.1041,
+        "funding": 0.003358
+      },
+      "timestamp": "2026-01-14T09:41:47.903655"
+    },
+    {
+      "id": "decision_20260114_094127_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement 0.",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 94999.0,
+        "sl": 94514.055,
+        "tp": 95226.47249999999
+      },
+      "timestamp": "2026-01-14T09:41:27.860770"
+    },
+    {
+      "id": "decision_20260114_094121_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement 0.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94989.0,
+        "fibo1_1m": -0.1566,
+        "funding": 0.003358
+      },
+      "timestamp": "2026-01-14T09:41:21.726506"
+    },
+    {
+      "id": "decision_20260114_094042_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur le niveau 0.618 Fibo",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 94998.0,
+        "sl": 94535.94499999999,
+        "tp": 95248.5275
+      },
+      "timestamp": "2026-01-14T09:40:42.240063"
+    },
+    {
+      "id": "decision_20260114_094040_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur le niveau 0.618 Fibo",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95011.0,
+        "fibo1_1m": -0.1304,
+        "funding": 0.0032990000000000003
+      },
+      "timestamp": "2026-01-14T09:40:40.966923"
+    },
+    {
+      "id": "decision_20260114_094021_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur 0.618 Fibo en tendance",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 95021.0,
+        "sl": 94513.06,
+        "tp": 95225.47
+      },
+      "timestamp": "2026-01-14T09:40:21.501150"
+    },
+    {
+      "id": "decision_20260114_094015_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur 0.618 Fibo en tendance",
+      "executed": false,
+      "context_snapshot": {
+        "price": 94988.0,
+        "fibo1_1m": -0.1304,
+        "funding": 0.0032990000000000003
+      },
+      "timestamp": "2026-01-14T09:40:15.380143"
+    },
+    {
+      "id": "decision_20260114_093917_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le 0.618",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95016.0,
+        "fibo1_1m": -0.1177,
+        "funding": 0.0032549999999999996
+      },
+      "timestamp": "2026-01-14T09:39:17.070659"
+    },
+    {
+      "id": "decision_20260114_093847_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Conflit entre tendance haussiere Fibo et biais",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95013.0,
+        "fibo1_1m": -0.1209,
+        "funding": 0.0032549999999999996
+      },
+      "timestamp": "2026-01-14T09:38:47.420065"
+    },
+    {
+      "id": "decision_20260114_093821_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre les niveaux Fibo 0.5 et",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95052.0,
+        "fibo1_1m": -0.1303,
+        "funding": 0.0032549999999999996
+      },
+      "timestamp": "2026-01-14T09:38:21.466068"
+    },
+    {
+      "id": "decision_20260114_093740_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du niveau 0.5 Fibo",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95128.0,
+        "fibo1_1m": -0.021,
+        "funding": 0.0032400000000000003
+      },
+      "timestamp": "2026-01-14T09:37:40.537176"
+    },
+    {
+      "id": "decision_20260114_093633_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre les niveaux Fibo 0.5 et",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95130.0,
+        "fibo1_1m": -0.0084,
+        "funding": 0.0032110000000000003
+      },
+      "timestamp": "2026-01-14T09:36:33.776305"
+    },
+    {
+      "id": "decision_20260114_093539_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre les niveaux 0.5 et",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95139.0,
+        "fibo1_1m": 0.0011,
+        "funding": 0.003167
+      },
+      "timestamp": "2026-01-14T09:35:39.090389"
+    },
+    {
+      "id": "decision_20260114_093501_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix entre 0.5 et 0.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95170.5,
+        "fibo1_1m": 0.0147,
+        "funding": 0.003167
+      },
+      "timestamp": "2026-01-14T09:35:01.701124"
+    },
+    {
+      "id": "decision_20260114_093435_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre les niveaux Fibo, le biais",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95139.0,
+        "fibo1_1m": -0.0179,
+        "funding": 0.003167
+      },
+      "timestamp": "2026-01-14T09:34:35.682754"
+    },
+    {
+      "id": "decision_20260114_093400_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre les niveaux Fibo 0",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95133.0,
+        "fibo1_1m": -0.0294,
+        "funding": 0.0031279999999999997
+      },
+      "timestamp": "2026-01-14T09:34:00.437041"
+    },
+    {
+      "id": "decision_20260114_093324_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.5 Fibo mais l",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95178.0,
+        "fibo1_1m": 0.02,
+        "funding": 0.0031279999999999997
+      },
+      "timestamp": "2026-01-14T09:33:24.781163"
+    },
+    {
+      "id": "decision_20260114_093252_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre les niveaux 0.5 et",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95162.0,
+        "fibo1_1m": 0.0032,
+        "funding": 0.003078
+      },
+      "timestamp": "2026-01-14T09:32:52.776434"
+    },
+    {
+      "id": "decision_20260114_093226_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.5 F",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95149.0,
+        "fibo1_1m": -0.0326,
+        "funding": 0.003078
+      },
+      "timestamp": "2026-01-14T09:32:26.635035"
+    },
+    {
+      "id": "decision_20260114_093144_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre les niveaux Fibo 0.5 et",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95155.0,
+        "fibo1_1m": -0.0305,
+        "funding": 0.0030589999999999997
+      },
+      "timestamp": "2026-01-14T09:31:44.355230"
+    },
+    {
+      "id": "decision_20260114_093103_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Biais global bearish contredit par tendance haussi",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95139.5,
+        "fibo1_1m": -0.062,
+        "funding": 0.0030589999999999997
+      },
+      "timestamp": "2026-01-14T09:31:03.819495"
+    },
+    {
+      "id": "decision_20260114_093022_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur niveau Fibo 0.5 en",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 95158.0,
+        "sl": 94680.22,
+        "tp": 95393.89
+      },
+      "timestamp": "2026-01-14T09:30:22.533131"
+    },
+    {
+      "id": "decision_20260114_093006_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur niveau Fibo 0.5 en",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95156.0,
+        "fibo1_1m": -0.0651,
+        "funding": 0.003036
+      },
+      "timestamp": "2026-01-14T09:30:06.437362"
+    },
+    {
+      "id": "decision_20260114_092940_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix entre 0.5 et 0.618",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95159.5,
+        "fibo1_1m": -0.062,
+        "funding": 0.003036
+      },
+      "timestamp": "2026-01-14T09:29:40.186898"
+    },
+    {
+      "id": "decision_20260114_092906_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le niveau 0.5 Fibo mais",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95160.0,
+        "fibo1_1m": -0.063,
+        "funding": 0.003
+      },
+      "timestamp": "2026-01-14T09:29:06.497789"
+    },
+    {
+      "id": "decision_20260114_092826_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix proche du 0.5 Fibo en retracement",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95181.0,
+        "fibo1_1m": -0.0378,
+        "funding": 0.003
+      },
+      "timestamp": "2026-01-14T09:28:26.777074"
+    },
+    {
+      "id": "decision_20260114_092708_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre les niveaux Fibo 0.5 et",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95180.0,
+        "fibo1_1m": -0.0683,
+        "funding": 0.0029790000000000003
+      },
+      "timestamp": "2026-01-14T09:27:08.402171"
+    },
+    {
+      "id": "decision_20260114_092646_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre le 0.5 et 0",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95193.0,
+        "fibo1_1m": -0.0641,
+        "funding": 0.0029790000000000003
+      },
+      "timestamp": "2026-01-14T09:26:46.118433"
+    },
+    {
+      "id": "decision_20260114_092600_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le 0.5 Fibo",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95212.0,
+        "fibo1_1m": -0.021,
+        "funding": 0.002947
+      },
+      "timestamp": "2026-01-14T09:26:00.135317"
+    },
+    {
+      "id": "decision_20260114_092525_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix entre 0.382 et 0.5 F",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95224.0,
+        "fibo1_1m": -0.0084,
+        "funding": 0.002947
+      },
+      "timestamp": "2026-01-14T09:25:25.951790"
+    },
+    {
+      "id": "decision_20260114_092445_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement 0",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95229.0,
+        "fibo1_1m": 0.0189,
+        "funding": 0.002927
+      },
+      "timestamp": "2026-01-14T09:24:45.776922"
+    },
+    {
+      "id": "decision_20260114_092410_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "SELL",
+      "reason": "Funding positif + Imb orderbook nÃ©gatif â†’ cascade longs probable",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 95212.0,
+        "sl": 95699.11499999999,
+        "tp": 94984.9425
+      },
+      "timestamp": "2026-01-14T09:24:10.434727"
+    },
+    {
+      "id": "decision_20260114_092359_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "SELL",
+      "reason": "Funding positif + Imb orderbook nÃ©gatif â†’ cascade longs probable",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95223.0,
+        "fibo1_1m": -0.0231,
+        "funding": 0.002927
+      },
+      "timestamp": "2026-01-14T09:23:59.540327"
+    },
+    {
+      "id": "decision_20260114_092357_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix sur 0.5 Fibo mais ICT neutre",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95223.0,
+        "fibo1_1m": -0.0231,
+        "funding": 0.002927
+      },
+      "timestamp": "2026-01-14T09:23:57.097419"
+    },
+    {
+      "id": "decision_20260114_092318_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Funding faible, momentum plat, pas de cascade en cours",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95215.0,
+        "fibo1_1m": -0.0546,
+        "funding": 0.002927
+      },
+      "timestamp": "2026-01-14T09:23:18.491171"
+    },
+    {
+      "id": "decision_20260114_092316_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix sur niveau 0.5 Fibo, mais pas",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95215.0,
+        "fibo1_1m": -0.0546,
+        "funding": 0.002927
+      },
+      "timestamp": "2026-01-14T09:23:16.718269"
+    },
+    {
+      "id": "decision_20260114_092246_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Funding trop faible pour cascade, momentum plat, risque faible de liquidations massives actuelles",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95235.0,
+        "fibo1_1m": -0.0336,
+        "funding": 0.002901
+      },
+      "timestamp": "2026-01-14T09:22:46.736826"
+    },
+    {
+      "id": "decision_20260114_092243_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix proche du 0.5 Fibo mais",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95235.0,
+        "fibo1_1m": -0.0336,
+        "funding": 0.002901
+      },
+      "timestamp": "2026-01-14T09:22:43.591295"
+    },
+    {
+      "id": "decision_20260114_092219_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Funding positif mais faible, pas de cascade en cours, momentum trop calme pour entrer",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95244.5,
+        "fibo1_1m": -0.0115,
+        "funding": 0.002901
+      },
+      "timestamp": "2026-01-14T09:22:19.537813"
+    },
+    {
+      "id": "decision_20260114_092217_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le niveau 0.5",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95244.5,
+        "fibo1_1m": -0.0115,
+        "funding": 0.002901
+      },
+      "timestamp": "2026-01-14T09:22:17.368741"
+    },
+    {
+      "id": "decision_20260114_092151_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Funding modÃ©rÃ©, momentum faible, pas de cascade en cours ni signal clair de liquidation imminente",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95247.5,
+        "fibo1_1m": 0.0021,
+        "funding": 0.002865
+      },
+      "timestamp": "2026-01-14T09:21:51.766329"
+    },
+    {
+      "id": "decision_20260114_092148_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.5 Fibo mais",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95247.5,
+        "fibo1_1m": 0.0021,
+        "funding": 0.002865
+      },
+      "timestamp": "2026-01-14T09:21:48.744346"
+    },
+    {
+      "id": "decision_20260114_092110_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Funding modÃ©rÃ©, momentum plat, pas de cascade en cours ni signal de squeeze clair.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95225.0,
+        "fibo1_1m": -0.0336,
+        "funding": 0.002865
+      },
+      "timestamp": "2026-01-14T09:21:10.476848"
+    },
+    {
+      "id": "decision_20260114_092107_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur niveau Fibo 0.5 en tendance",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 95242.0,
+        "sl": 94748.875,
+        "tp": 95463.0625
+      },
+      "timestamp": "2026-01-14T09:21:07.347841"
+    },
+    {
+      "id": "decision_20260114_092052_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Prix sur niveau Fibo 0.5 en tendance",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95225.0,
+        "fibo1_1m": -0.0336,
+        "funding": 0.002865
+      },
+      "timestamp": "2026-01-14T09:20:52.271458"
+    },
+    {
+      "id": "decision_20260114_092033_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "SELL",
+      "reason": "Funding positif + orderbook lourd en asks â†’ cascade de longs probable",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 95211.0,
+        "sl": 95702.12999999999,
+        "tp": 94987.93500000001
+      },
+      "timestamp": "2026-01-14T09:20:33.991507"
+    },
+    {
+      "id": "decision_20260114_092031_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "SELL",
+      "reason": "Funding positif + orderbook lourd en asks â†’ cascade de longs probable",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95226.0,
+        "fibo1_1m": -0.0346,
+        "funding": 0.002865
+      },
+      "timestamp": "2026-01-14T09:20:31.859224"
+    },
+    {
+      "id": "decision_20260114_092026_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le niveau 0.5 Fibo",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95226.0,
+        "fibo1_1m": -0.0346,
+        "funding": 0.002865
+      },
+      "timestamp": "2026-01-14T09:20:26.995496"
+    },
+    {
+      "id": "decision_20260114_010116_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Funding neutre, momentum faible, pas de cascade en cours â€“ trop peu de conviction pour entrer",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95379.0,
+        "fibo1_1m": -0.0021,
+        "funding": 0.000129
+      },
+      "timestamp": "2026-01-14T01:01:16.916953"
+    },
+    {
+      "id": "decision_20260114_010114_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement Fibonacci 0",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 95441.0,
+        "sl": 94902.105,
+        "tp": 95617.4475
+      },
+      "timestamp": "2026-01-14T01:01:14.049237"
+    },
+    {
+      "id": "decision_20260114_010058_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement Fibonacci 0",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95379.0,
+        "fibo1_1m": -0.0021,
+        "funding": 0.000129
+      },
+      "timestamp": "2026-01-14T01:00:58.530851"
+    },
+    {
+      "id": "decision_20260114_010032_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.236 Fibo",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95413.5,
+        "fibo1_1m": 0.0346,
+        "funding": 0.000129
+      },
+      "timestamp": "2026-01-14T01:00:32.054192"
+    },
+    {
+      "id": "decision_20260114_005959_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Funding trop faible pour cascade, momentum lent, pas de signal clair",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95407.5,
+        "fibo1_1m": 0.107,
+        "funding": 4.4e-05
+      },
+      "timestamp": "2026-01-14T00:59:59.063550"
+    },
+    {
+      "id": "decision_20260114_005957_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est au-dessus du niveau de dÃ©cision",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95407.5,
+        "fibo1_1m": 0.107,
+        "funding": 4.4e-05
+      },
+      "timestamp": "2026-01-14T00:59:57.076461"
+    },
+    {
+      "id": "decision_20260114_005924_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "SELL",
+      "reason": "Funding positif + ratio long/short Ã©levÃ© + orderbook dÃ©sÃ©quilibrÃ© â†’ risque cascade de liquidations longues imminente",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95365.5,
+        "fibo1_1m": 0.0924,
+        "funding": 4.4e-05
+      },
+      "timestamp": "2026-01-14T00:59:24.780645"
+    },
+    {
+      "id": "decision_20260114_005921_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.23",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95365.5,
+        "fibo1_1m": 0.0924,
+        "funding": 4.4e-05
+      },
+      "timestamp": "2026-01-14T00:59:21.745156"
+    },
+    {
+      "id": "decision_20260114_005814_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Funding trop faible pour cascade, momentum plat, risque faible malgrÃ© dÃ©sÃ©quilibre orderbook.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95388.0,
+        "fibo1_1m": 0.1228,
+        "funding": -1.1e-05
+      },
+      "timestamp": "2026-01-14T00:58:14.711665"
+    },
+    {
+      "id": "decision_20260114_005812_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur un niveau de retracement Fibonacci haussier",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95388.0,
+        "fibo1_1m": 0.1228,
+        "funding": -1.1e-05
+      },
+      "timestamp": "2026-01-14T00:58:12.020301"
+    },
+    {
+      "id": "decision_20260114_005723_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Pas de cascade en cours, funding neutre et momentum faible â€” pas de signal clair pour entrer.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95376.5,
+        "fibo1_1m": 0.207,
+        "funding": -0.000132
+      },
+      "timestamp": "2026-01-14T00:57:23.360083"
+    },
+    {
+      "id": "decision_20260114_005709_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix a retracÃ© au niveau Fibonacci 0",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95376.5,
+        "fibo1_1m": 0.207,
+        "funding": -0.000132
+      },
+      "timestamp": "2026-01-14T00:57:09.143360"
+    },
+    {
+      "id": "decision_20260114_005618_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Pas de signal de liquidation (funding=-0.000%)",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95360.0,
+        "fibo1_1m": 0.2966,
+        "funding": -0.000132
+      },
+      "timestamp": "2026-01-14T00:56:18.299075"
+    },
+    {
+      "id": "decision_20260114_005618_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le niveau Fibo 0.2",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95360.0,
+        "fibo1_1m": 0.2966,
+        "funding": -0.000132
+      },
+      "timestamp": "2026-01-14T00:56:18.296778"
+    },
+    {
+      "id": "decision_20260114_005524_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Pas de cascade en cours, funding neutre et momentum faible â€” pas de conviction pour entrer.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95349.0,
+        "fibo1_1m": 0.2387,
+        "funding": -0.00021600000000000002
+      },
+      "timestamp": "2026-01-14T00:55:24.255583"
+    },
+    {
+      "id": "decision_20260114_005521_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix retrace sur le niveau Fibonacci 0",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 95362.0,
+        "sl": 94872.255,
+        "tp": 95587.3725
+      },
+      "timestamp": "2026-01-14T00:55:21.303498"
+    },
+    {
+      "id": "decision_20260114_005519_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix retrace sur le niveau Fibonacci 0",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95349.0,
+        "fibo1_1m": 0.2387,
+        "funding": -0.00021600000000000002
+      },
+      "timestamp": "2026-01-14T00:55:19.820701"
+    },
+    {
+      "id": "decision_20260114_005512_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Momentum divergent: 1m=0.2387%, 5m=-0.0598%",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95349.0,
+        "fibo1_1m": 0.2387,
+        "funding": -0.00021600000000000002
+      },
+      "timestamp": "2026-01-14T00:55:12.374724"
+    },
+    {
+      "id": "decision_20260114_005419_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le niveau Fibo 0.236",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95233.0,
+        "fibo1_1m": 0.1757,
+        "funding": -0.00021600000000000002
+      },
+      "timestamp": "2026-01-14T00:54:19.329352"
+    },
+    {
+      "id": "decision_20260114_005413_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Momentum divergent: 1m=0.1757%, 5m=-0.1437%",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95233.0,
+        "fibo1_1m": 0.1757,
+        "funding": -0.00021600000000000002
+      },
+      "timestamp": "2026-01-14T00:54:13.344895"
+    },
+    {
+      "id": "decision_20260114_005328_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.236 F",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95227.0,
+        "fibo1_1m": 0.143,
+        "funding": -0.000315
+      },
+      "timestamp": "2026-01-14T00:53:28.652288"
+    },
+    {
+      "id": "decision_20260114_005324_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Momentum divergent: 1m=0.143%, 5m=-0.1017%",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95227.0,
+        "fibo1_1m": 0.143,
+        "funding": -0.000315
+      },
+      "timestamp": "2026-01-14T00:53:24.877710"
+    },
+    {
+      "id": "decision_20260114_005231_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Retracement sur 0.236 faible,",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95188.5,
+        "fibo1_1m": 0.0915,
+        "funding": -0.000445
+      },
+      "timestamp": "2026-01-14T00:52:31.418022"
+    },
+    {
+      "id": "decision_20260114_005227_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Momentum divergent: 1m=0.0915%, 5m=-0.1982%",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95188.5,
+        "fibo1_1m": 0.0915,
+        "funding": -0.000445
+      },
+      "timestamp": "2026-01-14T00:52:27.863084"
+    },
+    {
+      "id": "decision_20260114_005158_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix proche du 0.236 Fibo mais",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95073.5,
+        "fibo1_1m": -0.1502,
+        "funding": -0.000517
+      },
+      "timestamp": "2026-01-14T00:51:58.901594"
+    },
+    {
+      "id": "decision_20260114_005153_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "SELL",
+      "reason": "Momentum 1m et 5m nÃ©gatifs alignÃ©s, funding rate lÃ©gÃ¨rement nÃ©gatif, et biais orderbook bearish.",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 95149.0,
+        "sl": 95548.8675,
+        "tp": 94835.81625
+      },
+      "timestamp": "2026-01-14T00:51:53.995408"
+    },
+    {
+      "id": "decision_20260114_005152_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "SELL",
+      "reason": "Momentum 1m et 5m nÃ©gatifs alignÃ©s, funding rate lÃ©gÃ¨rement nÃ©gatif, et biais orderbook bearish.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95073.5,
+        "fibo1_1m": -0.1502,
+        "funding": -0.000517
+      },
+      "timestamp": "2026-01-14T00:51:52.152319"
+    },
+    {
+      "id": "decision_20260114_005046_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est entre le niveau 0.236 F",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95105.5,
+        "fibo1_1m": -0.1093,
+        "funding": -0.000517
+      },
+      "timestamp": "2026-01-14T00:50:46.247782"
+    },
+    {
+      "id": "decision_20260114_005041_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "SELL",
+      "reason": "Momentum 1m et 5m nÃ©gatifs et alignÃ©s, confirmant une pression baissiÃ¨re Ã  court terme.",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 95060.0,
+        "sl": 95581.0275,
+        "tp": 94867.73625
+      },
+      "timestamp": "2026-01-14T00:50:41.212525"
+    },
+    {
+      "id": "decision_20260114_005039_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "SELL",
+      "reason": "Momentum 1m et 5m nÃ©gatifs et alignÃ©s, confirmant une pression baissiÃ¨re Ã  court terme.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95105.5,
+        "fibo1_1m": -0.1093,
+        "funding": -0.000517
+      },
+      "timestamp": "2026-01-14T00:50:39.323192"
+    },
+    {
+      "id": "decision_20260114_004941_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du niveau 0.236",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95082.0,
+        "fibo1_1m": -0.1208,
+        "funding": -0.000619
+      },
+      "timestamp": "2026-01-14T00:49:41.622312"
+    },
+    {
+      "id": "decision_20260114_004935_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Momentum 1m et 5m sont nÃ©gatifs mais pas alignÃ©s avec le 1h positif, divergence trop forte pour agir.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95082.0,
+        "fibo1_1m": -0.1208,
+        "funding": -0.000619
+      },
+      "timestamp": "2026-01-14T00:49:35.097045"
+    },
+    {
+      "id": "decision_20260114_004903_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix sur niveau Fibo 0.236 en tendance",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95100.0,
+        "fibo1_1m": -0.0536,
+        "funding": -0.000691
+      },
+      "timestamp": "2026-01-14T00:49:03.280849"
+    },
+    {
+      "id": "decision_20260114_004858_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "SELL",
+      "reason": "Momentum 1m et 5m nÃ©gatifs et alignÃ©s, cohÃ©rent avec biais global bearish.",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 95066.0,
+        "sl": 95575.49999999999,
+        "tp": 94862.25
+      },
+      "timestamp": "2026-01-14T00:48:58.222304"
+    },
+    {
+      "id": "decision_20260114_004858_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "SELL",
+      "reason": "Momentum 1m et 5m nÃ©gatifs et alignÃ©s, cohÃ©rent avec biais global bearish.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95100.0,
+        "fibo1_1m": -0.0536,
+        "funding": -0.000691
+      },
+      "timestamp": "2026-01-14T00:48:58.110756"
+    },
+    {
+      "id": "decision_20260114_004754_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix proche du 0.236 Fibo",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95117.0,
+        "fibo1_1m": -0.0284,
+        "funding": -0.000741
+      },
+      "timestamp": "2026-01-14T00:47:54.900381"
+    },
+    {
+      "id": "decision_20260114_004748_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Momentum court terme (1m et 5m) nÃ©gatif et non alignÃ© avec le biais global bullish. Session Ã  faible volatilitÃ©.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95117.0,
+        "fibo1_1m": -0.0284,
+        "funding": -0.000741
+      },
+      "timestamp": "2026-01-14T00:47:48.399087"
+    },
+    {
+      "id": "decision_20260114_004714_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du niveau 0.23",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95162.0,
+        "fibo1_1m": 0.0137,
+        "funding": -0.000741
+      },
+      "timestamp": "2026-01-14T00:47:14.700534"
+    },
+    {
+      "id": "decision_20260114_004710_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Momentum divergent: 1m=0.0137%, 5m=-0.2861%",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95162.0,
+        "fibo1_1m": 0.0137,
+        "funding": -0.000741
+      },
+      "timestamp": "2026-01-14T00:47:10.853928"
+    },
+    {
+      "id": "decision_20260114_004637_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du niveau 0.2",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95170.5,
+        "fibo1_1m": 0.0179,
+        "funding": -0.000741
+      },
+      "timestamp": "2026-01-14T00:46:37.608152"
+    },
+    {
+      "id": "decision_20260114_004634_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Momentum divergent: 1m=0.0179%, 5m=-0.2819%",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95170.5,
+        "fibo1_1m": 0.0179,
+        "funding": -0.000741
+      },
+      "timestamp": "2026-01-14T00:46:34.066050"
+    },
+    {
+      "id": "decision_20260114_004607_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le 0.23",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95244.0,
+        "fibo1_1m": 0.0284,
+        "funding": -0.0008529999999999999
+      },
+      "timestamp": "2026-01-14T00:46:07.612520"
+    },
+    {
+      "id": "decision_20260114_004600_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Momentum divergent: 1m=0.0284%, 5m=-0.2002%",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95244.0,
+        "fibo1_1m": 0.0284,
+        "funding": -0.0008529999999999999
+      },
+      "timestamp": "2026-01-14T00:46:00.112108"
+    },
+    {
+      "id": "decision_20260114_004537_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le niveau Fibo 0.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95216.0,
+        "fibo1_1m": 0.0704,
+        "funding": -0.0008529999999999999
+      },
+      "timestamp": "2026-01-14T00:45:37.639735"
+    },
+    {
+      "id": "decision_20260114_004533_fibo1",
+      "agent_id": "fibo1",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Momentum divergent: 1m=0.0704%, 5m=-0.2494%",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95216.0,
+        "fibo1_1m": 0.0704,
+        "funding": -0.0008529999999999999
+      },
+      "timestamp": "2026-01-14T00:45:33.898069"
+    },
+    {
+      "id": "decision_20260114_004426_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix proche du 0.236 Fibo mais",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95155.0,
+        "fibo1_1m": 0.0263,
+        "funding": -0.0009490000000000001
+      },
+      "timestamp": "2026-01-14T00:44:26.730196"
+    },
+    {
+      "id": "decision_20260114_004325_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Pas de cascade claire en cours, funding neutre et momentum faible malgrÃ© dÃ©sÃ©quilibre orderbook.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95136.0,
+        "fibo1_1m": -0.0935,
+        "funding": -0.0009490000000000001
+      },
+      "timestamp": "2026-01-14T00:43:25.491284"
+    },
+    {
+      "id": "decision_20260114_004322_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.23",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95136.0,
+        "fibo1_1m": -0.0935,
+        "funding": -0.0009490000000000001
+      },
+      "timestamp": "2026-01-14T00:43:22.386105"
+    },
+    {
+      "id": "decision_20260114_004239_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est proche du 0.23",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95134.0,
+        "fibo1_1m": -0.0987,
+        "funding": -0.0010509999999999999
+      },
+      "timestamp": "2026-01-14T00:42:39.800102"
+    },
+    {
+      "id": "decision_20260114_004158_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix proche du niveau Fibo 0.23",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95217.0,
+        "fibo1_1m": -0.0336,
+        "funding": -0.001146
+      },
+      "timestamp": "2026-01-14T00:41:58.228515"
+    },
+    {
+      "id": "decision_20260114_004053_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Funding neutre, momentum faible, pas de cascade en cours",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95216.0,
+        "fibo1_1m": -0.0242,
+        "funding": -0.001245
+      },
+      "timestamp": "2026-01-14T00:40:53.850697"
+    },
+    {
+      "id": "decision_20260114_003956_fibo3",
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Funding trop faible et momentum insuffisant pour dÃ©clencher cascade",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95183.0,
+        "fibo1_1m": -0.0745,
+        "funding": -0.001245
+      },
+      "timestamp": "2026-01-14T00:39:56.213858"
+    },
+    {
+      "id": "decision_20260114_003953_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix proche du 0.236 Fibo mais sans",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95183.0,
+        "fibo1_1m": -0.0745,
+        "funding": -0.001245
+      },
+      "timestamp": "2026-01-14T00:39:53.798952"
+    },
+    {
+      "id": "decision_20260114_003910_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Prix proche du 0.236 Fibo mais momentum",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95196.0,
+        "fibo1_1m": -0.0745,
+        "funding": -0.0013109999999999999
+      },
+      "timestamp": "2026-01-14T00:39:10.085432"
+    },
+    {
+      "id": "decision_20260114_003830_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est au niveau Fibo 0.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95228.0,
+        "fibo1_1m": -0.0504,
+        "funding": -0.0013109999999999999
+      },
+      "timestamp": "2026-01-14T00:38:30.679808"
+    },
+    {
+      "id": "decision_20260114_003754_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "HOLD",
+      "reason": "Le prix est sur le niveau Fibo 0.",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95236.0,
+        "fibo1_1m": -0.1761,
+        "funding": -0.00143
+      },
+      "timestamp": "2026-01-14T00:37:54.311131"
+    },
+    {
+      "id": "decision_20260114_003604_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix a retracÃ© sur le niveau Fibonacci 0",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 95246.0,
+        "sl": 94804.595,
+        "tp": 95519.2025
+      },
+      "timestamp": "2026-01-14T00:36:04.684080"
+    },
+    {
+      "id": "decision_20260114_003603_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix a retracÃ© sur le niveau Fibonacci 0",
+      "executed": false,
+      "context_snapshot": {
+        "price": 95281.0,
+        "fibo1_1m": -0.1007,
+        "funding": -0.001503
+      },
+      "timestamp": "2026-01-14T00:36:03.136799"
+    },
+    {
+      "id": "decision_20260114_003301_fibo",
+      "agent_id": "fibo2",
+      "symbol": "BTCUSD",
+      "decision": "BUY",
+      "reason": "Le prix est sur le niveau de retracement Fibonacci 0",
+      "executed": true,
+      "context_snapshot": {
+        "entry_price": 95356.0,
+        "sl": 94942.9,
+        "tp": 95658.54999999999
+      },
+      "timestamp": "2026-01-14T00:33:01.364808"
+    }
+  ],
+  "strategist_actions": [],
+  "hourly_performance": {
+    "2": -0.79,
+    "3": -6.51,
+    "6": 2.6
+  },
+  "closed_positions_at_end": []
+}

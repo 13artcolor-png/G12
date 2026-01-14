@@ -1,0 +1,8 @@
+{
+  "max_drawdown_pct": 10,
+  "max_daily_loss_pct": 5,
+  "max_positions_total": 300,
+  "emergency_close_pct": 15,
+  "winner_never_loser": true,
+  "news_protection_enabled": true
+}

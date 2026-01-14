@@ -1,0 +1,37 @@
+{
+    "version": "1.0",
+    "created_at": "2026-01-09",
+    "symbol": "BTCUSD",
+    "mode": "demo",
+    "trading_enabled": true,
+    "mt5": {
+        "login": 247600,
+        "server": "FusionMarkets-Demo",
+        "connected": false
+    },
+    "agents": {
+        "fibo1": {
+            "enabled": true,
+            "position_size_pct": 0.01
+        },
+        "reversal": {
+            "enabled": true,
+            "position_size_pct": 0.01
+        },
+        "fibo3": {
+            "enabled": true,
+            "position_size_pct": 0.01
+        }
+    },
+    "risk": {
+        "max_drawdown_pct": 10,
+        "max_daily_loss_pct": 5,
+        "max_positions_total": 3,
+        "emergency_close_pct": 15
+    },
+    "spread": {
+        "max_spread_points": 50,
+        "tp_eur": 3.0,
+        "sl_eur": 5.0
+    }
+}

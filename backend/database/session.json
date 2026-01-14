@@ -1,0 +1,6871 @@
+{
+  "id": "20260114_130212",
+  "start_time": "2026-01-14T13:02:12.695859",
+  "trades": [
+    {
+      "agent": "fibo1",
+      "ticket": 188095166,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 94746.04,
+      "profit": 1.79,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T14:57:10"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188095167,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 94737.56,
+      "profit": 1.98,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T14:57:10"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188095174,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 94727.59,
+      "profit": 1.83,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T14:57:11"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188095358,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 94725.59,
+      "profit": 1.67,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T14:57:52"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188095363,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 94721.6,
+      "profit": 2.06,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T14:57:52"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188097608,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 94690.18,
+      "profit": 1.94,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T15:01:56"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188097609,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 94683.7,
+      "profit": 1.8900000000000001,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T15:01:56"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188097628,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 94673.72,
+      "profit": 1.76,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T15:01:56"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188097629,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 94667.74,
+      "profit": 1.96,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T15:01:56"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188097648,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 94661.75,
+      "profit": 1.55,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T15:01:57"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188104009,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95077.1,
+      "profit": 1.9100000000000001,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T15:23:51"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188104603,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95082.11,
+      "profit": 1.9300000000000002,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T15:25:12"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188122326,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95140.76,
+      "profit": 1.8900000000000001,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:21:46"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188122381,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95142.26,
+      "profit": 1.76,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:21:54"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188122387,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95158.3,
+      "profit": 2.15,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:21:54"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188122391,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95160.31,
+      "profit": 2.12,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:21:54"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188122393,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95171.34,
+      "profit": 1.56,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:21:55"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188122394,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95164.82,
+      "profit": 1.99,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:21:55"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188122513,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95196.4,
+      "profit": 1.9100000000000001,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:22:09"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188122402,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95176.85,
+      "profit": 1.6,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:21:55"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188122515,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95184.87,
+      "profit": 1.95,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:22:09"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188122517,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95186.87,
+      "profit": 1.78,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:22:09"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188122520,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95235.81,
+      "profit": -4.51,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:22:09"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188122521,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95239.33,
+      "profit": -4.38,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:22:09"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188122556,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95202.41,
+      "profit": 2.14,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:22:20"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188122563,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95207.43,
+      "profit": 2.21,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:22:20"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188122758,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95216.95,
+      "profit": 2.24,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:23:27"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188122760,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95220.96,
+      "profit": 2.14,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T16:23:27"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188139204,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95227.98,
+      "profit": 1.47,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:04:38"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188139205,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95228.98,
+      "profit": 2.03,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:04:38"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188140028,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95265.57,
+      "profit": 1.5899999999999999,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:06:25"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188140026,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95267.58,
+      "profit": 1.49,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:06:25"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188140025,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95314.2,
+      "profit": -4.28,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:06:25"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188140421,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95289.13,
+      "profit": 1.97,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:07:23"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188140540,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95295.65,
+      "profit": 1.83,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:07:39"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188140610,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95313.19,
+      "profit": 2.21,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:07:42"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188140543,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95295.65,
+      "profit": 1.6600000000000001,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:07:39"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188140548,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95301.16,
+      "profit": 1.6600000000000001,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:07:39"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188140601,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95304.67,
+      "profit": 1.98,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:07:42"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188140611,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95313.19,
+      "profit": 2.17,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:07:42"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188140600,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95334.3,
+      "profit": -4.22,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:07:42"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188140602,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95355.91,
+      "profit": -3.62,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:07:42"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188141227,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95388.57,
+      "profit": -4.26,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:09:00"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188141136,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95333.24,
+      "profit": 2.16,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:08:50"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188141158,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95335.75,
+      "profit": 2.24,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:08:56"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188141161,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95338.75,
+      "profit": 2.27,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:08:57"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188141169,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95345.27,
+      "profit": 1.8,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:08:57"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188141280,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95375.85,
+      "profit": 1.78,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:09:05"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188141281,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95375.85,
+      "profit": 1.79,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:09:05"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188142296,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95381.86,
+      "profit": 1.53,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:11:12"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188142301,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95411.43,
+      "profit": 2.03,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:11:13"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188142293,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95381.86,
+      "profit": 1.41,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:11:12"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188142300,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95411.43,
+      "profit": 2.05,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:11:13"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188142303,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95403.92,
+      "profit": 1.92,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:11:13"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188142298,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95424.25,
+      "profit": -4.02,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:11:13"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188142418,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95444.85,
+      "profit": -4.41,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:11:28"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188142407,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95421.46,
+      "profit": 2.27,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:11:25"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188142406,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95421.46,
+      "profit": 2.39,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:11:25"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188142567,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95479.52,
+      "profit": -4.12,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:11:51"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188142595,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95499.62,
+      "profit": -4.33,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:11:55"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188142714,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95494.64,
+      "profit": 1.73,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:12:03"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188142713,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95521.23,
+      "profit": -4.07,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:12:03"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188142715,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95514.2,
+      "profit": -4.41,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:12:03"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188144055,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95524.25,
+      "profit": -4.14,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:15:47"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188144056,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95532.29,
+      "profit": -4.22,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:15:47"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188144466,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95617.45,
+      "profit": 1.18,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:16:51"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188144573,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95683.11,
+      "profit": 1.51,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:17:00"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188144578,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95690.63,
+      "profit": 1.72,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:17:00"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188144579,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95686.12,
+      "profit": 1.87,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:17:00"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188152559,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95594.89,
+      "profit": 0.77,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:34:30"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188154674,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95676.6,
+      "profit": 0.77,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:37:45"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188154675,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95676.6,
+      "profit": 1.3599999999999999,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:37:45"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188155220,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95713.69,
+      "profit": 2.75,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:38:12"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188155341,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95765.82,
+      "profit": 2.5300000000000002,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:38:18"
+    },
+    {
+      "agent": "fibo2",
+      "ticket": 188155677,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95834.49,
+      "profit": 1.6600000000000001,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:38:48"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188155678,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95836.49,
+      "profit": 1.81,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:38:48"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188155679,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95812.94,
+      "profit": 1.2,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:38:48"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188155683,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95846.52,
+      "profit": 1.8599999999999999,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:38:49"
+    },
+    {
+      "agent": "fibo3",
+      "ticket": 188155684,
+      "direction": "SELL",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95843.51,
+      "profit": 1.53,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:38:49"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188155668,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95855.9,
+      "profit": -3.38,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:38:48"
+    },
+    {
+      "agent": "fibo1",
+      "ticket": 188155731,
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 0,
+      "exit_price": 95924.74,
+      "profit": -4.01,
+      "close_reason": "MT5_SYNC",
+      "timestamp": "2026-01-14T17:38:55"
+    },
+    {
+      "agent": "fibo3",
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 96770.0,
+      "exit_price": 96959.0,
+      "profit": 3.04,
+      "close_reason": "TP mecanique atteint: 3.04 >= 3.0 EUR",
+      "ticket": 230834297,
+      "timestamp": "2026-01-14T19:31:08.220674"
+    }
+  ],
+  "decisions": [],
+  "performance_history": {
+    "fibo1": [
+      {
+        "timestamp": "2026-01-14T13:02:58.177545",
+        "closed_pnl": 0,
+        "floating_pnl": 3.48
+      },
+      {
+        "timestamp": "2026-01-14T13:03:49.562623",
+        "closed_pnl": 0,
+        "floating_pnl": 0.76
+      },
+      {
+        "timestamp": "2026-01-14T13:04:36.688696",
+        "closed_pnl": 0,
+        "floating_pnl": 0.67
+      },
+      {
+        "timestamp": "2026-01-14T13:05:45.038275",
+        "closed_pnl": 0,
+        "floating_pnl": -0.76
+      },
+      {
+        "timestamp": "2026-01-14T13:06:22.663138",
+        "closed_pnl": 0,
+        "floating_pnl": -2.4
+      },
+      {
+        "timestamp": "2026-01-14T13:06:59.775282",
+        "closed_pnl": 0,
+        "floating_pnl": -3.42
+      },
+      {
+        "timestamp": "2026-01-14T13:07:28.927540",
+        "closed_pnl": 0,
+        "floating_pnl": -3.8
+      },
+      {
+        "timestamp": "2026-01-14T13:08:32.301664",
+        "closed_pnl": 0,
+        "floating_pnl": -4.69
+      },
+      {
+        "timestamp": "2026-01-14T13:09:32.569593",
+        "closed_pnl": 0,
+        "floating_pnl": -5.28
+      },
+      {
+        "timestamp": "2026-01-14T13:10:29.274051",
+        "closed_pnl": 0,
+        "floating_pnl": -3.97
+      },
+      {
+        "timestamp": "2026-01-14T13:11:56.787202",
+        "closed_pnl": 0,
+        "floating_pnl": -6.23
+      },
+      {
+        "timestamp": "2026-01-14T13:12:57.265377",
+        "closed_pnl": 0,
+        "floating_pnl": -7.84
+      },
+      {
+        "timestamp": "2026-01-14T13:13:59.143265",
+        "closed_pnl": 0,
+        "floating_pnl": -7.29
+      },
+      {
+        "timestamp": "2026-01-14T13:14:53.437029",
+        "closed_pnl": 0,
+        "floating_pnl": -8.79
+      },
+      {
+        "timestamp": "2026-01-14T13:16:21.983885",
+        "closed_pnl": 0,
+        "floating_pnl": -8.53
+      },
+      {
+        "timestamp": "2026-01-14T13:17:54.411275",
+        "closed_pnl": 0,
+        "floating_pnl": -7.8
+      },
+      {
+        "timestamp": "2026-01-14T13:18:56.942548",
+        "closed_pnl": 0,
+        "floating_pnl": -6.43
+      },
+      {
+        "timestamp": "2026-01-14T13:19:55.500492",
+        "closed_pnl": 0,
+        "floating_pnl": -6.53
+      },
+      {
+        "timestamp": "2026-01-14T13:20:38.010771",
+        "closed_pnl": 0,
+        "floating_pnl": -7.64
+      },
+      {
+        "timestamp": "2026-01-14T13:21:50.664190",
+        "closed_pnl": 0,
+        "floating_pnl": -6.18
+      },
+      {
+        "timestamp": "2026-01-14T13:23:25.084027",
+        "closed_pnl": 0,
+        "floating_pnl": -9.41
+      },
+      {
+        "timestamp": "2026-01-14T13:25:19.835096",
+        "closed_pnl": 0,
+        "floating_pnl": -14.52
+      },
+      {
+        "timestamp": "2026-01-14T13:26:00.501638",
+        "closed_pnl": 0,
+        "floating_pnl": -14.52
+      },
+      {
+        "timestamp": "2026-01-14T13:27:26.562327",
+        "closed_pnl": 0,
+        "floating_pnl": -13.62
+      },
+      {
+        "timestamp": "2026-01-14T13:29:05.001457",
+        "closed_pnl": 0,
+        "floating_pnl": -13.16
+      },
+      {
+        "timestamp": "2026-01-14T13:30:09.271409",
+        "closed_pnl": 0,
+        "floating_pnl": -12.74
+      },
+      {
+        "timestamp": "2026-01-14T13:31:22.786482",
+        "closed_pnl": 0,
+        "floating_pnl": -16.94
+      },
+      {
+        "timestamp": "2026-01-14T13:32:47.180913",
+        "closed_pnl": 0,
+        "floating_pnl": -14.52
+      },
+      {
+        "timestamp": "2026-01-14T13:35:43.052673",
+        "closed_pnl": 0,
+        "floating_pnl": -12.92
+      },
+      {
+        "timestamp": "2026-01-14T13:37:25.174509",
+        "closed_pnl": 0,
+        "floating_pnl": -19.2
+      },
+      {
+        "timestamp": "2026-01-14T13:38:21.658493",
+        "closed_pnl": 0,
+        "floating_pnl": -17.28
+      },
+      {
+        "timestamp": "2026-01-14T13:39:31.385479",
+        "closed_pnl": 0,
+        "floating_pnl": -16.32
+      },
+      {
+        "timestamp": "2026-01-14T13:40:10.190600",
+        "closed_pnl": 0,
+        "floating_pnl": -18.34
+      },
+      {
+        "timestamp": "2026-01-14T13:41:21.400818",
+        "closed_pnl": 0,
+        "floating_pnl": -17.53
+      },
+      {
+        "timestamp": "2026-01-14T13:43:00.669777",
+        "closed_pnl": 0,
+        "floating_pnl": -14.72
+      },
+      {
+        "timestamp": "2026-01-14T13:45:04.623757",
+        "closed_pnl": 0,
+        "floating_pnl": -12.72
+      },
+      {
+        "timestamp": "2026-01-14T13:46:11.108431",
+        "closed_pnl": 0,
+        "floating_pnl": -12.32
+      },
+      {
+        "timestamp": "2026-01-14T13:47:45.435452",
+        "closed_pnl": 0,
+        "floating_pnl": -12.5
+      },
+      {
+        "timestamp": "2026-01-14T13:49:09.737619",
+        "closed_pnl": 0,
+        "floating_pnl": -12.88
+      },
+      {
+        "timestamp": "2026-01-14T13:50:12.247478",
+        "closed_pnl": 0,
+        "floating_pnl": -12.58
+      },
+      {
+        "timestamp": "2026-01-14T13:51:28.790788",
+        "closed_pnl": 0,
+        "floating_pnl": -11.62
+      },
+      {
+        "timestamp": "2026-01-14T13:52:33.530440",
+        "closed_pnl": 0,
+        "floating_pnl": -12.24
+      },
+      {
+        "timestamp": "2026-01-14T13:53:01.258326",
+        "closed_pnl": 0,
+        "floating_pnl": -11.48
+      },
+      {
+        "timestamp": "2026-01-14T13:54:05.469626",
+        "closed_pnl": 0,
+        "floating_pnl": -11.96
+      },
+      {
+        "timestamp": "2026-01-14T13:54:53.258593",
+        "closed_pnl": 0,
+        "floating_pnl": -12.58
+      },
+      {
+        "timestamp": "2026-01-14T13:55:58.222141",
+        "closed_pnl": 0,
+        "floating_pnl": -13.46
+      },
+      {
+        "timestamp": "2026-01-14T13:56:50.328911",
+        "closed_pnl": 0,
+        "floating_pnl": -13.05
+      },
+      {
+        "timestamp": "2026-01-14T13:57:45.768908",
+        "closed_pnl": 0,
+        "floating_pnl": -12.86
+      },
+      {
+        "timestamp": "2026-01-14T13:58:57.212104",
+        "closed_pnl": 0,
+        "floating_pnl": -13.46
+      },
+      {
+        "timestamp": "2026-01-14T14:00:13.154416",
+        "closed_pnl": 0,
+        "floating_pnl": -13.45
+      },
+      {
+        "timestamp": "2026-01-14T14:01:31.557260",
+        "closed_pnl": 0,
+        "floating_pnl": -13.22
+      },
+      {
+        "timestamp": "2026-01-14T14:02:29.539361",
+        "closed_pnl": 0,
+        "floating_pnl": -10.23
+      },
+      {
+        "timestamp": "2026-01-14T14:03:54.191219",
+        "closed_pnl": 0,
+        "floating_pnl": -11.91
+      },
+      {
+        "timestamp": "2026-01-14T14:05:04.592912",
+        "closed_pnl": 0,
+        "floating_pnl": -6.53
+      },
+      {
+        "timestamp": "2026-01-14T14:05:51.968317",
+        "closed_pnl": 0,
+        "floating_pnl": -1.63
+      },
+      {
+        "timestamp": "2026-01-14T14:07:16.279760",
+        "closed_pnl": 0,
+        "floating_pnl": -1.68
+      },
+      {
+        "timestamp": "2026-01-14T14:08:11.811323",
+        "closed_pnl": 0,
+        "floating_pnl": -14.16
+      },
+      {
+        "timestamp": "2026-01-14T14:08:47.314833",
+        "closed_pnl": 0,
+        "floating_pnl": -11.41
+      },
+      {
+        "timestamp": "2026-01-14T14:09:39.156664",
+        "closed_pnl": 0,
+        "floating_pnl": -13.5
+      },
+      {
+        "timestamp": "2026-01-14T14:10:21.716717",
+        "closed_pnl": 0,
+        "floating_pnl": -12.95
+      },
+      {
+        "timestamp": "2026-01-14T14:10:59.632301",
+        "closed_pnl": 0,
+        "floating_pnl": -12.73
+      },
+      {
+        "timestamp": "2026-01-14T14:12:32.878314",
+        "closed_pnl": 0,
+        "floating_pnl": -11.31
+      },
+      {
+        "timestamp": "2026-01-14T14:13:23.943004",
+        "closed_pnl": 0,
+        "floating_pnl": -11.62
+      },
+      {
+        "timestamp": "2026-01-14T14:14:34.587859",
+        "closed_pnl": 0,
+        "floating_pnl": -12.24
+      },
+      {
+        "timestamp": "2026-01-14T14:16:06.507115",
+        "closed_pnl": 0,
+        "floating_pnl": -4.92
+      },
+      {
+        "timestamp": "2026-01-14T14:17:41.027686",
+        "closed_pnl": 0,
+        "floating_pnl": -9.67
+      },
+      {
+        "timestamp": "2026-01-14T14:19:05.362839",
+        "closed_pnl": 0,
+        "floating_pnl": -11.74
+      },
+      {
+        "timestamp": "2026-01-14T14:20:25.620116",
+        "closed_pnl": 0,
+        "floating_pnl": -11.3
+      },
+      {
+        "timestamp": "2026-01-14T14:21:48.019232",
+        "closed_pnl": 0,
+        "floating_pnl": -20.5
+      },
+      {
+        "timestamp": "2026-01-14T14:23:26.646112",
+        "closed_pnl": 0,
+        "floating_pnl": -29.86
+      },
+      {
+        "timestamp": "2026-01-14T14:24:31.093338",
+        "closed_pnl": 0,
+        "floating_pnl": -24.33
+      },
+      {
+        "timestamp": "2026-01-14T14:26:08.056313",
+        "closed_pnl": 0,
+        "floating_pnl": -20.64
+      },
+      {
+        "timestamp": "2026-01-14T14:27:44.679525",
+        "closed_pnl": 0,
+        "floating_pnl": -19.97
+      },
+      {
+        "timestamp": "2026-01-14T14:29:21.412685",
+        "closed_pnl": 0,
+        "floating_pnl": -20.03
+      },
+      {
+        "timestamp": "2026-01-14T14:30:18.025266",
+        "closed_pnl": 0,
+        "floating_pnl": -19.78
+      },
+      {
+        "timestamp": "2026-01-14T14:31:10.734693",
+        "closed_pnl": 0,
+        "floating_pnl": -18.31
+      },
+      {
+        "timestamp": "2026-01-14T14:31:57.554381",
+        "closed_pnl": 0,
+        "floating_pnl": -12.99
+      },
+      {
+        "timestamp": "2026-01-14T14:32:55.506449",
+        "closed_pnl": 0,
+        "floating_pnl": -12.83
+      },
+      {
+        "timestamp": "2026-01-14T14:34:09.298884",
+        "closed_pnl": 0,
+        "floating_pnl": -11.62
+      },
+      {
+        "timestamp": "2026-01-14T14:34:59.416769",
+        "closed_pnl": 0,
+        "floating_pnl": -11.02
+      },
+      {
+        "timestamp": "2026-01-14T14:36:10.716407",
+        "closed_pnl": 0,
+        "floating_pnl": -9.39
+      },
+      {
+        "timestamp": "2026-01-14T14:37:19.719506",
+        "closed_pnl": 0,
+        "floating_pnl": -16.69
+      },
+      {
+        "timestamp": "2026-01-14T14:39:22.452586",
+        "closed_pnl": 0,
+        "floating_pnl": -12.3
+      },
+      {
+        "timestamp": "2026-01-14T14:40:35.807304",
+        "closed_pnl": 0,
+        "floating_pnl": -11.01
+      },
+      {
+        "timestamp": "2026-01-14T14:42:35.777693",
+        "closed_pnl": 0,
+        "floating_pnl": -11.01
+      },
+      {
+        "timestamp": "2026-01-14T14:43:43.885486",
+        "closed_pnl": 0,
+        "floating_pnl": -15.75
+      },
+      {
+        "timestamp": "2026-01-14T14:45:08.369256",
+        "closed_pnl": 0,
+        "floating_pnl": -13.41
+      },
+      {
+        "timestamp": "2026-01-14T14:46:30.915485",
+        "closed_pnl": 0,
+        "floating_pnl": -9.99
+      },
+      {
+        "timestamp": "2026-01-14T14:47:57.621468",
+        "closed_pnl": 0,
+        "floating_pnl": -8.69
+      },
+      {
+        "timestamp": "2026-01-14T14:49:06.187469",
+        "closed_pnl": 0,
+        "floating_pnl": -3.32
+      },
+      {
+        "timestamp": "2026-01-14T14:50:20.626255",
+        "closed_pnl": 0,
+        "floating_pnl": -1.78
+      },
+      {
+        "timestamp": "2026-01-14T14:51:33.741978",
+        "closed_pnl": 0,
+        "floating_pnl": 5.54
+      },
+      {
+        "timestamp": "2026-01-14T14:52:46.700500",
+        "closed_pnl": 0,
+        "floating_pnl": 8.1
+      },
+      {
+        "timestamp": "2026-01-14T14:53:39.317894",
+        "closed_pnl": 0,
+        "floating_pnl": 4.82
+      },
+      {
+        "timestamp": "2026-01-14T14:55:17.541178",
+        "closed_pnl": 0,
+        "floating_pnl": 2.44
+      },
+      {
+        "timestamp": "2026-01-14T14:56:21.479094",
+        "closed_pnl": 0,
+        "floating_pnl": 3.66
+      },
+      {
+        "timestamp": "2026-01-14T14:57:30.358116",
+        "closed_pnl": 0,
+        "floating_pnl": 3.28
+      },
+      {
+        "timestamp": "2026-01-14T14:58:54.951461",
+        "closed_pnl": 0,
+        "floating_pnl": -0.13
+      },
+      {
+        "timestamp": "2026-01-14T15:00:01.614917",
+        "closed_pnl": 0,
+        "floating_pnl": -0.85
+      },
+      {
+        "timestamp": "2026-01-14T15:01:29.790584",
+        "closed_pnl": 0,
+        "floating_pnl": -4.57
+      },
+      {
+        "timestamp": "2026-01-14T15:02:24.965847",
+        "closed_pnl": 0,
+        "floating_pnl": -6.1
+      },
+      {
+        "timestamp": "2026-01-14T15:03:32.514380",
+        "closed_pnl": 0,
+        "floating_pnl": -17.12
+      },
+      {
+        "timestamp": "2026-01-14T15:05:07.833094",
+        "closed_pnl": 0,
+        "floating_pnl": -23.41
+      },
+      {
+        "timestamp": "2026-01-14T15:06:26.020264",
+        "closed_pnl": 0,
+        "floating_pnl": -28.98
+      },
+      {
+        "timestamp": "2026-01-14T15:07:58.416358",
+        "closed_pnl": 0,
+        "floating_pnl": -24.85
+      },
+      {
+        "timestamp": "2026-01-14T15:09:27.612893",
+        "closed_pnl": 0,
+        "floating_pnl": -23.18
+      },
+      {
+        "timestamp": "2026-01-14T15:11:06.155446",
+        "closed_pnl": 0,
+        "floating_pnl": -20.87
+      },
+      {
+        "timestamp": "2026-01-14T15:12:20.837298",
+        "closed_pnl": 0,
+        "floating_pnl": -26.63
+      },
+      {
+        "timestamp": "2026-01-14T15:13:15.522512",
+        "closed_pnl": 0,
+        "floating_pnl": -7.23
+      },
+      {
+        "timestamp": "2026-01-14T15:15:06.484670",
+        "closed_pnl": 0,
+        "floating_pnl": -7.53
+      },
+      {
+        "timestamp": "2026-01-14T15:16:01.122809",
+        "closed_pnl": 0,
+        "floating_pnl": -6.96
+      },
+      {
+        "timestamp": "2026-01-14T15:16:52.323810",
+        "closed_pnl": 0,
+        "floating_pnl": -0.86
+      },
+      {
+        "timestamp": "2026-01-14T15:18:00.205457",
+        "closed_pnl": 0,
+        "floating_pnl": -3.24
+      },
+      {
+        "timestamp": "2026-01-14T15:18:58.686889",
+        "closed_pnl": 0,
+        "floating_pnl": -2.92
+      },
+      {
+        "timestamp": "2026-01-14T15:20:05.274630",
+        "closed_pnl": 0,
+        "floating_pnl": -2.25
+      },
+      {
+        "timestamp": "2026-01-14T15:21:10.895997",
+        "closed_pnl": 0,
+        "floating_pnl": -2.51
+      },
+      {
+        "timestamp": "2026-01-14T15:22:24.116353",
+        "closed_pnl": 0,
+        "floating_pnl": -3.91
+      },
+      {
+        "timestamp": "2026-01-14T15:23:12.690398",
+        "closed_pnl": 0,
+        "floating_pnl": -3.31
+      },
+      {
+        "timestamp": "2026-01-14T15:24:09.075429",
+        "closed_pnl": 0,
+        "floating_pnl": -4.49
+      },
+      {
+        "timestamp": "2026-01-14T15:24:35.673887",
+        "closed_pnl": 0,
+        "floating_pnl": -5.92
+      },
+      {
+        "timestamp": "2026-01-14T15:25:22.043675",
+        "closed_pnl": 0,
+        "floating_pnl": -5.85
+      },
+      {
+        "timestamp": "2026-01-14T15:25:57.578244",
+        "closed_pnl": 0,
+        "floating_pnl": -5.13
+      },
+      {
+        "timestamp": "2026-01-14T15:26:39.821377",
+        "closed_pnl": 0,
+        "floating_pnl": -4.43
+      },
+      {
+        "timestamp": "2026-01-14T15:27:27.366900",
+        "closed_pnl": 0,
+        "floating_pnl": -2.92
+      },
+      {
+        "timestamp": "2026-01-14T15:28:26.461365",
+        "closed_pnl": 0,
+        "floating_pnl": -2.97
+      },
+      {
+        "timestamp": "2026-01-14T15:28:59.203658",
+        "closed_pnl": 0,
+        "floating_pnl": -3.33
+      },
+      {
+        "timestamp": "2026-01-14T15:30:10.868103",
+        "closed_pnl": 0,
+        "floating_pnl": -3.24
+      },
+      {
+        "timestamp": "2026-01-14T15:30:41.772525",
+        "closed_pnl": 0,
+        "floating_pnl": -3.4
+      },
+      {
+        "timestamp": "2026-01-14T15:31:28.034344",
+        "closed_pnl": 0,
+        "floating_pnl": -4.03
+      },
+      {
+        "timestamp": "2026-01-14T15:32:40.396567",
+        "closed_pnl": 0,
+        "floating_pnl": -0.74
+      },
+      {
+        "timestamp": "2026-01-14T15:33:43.962194",
+        "closed_pnl": 0,
+        "floating_pnl": 1.29
+      },
+      {
+        "timestamp": "2026-01-14T15:34:56.157352",
+        "closed_pnl": 0,
+        "floating_pnl": -0.63
+      },
+      {
+        "timestamp": "2026-01-14T15:35:51.793632",
+        "closed_pnl": 0,
+        "floating_pnl": -1.06
+      },
+      {
+        "timestamp": "2026-01-14T15:36:41.481780",
+        "closed_pnl": 0,
+        "floating_pnl": -0.15
+      },
+      {
+        "timestamp": "2026-01-14T15:37:47.658126",
+        "closed_pnl": 0,
+        "floating_pnl": -0.31
+      },
+      {
+        "timestamp": "2026-01-14T15:38:34.474637",
+        "closed_pnl": 0,
+        "floating_pnl": -2.95
+      },
+      {
+        "timestamp": "2026-01-14T15:39:25.377346",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:40:34.572423",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:42:21.836739",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:43:49.921403",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:44:59.997077",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:46:12.276707",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:48:20.444692",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:49:26.577015",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:50:52.928295",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:52:23.032612",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:53:51.123855",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:55:31.244228",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:57:07.532213",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:58:13.614179",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:01:13.888949",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:07:04.409453",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:08:18.581895",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:10:26.758475",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:11:19.050127",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:12:43.145123",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:13:49.218558",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:44:16.778282",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:01:32.295259",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:06:43.550089",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:12:05.940832",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:13:36.047632",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:14:56.130869",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:17:48.345273",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:24:54.354063",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:34:23.151902",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:37:09.429517",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:38:49.630086",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:41:23.822377",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:43:13.934626",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:45:36.921095",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:47:13.037008",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:48:33.128342",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:50:09.230427",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:51:35.590089",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:53:49.730293",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:56:56.209800",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:59:44.409432",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:01:18.599823",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:02:36.685861",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:05:02.850747",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:07:48.458362",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:09:18.571414",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:10:18.640326",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:13:28.974384",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:18:09.335360",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:23:03.699790",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:23:47.800252",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:25:00.538815",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:26:34.462031",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:28:51.149189",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:29:43.257446",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:30:43.371077",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:31:36.450891",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:33:10.586742",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:34:20.751876",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:37:20.999175",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:40:03.202706",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:45:05.718043",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:48:22.139188",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:50:58.338876",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:52:08.531429",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:52:41.868485",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:53:39.168247",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:55:43.429284",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:56:44.827153",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:58:08.931204",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:59:50.183198",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:01:07.310357",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:02:22.077987",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:03:14.188967",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:04:58.353386",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:06:21.599958",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:07:36.710493",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:11:18.626169",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:12:55.130984",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:14:40.906335",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:19:44.756362",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:21:40.351022",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:23:11.083048",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:28:44.210156",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:29:48.977010",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:31:36.399926",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:32:55.118411",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:34:03.541048",
+        "closed_pnl": -47.95,
+        "floating_pnl": -1.07
+      },
+      {
+        "timestamp": "2026-01-14T19:35:35.548410",
+        "closed_pnl": -47.95,
+        "floating_pnl": -2.46
+      },
+      {
+        "timestamp": "2026-01-14T19:36:37.061821",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:37:31.408920",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:38:35.989882",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:40:46.310205",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      }
+    ],
+    "fibo2": [
+      {
+        "timestamp": "2026-01-14T13:02:58.177545",
+        "closed_pnl": 0,
+        "floating_pnl": -26.93
+      },
+      {
+        "timestamp": "2026-01-14T13:03:49.562623",
+        "closed_pnl": 0,
+        "floating_pnl": -20.13
+      },
+      {
+        "timestamp": "2026-01-14T13:04:36.688696",
+        "closed_pnl": 0,
+        "floating_pnl": -18.69
+      },
+      {
+        "timestamp": "2026-01-14T13:05:45.039282",
+        "closed_pnl": 0,
+        "floating_pnl": -12.52
+      },
+      {
+        "timestamp": "2026-01-14T13:06:22.664135",
+        "closed_pnl": 0,
+        "floating_pnl": -12.1
+      },
+      {
+        "timestamp": "2026-01-14T13:06:59.775282",
+        "closed_pnl": 0,
+        "floating_pnl": -8.08
+      },
+      {
+        "timestamp": "2026-01-14T13:07:28.927540",
+        "closed_pnl": 0,
+        "floating_pnl": -6.33
+      },
+      {
+        "timestamp": "2026-01-14T13:08:32.302665",
+        "closed_pnl": 0,
+        "floating_pnl": -5.1
+      },
+      {
+        "timestamp": "2026-01-14T13:09:32.569593",
+        "closed_pnl": 0,
+        "floating_pnl": -3.65
+      },
+      {
+        "timestamp": "2026-01-14T13:10:29.275053",
+        "closed_pnl": 0,
+        "floating_pnl": -7.05
+      },
+      {
+        "timestamp": "2026-01-14T13:11:56.787202",
+        "closed_pnl": 0,
+        "floating_pnl": -0.35
+      },
+      {
+        "timestamp": "2026-01-14T13:12:57.266378",
+        "closed_pnl": 0,
+        "floating_pnl": 2.94
+      },
+      {
+        "timestamp": "2026-01-14T13:13:59.144265",
+        "closed_pnl": 0,
+        "floating_pnl": 3.66
+      },
+      {
+        "timestamp": "2026-01-14T13:14:53.438030",
+        "closed_pnl": 0,
+        "floating_pnl": 4.91
+      },
+      {
+        "timestamp": "2026-01-14T13:16:21.985888",
+        "closed_pnl": 0,
+        "floating_pnl": 5.53
+      },
+      {
+        "timestamp": "2026-01-14T13:17:54.412276",
+        "closed_pnl": 0,
+        "floating_pnl": 2.01
+      },
+      {
+        "timestamp": "2026-01-14T13:18:56.943548",
+        "closed_pnl": 0,
+        "floating_pnl": 0.56
+      },
+      {
+        "timestamp": "2026-01-14T13:19:55.500492",
+        "closed_pnl": 0,
+        "floating_pnl": 0.78
+      },
+      {
+        "timestamp": "2026-01-14T13:20:38.011772",
+        "closed_pnl": 0,
+        "floating_pnl": 1.2
+      },
+      {
+        "timestamp": "2026-01-14T13:21:50.666189",
+        "closed_pnl": 0,
+        "floating_pnl": 0.99
+      },
+      {
+        "timestamp": "2026-01-14T13:23:25.084027",
+        "closed_pnl": 0,
+        "floating_pnl": 5.11
+      },
+      {
+        "timestamp": "2026-01-14T13:25:19.837096",
+        "closed_pnl": 0,
+        "floating_pnl": 9.18
+      },
+      {
+        "timestamp": "2026-01-14T13:26:00.502641",
+        "closed_pnl": 0,
+        "floating_pnl": 9.52
+      },
+      {
+        "timestamp": "2026-01-14T13:27:26.563327",
+        "closed_pnl": 0,
+        "floating_pnl": 7.64
+      },
+      {
+        "timestamp": "2026-01-14T13:29:05.003960",
+        "closed_pnl": 0,
+        "floating_pnl": 7.53
+      },
+      {
+        "timestamp": "2026-01-14T13:30:09.272406",
+        "closed_pnl": 0,
+        "floating_pnl": 7.21
+      },
+      {
+        "timestamp": "2026-01-14T13:31:22.787482",
+        "closed_pnl": 0,
+        "floating_pnl": 11.02
+      },
+      {
+        "timestamp": "2026-01-14T13:32:47.181916",
+        "closed_pnl": 0,
+        "floating_pnl": 9.99
+      },
+      {
+        "timestamp": "2026-01-14T13:35:43.053673",
+        "closed_pnl": 0,
+        "floating_pnl": 11.44
+      },
+      {
+        "timestamp": "2026-01-14T13:37:25.176509",
+        "closed_pnl": 0,
+        "floating_pnl": 16.79
+      },
+      {
+        "timestamp": "2026-01-14T13:38:21.659493",
+        "closed_pnl": 0,
+        "floating_pnl": 11.85
+      },
+      {
+        "timestamp": "2026-01-14T13:39:31.387475",
+        "closed_pnl": 0,
+        "floating_pnl": 11.96
+      },
+      {
+        "timestamp": "2026-01-14T13:40:10.191603",
+        "closed_pnl": 0,
+        "floating_pnl": 15.85
+      },
+      {
+        "timestamp": "2026-01-14T13:41:21.401817",
+        "closed_pnl": 0,
+        "floating_pnl": 14.23
+      },
+      {
+        "timestamp": "2026-01-14T13:43:00.672777",
+        "closed_pnl": 0,
+        "floating_pnl": 12.25
+      },
+      {
+        "timestamp": "2026-01-14T13:45:04.625757",
+        "closed_pnl": 0,
+        "floating_pnl": 7.31
+      },
+      {
+        "timestamp": "2026-01-14T13:46:11.109434",
+        "closed_pnl": 0,
+        "floating_pnl": 5.98
+      },
+      {
+        "timestamp": "2026-01-14T13:47:45.437451",
+        "closed_pnl": 0,
+        "floating_pnl": 5.98
+      },
+      {
+        "timestamp": "2026-01-14T13:49:09.738621",
+        "closed_pnl": 0,
+        "floating_pnl": 7.09
+      },
+      {
+        "timestamp": "2026-01-14T13:50:12.250603",
+        "closed_pnl": 0,
+        "floating_pnl": 6.59
+      },
+      {
+        "timestamp": "2026-01-14T13:51:28.792787",
+        "closed_pnl": 0,
+        "floating_pnl": 6.29
+      },
+      {
+        "timestamp": "2026-01-14T13:52:33.532443",
+        "closed_pnl": 0,
+        "floating_pnl": 5.87
+      },
+      {
+        "timestamp": "2026-01-14T13:53:01.260326",
+        "closed_pnl": 0,
+        "floating_pnl": 4.93
+      },
+      {
+        "timestamp": "2026-01-14T13:54:05.471629",
+        "closed_pnl": 0,
+        "floating_pnl": 5.65
+      },
+      {
+        "timestamp": "2026-01-14T13:54:53.262780",
+        "closed_pnl": 0,
+        "floating_pnl": 7.02
+      },
+      {
+        "timestamp": "2026-01-14T13:55:58.224141",
+        "closed_pnl": 0,
+        "floating_pnl": 8.86
+      },
+      {
+        "timestamp": "2026-01-14T13:56:50.330911",
+        "closed_pnl": 0,
+        "floating_pnl": 7.2
+      },
+      {
+        "timestamp": "2026-01-14T13:57:45.770417",
+        "closed_pnl": 0,
+        "floating_pnl": 8.65
+      },
+      {
+        "timestamp": "2026-01-14T13:58:57.214105",
+        "closed_pnl": 0,
+        "floating_pnl": 8.13
+      },
+      {
+        "timestamp": "2026-01-14T14:00:13.157926",
+        "closed_pnl": 0,
+        "floating_pnl": 6.58
+      },
+      {
+        "timestamp": "2026-01-14T14:01:31.559260",
+        "closed_pnl": 0,
+        "floating_pnl": 9.07
+      },
+      {
+        "timestamp": "2026-01-14T14:02:29.541361",
+        "closed_pnl": 0,
+        "floating_pnl": 4.02
+      },
+      {
+        "timestamp": "2026-01-14T14:03:54.193728",
+        "closed_pnl": 0,
+        "floating_pnl": 5.14
+      },
+      {
+        "timestamp": "2026-01-14T14:05:04.594912",
+        "closed_pnl": 0,
+        "floating_pnl": -0.62
+      },
+      {
+        "timestamp": "2026-01-14T14:05:51.972319",
+        "closed_pnl": 0,
+        "floating_pnl": -6.78
+      },
+      {
+        "timestamp": "2026-01-14T14:07:16.282760",
+        "closed_pnl": 0,
+        "floating_pnl": -1.02
+      },
+      {
+        "timestamp": "2026-01-14T14:08:11.814324",
+        "closed_pnl": 0,
+        "floating_pnl": 6.19
+      },
+      {
+        "timestamp": "2026-01-14T14:08:47.316834",
+        "closed_pnl": 0,
+        "floating_pnl": 4.93
+      },
+      {
+        "timestamp": "2026-01-14T14:09:39.158664",
+        "closed_pnl": 0,
+        "floating_pnl": 5.26
+      },
+      {
+        "timestamp": "2026-01-14T14:10:21.721724",
+        "closed_pnl": 0,
+        "floating_pnl": 3.6
+      },
+      {
+        "timestamp": "2026-01-14T14:10:59.634305",
+        "closed_pnl": 0,
+        "floating_pnl": 4.86
+      },
+      {
+        "timestamp": "2026-01-14T14:12:32.880314",
+        "closed_pnl": 0,
+        "floating_pnl": 3.59
+      },
+      {
+        "timestamp": "2026-01-14T14:13:23.945005",
+        "closed_pnl": 0,
+        "floating_pnl": 3.91
+      },
+      {
+        "timestamp": "2026-01-14T14:14:34.589860",
+        "closed_pnl": 0,
+        "floating_pnl": 2.87
+      },
+      {
+        "timestamp": "2026-01-14T14:16:06.512116",
+        "closed_pnl": 0,
+        "floating_pnl": -3.39
+      },
+      {
+        "timestamp": "2026-01-14T14:17:41.030686",
+        "closed_pnl": 0,
+        "floating_pnl": 0.71
+      },
+      {
+        "timestamp": "2026-01-14T14:19:05.364839",
+        "closed_pnl": 0,
+        "floating_pnl": 2.77
+      },
+      {
+        "timestamp": "2026-01-14T14:20:25.623116",
+        "closed_pnl": 0,
+        "floating_pnl": 3.31
+      },
+      {
+        "timestamp": "2026-01-14T14:21:48.021232",
+        "closed_pnl": 0,
+        "floating_pnl": 12.35
+      },
+      {
+        "timestamp": "2026-01-14T14:23:26.652272",
+        "closed_pnl": 0,
+        "floating_pnl": 8.77
+      },
+      {
+        "timestamp": "2026-01-14T14:24:31.096340",
+        "closed_pnl": 0,
+        "floating_pnl": 4.66
+      },
+      {
+        "timestamp": "2026-01-14T14:26:08.059313",
+        "closed_pnl": 0,
+        "floating_pnl": 2.7
+      },
+      {
+        "timestamp": "2026-01-14T14:27:44.682655",
+        "closed_pnl": 0,
+        "floating_pnl": 1.96
+      },
+      {
+        "timestamp": "2026-01-14T14:29:21.415686",
+        "closed_pnl": 0,
+        "floating_pnl": 2.57
+      },
+      {
+        "timestamp": "2026-01-14T14:30:18.030771",
+        "closed_pnl": 0,
+        "floating_pnl": 3.22
+      },
+      {
+        "timestamp": "2026-01-14T14:31:10.736693",
+        "closed_pnl": 0,
+        "floating_pnl": -0.63
+      },
+      {
+        "timestamp": "2026-01-14T14:31:57.556833",
+        "closed_pnl": 0,
+        "floating_pnl": -4.03
+      },
+      {
+        "timestamp": "2026-01-14T14:32:55.509451",
+        "closed_pnl": 0,
+        "floating_pnl": -2.35
+      },
+      {
+        "timestamp": "2026-01-14T14:34:09.301885",
+        "closed_pnl": 0,
+        "floating_pnl": -3.44
+      },
+      {
+        "timestamp": "2026-01-14T14:34:59.423327",
+        "closed_pnl": 0,
+        "floating_pnl": -3.19
+      },
+      {
+        "timestamp": "2026-01-14T14:36:10.719440",
+        "closed_pnl": 0,
+        "floating_pnl": -4.76
+      },
+      {
+        "timestamp": "2026-01-14T14:37:19.722508",
+        "closed_pnl": 0,
+        "floating_pnl": 1.28
+      },
+      {
+        "timestamp": "2026-01-14T14:39:22.456288",
+        "closed_pnl": 0,
+        "floating_pnl": -2.23
+      },
+      {
+        "timestamp": "2026-01-14T14:40:35.810307",
+        "closed_pnl": 0,
+        "floating_pnl": -4.64
+      },
+      {
+        "timestamp": "2026-01-14T14:42:35.783696",
+        "closed_pnl": 0,
+        "floating_pnl": -5.68
+      },
+      {
+        "timestamp": "2026-01-14T14:43:43.889485",
+        "closed_pnl": 0,
+        "floating_pnl": -0.74
+      },
+      {
+        "timestamp": "2026-01-14T14:45:08.371854",
+        "closed_pnl": 0,
+        "floating_pnl": -2.89
+      },
+      {
+        "timestamp": "2026-01-14T14:46:30.917989",
+        "closed_pnl": 0,
+        "floating_pnl": -3.04
+      },
+      {
+        "timestamp": "2026-01-14T14:47:57.624777",
+        "closed_pnl": 0,
+        "floating_pnl": -7.89
+      },
+      {
+        "timestamp": "2026-01-14T14:49:06.193973",
+        "closed_pnl": 0,
+        "floating_pnl": -15.4
+      },
+      {
+        "timestamp": "2026-01-14T14:50:20.629253",
+        "closed_pnl": 0,
+        "floating_pnl": -16.75
+      },
+      {
+        "timestamp": "2026-01-14T14:51:33.744481",
+        "closed_pnl": 0,
+        "floating_pnl": -22.22
+      },
+      {
+        "timestamp": "2026-01-14T14:52:46.704223",
+        "closed_pnl": 0,
+        "floating_pnl": -25.41
+      },
+      {
+        "timestamp": "2026-01-14T14:53:39.320926",
+        "closed_pnl": 0,
+        "floating_pnl": -21.91
+      },
+      {
+        "timestamp": "2026-01-14T14:55:17.547681",
+        "closed_pnl": 0,
+        "floating_pnl": -20.56
+      },
+      {
+        "timestamp": "2026-01-14T14:56:21.482093",
+        "closed_pnl": 0,
+        "floating_pnl": -20.89
+      },
+      {
+        "timestamp": "2026-01-14T14:57:30.362116",
+        "closed_pnl": 0,
+        "floating_pnl": -20.26
+      },
+      {
+        "timestamp": "2026-01-14T14:58:54.954493",
+        "closed_pnl": 0,
+        "floating_pnl": -16.84
+      },
+      {
+        "timestamp": "2026-01-14T15:00:01.618419",
+        "closed_pnl": 0,
+        "floating_pnl": -15.21
+      },
+      {
+        "timestamp": "2026-01-14T15:01:29.798094",
+        "closed_pnl": 0,
+        "floating_pnl": -14.18
+      },
+      {
+        "timestamp": "2026-01-14T15:02:24.969353",
+        "closed_pnl": 0,
+        "floating_pnl": -10.58
+      },
+      {
+        "timestamp": "2026-01-14T15:03:32.518390",
+        "closed_pnl": 0,
+        "floating_pnl": 2.5
+      },
+      {
+        "timestamp": "2026-01-14T15:05:07.836096",
+        "closed_pnl": 0,
+        "floating_pnl": 9.41
+      },
+      {
+        "timestamp": "2026-01-14T15:06:26.024264",
+        "closed_pnl": 0,
+        "floating_pnl": 11.03
+      },
+      {
+        "timestamp": "2026-01-14T15:07:58.425377",
+        "closed_pnl": 0,
+        "floating_pnl": 8.08
+      },
+      {
+        "timestamp": "2026-01-14T15:09:27.616539",
+        "closed_pnl": 0,
+        "floating_pnl": 11.59
+      },
+      {
+        "timestamp": "2026-01-14T15:11:06.159466",
+        "closed_pnl": 0,
+        "floating_pnl": 2.82
+      },
+      {
+        "timestamp": "2026-01-14T15:12:20.841298",
+        "closed_pnl": 0,
+        "floating_pnl": 2.08
+      },
+      {
+        "timestamp": "2026-01-14T15:13:15.527018",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:15:06.491670",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:16:01.126811",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:16:52.327810",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:18:00.209093",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:18:58.690888",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:20:05.283136",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:21:10.900503",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:22:24.120559",
+        "closed_pnl": 0,
+        "floating_pnl": 0.73
+      },
+      {
+        "timestamp": "2026-01-14T15:23:12.694901",
+        "closed_pnl": 0,
+        "floating_pnl": 0.03
+      },
+      {
+        "timestamp": "2026-01-14T15:24:09.079936",
+        "closed_pnl": 0,
+        "floating_pnl": 0.57
+      },
+      {
+        "timestamp": "2026-01-14T15:24:35.681887",
+        "closed_pnl": 0,
+        "floating_pnl": 1.2
+      },
+      {
+        "timestamp": "2026-01-14T15:25:22.048184",
+        "closed_pnl": 0,
+        "floating_pnl": 1.19
+      },
+      {
+        "timestamp": "2026-01-14T15:25:57.581745",
+        "closed_pnl": 0,
+        "floating_pnl": 1.08
+      },
+      {
+        "timestamp": "2026-01-14T15:26:39.825377",
+        "closed_pnl": 0,
+        "floating_pnl": 0.21
+      },
+      {
+        "timestamp": "2026-01-14T15:27:27.372407",
+        "closed_pnl": 0,
+        "floating_pnl": -0.21
+      },
+      {
+        "timestamp": "2026-01-14T15:28:26.470385",
+        "closed_pnl": 0,
+        "floating_pnl": -0.27
+      },
+      {
+        "timestamp": "2026-01-14T15:28:59.208190",
+        "closed_pnl": 0,
+        "floating_pnl": -0.02
+      },
+      {
+        "timestamp": "2026-01-14T15:30:10.872619",
+        "closed_pnl": 0,
+        "floating_pnl": -0.03
+      },
+      {
+        "timestamp": "2026-01-14T15:30:41.777525",
+        "closed_pnl": 0,
+        "floating_pnl": -0.58
+      },
+      {
+        "timestamp": "2026-01-14T15:31:28.039346",
+        "closed_pnl": 0,
+        "floating_pnl": -0.03
+      },
+      {
+        "timestamp": "2026-01-14T15:32:40.406089",
+        "closed_pnl": 0,
+        "floating_pnl": -1.45
+      },
+      {
+        "timestamp": "2026-01-14T15:33:43.966191",
+        "closed_pnl": 0,
+        "floating_pnl": -1.94
+      },
+      {
+        "timestamp": "2026-01-14T15:34:56.162984",
+        "closed_pnl": 0,
+        "floating_pnl": -1.0
+      },
+      {
+        "timestamp": "2026-01-14T15:35:51.798135",
+        "closed_pnl": 0,
+        "floating_pnl": -1.42
+      },
+      {
+        "timestamp": "2026-01-14T15:36:41.486783",
+        "closed_pnl": 0,
+        "floating_pnl": -2.57
+      },
+      {
+        "timestamp": "2026-01-14T15:37:47.666631",
+        "closed_pnl": 0,
+        "floating_pnl": -0.71
+      },
+      {
+        "timestamp": "2026-01-14T15:38:34.479998",
+        "closed_pnl": 0,
+        "floating_pnl": 0.37
+      },
+      {
+        "timestamp": "2026-01-14T15:39:25.382854",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:40:34.577423",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:42:21.840739",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:43:49.931404",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:45:00.002080",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:46:12.281707",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:48:20.450198",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:49:26.581731",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:50:52.939297",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:52:23.037609",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:53:51.129854",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:55:31.249736",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:57:07.537216",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:58:13.624687",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:01:13.893946",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:07:04.415098",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:08:18.586898",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:10:26.764085",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:11:19.061293",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:12:43.149627",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:13:49.224131",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:44:16.783441",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:01:32.302298",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:06:43.562250",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:12:05.947841",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:13:36.053641",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:14:56.137871",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:17:48.351778",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:24:54.366233",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:34:23.159410",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:37:09.435524",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:38:49.637088",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:41:23.829135",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:43:13.948131",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:45:36.929095",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:47:13.044008",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:48:33.135889",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:50:09.237426",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:51:35.604099",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:53:49.737802",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:56:56.216770",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:59:44.415432",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:01:18.606835",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:02:36.700367",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:05:02.857546",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:07:48.465363",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:09:18.578416",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:10:18.647322",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:13:28.987387",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:18:09.342361",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:23:03.706455",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:23:47.807301",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:25:00.545815",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:26:34.475843",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:28:51.156361",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:29:43.263951",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:30:43.378076",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:31:36.458413",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:33:10.600895",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:34:20.759424",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:37:21.006847",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:40:03.209213",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:45:05.726586",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:48:22.153695",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:50:58.345884",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:52:08.537432",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:52:41.874997",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:53:39.175023",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:55:43.442790",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:56:44.834155",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:58:08.937850",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:59:50.190700",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:01:07.317033",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:02:22.091988",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:03:14.196473",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:04:58.360445",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:06:21.606969",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:07:36.720001",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:11:18.639675",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:12:55.136986",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:14:40.913336",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:19:44.764021",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:21:40.358054",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:23:11.096552",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:28:44.217798",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:29:48.984011",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:31:36.406446",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:32:55.125413",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:34:03.566826",
+        "closed_pnl": 47.67,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:35:35.556183",
+        "closed_pnl": 47.67,
+        "floating_pnl": -0.07
+      },
+      {
+        "timestamp": "2026-01-14T19:36:37.069864",
+        "closed_pnl": 47.67,
+        "floating_pnl": -1.1
+      },
+      {
+        "timestamp": "2026-01-14T19:37:31.416427",
+        "closed_pnl": 47.67,
+        "floating_pnl": -0.88
+      },
+      {
+        "timestamp": "2026-01-14T19:38:35.998389",
+        "closed_pnl": 47.67,
+        "floating_pnl": -1.53
+      },
+      {
+        "timestamp": "2026-01-14T19:40:46.325433",
+        "closed_pnl": 47.67,
+        "floating_pnl": -1.98
+      }
+    ],
+    "fibo3": [
+      {
+        "timestamp": "2026-01-14T13:02:58.177545",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:03:49.563623",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:04:36.689696",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:05:45.039282",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:06:22.665137",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:06:59.776284",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:07:28.928802",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:08:32.302665",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:09:32.570595",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:10:29.276052",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:11:56.788203",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:12:57.266378",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:13:59.144265",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:14:53.438030",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:16:21.986886",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:17:54.413275",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T13:18:56.944547",
+        "closed_pnl": 0,
+        "floating_pnl": -0.06
+      },
+      {
+        "timestamp": "2026-01-14T13:19:55.501491",
+        "closed_pnl": 0,
+        "floating_pnl": -0.17
+      },
+      {
+        "timestamp": "2026-01-14T13:20:38.012771",
+        "closed_pnl": 0,
+        "floating_pnl": -0.38
+      },
+      {
+        "timestamp": "2026-01-14T13:21:50.667189",
+        "closed_pnl": 0,
+        "floating_pnl": -0.0
+      },
+      {
+        "timestamp": "2026-01-14T13:23:25.085027",
+        "closed_pnl": 0,
+        "floating_pnl": 0.68
+      },
+      {
+        "timestamp": "2026-01-14T13:25:19.838096",
+        "closed_pnl": 0,
+        "floating_pnl": 4.47
+      },
+      {
+        "timestamp": "2026-01-14T13:26:00.504144",
+        "closed_pnl": 0,
+        "floating_pnl": 4.08
+      },
+      {
+        "timestamp": "2026-01-14T13:27:26.564327",
+        "closed_pnl": 0,
+        "floating_pnl": 2.82
+      },
+      {
+        "timestamp": "2026-01-14T13:29:05.005542",
+        "closed_pnl": 0,
+        "floating_pnl": 2.97
+      },
+      {
+        "timestamp": "2026-01-14T13:30:09.273407",
+        "closed_pnl": 0,
+        "floating_pnl": 2.04
+      },
+      {
+        "timestamp": "2026-01-14T13:31:22.788482",
+        "closed_pnl": 0,
+        "floating_pnl": 4.66
+      },
+      {
+        "timestamp": "2026-01-14T13:32:47.182916",
+        "closed_pnl": 0,
+        "floating_pnl": 3.28
+      },
+      {
+        "timestamp": "2026-01-14T13:35:43.053673",
+        "closed_pnl": 0,
+        "floating_pnl": 5.32
+      },
+      {
+        "timestamp": "2026-01-14T13:37:25.180510",
+        "closed_pnl": 0,
+        "floating_pnl": 8.5
+      },
+      {
+        "timestamp": "2026-01-14T13:38:21.660126",
+        "closed_pnl": 0,
+        "floating_pnl": 5.61
+      },
+      {
+        "timestamp": "2026-01-14T13:39:31.388476",
+        "closed_pnl": 0,
+        "floating_pnl": 5.61
+      },
+      {
+        "timestamp": "2026-01-14T13:40:10.192604",
+        "closed_pnl": 0,
+        "floating_pnl": 9.83
+      },
+      {
+        "timestamp": "2026-01-14T13:41:21.403816",
+        "closed_pnl": 0,
+        "floating_pnl": 7.17
+      },
+      {
+        "timestamp": "2026-01-14T13:43:00.675778",
+        "closed_pnl": 0,
+        "floating_pnl": 5.72
+      },
+      {
+        "timestamp": "2026-01-14T13:45:04.626756",
+        "closed_pnl": 0,
+        "floating_pnl": 0.98
+      },
+      {
+        "timestamp": "2026-01-14T13:46:11.111155",
+        "closed_pnl": 0,
+        "floating_pnl": -0.04
+      },
+      {
+        "timestamp": "2026-01-14T13:47:45.438452",
+        "closed_pnl": 0,
+        "floating_pnl": 0.46
+      },
+      {
+        "timestamp": "2026-01-14T13:49:09.741129",
+        "closed_pnl": 0,
+        "floating_pnl": 0.46
+      },
+      {
+        "timestamp": "2026-01-14T13:50:12.253602",
+        "closed_pnl": 0,
+        "floating_pnl": 0.78
+      },
+      {
+        "timestamp": "2026-01-14T13:51:28.793787",
+        "closed_pnl": 0,
+        "floating_pnl": 0.46
+      },
+      {
+        "timestamp": "2026-01-14T13:52:33.534442",
+        "closed_pnl": 0,
+        "floating_pnl": -0.57
+      },
+      {
+        "timestamp": "2026-01-14T13:53:01.262329",
+        "closed_pnl": 0,
+        "floating_pnl": -1.59
+      },
+      {
+        "timestamp": "2026-01-14T13:54:05.472629",
+        "closed_pnl": 0,
+        "floating_pnl": -0.87
+      },
+      {
+        "timestamp": "2026-01-14T13:54:53.265780",
+        "closed_pnl": 0,
+        "floating_pnl": 0.26
+      },
+      {
+        "timestamp": "2026-01-14T13:55:58.226141",
+        "closed_pnl": 0,
+        "floating_pnl": 1.79
+      },
+      {
+        "timestamp": "2026-01-14T13:56:50.331911",
+        "closed_pnl": 0,
+        "floating_pnl": 0.68
+      },
+      {
+        "timestamp": "2026-01-14T13:57:45.772416",
+        "closed_pnl": 0,
+        "floating_pnl": 2.33
+      },
+      {
+        "timestamp": "2026-01-14T13:58:57.216104",
+        "closed_pnl": 0,
+        "floating_pnl": 1.79
+      },
+      {
+        "timestamp": "2026-01-14T14:00:13.161924",
+        "closed_pnl": 0,
+        "floating_pnl": 0.67
+      },
+      {
+        "timestamp": "2026-01-14T14:01:31.561264",
+        "closed_pnl": 0,
+        "floating_pnl": 1.71
+      },
+      {
+        "timestamp": "2026-01-14T14:02:29.542361",
+        "closed_pnl": 0,
+        "floating_pnl": -2.53
+      },
+      {
+        "timestamp": "2026-01-14T14:03:54.194726",
+        "closed_pnl": 0,
+        "floating_pnl": -0.99
+      },
+      {
+        "timestamp": "2026-01-14T14:05:04.595912",
+        "closed_pnl": 0,
+        "floating_pnl": -9.21
+      },
+      {
+        "timestamp": "2026-01-14T14:05:51.976827",
+        "closed_pnl": 0,
+        "floating_pnl": -13.84
+      },
+      {
+        "timestamp": "2026-01-14T14:07:16.284760",
+        "closed_pnl": 0,
+        "floating_pnl": -6.25
+      },
+      {
+        "timestamp": "2026-01-14T14:08:11.816323",
+        "closed_pnl": 0,
+        "floating_pnl": 0.05
+      },
+      {
+        "timestamp": "2026-01-14T14:08:47.319339",
+        "closed_pnl": 0,
+        "floating_pnl": -1.18
+      },
+      {
+        "timestamp": "2026-01-14T14:09:39.160664",
+        "closed_pnl": 0,
+        "floating_pnl": -0.04
+      },
+      {
+        "timestamp": "2026-01-14T14:10:21.725725",
+        "closed_pnl": 0,
+        "floating_pnl": -3.55
+      },
+      {
+        "timestamp": "2026-01-14T14:10:59.636305",
+        "closed_pnl": 0,
+        "floating_pnl": -1.49
+      },
+      {
+        "timestamp": "2026-01-14T14:12:32.882822",
+        "closed_pnl": 0,
+        "floating_pnl": -2.53
+      },
+      {
+        "timestamp": "2026-01-14T14:13:23.947508",
+        "closed_pnl": 0,
+        "floating_pnl": -2.93
+      },
+      {
+        "timestamp": "2026-01-14T14:14:34.591860",
+        "closed_pnl": 0,
+        "floating_pnl": -3.76
+      },
+      {
+        "timestamp": "2026-01-14T14:16:06.516114",
+        "closed_pnl": 0,
+        "floating_pnl": -9.63
+      },
+      {
+        "timestamp": "2026-01-14T14:17:41.032686",
+        "closed_pnl": 0,
+        "floating_pnl": -5.1
+      },
+      {
+        "timestamp": "2026-01-14T14:19:05.366838",
+        "closed_pnl": 0,
+        "floating_pnl": -3.87
+      },
+      {
+        "timestamp": "2026-01-14T14:20:25.626116",
+        "closed_pnl": 0,
+        "floating_pnl": -2.11
+      },
+      {
+        "timestamp": "2026-01-14T14:21:48.023966",
+        "closed_pnl": 0,
+        "floating_pnl": 6.95
+      },
+      {
+        "timestamp": "2026-01-14T14:23:26.656366",
+        "closed_pnl": 0,
+        "floating_pnl": 10.12
+      },
+      {
+        "timestamp": "2026-01-14T14:24:31.099365",
+        "closed_pnl": 0,
+        "floating_pnl": 7.73
+      },
+      {
+        "timestamp": "2026-01-14T14:26:08.061826",
+        "closed_pnl": 0,
+        "floating_pnl": 4.54
+      },
+      {
+        "timestamp": "2026-01-14T14:27:44.685658",
+        "closed_pnl": 0,
+        "floating_pnl": 3.18
+      },
+      {
+        "timestamp": "2026-01-14T14:29:21.418187",
+        "closed_pnl": 0,
+        "floating_pnl": 5.13
+      },
+      {
+        "timestamp": "2026-01-14T14:30:18.035774",
+        "closed_pnl": 0,
+        "floating_pnl": 5.36
+      },
+      {
+        "timestamp": "2026-01-14T14:31:10.739693",
+        "closed_pnl": 0,
+        "floating_pnl": -0.15
+      },
+      {
+        "timestamp": "2026-01-14T14:31:57.559832",
+        "closed_pnl": 0,
+        "floating_pnl": -4.81
+      },
+      {
+        "timestamp": "2026-01-14T14:32:55.512451",
+        "closed_pnl": 0,
+        "floating_pnl": -3.76
+      },
+      {
+        "timestamp": "2026-01-14T14:34:09.304390",
+        "closed_pnl": 0,
+        "floating_pnl": -7.47
+      },
+      {
+        "timestamp": "2026-01-14T14:34:59.429329",
+        "closed_pnl": 0,
+        "floating_pnl": -4.92
+      },
+      {
+        "timestamp": "2026-01-14T14:36:10.722440",
+        "closed_pnl": 0,
+        "floating_pnl": -8.19
+      },
+      {
+        "timestamp": "2026-01-14T14:37:19.725506",
+        "closed_pnl": 0,
+        "floating_pnl": 1.78
+      },
+      {
+        "timestamp": "2026-01-14T14:39:22.458287",
+        "closed_pnl": 0,
+        "floating_pnl": -5.53
+      },
+      {
+        "timestamp": "2026-01-14T14:40:35.812816",
+        "closed_pnl": 0,
+        "floating_pnl": -2.76
+      },
+      {
+        "timestamp": "2026-01-14T14:42:35.789697",
+        "closed_pnl": 0,
+        "floating_pnl": -7.2
+      },
+      {
+        "timestamp": "2026-01-14T14:43:43.892488",
+        "closed_pnl": 0,
+        "floating_pnl": -1.32
+      },
+      {
+        "timestamp": "2026-01-14T14:45:08.374854",
+        "closed_pnl": 0,
+        "floating_pnl": -4.92
+      },
+      {
+        "timestamp": "2026-01-14T14:46:30.921993",
+        "closed_pnl": 0,
+        "floating_pnl": -4.7
+      },
+      {
+        "timestamp": "2026-01-14T14:47:57.627779",
+        "closed_pnl": 0,
+        "floating_pnl": -12.62
+      },
+      {
+        "timestamp": "2026-01-14T14:49:06.200050",
+        "closed_pnl": 0,
+        "floating_pnl": -16.23
+      },
+      {
+        "timestamp": "2026-01-14T14:50:20.633253",
+        "closed_pnl": 0,
+        "floating_pnl": -17.89
+      },
+      {
+        "timestamp": "2026-01-14T14:51:33.748521",
+        "closed_pnl": 0,
+        "floating_pnl": -23.55
+      },
+      {
+        "timestamp": "2026-01-14T14:52:46.707364",
+        "closed_pnl": 0,
+        "floating_pnl": -26.24
+      },
+      {
+        "timestamp": "2026-01-14T14:53:39.323925",
+        "closed_pnl": 0,
+        "floating_pnl": -23.05
+      },
+      {
+        "timestamp": "2026-01-14T14:55:17.553734",
+        "closed_pnl": 0,
+        "floating_pnl": -22.22
+      },
+      {
+        "timestamp": "2026-01-14T14:56:21.485598",
+        "closed_pnl": 0,
+        "floating_pnl": -22.1
+      },
+      {
+        "timestamp": "2026-01-14T14:57:30.365116",
+        "closed_pnl": 0,
+        "floating_pnl": -21.6
+      },
+      {
+        "timestamp": "2026-01-14T14:58:54.957999",
+        "closed_pnl": 0,
+        "floating_pnl": -14.79
+      },
+      {
+        "timestamp": "2026-01-14T15:00:01.621422",
+        "closed_pnl": 0,
+        "floating_pnl": -13.46
+      },
+      {
+        "timestamp": "2026-01-14T15:01:29.803674",
+        "closed_pnl": 0,
+        "floating_pnl": -14.18
+      },
+      {
+        "timestamp": "2026-01-14T15:02:24.973352",
+        "closed_pnl": 0,
+        "floating_pnl": -11.79
+      },
+      {
+        "timestamp": "2026-01-14T15:03:32.521416",
+        "closed_pnl": 0,
+        "floating_pnl": -0.87
+      },
+      {
+        "timestamp": "2026-01-14T15:05:07.840094",
+        "closed_pnl": 0,
+        "floating_pnl": 9.78
+      },
+      {
+        "timestamp": "2026-01-14T15:06:26.027266",
+        "closed_pnl": 0,
+        "floating_pnl": 12.06
+      },
+      {
+        "timestamp": "2026-01-14T15:07:58.431381",
+        "closed_pnl": 0,
+        "floating_pnl": 10.34
+      },
+      {
+        "timestamp": "2026-01-14T15:09:27.621044",
+        "closed_pnl": 0,
+        "floating_pnl": 8.25
+      },
+      {
+        "timestamp": "2026-01-14T15:11:06.163172",
+        "closed_pnl": 0,
+        "floating_pnl": 6.04
+      },
+      {
+        "timestamp": "2026-01-14T15:12:20.846298",
+        "closed_pnl": 0,
+        "floating_pnl": 1.21
+      },
+      {
+        "timestamp": "2026-01-14T15:13:15.530645",
+        "closed_pnl": 0,
+        "floating_pnl": -0.41
+      },
+      {
+        "timestamp": "2026-01-14T15:15:06.499175",
+        "closed_pnl": 0,
+        "floating_pnl": -0.64
+      },
+      {
+        "timestamp": "2026-01-14T15:16:01.129812",
+        "closed_pnl": 0,
+        "floating_pnl": -1.1
+      },
+      {
+        "timestamp": "2026-01-14T15:16:52.331810",
+        "closed_pnl": 0,
+        "floating_pnl": 2.23
+      },
+      {
+        "timestamp": "2026-01-14T15:18:00.213094",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:18:58.694890",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:20:05.292136",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:21:10.904004",
+        "closed_pnl": 0,
+        "floating_pnl": 0.01
+      },
+      {
+        "timestamp": "2026-01-14T15:22:24.125065",
+        "closed_pnl": 0,
+        "floating_pnl": 0.66
+      },
+      {
+        "timestamp": "2026-01-14T15:23:12.698410",
+        "closed_pnl": 0,
+        "floating_pnl": 0.2
+      },
+      {
+        "timestamp": "2026-01-14T15:24:09.083937",
+        "closed_pnl": 0,
+        "floating_pnl": 0.72
+      },
+      {
+        "timestamp": "2026-01-14T15:24:35.690889",
+        "closed_pnl": 0,
+        "floating_pnl": 1.2
+      },
+      {
+        "timestamp": "2026-01-14T15:25:22.052184",
+        "closed_pnl": 0,
+        "floating_pnl": 1.29
+      },
+      {
+        "timestamp": "2026-01-14T15:25:57.586749",
+        "closed_pnl": 0,
+        "floating_pnl": 1.22
+      },
+      {
+        "timestamp": "2026-01-14T15:26:39.829377",
+        "closed_pnl": 0,
+        "floating_pnl": 0.27
+      },
+      {
+        "timestamp": "2026-01-14T15:27:27.376408",
+        "closed_pnl": 0,
+        "floating_pnl": -0.21
+      },
+      {
+        "timestamp": "2026-01-14T15:28:26.478887",
+        "closed_pnl": 0,
+        "floating_pnl": -0.1
+      },
+      {
+        "timestamp": "2026-01-14T15:28:59.213188",
+        "closed_pnl": 0,
+        "floating_pnl": 0.14
+      },
+      {
+        "timestamp": "2026-01-14T15:30:10.877618",
+        "closed_pnl": 0,
+        "floating_pnl": 0.54
+      },
+      {
+        "timestamp": "2026-01-14T15:30:41.781372",
+        "closed_pnl": 0,
+        "floating_pnl": -2.12
+      },
+      {
+        "timestamp": "2026-01-14T15:31:28.044343",
+        "closed_pnl": 0,
+        "floating_pnl": -1.17
+      },
+      {
+        "timestamp": "2026-01-14T15:32:40.416599",
+        "closed_pnl": 0,
+        "floating_pnl": -3.87
+      },
+      {
+        "timestamp": "2026-01-14T15:33:43.970803",
+        "closed_pnl": 0,
+        "floating_pnl": -6.8
+      },
+      {
+        "timestamp": "2026-01-14T15:34:56.166983",
+        "closed_pnl": 0,
+        "floating_pnl": -1.62
+      },
+      {
+        "timestamp": "2026-01-14T15:35:51.802136",
+        "closed_pnl": 0,
+        "floating_pnl": -1.91
+      },
+      {
+        "timestamp": "2026-01-14T15:36:41.491784",
+        "closed_pnl": 0,
+        "floating_pnl": -3.68
+      },
+      {
+        "timestamp": "2026-01-14T15:37:47.677737",
+        "closed_pnl": 0,
+        "floating_pnl": 0.95
+      },
+      {
+        "timestamp": "2026-01-14T15:38:34.484508",
+        "closed_pnl": 0,
+        "floating_pnl": 6.68
+      },
+      {
+        "timestamp": "2026-01-14T15:39:25.386853",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:40:34.582422",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:42:21.846245",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:43:49.942408",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:45:00.008128",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:46:12.286710",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:48:20.455302",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:49:26.587731",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:50:52.949801",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:52:23.042610",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:53:51.134365",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:55:31.255539",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:57:07.542215",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:58:13.636208",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:01:13.899452",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:07:04.420604",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:08:18.593899",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:10:26.768586",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:11:19.072500",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:12:43.155640",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:13:49.229132",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:44:16.789441",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:01:32.307336",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:06:43.572862",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:12:05.954345",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:13:36.061129",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:14:56.144873",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:17:48.358286",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:24:54.379891",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:34:23.167132",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:37:09.442024",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:38:49.644202",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:41:23.836139",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:43:13.961782",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:45:36.935717",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:47:13.051115",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:48:33.142889",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:50:09.243933",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:51:35.617106",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:53:49.744804",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:56:56.224276",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:59:44.423061",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:01:18.613627",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:02:36.713937",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:05:02.864546",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:07:48.474498",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:09:18.585965",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:10:18.654430",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:13:29.000396",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:18:09.349868",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:23:03.713455",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:23:47.815218",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:25:00.552618",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:26:34.489351",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:28:51.163362",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:29:43.271459",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:30:43.385075",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:31:36.465414",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:33:10.615037",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:34:20.767153",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:37:21.014845",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:40:03.216849",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:45:05.733588",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:48:22.167204",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:50:58.351910",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:52:08.544937",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:52:41.882549",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:53:39.181024",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:55:43.455307",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:56:44.840159",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:58:08.945353",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:59:50.197206",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:01:07.324540",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:02:22.106176",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:03:14.203481",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:04:58.367445",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:06:21.613474",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:07:36.727619",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:11:18.653682",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:12:55.143986",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:14:40.920841",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:19:44.771526",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0.64
+      },
+      {
+        "timestamp": "2026-01-14T19:21:40.365931",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0.99
+      },
+      {
+        "timestamp": "2026-01-14T19:23:11.112610",
+        "closed_pnl": 53.56,
+        "floating_pnl": 0.95
+      },
+      {
+        "timestamp": "2026-01-14T19:28:44.224307",
+        "closed_pnl": 53.56,
+        "floating_pnl": 3.23
+      },
+      {
+        "timestamp": "2026-01-14T19:29:48.991517",
+        "closed_pnl": 53.56,
+        "floating_pnl": 3.55
+      },
+      {
+        "timestamp": "2026-01-14T19:31:36.413949",
+        "closed_pnl": 53.56,
+        "floating_pnl": 1.77
+      },
+      {
+        "timestamp": "2026-01-14T19:32:55.132547",
+        "closed_pnl": 53.56,
+        "floating_pnl": -3.13
+      },
+      {
+        "timestamp": "2026-01-14T19:34:03.582332",
+        "closed_pnl": 53.56,
+        "floating_pnl": -9.32
+      },
+      {
+        "timestamp": "2026-01-14T19:35:35.562807",
+        "closed_pnl": 53.56,
+        "floating_pnl": -2.53
+      },
+      {
+        "timestamp": "2026-01-14T19:36:37.077865",
+        "closed_pnl": 53.56,
+        "floating_pnl": -1.63
+      },
+      {
+        "timestamp": "2026-01-14T19:37:31.425088",
+        "closed_pnl": 53.56,
+        "floating_pnl": -1.2
+      },
+      {
+        "timestamp": "2026-01-14T19:38:36.006530",
+        "closed_pnl": 53.56,
+        "floating_pnl": -3.11
+      },
+      {
+        "timestamp": "2026-01-14T19:40:46.341714",
+        "closed_pnl": 53.56,
+        "floating_pnl": -3.7
+      }
+    ],
+    "master": [
+      {
+        "timestamp": "2026-01-14T14:14:34.589860",
+        "closed_pnl": 0,
+        "floating_pnl": -12.3
+      },
+      {
+        "timestamp": "2026-01-14T14:14:34.591860",
+        "closed_pnl": 0,
+        "floating_pnl": -13.13
+      },
+      {
+        "timestamp": "2026-01-14T14:16:06.507115",
+        "closed_pnl": 0,
+        "floating_pnl": -5.81
+      },
+      {
+        "timestamp": "2026-01-14T14:16:06.512116",
+        "closed_pnl": 0,
+        "floating_pnl": -12.07
+      },
+      {
+        "timestamp": "2026-01-14T14:16:06.516114",
+        "closed_pnl": 0,
+        "floating_pnl": -17.94
+      },
+      {
+        "timestamp": "2026-01-14T14:17:41.027686",
+        "closed_pnl": 0,
+        "floating_pnl": -22.69
+      },
+      {
+        "timestamp": "2026-01-14T14:17:41.030686",
+        "closed_pnl": 0,
+        "floating_pnl": -18.59
+      },
+      {
+        "timestamp": "2026-01-14T14:17:41.032686",
+        "closed_pnl": 0,
+        "floating_pnl": -14.06
+      },
+      {
+        "timestamp": "2026-01-14T14:19:05.362839",
+        "closed_pnl": 0,
+        "floating_pnl": -16.13
+      },
+      {
+        "timestamp": "2026-01-14T14:19:05.364839",
+        "closed_pnl": 0,
+        "floating_pnl": -14.07
+      },
+      {
+        "timestamp": "2026-01-14T14:19:05.366838",
+        "closed_pnl": 0,
+        "floating_pnl": -12.84
+      },
+      {
+        "timestamp": "2026-01-14T14:20:25.620116",
+        "closed_pnl": 0,
+        "floating_pnl": -12.4
+      },
+      {
+        "timestamp": "2026-01-14T14:20:25.623116",
+        "closed_pnl": 0,
+        "floating_pnl": -11.86
+      },
+      {
+        "timestamp": "2026-01-14T14:20:25.626116",
+        "closed_pnl": 0,
+        "floating_pnl": -10.1
+      },
+      {
+        "timestamp": "2026-01-14T14:21:48.019232",
+        "closed_pnl": 0,
+        "floating_pnl": -19.3
+      },
+      {
+        "timestamp": "2026-01-14T14:21:48.021232",
+        "closed_pnl": 0,
+        "floating_pnl": -10.26
+      },
+      {
+        "timestamp": "2026-01-14T14:21:48.023966",
+        "closed_pnl": 0,
+        "floating_pnl": -1.2
+      },
+      {
+        "timestamp": "2026-01-14T14:23:26.646112",
+        "closed_pnl": 0,
+        "floating_pnl": -10.56
+      },
+      {
+        "timestamp": "2026-01-14T14:23:26.652272",
+        "closed_pnl": 0,
+        "floating_pnl": -14.14
+      },
+      {
+        "timestamp": "2026-01-14T14:23:26.656366",
+        "closed_pnl": 0,
+        "floating_pnl": -10.97
+      },
+      {
+        "timestamp": "2026-01-14T14:24:31.093338",
+        "closed_pnl": 0,
+        "floating_pnl": -5.44
+      },
+      {
+        "timestamp": "2026-01-14T14:24:31.096340",
+        "closed_pnl": 0,
+        "floating_pnl": -9.55
+      },
+      {
+        "timestamp": "2026-01-14T14:24:31.099365",
+        "closed_pnl": 0,
+        "floating_pnl": -11.94
+      },
+      {
+        "timestamp": "2026-01-14T14:26:08.056313",
+        "closed_pnl": 0,
+        "floating_pnl": -8.25
+      },
+      {
+        "timestamp": "2026-01-14T14:26:08.059313",
+        "closed_pnl": 0,
+        "floating_pnl": -10.21
+      },
+      {
+        "timestamp": "2026-01-14T14:26:08.061826",
+        "closed_pnl": 0,
+        "floating_pnl": -13.4
+      },
+      {
+        "timestamp": "2026-01-14T14:27:44.679525",
+        "closed_pnl": 0,
+        "floating_pnl": -12.73
+      },
+      {
+        "timestamp": "2026-01-14T14:27:44.682655",
+        "closed_pnl": 0,
+        "floating_pnl": -13.47
+      },
+      {
+        "timestamp": "2026-01-14T14:27:44.685658",
+        "closed_pnl": 0,
+        "floating_pnl": -14.83
+      },
+      {
+        "timestamp": "2026-01-14T14:29:21.412685",
+        "closed_pnl": 0,
+        "floating_pnl": -14.89
+      },
+      {
+        "timestamp": "2026-01-14T14:29:21.415686",
+        "closed_pnl": 0,
+        "floating_pnl": -14.28
+      },
+      {
+        "timestamp": "2026-01-14T14:29:21.418187",
+        "closed_pnl": 0,
+        "floating_pnl": -12.33
+      },
+      {
+        "timestamp": "2026-01-14T14:30:18.025266",
+        "closed_pnl": 0,
+        "floating_pnl": -12.08
+      },
+      {
+        "timestamp": "2026-01-14T14:30:18.030771",
+        "closed_pnl": 0,
+        "floating_pnl": -11.43
+      },
+      {
+        "timestamp": "2026-01-14T14:30:18.035774",
+        "closed_pnl": 0,
+        "floating_pnl": -11.2
+      },
+      {
+        "timestamp": "2026-01-14T14:31:10.734693",
+        "closed_pnl": 0,
+        "floating_pnl": -9.73
+      },
+      {
+        "timestamp": "2026-01-14T14:31:10.736693",
+        "closed_pnl": 0,
+        "floating_pnl": -13.58
+      },
+      {
+        "timestamp": "2026-01-14T14:31:10.739693",
+        "closed_pnl": 0,
+        "floating_pnl": -19.09
+      },
+      {
+        "timestamp": "2026-01-14T14:31:57.554381",
+        "closed_pnl": 0,
+        "floating_pnl": -13.77
+      },
+      {
+        "timestamp": "2026-01-14T14:31:57.556833",
+        "closed_pnl": 0,
+        "floating_pnl": -17.17
+      },
+      {
+        "timestamp": "2026-01-14T14:31:57.559832",
+        "closed_pnl": 0,
+        "floating_pnl": -21.83
+      },
+      {
+        "timestamp": "2026-01-14T14:32:55.506449",
+        "closed_pnl": 0,
+        "floating_pnl": -21.67
+      },
+      {
+        "timestamp": "2026-01-14T14:32:55.509451",
+        "closed_pnl": 0,
+        "floating_pnl": -19.99
+      },
+      {
+        "timestamp": "2026-01-14T14:32:55.512451",
+        "closed_pnl": 0,
+        "floating_pnl": -18.94
+      },
+      {
+        "timestamp": "2026-01-14T14:34:09.298884",
+        "closed_pnl": 0,
+        "floating_pnl": -17.73
+      },
+      {
+        "timestamp": "2026-01-14T14:34:09.301885",
+        "closed_pnl": 0,
+        "floating_pnl": -18.82
+      },
+      {
+        "timestamp": "2026-01-14T14:34:09.304390",
+        "closed_pnl": 0,
+        "floating_pnl": -22.53
+      },
+      {
+        "timestamp": "2026-01-14T14:34:59.416769",
+        "closed_pnl": 0,
+        "floating_pnl": -21.93
+      },
+      {
+        "timestamp": "2026-01-14T14:34:59.423327",
+        "closed_pnl": 0,
+        "floating_pnl": -21.68
+      },
+      {
+        "timestamp": "2026-01-14T14:34:59.429329",
+        "closed_pnl": 0,
+        "floating_pnl": -19.13
+      },
+      {
+        "timestamp": "2026-01-14T14:36:10.716407",
+        "closed_pnl": 0,
+        "floating_pnl": -17.5
+      },
+      {
+        "timestamp": "2026-01-14T14:36:10.719440",
+        "closed_pnl": 0,
+        "floating_pnl": -19.07
+      },
+      {
+        "timestamp": "2026-01-14T14:36:10.722440",
+        "closed_pnl": 0,
+        "floating_pnl": -22.34
+      },
+      {
+        "timestamp": "2026-01-14T14:37:19.719506",
+        "closed_pnl": 0,
+        "floating_pnl": -29.64
+      },
+      {
+        "timestamp": "2026-01-14T14:37:19.722508",
+        "closed_pnl": 0,
+        "floating_pnl": -23.6
+      },
+      {
+        "timestamp": "2026-01-14T14:37:19.725506",
+        "closed_pnl": 0,
+        "floating_pnl": -13.63
+      },
+      {
+        "timestamp": "2026-01-14T14:39:22.452586",
+        "closed_pnl": 0,
+        "floating_pnl": -9.24
+      },
+      {
+        "timestamp": "2026-01-14T14:39:22.456288",
+        "closed_pnl": 0,
+        "floating_pnl": -12.75
+      },
+      {
+        "timestamp": "2026-01-14T14:39:22.458287",
+        "closed_pnl": 0,
+        "floating_pnl": -20.06
+      },
+      {
+        "timestamp": "2026-01-14T14:40:35.807304",
+        "closed_pnl": 0,
+        "floating_pnl": -18.77
+      },
+      {
+        "timestamp": "2026-01-14T14:40:35.810307",
+        "closed_pnl": 0,
+        "floating_pnl": -21.18
+      },
+      {
+        "timestamp": "2026-01-14T14:40:35.812816",
+        "closed_pnl": 0,
+        "floating_pnl": -18.41
+      },
+      {
+        "timestamp": "2026-01-14T14:42:35.777693",
+        "closed_pnl": 0,
+        "floating_pnl": -18.41
+      },
+      {
+        "timestamp": "2026-01-14T14:42:35.783696",
+        "closed_pnl": 0,
+        "floating_pnl": -19.45
+      },
+      {
+        "timestamp": "2026-01-14T14:42:35.789697",
+        "closed_pnl": 0,
+        "floating_pnl": -23.89
+      },
+      {
+        "timestamp": "2026-01-14T14:43:43.885486",
+        "closed_pnl": 0,
+        "floating_pnl": -28.63
+      },
+      {
+        "timestamp": "2026-01-14T14:43:43.889485",
+        "closed_pnl": 0,
+        "floating_pnl": -23.69
+      },
+      {
+        "timestamp": "2026-01-14T14:43:43.892488",
+        "closed_pnl": 0,
+        "floating_pnl": -17.81
+      },
+      {
+        "timestamp": "2026-01-14T14:45:08.369256",
+        "closed_pnl": 0,
+        "floating_pnl": -15.47
+      },
+      {
+        "timestamp": "2026-01-14T14:45:08.371854",
+        "closed_pnl": 0,
+        "floating_pnl": -17.62
+      },
+      {
+        "timestamp": "2026-01-14T14:45:08.374854",
+        "closed_pnl": 0,
+        "floating_pnl": -21.22
+      },
+      {
+        "timestamp": "2026-01-14T14:46:30.915485",
+        "closed_pnl": 0,
+        "floating_pnl": -17.8
+      },
+      {
+        "timestamp": "2026-01-14T14:46:30.917989",
+        "closed_pnl": 0,
+        "floating_pnl": -17.95
+      },
+      {
+        "timestamp": "2026-01-14T14:46:30.921993",
+        "closed_pnl": 0,
+        "floating_pnl": -17.73
+      },
+      {
+        "timestamp": "2026-01-14T14:47:57.621468",
+        "closed_pnl": 0,
+        "floating_pnl": -16.43
+      },
+      {
+        "timestamp": "2026-01-14T14:47:57.624777",
+        "closed_pnl": 0,
+        "floating_pnl": -21.28
+      },
+      {
+        "timestamp": "2026-01-14T14:47:57.627779",
+        "closed_pnl": 0,
+        "floating_pnl": -29.2
+      },
+      {
+        "timestamp": "2026-01-14T14:49:06.187469",
+        "closed_pnl": 0,
+        "floating_pnl": -23.83
+      },
+      {
+        "timestamp": "2026-01-14T14:49:06.193973",
+        "closed_pnl": 0,
+        "floating_pnl": -31.34
+      },
+      {
+        "timestamp": "2026-01-14T14:49:06.200050",
+        "closed_pnl": 0,
+        "floating_pnl": -34.95
+      },
+      {
+        "timestamp": "2026-01-14T14:50:20.626255",
+        "closed_pnl": 0,
+        "floating_pnl": -33.41
+      },
+      {
+        "timestamp": "2026-01-14T14:50:20.629253",
+        "closed_pnl": 0,
+        "floating_pnl": -34.76
+      },
+      {
+        "timestamp": "2026-01-14T14:50:20.633253",
+        "closed_pnl": 0,
+        "floating_pnl": -36.42
+      },
+      {
+        "timestamp": "2026-01-14T14:51:33.741978",
+        "closed_pnl": 0,
+        "floating_pnl": -29.1
+      },
+      {
+        "timestamp": "2026-01-14T14:51:33.744481",
+        "closed_pnl": 0,
+        "floating_pnl": -34.57
+      },
+      {
+        "timestamp": "2026-01-14T14:51:33.748521",
+        "closed_pnl": 0,
+        "floating_pnl": -40.23
+      },
+      {
+        "timestamp": "2026-01-14T14:52:46.700500",
+        "closed_pnl": 0,
+        "floating_pnl": -37.67
+      },
+      {
+        "timestamp": "2026-01-14T14:52:46.704223",
+        "closed_pnl": 0,
+        "floating_pnl": -40.86
+      },
+      {
+        "timestamp": "2026-01-14T14:52:46.707364",
+        "closed_pnl": 0,
+        "floating_pnl": -43.55
+      },
+      {
+        "timestamp": "2026-01-14T14:53:39.317894",
+        "closed_pnl": 0,
+        "floating_pnl": -46.83
+      },
+      {
+        "timestamp": "2026-01-14T14:53:39.320926",
+        "closed_pnl": 0,
+        "floating_pnl": -43.33
+      },
+      {
+        "timestamp": "2026-01-14T14:53:39.323925",
+        "closed_pnl": 0,
+        "floating_pnl": -40.14
+      },
+      {
+        "timestamp": "2026-01-14T14:55:17.541178",
+        "closed_pnl": 0,
+        "floating_pnl": -42.52
+      },
+      {
+        "timestamp": "2026-01-14T14:55:17.547681",
+        "closed_pnl": 0,
+        "floating_pnl": -41.17
+      },
+      {
+        "timestamp": "2026-01-14T14:55:17.553734",
+        "closed_pnl": 0,
+        "floating_pnl": -40.34
+      },
+      {
+        "timestamp": "2026-01-14T14:56:21.479094",
+        "closed_pnl": 0,
+        "floating_pnl": -39.12
+      },
+      {
+        "timestamp": "2026-01-14T14:56:21.482093",
+        "closed_pnl": 0,
+        "floating_pnl": -39.45
+      },
+      {
+        "timestamp": "2026-01-14T14:56:21.485598",
+        "closed_pnl": 0,
+        "floating_pnl": -39.33
+      },
+      {
+        "timestamp": "2026-01-14T14:57:30.358116",
+        "closed_pnl": 0,
+        "floating_pnl": -39.71
+      },
+      {
+        "timestamp": "2026-01-14T14:57:30.362116",
+        "closed_pnl": 0,
+        "floating_pnl": -39.08
+      },
+      {
+        "timestamp": "2026-01-14T14:57:30.365116",
+        "closed_pnl": 0,
+        "floating_pnl": -38.58
+      },
+      {
+        "timestamp": "2026-01-14T14:58:54.951461",
+        "closed_pnl": 0,
+        "floating_pnl": -41.99
+      },
+      {
+        "timestamp": "2026-01-14T14:58:54.954493",
+        "closed_pnl": 0,
+        "floating_pnl": -38.57
+      },
+      {
+        "timestamp": "2026-01-14T14:58:54.957999",
+        "closed_pnl": 0,
+        "floating_pnl": -31.76
+      },
+      {
+        "timestamp": "2026-01-14T15:00:01.614917",
+        "closed_pnl": 0,
+        "floating_pnl": -32.48
+      },
+      {
+        "timestamp": "2026-01-14T15:00:01.618419",
+        "closed_pnl": 0,
+        "floating_pnl": -30.85
+      },
+      {
+        "timestamp": "2026-01-14T15:00:01.621422",
+        "closed_pnl": 0,
+        "floating_pnl": -29.52
+      },
+      {
+        "timestamp": "2026-01-14T15:01:29.790584",
+        "closed_pnl": 0,
+        "floating_pnl": -33.24
+      },
+      {
+        "timestamp": "2026-01-14T15:01:29.798094",
+        "closed_pnl": 0,
+        "floating_pnl": -32.21
+      },
+      {
+        "timestamp": "2026-01-14T15:01:29.803674",
+        "closed_pnl": 0,
+        "floating_pnl": -32.93
+      },
+      {
+        "timestamp": "2026-01-14T15:02:24.965847",
+        "closed_pnl": 0,
+        "floating_pnl": -34.46
+      },
+      {
+        "timestamp": "2026-01-14T15:02:24.969353",
+        "closed_pnl": 0,
+        "floating_pnl": -30.86
+      },
+      {
+        "timestamp": "2026-01-14T15:02:24.973352",
+        "closed_pnl": 0,
+        "floating_pnl": -28.47
+      },
+      {
+        "timestamp": "2026-01-14T15:03:32.514380",
+        "closed_pnl": 0,
+        "floating_pnl": -39.49
+      },
+      {
+        "timestamp": "2026-01-14T15:03:32.518390",
+        "closed_pnl": 0,
+        "floating_pnl": -26.41
+      },
+      {
+        "timestamp": "2026-01-14T15:03:32.521416",
+        "closed_pnl": 0,
+        "floating_pnl": -15.49
+      },
+      {
+        "timestamp": "2026-01-14T15:05:07.833094",
+        "closed_pnl": 0,
+        "floating_pnl": -21.78
+      },
+      {
+        "timestamp": "2026-01-14T15:05:07.836096",
+        "closed_pnl": 0,
+        "floating_pnl": -14.87
+      },
+      {
+        "timestamp": "2026-01-14T15:05:07.840094",
+        "closed_pnl": 0,
+        "floating_pnl": -4.22
+      },
+      {
+        "timestamp": "2026-01-14T15:06:26.020264",
+        "closed_pnl": 0,
+        "floating_pnl": -9.79
+      },
+      {
+        "timestamp": "2026-01-14T15:06:26.024264",
+        "closed_pnl": 0,
+        "floating_pnl": -8.17
+      },
+      {
+        "timestamp": "2026-01-14T15:06:26.027266",
+        "closed_pnl": 0,
+        "floating_pnl": -5.89
+      },
+      {
+        "timestamp": "2026-01-14T15:07:58.416358",
+        "closed_pnl": 0,
+        "floating_pnl": -1.76
+      },
+      {
+        "timestamp": "2026-01-14T15:07:58.425377",
+        "closed_pnl": 0,
+        "floating_pnl": -4.71
+      },
+      {
+        "timestamp": "2026-01-14T15:07:58.431381",
+        "closed_pnl": 0,
+        "floating_pnl": -6.43
+      },
+      {
+        "timestamp": "2026-01-14T15:09:27.612893",
+        "closed_pnl": 0,
+        "floating_pnl": -4.76
+      },
+      {
+        "timestamp": "2026-01-14T15:09:27.616539",
+        "closed_pnl": 0,
+        "floating_pnl": -1.25
+      },
+      {
+        "timestamp": "2026-01-14T15:09:27.621044",
+        "closed_pnl": 0,
+        "floating_pnl": -3.34
+      },
+      {
+        "timestamp": "2026-01-14T15:11:06.155446",
+        "closed_pnl": 0,
+        "floating_pnl": -1.03
+      },
+      {
+        "timestamp": "2026-01-14T15:11:06.159466",
+        "closed_pnl": 0,
+        "floating_pnl": -9.8
+      },
+      {
+        "timestamp": "2026-01-14T15:11:06.163172",
+        "closed_pnl": 0,
+        "floating_pnl": -12.01
+      },
+      {
+        "timestamp": "2026-01-14T15:12:20.837298",
+        "closed_pnl": 0,
+        "floating_pnl": -17.77
+      },
+      {
+        "timestamp": "2026-01-14T15:12:20.841298",
+        "closed_pnl": 0,
+        "floating_pnl": -18.51
+      },
+      {
+        "timestamp": "2026-01-14T15:12:20.846298",
+        "closed_pnl": 0,
+        "floating_pnl": -23.34
+      },
+      {
+        "timestamp": "2026-01-14T15:13:15.522512",
+        "closed_pnl": 0,
+        "floating_pnl": -3.94
+      },
+      {
+        "timestamp": "2026-01-14T15:13:15.527018",
+        "closed_pnl": 0,
+        "floating_pnl": -6.02
+      },
+      {
+        "timestamp": "2026-01-14T15:13:15.530645",
+        "closed_pnl": 0,
+        "floating_pnl": -7.64
+      },
+      {
+        "timestamp": "2026-01-14T15:15:06.484670",
+        "closed_pnl": 0,
+        "floating_pnl": -7.94
+      },
+      {
+        "timestamp": "2026-01-14T15:15:06.491670",
+        "closed_pnl": 0,
+        "floating_pnl": -7.94
+      },
+      {
+        "timestamp": "2026-01-14T15:15:06.499175",
+        "closed_pnl": 0,
+        "floating_pnl": -8.17
+      },
+      {
+        "timestamp": "2026-01-14T15:16:01.122809",
+        "closed_pnl": 0,
+        "floating_pnl": -7.6
+      },
+      {
+        "timestamp": "2026-01-14T15:16:01.126811",
+        "closed_pnl": 0,
+        "floating_pnl": -7.6
+      },
+      {
+        "timestamp": "2026-01-14T15:16:01.129812",
+        "closed_pnl": 0,
+        "floating_pnl": -8.06
+      },
+      {
+        "timestamp": "2026-01-14T15:16:52.323810",
+        "closed_pnl": 0,
+        "floating_pnl": -1.96
+      },
+      {
+        "timestamp": "2026-01-14T15:16:52.327810",
+        "closed_pnl": 0,
+        "floating_pnl": -1.96
+      },
+      {
+        "timestamp": "2026-01-14T15:16:52.331810",
+        "closed_pnl": 0,
+        "floating_pnl": 1.37
+      },
+      {
+        "timestamp": "2026-01-14T15:18:00.205457",
+        "closed_pnl": 0,
+        "floating_pnl": -1.01
+      },
+      {
+        "timestamp": "2026-01-14T15:18:00.209093",
+        "closed_pnl": 0,
+        "floating_pnl": -1.01
+      },
+      {
+        "timestamp": "2026-01-14T15:18:00.213094",
+        "closed_pnl": 0,
+        "floating_pnl": -3.24
+      },
+      {
+        "timestamp": "2026-01-14T15:18:58.686889",
+        "closed_pnl": 0,
+        "floating_pnl": -2.92
+      },
+      {
+        "timestamp": "2026-01-14T15:18:58.690888",
+        "closed_pnl": 0,
+        "floating_pnl": -2.92
+      },
+      {
+        "timestamp": "2026-01-14T15:18:58.694890",
+        "closed_pnl": 0,
+        "floating_pnl": -2.92
+      },
+      {
+        "timestamp": "2026-01-14T15:20:05.274630",
+        "closed_pnl": 0,
+        "floating_pnl": -2.25
+      },
+      {
+        "timestamp": "2026-01-14T15:20:05.283136",
+        "closed_pnl": 0,
+        "floating_pnl": -2.25
+      },
+      {
+        "timestamp": "2026-01-14T15:20:05.292136",
+        "closed_pnl": 0,
+        "floating_pnl": -2.25
+      },
+      {
+        "timestamp": "2026-01-14T15:21:10.895997",
+        "closed_pnl": 0,
+        "floating_pnl": -2.51
+      },
+      {
+        "timestamp": "2026-01-14T15:21:10.900503",
+        "closed_pnl": 0,
+        "floating_pnl": -2.51
+      },
+      {
+        "timestamp": "2026-01-14T15:21:10.904004",
+        "closed_pnl": 0,
+        "floating_pnl": -2.5
+      },
+      {
+        "timestamp": "2026-01-14T15:22:24.116353",
+        "closed_pnl": 0,
+        "floating_pnl": -3.9
+      },
+      {
+        "timestamp": "2026-01-14T15:22:24.120559",
+        "closed_pnl": 0,
+        "floating_pnl": -3.17
+      },
+      {
+        "timestamp": "2026-01-14T15:22:24.125065",
+        "closed_pnl": 0,
+        "floating_pnl": -2.52
+      },
+      {
+        "timestamp": "2026-01-14T15:23:12.690398",
+        "closed_pnl": 0,
+        "floating_pnl": -1.92
+      },
+      {
+        "timestamp": "2026-01-14T15:23:12.694901",
+        "closed_pnl": 0,
+        "floating_pnl": -2.62
+      },
+      {
+        "timestamp": "2026-01-14T15:23:12.698410",
+        "closed_pnl": 0,
+        "floating_pnl": -3.08
+      },
+      {
+        "timestamp": "2026-01-14T15:24:09.075429",
+        "closed_pnl": 0,
+        "floating_pnl": -4.26
+      },
+      {
+        "timestamp": "2026-01-14T15:24:09.079936",
+        "closed_pnl": 0,
+        "floating_pnl": -3.72
+      },
+      {
+        "timestamp": "2026-01-14T15:24:09.083937",
+        "closed_pnl": 0,
+        "floating_pnl": -3.2
+      },
+      {
+        "timestamp": "2026-01-14T15:24:35.673887",
+        "closed_pnl": 0,
+        "floating_pnl": -4.63
+      },
+      {
+        "timestamp": "2026-01-14T15:24:35.681887",
+        "closed_pnl": 0,
+        "floating_pnl": -4.0
+      },
+      {
+        "timestamp": "2026-01-14T15:24:35.690889",
+        "closed_pnl": 0,
+        "floating_pnl": -3.52
+      },
+      {
+        "timestamp": "2026-01-14T15:25:22.043675",
+        "closed_pnl": 0,
+        "floating_pnl": -3.45
+      },
+      {
+        "timestamp": "2026-01-14T15:25:22.048184",
+        "closed_pnl": 0,
+        "floating_pnl": -3.46
+      },
+      {
+        "timestamp": "2026-01-14T15:25:22.052184",
+        "closed_pnl": 0,
+        "floating_pnl": -3.37
+      },
+      {
+        "timestamp": "2026-01-14T15:25:57.578244",
+        "closed_pnl": 0,
+        "floating_pnl": -2.65
+      },
+      {
+        "timestamp": "2026-01-14T15:25:57.581745",
+        "closed_pnl": 0,
+        "floating_pnl": -2.76
+      },
+      {
+        "timestamp": "2026-01-14T15:25:57.586749",
+        "closed_pnl": 0,
+        "floating_pnl": -2.83
+      },
+      {
+        "timestamp": "2026-01-14T15:26:39.821377",
+        "closed_pnl": 0,
+        "floating_pnl": -2.13
+      },
+      {
+        "timestamp": "2026-01-14T15:26:39.825377",
+        "closed_pnl": 0,
+        "floating_pnl": -3.0
+      },
+      {
+        "timestamp": "2026-01-14T15:26:39.829377",
+        "closed_pnl": 0,
+        "floating_pnl": -3.95
+      },
+      {
+        "timestamp": "2026-01-14T15:27:27.366900",
+        "closed_pnl": 0,
+        "floating_pnl": -2.44
+      },
+      {
+        "timestamp": "2026-01-14T15:27:27.372407",
+        "closed_pnl": 0,
+        "floating_pnl": -2.86
+      },
+      {
+        "timestamp": "2026-01-14T15:27:27.376408",
+        "closed_pnl": 0,
+        "floating_pnl": -3.34
+      },
+      {
+        "timestamp": "2026-01-14T15:28:26.461365",
+        "closed_pnl": 0,
+        "floating_pnl": -3.39
+      },
+      {
+        "timestamp": "2026-01-14T15:28:26.470385",
+        "closed_pnl": 0,
+        "floating_pnl": -3.45
+      },
+      {
+        "timestamp": "2026-01-14T15:28:26.478887",
+        "closed_pnl": 0,
+        "floating_pnl": -3.34
+      },
+      {
+        "timestamp": "2026-01-14T15:28:59.203658",
+        "closed_pnl": 0,
+        "floating_pnl": -3.7
+      },
+      {
+        "timestamp": "2026-01-14T15:28:59.208190",
+        "closed_pnl": 0,
+        "floating_pnl": -3.45
+      },
+      {
+        "timestamp": "2026-01-14T15:28:59.213188",
+        "closed_pnl": 0,
+        "floating_pnl": -3.21
+      },
+      {
+        "timestamp": "2026-01-14T15:30:10.868103",
+        "closed_pnl": 0,
+        "floating_pnl": -3.12
+      },
+      {
+        "timestamp": "2026-01-14T15:30:10.872619",
+        "closed_pnl": 0,
+        "floating_pnl": -3.13
+      },
+      {
+        "timestamp": "2026-01-14T15:30:10.877618",
+        "closed_pnl": 0,
+        "floating_pnl": -2.73
+      },
+      {
+        "timestamp": "2026-01-14T15:30:41.772525",
+        "closed_pnl": 0,
+        "floating_pnl": -2.89
+      },
+      {
+        "timestamp": "2026-01-14T15:30:41.777525",
+        "closed_pnl": 0,
+        "floating_pnl": -3.44
+      },
+      {
+        "timestamp": "2026-01-14T15:30:41.781372",
+        "closed_pnl": 0,
+        "floating_pnl": -6.1
+      },
+      {
+        "timestamp": "2026-01-14T15:31:28.034344",
+        "closed_pnl": 0,
+        "floating_pnl": -6.73
+      },
+      {
+        "timestamp": "2026-01-14T15:31:28.039346",
+        "closed_pnl": 0,
+        "floating_pnl": -6.18
+      },
+      {
+        "timestamp": "2026-01-14T15:31:28.044343",
+        "closed_pnl": 0,
+        "floating_pnl": -5.23
+      },
+      {
+        "timestamp": "2026-01-14T15:32:40.396567",
+        "closed_pnl": 0,
+        "floating_pnl": -1.94
+      },
+      {
+        "timestamp": "2026-01-14T15:32:40.406089",
+        "closed_pnl": 0,
+        "floating_pnl": -3.36
+      },
+      {
+        "timestamp": "2026-01-14T15:32:40.416599",
+        "closed_pnl": 0,
+        "floating_pnl": -6.06
+      },
+      {
+        "timestamp": "2026-01-14T15:33:43.962194",
+        "closed_pnl": 0,
+        "floating_pnl": -4.03
+      },
+      {
+        "timestamp": "2026-01-14T15:33:43.966191",
+        "closed_pnl": 0,
+        "floating_pnl": -4.52
+      },
+      {
+        "timestamp": "2026-01-14T15:33:43.970803",
+        "closed_pnl": 0,
+        "floating_pnl": -7.45
+      },
+      {
+        "timestamp": "2026-01-14T15:34:56.157352",
+        "closed_pnl": 0,
+        "floating_pnl": -9.37
+      },
+      {
+        "timestamp": "2026-01-14T15:34:56.162984",
+        "closed_pnl": 0,
+        "floating_pnl": -8.43
+      },
+      {
+        "timestamp": "2026-01-14T15:34:56.166983",
+        "closed_pnl": 0,
+        "floating_pnl": -3.25
+      },
+      {
+        "timestamp": "2026-01-14T15:35:51.793632",
+        "closed_pnl": 0,
+        "floating_pnl": -3.68
+      },
+      {
+        "timestamp": "2026-01-14T15:35:51.798135",
+        "closed_pnl": 0,
+        "floating_pnl": -4.1
+      },
+      {
+        "timestamp": "2026-01-14T15:35:51.802136",
+        "closed_pnl": 0,
+        "floating_pnl": -4.39
+      },
+      {
+        "timestamp": "2026-01-14T15:36:41.481780",
+        "closed_pnl": 0,
+        "floating_pnl": -3.48
+      },
+      {
+        "timestamp": "2026-01-14T15:36:41.486783",
+        "closed_pnl": 0,
+        "floating_pnl": -4.63
+      },
+      {
+        "timestamp": "2026-01-14T15:36:41.491784",
+        "closed_pnl": 0,
+        "floating_pnl": -6.4
+      },
+      {
+        "timestamp": "2026-01-14T15:37:47.658126",
+        "closed_pnl": 0,
+        "floating_pnl": -6.56
+      },
+      {
+        "timestamp": "2026-01-14T15:37:47.666631",
+        "closed_pnl": 0,
+        "floating_pnl": -4.7
+      },
+      {
+        "timestamp": "2026-01-14T15:37:47.677737",
+        "closed_pnl": 0,
+        "floating_pnl": -0.07
+      },
+      {
+        "timestamp": "2026-01-14T15:38:34.474637",
+        "closed_pnl": 0,
+        "floating_pnl": -2.71
+      },
+      {
+        "timestamp": "2026-01-14T15:38:34.479998",
+        "closed_pnl": 0,
+        "floating_pnl": -1.63
+      },
+      {
+        "timestamp": "2026-01-14T15:38:34.484508",
+        "closed_pnl": 0,
+        "floating_pnl": 4.1
+      },
+      {
+        "timestamp": "2026-01-14T15:39:25.377346",
+        "closed_pnl": 0,
+        "floating_pnl": 7.05
+      },
+      {
+        "timestamp": "2026-01-14T15:39:25.382854",
+        "closed_pnl": 0,
+        "floating_pnl": 6.68
+      },
+      {
+        "timestamp": "2026-01-14T15:39:25.386853",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:40:34.572423",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:40:34.577423",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:40:34.582422",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:42:21.836739",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:42:21.840739",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:42:21.846245",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:43:49.921403",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:43:49.931404",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:43:49.942408",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:44:59.997077",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:45:00.002080",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:45:00.008128",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:46:12.276707",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:46:12.281707",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:46:12.286710",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:48:20.444692",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:48:20.450198",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:48:20.455302",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:49:26.577015",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:49:26.581731",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:49:26.587731",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:50:52.928295",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:50:52.939297",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:50:52.949801",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:52:23.032612",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:52:23.037609",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:52:23.042610",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:53:51.123855",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:53:51.129854",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:53:51.134365",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:55:31.244228",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:55:31.249736",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:55:31.255539",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:57:07.532213",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:57:07.537216",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:57:07.542215",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:58:13.614179",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:58:13.624687",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T15:58:13.636208",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:01:13.888949",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:01:13.893946",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:01:13.899452",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:07:04.409453",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:07:04.415098",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:07:04.420604",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:08:18.581895",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:08:18.586898",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:08:18.593899",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:10:26.758475",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:10:26.764085",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:10:26.768586",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:11:19.050127",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:11:19.061293",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:11:19.072500",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:12:43.145123",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:12:43.149627",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:12:43.155640",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:13:49.218558",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:13:49.224131",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:13:49.229132",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:44:16.778282",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:44:16.783441",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T16:44:16.789441",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:01:32.295259",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:01:32.302298",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:01:32.307336",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:06:43.550089",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:06:43.562250",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:06:43.572862",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:12:05.940832",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:12:05.947841",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:12:05.954345",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:13:36.047632",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:13:36.053641",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:13:36.061129",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:14:56.130869",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:14:56.137871",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:14:56.144873",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:17:48.345273",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:17:48.351778",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:17:48.358286",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:24:54.354063",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:24:54.366233",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:24:54.379891",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:34:23.151902",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:34:23.159410",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:34:23.167132",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:37:09.429517",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:37:09.435524",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:37:09.442024",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:38:49.630086",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:38:49.637088",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:38:49.644202",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:41:23.822377",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:41:23.829135",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:41:23.836139",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:43:13.934626",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:43:13.948131",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:43:13.961782",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:45:36.921095",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:45:36.929095",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:45:36.935717",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:47:13.037008",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:47:13.044008",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:47:13.051115",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:48:33.128342",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:48:33.135889",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:48:33.142889",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:50:09.230427",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:50:09.237426",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:50:09.243933",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:51:35.590089",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:51:35.604099",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:51:35.617106",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:53:49.730293",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:53:49.737802",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:53:49.744804",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:56:56.209800",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:56:56.216770",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:56:56.224276",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:59:44.409432",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:59:44.415432",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T17:59:44.423061",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:01:18.599823",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:01:18.606835",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:01:18.613627",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:02:36.685861",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:02:36.700367",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:02:36.713937",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:05:02.850747",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:05:02.857546",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:05:02.864546",
+        "closed_pnl": 0,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:07:48.458362",
+        "closed_pnl": -47.95,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:07:48.465363",
+        "closed_pnl": -0.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:07:48.474498",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:09:18.571414",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:09:18.578416",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:09:18.585965",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:10:18.640326",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:10:18.647322",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:10:18.654430",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:13:28.974384",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:13:28.987387",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:13:29.000396",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:18:09.335360",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:18:09.342361",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:18:09.349868",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:23:03.699790",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:23:03.706455",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:23:03.713455",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:23:47.800252",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:23:47.807301",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:23:47.815218",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:25:00.538815",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:25:00.545815",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:25:00.552618",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:26:34.462031",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:26:34.475843",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:26:34.489351",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:28:51.149189",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:28:51.156361",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:28:51.163362",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:29:43.257446",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:29:43.263951",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:29:43.271459",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:30:43.371077",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:30:43.378076",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:30:43.385075",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:31:36.450891",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:31:36.458413",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:31:36.465414",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:33:10.586742",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:33:10.600895",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:33:10.615037",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:34:20.751876",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:34:20.759424",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:34:20.767153",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:37:20.999175",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:37:21.006847",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:37:21.014845",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:40:03.202706",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:40:03.209213",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:40:03.216849",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:45:05.718043",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:45:05.726586",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:45:05.733588",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:48:22.139188",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:48:22.153695",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:48:22.167204",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:50:58.338876",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:50:58.345884",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:50:58.351910",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:52:08.531429",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:52:08.537432",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:52:08.544937",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:52:41.868485",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:52:41.874997",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:52:41.882549",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:53:39.168247",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:53:39.175023",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:53:39.181024",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:55:43.429284",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:55:43.442790",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:55:43.455307",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:56:44.827153",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:56:44.834155",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:56:44.840159",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:58:08.931204",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:58:08.937850",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:58:08.945353",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:59:50.183198",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:59:50.190700",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T18:59:50.197206",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:01:07.310357",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:01:07.317033",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:01:07.324540",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:02:22.077987",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:02:22.091988",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:02:22.106176",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:03:14.188967",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:03:14.196473",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:03:14.203481",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:04:58.353386",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:04:58.360445",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:04:58.367445",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:06:21.599958",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:06:21.606969",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:06:21.613474",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:07:36.710493",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:07:36.720001",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:07:36.727619",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:11:18.626169",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:11:18.639675",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:11:18.653682",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:12:55.130984",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:12:55.136986",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:12:55.143986",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:14:40.906335",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:14:40.913336",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:14:40.920841",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:19:44.756362",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:19:44.764021",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0
+      },
+      {
+        "timestamp": "2026-01-14T19:19:44.771526",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0.64
+      },
+      {
+        "timestamp": "2026-01-14T19:21:40.351022",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0.64
+      },
+      {
+        "timestamp": "2026-01-14T19:21:40.358054",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0.64
+      },
+      {
+        "timestamp": "2026-01-14T19:21:40.365931",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0.99
+      },
+      {
+        "timestamp": "2026-01-14T19:23:11.083048",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0.99
+      },
+      {
+        "timestamp": "2026-01-14T19:23:11.096552",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0.99
+      },
+      {
+        "timestamp": "2026-01-14T19:23:11.112610",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0.95
+      },
+      {
+        "timestamp": "2026-01-14T19:28:44.210156",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0.95
+      },
+      {
+        "timestamp": "2026-01-14T19:28:44.217798",
+        "closed_pnl": 53.28,
+        "floating_pnl": 0.95
+      },
+      {
+        "timestamp": "2026-01-14T19:28:44.224307",
+        "closed_pnl": 53.28,
+        "floating_pnl": 3.23
+      },
+      {
+        "timestamp": "2026-01-14T19:29:48.977010",
+        "closed_pnl": 53.28,
+        "floating_pnl": 3.23
+      },
+      {
+        "timestamp": "2026-01-14T19:29:48.984011",
+        "closed_pnl": 53.28,
+        "floating_pnl": 3.23
+      },
+      {
+        "timestamp": "2026-01-14T19:29:48.991517",
+        "closed_pnl": 53.28,
+        "floating_pnl": 3.55
+      },
+      {
+        "timestamp": "2026-01-14T19:31:36.399926",
+        "closed_pnl": 53.28,
+        "floating_pnl": 3.55
+      },
+      {
+        "timestamp": "2026-01-14T19:31:36.406446",
+        "closed_pnl": 53.28,
+        "floating_pnl": 3.55
+      },
+      {
+        "timestamp": "2026-01-14T19:31:36.413949",
+        "closed_pnl": 53.28,
+        "floating_pnl": 1.77
+      },
+      {
+        "timestamp": "2026-01-14T19:32:55.118411",
+        "closed_pnl": 53.28,
+        "floating_pnl": 1.77
+      },
+      {
+        "timestamp": "2026-01-14T19:32:55.125413",
+        "closed_pnl": 53.28,
+        "floating_pnl": 1.77
+      },
+      {
+        "timestamp": "2026-01-14T19:32:55.132547",
+        "closed_pnl": 53.28,
+        "floating_pnl": -3.13
+      },
+      {
+        "timestamp": "2026-01-14T19:34:03.541048",
+        "closed_pnl": 53.28,
+        "floating_pnl": -4.2
+      },
+      {
+        "timestamp": "2026-01-14T19:34:03.566826",
+        "closed_pnl": 53.28,
+        "floating_pnl": -4.2
+      },
+      {
+        "timestamp": "2026-01-14T19:34:03.582332",
+        "closed_pnl": 53.28,
+        "floating_pnl": -10.39
+      },
+      {
+        "timestamp": "2026-01-14T19:35:35.548410",
+        "closed_pnl": 53.28,
+        "floating_pnl": -11.78
+      },
+      {
+        "timestamp": "2026-01-14T19:35:35.556183",
+        "closed_pnl": 53.28,
+        "floating_pnl": -11.85
+      },
+      {
+        "timestamp": "2026-01-14T19:35:35.562807",
+        "closed_pnl": 53.28,
+        "floating_pnl": -5.06
+      },
+      {
+        "timestamp": "2026-01-14T19:36:37.061821",
+        "closed_pnl": 53.28,
+        "floating_pnl": -2.6
+      },
+      {
+        "timestamp": "2026-01-14T19:36:37.069864",
+        "closed_pnl": 53.28,
+        "floating_pnl": -3.63
+      },
+      {
+        "timestamp": "2026-01-14T19:36:37.077865",
+        "closed_pnl": 53.28,
+        "floating_pnl": -2.73
+      },
+      {
+        "timestamp": "2026-01-14T19:37:31.408920",
+        "closed_pnl": 53.28,
+        "floating_pnl": -2.73
+      },
+      {
+        "timestamp": "2026-01-14T19:37:31.416427",
+        "closed_pnl": 53.28,
+        "floating_pnl": -2.51
+      },
+      {
+        "timestamp": "2026-01-14T19:37:31.425088",
+        "closed_pnl": 53.28,
+        "floating_pnl": -2.08
+      },
+      {
+        "timestamp": "2026-01-14T19:38:35.989882",
+        "closed_pnl": 53.28,
+        "floating_pnl": -2.08
+      },
+      {
+        "timestamp": "2026-01-14T19:38:35.998389",
+        "closed_pnl": 53.28,
+        "floating_pnl": -2.73
+      },
+      {
+        "timestamp": "2026-01-14T19:38:36.006530",
+        "closed_pnl": 53.28,
+        "floating_pnl": -4.64
+      },
+      {
+        "timestamp": "2026-01-14T19:40:46.310205",
+        "closed_pnl": 53.28,
+        "floating_pnl": -4.64
+      },
+      {
+        "timestamp": "2026-01-14T19:40:46.325433",
+        "closed_pnl": 53.28,
+        "floating_pnl": -5.09
+      },
+      {
+        "timestamp": "2026-01-14T19:40:46.341714",
+        "closed_pnl": 53.28,
+        "floating_pnl": -5.68
+      }
+    ]
+  },
+  "balance_start": 3018.43,
+  "updated_at": "2026-01-14T19:40:46.349717"
+}

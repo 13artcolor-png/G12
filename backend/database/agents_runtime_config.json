@@ -1,0 +1,50 @@
+{
+  "fibo1": {
+    "name": "FIBO1",
+    "description": "Trade sur niveaux Fibonacci + ICT/SMC (Compte 1)",
+    "enabled": true,
+    "color": "#3b82f6",
+    "fibo_level": "0.236",
+    "fibo_tolerance_pct": 2.0,
+    "cooldown_seconds": 120,
+    "decision_interval": 10,
+    "signal_timeframe": "M1",
+    "position_size_pct": 0.01,
+    "min_winrate_pct": 20,
+    "max_drawdown_pct": 10,
+    "max_positions": 100,
+    "min_trades_for_eval": 10
+  },
+  "fibo2": {
+    "name": "FIBO2",
+    "description": "Trade sur niveaux Fibonacci + ICT/SMC (Compte 2)",
+    "enabled": true,
+    "color": "#10b981",
+    "fibo_level": "0.236",
+    "fibo_tolerance_pct": 2.5,
+    "cooldown_seconds": 120,
+    "decision_interval": 10,
+    "signal_timeframe": "M5",
+    "position_size_pct": 0.01,
+    "min_winrate_pct": 20,
+    "max_drawdown_pct": 10,
+    "max_positions": 100,
+    "min_trades_for_eval": 10
+  },
+  "fibo3": {
+    "name": "FIBO3",
+    "description": "Trade sur niveaux Fibonacci + ICT/SMC (Compte 3)",
+    "enabled": true,
+    "color": "#f59e0b",
+    "fibo_level": "0.236",
+    "fibo_tolerance_pct": 2.5,
+    "cooldown_seconds": 120,
+    "decision_interval": 10,
+    "signal_timeframe": "M15",
+    "position_size_pct": 0.01,
+    "min_winrate_pct": 20,
+    "max_drawdown_pct": 10,
+    "max_positions": 100,
+    "min_trades_for_eval": 10
+  }
+}

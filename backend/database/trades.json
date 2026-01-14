@@ -1,0 +1,20 @@
+{
+  "trades": [
+    {
+      "id": "trade_20260114_193108_230834297",
+      "ticket": 230834297,
+      "agent_id": "fibo3",
+      "symbol": "BTCUSD",
+      "direction": "BUY",
+      "volume": 0.01,
+      "entry_price": 96770.0,
+      "exit_price": 96959.0,
+      "profit_eur": 3.04,
+      "close_reason": "TP mecanique atteint: 3.04 >= 3.0 EUR",
+      "entry_context": null,
+      "exit_context": null,
+      "timestamp": "2026-01-14T19:31:08.219673",
+      "won": true
+    }
+  ]
+}

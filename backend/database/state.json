@@ -1,0 +1,81 @@
+{
+    "last_update": null,
+    "trading_halted": false,
+    "halt_reason": null,
+    "session": {
+        "start_time": null,
+        "start_balance": null,
+        "current_balance": null,
+        "session_pnl": 0,
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0
+    },
+    "mt5": {
+        "connected": false,
+        "last_sync": null,
+        "balance": 0,
+        "equity": 0,
+        "margin_free": 0
+    },
+    "btcusd": {
+        "price": null,
+        "spread": null,
+        "bid": null,
+        "ask": null,
+        "change_1m": null,
+        "change_5m": null,
+        "change_1h": null,
+        "change_24h": null
+    },
+    "binance": {
+        "funding_rate": null,
+        "open_interest": null,
+        "liquidations_24h": null,
+        "long_short_ratio": null,
+        "last_update": null
+    },
+    "sentiment": {
+        "fear_greed_index": null,
+        "fear_greed_label": null,
+        "news_sentiment": null,
+        "last_update": null
+    },
+    "current_session": {
+        "name": null,
+        "volatility": null
+    },
+    "agents": {
+        "fibo1": {
+            "status": "idle",
+            "last_trade": null,
+            "last_decision": null,
+            "session_pnl": 0,
+            "session_trades": 0,
+            "session_wins": 0,
+            "open_position": null,
+            "cooldown_until": null
+        },
+        "reversal": {
+            "status": "idle",
+            "last_trade": null,
+            "last_decision": null,
+            "session_pnl": 0,
+            "session_trades": 0,
+            "session_wins": 0,
+            "open_position": null,
+            "cooldown_until": null
+        },
+        "fibo3": {
+            "status": "idle",
+            "last_trade": null,
+            "last_decision": null,
+            "session_pnl": 0,
+            "session_trades": 0,
+            "session_wins": 0,
+            "open_position": null,
+            "cooldown_until": null
+        }
+    },
+    "positions": []
+}

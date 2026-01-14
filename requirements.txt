@@ -1,0 +1,20 @@
+# G12 - Dependencies
+# Python 3.10+
+
+# FastAPI
+fastapi>=0.109.0
+uvicorn>=0.27.0
+python-multipart>=0.0.6
+
+# MetaTrader 5
+MetaTrader5>=5.0.5488
+
+# HTTP Requests
+requests>=2.31.0
+httpx>=0.26.0
+
+# Data
+feedparser>=6.0.10
+
+# Utils
+python-dotenv>=1.0.0
