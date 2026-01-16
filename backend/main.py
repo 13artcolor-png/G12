@@ -229,28 +229,69 @@ async def root():
 def _build_status_data():
     """Construit les donnees de status (appele en arriere-plan)"""
     try:
-        # Utiliser le premier agent actif au lieu de hardcoder "fibo1"
-        mt5 = get_mt5(get_first_enabled_agent())
+        # Recuperer les composants avec gestion d'erreur individuelle
         aggregator = get_aggregator()
-        trading_loop = get_trading_loop()
-        closer_loop = get_closer_loop()
-        risk = get_risk_manager()
-        logger = get_logger()
-
-        from session_logger import get_session_logger
-        session_logger = get_session_logger()
-        g11_session = session_logger.get_status()
-
         context = aggregator.get_full_context() or {}
-        global_stats = logger.get_global_stats(7)
-        recent_decisions = logger.get_recent_decisions(limit=20)
         account_data = context.get("account") or {}
+
+        # MT5 connection status
+        mt5_connected = False
+        try:
+            mt5 = get_mt5(get_first_enabled_agent())
+            mt5_connected = mt5.connected if mt5 else False
+        except Exception as e:
+            print(f"[API] Erreur MT5 status: {e}")
+
+        # Session logger
+        g11_session = {}
+        try:
+            from session_logger import get_session_logger
+            session_logger = get_session_logger()
+            g11_session = session_logger.get_status()
+        except Exception as e:
+            print(f"[API] Erreur session logger: {e}")
+
+        # Trading loop status
+        agents_status = {}
+        trading_status = {}
+        try:
+            trading_loop = get_trading_loop()
+            trading_status = trading_loop.get_status()
+            agents_status = trading_status.get("agents", {})
+        except Exception as e:
+            print(f"[API] Erreur trading loop: {e}")
+
+        # Closer loop status
+        closer_status = {}
+        try:
+            closer_loop = get_closer_loop()
+            closer_status = closer_loop.get_status()
+        except Exception as e:
+            print(f"[API] Erreur closer loop: {e}")
+
+        # Risk manager
+        risk_status = {}
+        try:
+            risk = get_risk_manager()
+            risk_status = risk.get_status()
+        except Exception as e:
+            print(f"[API] Erreur risk manager: {e}")
+
+        # Logger stats
+        global_stats = {}
+        recent_decisions = []
+        try:
+            logger = get_logger()
+            global_stats = logger.get_global_stats(7)
+            recent_decisions = logger.get_recent_decisions(limit=20)
+        except Exception as e:
+            print(f"[API] Erreur logger: {e}")
 
         return {
             "timestamp": datetime.now().isoformat(),
             "mt5": {
-                "connected": mt5.connected,
-                "account": None  # Ne pas appeler get_account_info() ici, trop lent
+                "connected": mt5_connected,
+                "account": None
             },
             "account": account_data,
             "price": context.get("price"),
@@ -263,17 +304,19 @@ def _build_status_data():
             "g11_session": g11_session,
             "analysis": context.get("analysis"),
             "positions": account_data.get("positions", []),
-            "agents": trading_loop.get_status().get("agents", {}),
-            "risk": risk.get_status(),
+            "agents": agents_status,
+            "risk": risk_status,
             "loops": {
-                "trading": trading_loop.get_status(),
-                "closer": closer_loop.get_status()
+                "trading": trading_status,
+                "closer": closer_status
             },
             "stats": global_stats,
             "decisions": recent_decisions
         }
     except Exception as e:
-        print(f"[API] Erreur build status: {e}")
+        import traceback
+        print(f"[API] ERREUR CRITIQUE build status: {e}")
+        traceback.print_exc()
         return None
 
 
@@ -295,7 +338,7 @@ def _update_status_cache_background():
 
 @app.get("/api/status")
 async def get_status():
-    """Status complet du systeme (utilise cache pour eviter blocage MT5)"""
+    """Status complet du systeme - utilise directement le context de l'aggregator"""
     global _status_cache
 
     now = time.time()
@@ -305,15 +348,53 @@ async def get_status():
     if _status_cache["data"] and cache_age < _status_cache_max_age:
         return _status_cache["data"]
 
-    # Si pas de cache ou cache trop vieux, lancer update dans un VRAI thread separe
+    # Lancer update en arriere-plan pour le prochain appel
     if not _status_cache["updating"]:
         threading.Thread(target=_update_status_cache_background, daemon=True).start()
 
-    # Retourner le cache existant (meme vieux) ou donnees minimales
+    # Retourner le cache existant s'il y a
     if _status_cache["data"]:
         return _status_cache["data"]
 
-    # Pas de cache du tout - retourner donnees minimales
+    # PAS DE CACHE - Construire une reponse directement avec le context
+    try:
+        aggregator = get_aggregator()
+        context = aggregator.get_full_context() or {}
+        account_data = context.get("account") or {}
+
+        # Session G12
+        g11_session = {}
+        try:
+            from session_logger import get_session_logger
+            session_logger = get_session_logger()
+            g11_session = session_logger.get_status()
+        except Exception:
+            pass
+
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "mt5": {"connected": bool(account_data), "account": None},
+            "account": account_data,
+            "price": context.get("price"),
+            "futures": context.get("futures"),
+            "sentiment": context.get("sentiment"),
+            "macro": context.get("macro"),
+            "whales": context.get("whales"),
+            "whale_list": context.get("whale_list"),
+            "session": context.get("session"),
+            "g11_session": g11_session,
+            "analysis": context.get("analysis"),
+            "positions": account_data.get("positions", []),
+            "agents": {},
+            "risk": {},
+            "loops": {"trading": {}, "closer": {}},
+            "stats": {},
+            "decisions": []
+        }
+    except Exception as e:
+        print(f"[API] Erreur fallback status: {e}")
+
+    # Fallback ultime
     return {
         "timestamp": datetime.now().isoformat(),
         "mt5": {"connected": False, "account": None},
@@ -445,8 +526,9 @@ async def start_trading(background_tasks: BackgroundTasks):
 
 
 @app.post("/api/trading/stop")
+@app.get("/api/trading/stop")
 async def stop_trading():
-    """Arrete les boucles de trading (non-bloquant)"""
+    """Arrete les boucles de trading (non-bloquant, GET ou POST)"""
     trading_loop = get_trading_loop()
     closer_loop = get_closer_loop()
     trading_loop.running = False
@@ -518,34 +600,41 @@ async def get_price_data():
 # =============================================================================
 @app.get("/api/trades")
 async def get_trades(limit: int = 100, agent: str = None):
-    """Historique des trades - depuis session.json"""
+    """Historique des trades - depuis session.json (rapide, synchronise avec MT5)
+
+    OPTIMISATION: Utilise les trades deja synchronises dans session.json
+    au lieu d'interroger MT5 a chaque requete (10+ secondes de latence)
+    """
     from session_logger import get_session_logger
-    session_logger = get_session_logger()
 
-    # Utiliser les trades de la session active
-    trades = session_logger.trades[-limit:] if session_logger.trades else []
+    logger = get_session_logger()
 
-    # Filtrer par agent si specifie
-    if agent and agent != 'all':
-        trades = [t for t in trades if t.get('agent') == agent or t.get('agent_id') == agent]
-
-    # Formater les trades pour compatibilite avec le frontend
-    formatted_trades = []
-    for t in trades:
-        formatted_trades.append({
-            'agent_id': t.get('agent') or t.get('agent_id'),
-            'ticket': t.get('ticket'),
-            'direction': t.get('direction'),
-            'volume': t.get('volume'),
-            'entry_price': t.get('entry_price', 0),
-            'exit_price': t.get('exit_price', 0),
-            'profit': t.get('profit', 0),
-            'profit_eur': t.get('profit', 0),
-            'close_reason': t.get('close_reason', ''),
-            'timestamp': t.get('timestamp', '')
+    # Recuperer tous les trades de la session
+    all_trades = []
+    for trade in logger.trades:
+        trade_agent = trade.get('agent', '')
+        all_trades.append({
+            'agent_id': trade_agent,
+            'ticket': trade.get('ticket', 0),
+            'direction': trade.get('direction', 'UNKNOWN'),
+            'volume': trade.get('volume', 0),
+            'entry_price': trade.get('entry_price', 0),
+            'exit_price': trade.get('exit_price', 0),
+            'profit': trade.get('profit', 0),
+            'profit_eur': trade.get('profit', 0),
+            'close_reason': trade.get('close_reason', ''),
+            'timestamp': trade.get('timestamp', '')
         })
 
-    return {"trades": formatted_trades}
+    # Filtrer par agent si necessaire
+    if agent and agent != 'all':
+        all_trades = [t for t in all_trades if t['agent_id'] == agent]
+
+    # Trier par timestamp descending et limiter
+    all_trades.sort(key=lambda x: x.get('timestamp', ''), reverse=True)
+    all_trades = all_trades[:limit]
+
+    return {"trades": all_trades}
 
 
 @app.get("/api/decisions")
@@ -717,6 +806,50 @@ async def update_spread_config(updates: Dict):
         risk_manager.reload_config()
 
         return {"success": True, "config": SPREAD_CONFIG}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# =============================================================================
+# ENDPOINTS - STRATEGIST CONFIG
+# =============================================================================
+@app.get("/api/config/strategist")
+async def get_strategist_config():
+    """Recupere la configuration du Strategist"""
+    config_file = DATABASE_DIR / "strategist_runtime_config.json"
+    try:
+        if config_file.exists():
+            with open(config_file, 'r') as f:
+                return json.load(f)
+        else:
+            # Config par defaut
+            return {"use_session_analysis": True}
+    except Exception as e:
+        return {"use_session_analysis": True}
+
+
+@app.post("/api/config/strategist")
+async def update_strategist_config(updates: Dict):
+    """Met a jour la configuration du Strategist"""
+    config_file = DATABASE_DIR / "strategist_runtime_config.json"
+    try:
+        # Charger config existante
+        if config_file.exists():
+            with open(config_file, 'r') as f:
+                config = json.load(f)
+        else:
+            config = {"use_session_analysis": True}
+
+        # Mettre a jour
+        for key, value in updates.items():
+            config[key] = value
+
+        # Sauvegarder
+        with open(config_file, 'w') as f:
+            json.dump(config, f, indent=2)
+
+        print(f"[API] Config Strategist mise a jour: {config}")
+        return {"success": True, "config": config}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -1011,6 +1144,26 @@ async def sync_session_with_mt5():
     return logger.sync_with_mt5_history()
 
 
+@app.post("/api/session/deduplicate")
+async def deduplicate_session_trades():
+    """
+    Supprime les doublons de trades dans la session.
+    Un doublon est un trade avec le meme position_id ou ticket.
+    Garde le trade avec les donnees les plus completes (entry_price != 0).
+    """
+    from session_logger import get_session_logger
+    logger = get_session_logger()
+    trades_before = len(logger.trades)
+    duplicates_removed = logger.deduplicate_trades()
+    trades_after = len(logger.trades)
+    return {
+        'success': True,
+        'trades_before': trades_before,
+        'trades_after': trades_after,
+        'duplicates_removed': duplicates_removed
+    }
+
+
 @app.get("/api/session/export")
 async def export_session():
     """Exporte les donnees de la session"""
@@ -1032,6 +1185,28 @@ async def get_session_performance():
     logger = get_session_logger()
     return {
         "session_id": logger.session_id,
+        "performance": logger.performance_history
+    }
+
+
+@app.post("/api/session/rebuild-performance")
+async def rebuild_session_performance():
+    """Reconstruit performance_history a partir des trades enregistres"""
+    from session_logger import get_session_logger
+    logger = get_session_logger()
+
+    trades_before = len(logger.trades)
+    master_before = len(logger.performance_history.get('master', []))
+
+    logger.rebuild_performance_history()
+
+    master_after = len(logger.performance_history.get('master', []))
+
+    return {
+        "success": True,
+        "trades_count": trades_before,
+        "points_before": master_before,
+        "points_after": master_after,
         "performance": logger.performance_history
     }
 
@@ -1087,21 +1262,124 @@ async def strategist_actions(limit: int = 50):
 
 @app.get("/api/strategist/debug")
 async def strategist_debug():
-    """Debug: montre l'etat interne du Strategist"""
+    """Debug complet: montre l'etat interne du Strategist avec profit factor et actions"""
     import time
+    from datetime import datetime
     from strategist import get_strategist
+    from data.aggregator import get_aggregator
+
     strategist = get_strategist()
+    aggregator = get_aggregator()
     current_time = time.time()
     inactivity_seconds = current_time - strategist._last_inactivity_reduction_time
+    optim_seconds = current_time - strategist._last_optimization_time
+
+    # Charger les stats globales
+    global_stats = strategist._analyze_global()
+
+    # Recuperer l'analyse complete des positions (G12 vs MT5)
+    positions_analysis = strategist._analyze_open_positions()
+
+    # Reformater pour l'API
+    open_positions = []
+    try:
+        account_data = aggregator.get_account_data()
+        if account_data and account_data.get('positions'):
+            for pos in account_data['positions']:
+                open_positions.append({
+                    'ticket': pos.get('ticket'),
+                    'agent': pos.get('_agent_id', 'unknown'),
+                    'direction': 'BUY' if pos.get('type', 0) == 0 else 'SELL',
+                    'symbol': pos.get('symbol', 'BTCUSD'),
+                    'entry_price': round(pos.get('price_open', 0), 2),
+                    'current_price': round(pos.get('price_current', 0), 2),
+                    'volume': pos.get('volume', 0),
+                    'sl': round(pos.get('sl', 0), 2),
+                    'tp': round(pos.get('tp', 0), 2),
+                    'floating_pnl': round(pos.get('profit', 0), 2)
+                })
+    except Exception as e:
+        print(f"[Strategist Debug] Erreur recuperation positions: {e}")
+
+    total_floating_pnl = positions_analysis.get('total_floating_pnl', 0)
+    positions_inconsistencies = positions_analysis.get('inconsistencies', [])
+    positions_alerts = positions_analysis.get('alerts', [])
+
+    # Charger les actions recentes depuis action_history.json
+    recent_actions = []
+    try:
+        import json
+        from pathlib import Path
+        action_file = Path(__file__).parent / "database" / "action_history.json"
+        if action_file.exists():
+            with open(action_file, 'r') as f:
+                data = json.load(f)
+                recent_actions = data.get('actions', [])[-10:]  # 10 dernieres
+    except Exception:
+        pass
+
+    # Calculer profit_factor par agent
+    agents_pf = {}
+    for agent_id in ['fibo1', 'fibo2', 'fibo3']:
+        agent_trades = [t for t in strategist.trades if t.get('agent_id') == agent_id or t.get('agent', '') == agent_id]
+        wins = [t for t in agent_trades if t.get('profit', 0) > 0]
+        losses = [t for t in agent_trades if t.get('profit', 0) < 0]
+        total_win = sum(t.get('profit', 0) for t in wins)
+        total_loss = abs(sum(t.get('profit', 0) for t in losses))
+        pf = round(total_win / total_loss, 2) if total_loss > 0 else 999
+        win_rate = round(len(wins) / len(agent_trades) * 100, 1) if agent_trades else 0
+        agents_pf[agent_id] = {
+            'trades': len(agent_trades),
+            'profit_factor': pf,
+            'win_rate': win_rate,
+            'total_pnl': round(sum(t.get('profit', 0) for t in agent_trades), 2)
+        }
+
+    # Determiner prochaine action potentielle
+    next_action = "Aucune correction necessaire"
+    if global_stats.get('profit_factor', 999) < 1.0 and global_stats.get('total_trades', 0) >= 10:
+        next_action = f"AJUSTER_TPSL (profit_factor={global_stats.get('profit_factor')} < 1.0)"
+    elif any(agents_pf[a]['win_rate'] < 30 and agents_pf[a]['trades'] >= 5 for a in agents_pf):
+        losing_agents = [a for a in agents_pf if agents_pf[a]['win_rate'] < 30 and agents_pf[a]['trades'] >= 5]
+        next_action = f"AUGMENTER_SEUILS pour {', '.join(losing_agents)}"
+    elif inactivity_seconds >= 900:
+        next_action = "CHECK_INACTIVITE (15min+ sans action)"
+
     return {
+        "status": "actif" if strategist._last_optimization_time > 0 else "en_attente",
         "trades_count": len(strategist.trades),
-        "last_trades_count": strategist._last_trades_count,
-        "last_inactivity_reduction_time": strategist._last_inactivity_reduction_time,
-        "inactivity_seconds": int(inactivity_seconds),
-        "inactivity_minutes": round(inactivity_seconds / 60, 1),
-        "threshold_seconds": 900,
-        "would_trigger": inactivity_seconds >= 900,
-        "last_optimization_time": strategist._last_optimization_time
+        "last_optimization": {
+            "timestamp": datetime.fromtimestamp(strategist._last_optimization_time).isoformat() if strategist._last_optimization_time > 0 else None,
+            "seconds_ago": int(optim_seconds),
+            "minutes_ago": round(optim_seconds / 60, 1)
+        },
+        "inactivity": {
+            "seconds": int(inactivity_seconds),
+            "minutes": round(inactivity_seconds / 60, 1),
+            "threshold_minutes": 15,
+            "would_trigger": inactivity_seconds >= 900
+        },
+        "global_stats": {
+            "profit_factor": global_stats.get('profit_factor', 0),
+            "win_rate": global_stats.get('win_rate', 0),
+            "total_trades": global_stats.get('total_trades', 0),
+            "total_pnl": global_stats.get('total_profit', 0)
+        },
+        "agents": agents_pf,
+        "next_potential_action": next_action,
+        "recent_actions": recent_actions,
+        "thresholds": {
+            "profit_factor_min": 1.0,
+            "win_rate_min": 30,
+            "min_trades_for_correction": 10
+        },
+        "open_positions": open_positions,
+        "open_positions_count": len(open_positions),
+        "total_floating_pnl": total_floating_pnl,
+        "positions_inconsistencies": positions_inconsistencies,
+        "positions_alerts": positions_alerts,
+        "positions_g12_count": positions_analysis.get('positions_count', {}).get('g12', 0),
+        "positions_mt5_count": positions_analysis.get('positions_count', {}).get('mt5', 0)
     }
 
 
@@ -1121,6 +1399,65 @@ async def force_inactivity_check():
         "result": result,
         "message": f"Check execute, {result.get('executed_count', 0)} actions"
     }
+
+
+@app.post("/api/strategist/test")
+async def test_strategist():
+    """Test manuel du Strategist - execute une analyse complete"""
+    from strategist import get_strategist
+    strategist = get_strategist()
+
+    try:
+        # 1. Recuperer les stats actuelles
+        logger = get_session_logger()
+        stats = logger.sync_with_mt5_history()
+
+        # 2. Calculer les stats globales
+        total_profit = 0
+        total_loss = 0
+        total_trades = 0
+
+        for agent_id in ['fibo1', 'fibo2', 'fibo3']:
+            agent_stats = stats.get(agent_id, {})
+            pnl = agent_stats.get('session_pnl', 0)
+            trades = agent_stats.get('session_trades', 0)
+            total_trades += trades
+            if pnl > 0:
+                total_profit += pnl
+            else:
+                total_loss += abs(pnl)
+
+        # 3. Calculer le profit factor
+        profit_factor = total_profit / total_loss if total_loss > 0 else (999 if total_profit > 0 else 0)
+
+        # 4. Determiner si une correction serait declenchee
+        would_correct = profit_factor < 1.0 and total_trades >= 10
+
+        # 5. Verifier l'inactivite
+        import time
+        current_time = time.time()
+        last_check = getattr(strategist, '_last_inactivity_reduction_time', 0)
+        inactivity_minutes = (current_time - last_check) / 60 if last_check > 0 else 0
+
+        return {
+            "success": True,
+            "message": f"Test Strategist: {total_trades} trades analyses, PF={profit_factor:.2f}",
+            "details": {
+                "total_trades": total_trades,
+                "total_profit": round(total_profit, 2),
+                "total_loss": round(total_loss, 2),
+                "profit_factor": round(profit_factor, 2),
+                "would_trigger_correction": would_correct,
+                "inactivity_minutes": round(inactivity_minutes, 1)
+            }
+        }
+
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e),
+            "message": f"Erreur lors du test: {str(e)}"
+        }
 
 
 # =============================================================================

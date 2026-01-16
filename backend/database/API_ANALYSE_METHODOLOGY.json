@@ -1,0 +1,529 @@
+{
+  "document_type": "TRADING_ANALYSIS_METHODOLOGY",
+  "version": "1.0",
+  "destination": "API_DECISIONNAIRE",
+  "description": "Méthodologie complète d'analyse et d'interprétation des données de session de trading pour optimisation automatique",
+
+  "input_data_structure": {
+    "description": "Structure attendue du fichier JSON de session",
+    "required_fields": [
+      "metadata.session_id",
+      "periode.debut",
+      "periode.fin",
+      "periode.duree_minutes",
+      "resultat.pnl_session",
+      "resultat.balance_depart",
+      "stats_globales.total_trades",
+      "stats_globales.trades_gagnants",
+      "stats_globales.trades_perdants",
+      "stats_globales.win_rate",
+      "stats_globales.meilleur_trade",
+      "stats_globales.pire_trade",
+      "stats_par_agent",
+      "performance_horaire",
+      "trades[]"
+    ],
+    "trades_array_fields": [
+      "agent",
+      "ticket",
+      "direction",
+      "volume",
+      "profit",
+      "close_reason",
+      "timestamp"
+    ]
+  },
+
+  "analysis_pipeline": {
+    "step_1_data_extraction": {
+      "description": "Extraction et validation des données brutes",
+      "actions": [
+        "Valider la présence de tous les champs requis",
+        "Filtrer les trades avec profit != null",
+        "Convertir timestamps en objets datetime",
+        "Extraire l'heure de chaque trade pour analyse horaire"
+      ]
+    },
+
+    "step_2_calculate_core_metrics": {
+      "description": "Calcul des métriques fondamentales",
+      "metrics": {
+        "profit_factor": {
+          "formula": "sum(profits > 0) / abs(sum(profits < 0))",
+          "interpretation": {
+            "critical_low": {"range": [0, 0.8], "status": "DANGER", "action": "STOP_TRADING_OR_MAJOR_REVISION"},
+            "low": {"range": [0.8, 1.0], "status": "LOSING", "action": "SIGNIFICANT_CHANGES_REQUIRED"},
+            "breakeven": {"range": [1.0, 1.2], "status": "MARGINAL", "action": "OPTIMIZATION_NEEDED"},
+            "acceptable": {"range": [1.2, 1.5], "status": "OK", "action": "MINOR_TWEAKS"},
+            "good": {"range": [1.5, 2.0], "status": "PROFITABLE", "action": "MAINTAIN"},
+            "excellent": {"range": [2.0, null], "status": "EXCELLENT", "action": "SCALE_UP"}
+          }
+        },
+        "reward_risk_ratio": {
+          "formula": "avg(profits > 0) / abs(avg(profits < 0))",
+          "interpretation": {
+            "inverted": {"range": [0, 0.8], "status": "CRITICAL", "action": "INVERT_TP_SL_IMMEDIATELY"},
+            "poor": {"range": [0.8, 1.0], "status": "POOR", "action": "INCREASE_TP_OR_REDUCE_SL"},
+            "neutral": {"range": [1.0, 1.5], "status": "NEUTRAL", "action": "OPTIMIZE_ENTRIES"},
+            "good": {"range": [1.5, 2.0], "status": "GOOD", "action": "MAINTAIN"},
+            "excellent": {"range": [2.0, null], "status": "EXCELLENT", "action": "NONE"}
+          }
+        },
+        "win_rate": {
+          "formula": "(trades_gagnants / total_trades) * 100",
+          "interpretation": {
+            "very_low": {"range": [0, 40], "status": "CRITICAL", "action": "REVIEW_ENTRY_SIGNALS"},
+            "low": {"range": [40, 50], "status": "POOR", "action": "TIGHTEN_ENTRY_CRITERIA"},
+            "acceptable": {"range": [50, 55], "status": "ACCEPTABLE", "action": "FOCUS_ON_RR_RATIO"},
+            "good": {"range": [55, 65], "status": "GOOD", "action": "MAINTAIN_IF_RR_OK"},
+            "excellent": {"range": [65, 100], "status": "EXCELLENT", "action": "VERIFY_NOT_OVERFITTING"}
+          }
+        },
+        "trades_frequency": {
+          "formula": "total_trades / duree_minutes",
+          "unit": "trades_per_minute",
+          "interpretation": {
+            "extreme_overtrading": {"range": [2.0, null], "status": "CRITICAL", "action": "REDUCE_BY_75%"},
+            "overtrading": {"range": [1.0, 2.0], "status": "HIGH", "action": "REDUCE_BY_50%"},
+            "high": {"range": [0.5, 1.0], "status": "ELEVATED", "action": "CONSIDER_REDUCTION"},
+            "normal": {"range": [0.1, 0.5], "status": "NORMAL", "action": "NONE"},
+            "low": {"range": [0, 0.1], "status": "LOW", "action": "VERIFY_SIGNALS_NOT_MISSED"}
+          }
+        }
+      }
+    },
+
+    "step_3_agent_performance_analysis": {
+      "description": "Analyse comparative des performances par agent",
+      "for_each_agent": {
+        "calculate": [
+          "win_rate_agent = wins / trades * 100",
+          "profit_per_trade = profit / trades",
+          "contribution_pct = trades / total_trades * 100",
+          "profit_contribution = agent_profit / abs(total_pnl) * 100"
+        ],
+        "classify": {
+          "profitable_agent": {
+            "condition": "profit > 0 AND win_rate > 50",
+            "action": "MAINTAIN_OR_INCREASE_ALLOCATION"
+          },
+          "marginal_agent": {
+            "condition": "profit > -10 AND profit <= 0",
+            "action": "TIGHTEN_PARAMETERS"
+          },
+          "losing_agent": {
+            "condition": "profit <= -10 AND win_rate > 45",
+            "action": "REDUCE_TOLERANCE_AND_FREQUENCY"
+          },
+          "critical_agent": {
+            "condition": "profit <= -10 AND win_rate <= 45",
+            "action": "DISABLE_OR_COMPLETE_REVISION"
+          }
+        },
+        "overtrading_detection": {
+          "condition": "agent_trades / total_trades > 0.5",
+          "action": "LIMIT_MAX_TRADES_PER_HOUR",
+          "recommended_limit": "max(10, total_trades * 0.3 / session_hours)"
+        }
+      },
+      "ranking": {
+        "method": "ORDER BY profit_per_trade DESC",
+        "output": {
+          "best_agent": "Agent avec meilleur profit/trade",
+          "worst_agent": "Agent avec pire profit/trade"
+        }
+      }
+    },
+
+    "step_4_temporal_analysis": {
+      "description": "Analyse des performances par tranche horaire",
+      "for_each_hour": {
+        "calculate": [
+          "pnl_hour = sum(profits) pour trades dans cette heure",
+          "trades_count_hour = count(trades) pour cette heure",
+          "win_rate_hour = trades_gagnants_hour / trades_count_hour * 100"
+        ],
+        "classify": {
+          "profitable_hour": {
+            "condition": "pnl_hour > 0",
+            "status": "FAVORABLE",
+            "action": "PRIORITIZE_TRADING"
+          },
+          "breakeven_hour": {
+            "condition": "pnl_hour >= -5 AND pnl_hour <= 5",
+            "status": "NEUTRAL",
+            "action": "REDUCE_VOLUME"
+          },
+          "losing_hour": {
+            "condition": "pnl_hour < -5 AND pnl_hour >= -30",
+            "status": "UNFAVORABLE",
+            "action": "AVOID_OR_REDUCE_SIGNIFICANTLY"
+          },
+          "critical_hour": {
+            "condition": "pnl_hour < -30",
+            "status": "CRITICAL",
+            "action": "BLACKLIST_HOUR"
+          }
+        }
+      },
+      "output": {
+        "recommended_trading_hours": "Liste des heures avec pnl > 0",
+        "blacklisted_hours": "Liste des heures avec pnl < -30",
+        "reduce_volume_hours": "Liste des heures avec -30 <= pnl <= 0"
+      }
+    },
+
+    "step_5_close_reason_analysis": {
+      "description": "Analyse des raisons de clôture des trades",
+      "categorize_reasons": {
+        "TP": {
+          "type": "PLANNED_EXIT",
+          "healthy_range_pct": [30, 60],
+          "if_below_range": "TP trop éloigné ou signaux faibles",
+          "if_above_range": "TP potentiellement trop serré"
+        },
+        "SL": {
+          "type": "PLANNED_EXIT",
+          "healthy_range_pct": [15, 35],
+          "if_below_range": "SL trop large ou win_rate élevé",
+          "if_above_range": "SL trop serré ou mauvais timing entrées"
+        },
+        "MT5_SYNC": {
+          "type": "UNPLANNED_EXIT",
+          "healthy_range_pct": [0, 20],
+          "if_above_range": {
+            "status": "PROBLEMATIC",
+            "diagnosis": "Trades fermés avant TP/SL - pertes de gains potentiels",
+            "action": "INVESTIGATE_SYNC_LOGIC_AND_DISABLE_PREMATURE_CLOSES"
+          }
+        },
+        "session_end": {
+          "type": "FORCED_EXIT",
+          "healthy_range_pct": [0, 15],
+          "if_above_range": "Sessions trop courtes ou positions trop longues"
+        },
+        "MANUAL": {
+          "type": "INTERVENTION",
+          "any_presence": "FLAG_FOR_REVIEW"
+        }
+      },
+      "critical_alert": {
+        "condition": "MT5_SYNC_pct > 50",
+        "message": "MAJORITAIREMENT DES CLOTURES NON PLANIFIEES - REVOIR LOGIQUE DE SYNCHRONISATION",
+        "priority": "HIGH"
+      }
+    },
+
+    "step_6_direction_analysis": {
+      "description": "Analyse des performances BUY vs SELL",
+      "for_each_direction": {
+        "calculate": [
+          "count = nombre de trades",
+          "pnl = somme des profits",
+          "win_rate = trades_gagnants / count * 100",
+          "avg_profit = pnl / count"
+        ]
+      },
+      "decision_rules": {
+        "strong_bias": {
+          "condition": "abs(pnl_BUY - pnl_SELL) > 50 AND (pnl_BUY > 0 XOR pnl_SELL > 0)",
+          "action": "DISABLE_LOSING_DIRECTION_OR_REDUCE_VOLUME_80%"
+        },
+        "moderate_bias": {
+          "condition": "abs(pnl_BUY - pnl_SELL) > 20",
+          "action": "FAVOR_WINNING_DIRECTION_REDUCE_LOSING_50%"
+        },
+        "balanced": {
+          "condition": "abs(pnl_BUY - pnl_SELL) <= 20",
+          "action": "NO_DIRECTION_FILTER_NEEDED"
+        }
+      }
+    },
+
+    "step_7_risk_assessment": {
+      "description": "Évaluation du risque global de la session",
+      "calculate": {
+        "max_drawdown_potential": "abs(pire_trade) * sqrt(total_trades)",
+        "risk_per_trade": "abs(pnl_session) / total_trades",
+        "session_volatility": "std_dev(all_profits)"
+      },
+      "risk_score": {
+        "formula": "(1 - profit_factor) * 30 + (1 - RR_ratio) * 30 + (trades_frequency * 20) + (MT5_SYNC_pct / 5)",
+        "interpretation": {
+          "low_risk": {"range": [0, 30], "status": "ACCEPTABLE"},
+          "medium_risk": {"range": [30, 60], "status": "MONITOR"},
+          "high_risk": {"range": [60, 80], "status": "REDUCE_EXPOSURE"},
+          "critical_risk": {"range": [80, 100], "status": "STOP_AND_REVIEW"}
+        }
+      }
+    }
+  },
+
+  "output_decisions": {
+    "description": "Décisions automatiques basées sur l'analyse",
+    "decision_categories": {
+
+      "tp_sl_adjustment": {
+        "trigger_conditions": [
+          "RR_ratio < 1.0",
+          "profit_factor < 1.0",
+          "SL_closes_pct > TP_closes_pct"
+        ],
+        "decision_logic": {
+          "if_RR_below_0.8": {
+            "action": "INVERT_TP_SL",
+            "new_tp": "current_sl * 2",
+            "new_sl": "current_tp * 0.5"
+          },
+          "if_RR_between_0.8_and_1.0": {
+            "action": "INCREASE_TP",
+            "new_tp": "current_tp * 1.5"
+          },
+          "if_SL_hit_rate_above_30%": {
+            "action": "WIDEN_SL_OR_IMPROVE_ENTRIES",
+            "new_sl": "current_sl * 1.2"
+          }
+        }
+      },
+
+      "frequency_adjustment": {
+        "trigger_conditions": [
+          "trades_per_minute > 1.0",
+          "any_agent_contribution > 50%"
+        ],
+        "decision_logic": {
+          "overtrading_detected": {
+            "action": "SET_TRADE_LIMITS",
+            "params": {
+              "max_trades_per_hour": "current_rate * 0.5",
+              "min_interval_seconds": 60,
+              "per_agent_limit": "total_limit / num_agents"
+            }
+          }
+        }
+      },
+
+      "agent_adjustment": {
+        "for_each_agent": {
+          "if_losing_and_overtrading": {
+            "action": "REDUCE_TOLERANCE_AND_LIMIT",
+            "tolerance_multiplier": 0.5,
+            "max_trades_reduction": 0.3
+          },
+          "if_losing_but_low_frequency": {
+            "action": "TIGHTEN_ENTRY_CRITERIA",
+            "tolerance_multiplier": 0.7
+          },
+          "if_profitable": {
+            "action": "MAINTAIN_OR_SLIGHT_INCREASE",
+            "tolerance_multiplier": 1.1
+          }
+        }
+      },
+
+      "hour_filter_adjustment": {
+        "trigger_conditions": [
+          "any_hour_pnl < -30"
+        ],
+        "decision_logic": {
+          "action": "UPDATE_TRADING_SCHEDULE",
+          "params": {
+            "blacklist_hours": "hours WHERE pnl < -30",
+            "preferred_hours": "hours WHERE pnl > 10",
+            "reduced_volume_hours": "hours WHERE -30 <= pnl <= 0"
+          }
+        }
+      },
+
+      "sync_logic_adjustment": {
+        "trigger_conditions": [
+          "MT5_SYNC_closes_pct > 50"
+        ],
+        "decision_logic": {
+          "action": "MODIFY_SYNC_BEHAVIOR",
+          "params": {
+            "disable_auto_close_on_sync": true,
+            "preserve_open_positions": true,
+            "only_close_on_tp_sl": true
+          }
+        }
+      }
+    }
+  },
+
+  "output_format": {
+    "description": "Format de sortie des recommandations",
+    "structure": {
+      "session_summary": {
+        "pnl": "float",
+        "profit_factor": "float",
+        "rr_ratio": "float",
+        "win_rate": "float",
+        "risk_score": "int (0-100)"
+      },
+      "critical_issues": [
+        {
+          "type": "string",
+          "severity": "CRITICAL|HIGH|MEDIUM|LOW",
+          "description": "string",
+          "metric_value": "float",
+          "threshold": "float"
+        }
+      ],
+      "recommended_actions": [
+        {
+          "priority": "int (1-10)",
+          "category": "TP_SL|FREQUENCY|AGENT|SCHEDULE|SYNC",
+          "action": "string",
+          "params": "object",
+          "expected_impact": "string"
+        }
+      ],
+      "new_config": {
+        "tp_percent": "float",
+        "sl_percent": "float",
+        "max_trades_per_hour": "int",
+        "min_trade_interval_seconds": "int",
+        "trading_hours": ["int array"],
+        "blacklisted_hours": ["int array"],
+        "agent_configs": {
+          "agent_name": {
+            "enabled": "bool",
+            "tolerance": "float",
+            "max_trades": "int"
+          }
+        }
+      }
+    }
+  },
+
+  "validation_rules": {
+    "description": "Règles de validation des recommandations",
+    "constraints": [
+      "new_tp > new_sl (toujours)",
+      "new_tp >= current_tp * 0.5 (pas de réduction drastique du TP)",
+      "new_sl <= current_sl * 2 (pas d'élargissement excessif du SL)",
+      "max_trades_per_hour >= 5 (minimum d'activité)",
+      "at_least_one_agent_enabled (jamais tout désactiver)",
+      "at_least_3_trading_hours (fenêtre minimum)"
+    ],
+    "safety_checks": [
+      "Si risk_score > 80: RECOMMEND_PAPER_TRADING",
+      "Si profit_factor < 0.5: RECOMMEND_STRATEGY_OVERHAUL",
+      "Si win_rate < 30%: FLAG_POSSIBLE_DATA_ISSUE"
+    ]
+  },
+
+  "example_analysis_output": {
+    "session_analyzed": "G12_2026-01-15_17h28_to_19h30",
+    "session_summary": {
+      "pnl": -139.74,
+      "profit_factor": 0.61,
+      "rr_ratio": 0.49,
+      "win_rate": 55.7,
+      "risk_score": 78
+    },
+    "critical_issues": [
+      {
+        "type": "INVERTED_RR_RATIO",
+        "severity": "CRITICAL",
+        "description": "Le ratio reward/risk est inversé - gains moyens inférieurs aux pertes moyennes",
+        "metric_value": 0.49,
+        "threshold": 1.0
+      },
+      {
+        "type": "LOW_PROFIT_FACTOR",
+        "severity": "CRITICAL",
+        "description": "Profit factor sous 1.0 indique une stratégie mathématiquement perdante",
+        "metric_value": 0.61,
+        "threshold": 1.0
+      },
+      {
+        "type": "EXCESSIVE_MT5_SYNC_CLOSES",
+        "severity": "HIGH",
+        "description": "72.6% des trades fermés par synchronisation plutôt que TP/SL",
+        "metric_value": 72.6,
+        "threshold": 20.0
+      },
+      {
+        "type": "OVERTRADING",
+        "severity": "HIGH",
+        "description": "Fréquence de trading excessive (1.81 trades/minute)",
+        "metric_value": 1.81,
+        "threshold": 0.5
+      },
+      {
+        "type": "AGENT_OVERCONCENTRATION",
+        "severity": "MEDIUM",
+        "description": "fibo3 représente 62% des trades mais génère les plus grosses pertes",
+        "metric_value": 62,
+        "threshold": 50
+      }
+    ],
+    "recommended_actions": [
+      {
+        "priority": 1,
+        "category": "TP_SL",
+        "action": "INVERT_TP_SL_RATIO",
+        "params": {
+          "new_tp_percent": 1.0,
+          "new_sl_percent": 0.5
+        },
+        "expected_impact": "Transformation du RR de 0.49:1 vers 2:1 minimum"
+      },
+      {
+        "priority": 2,
+        "category": "SYNC",
+        "action": "DISABLE_PREMATURE_CLOSES",
+        "params": {
+          "only_close_on_tp_sl": true,
+          "disable_mt5_sync_close": true
+        },
+        "expected_impact": "Permettre aux trades d'atteindre leurs cibles"
+      },
+      {
+        "priority": 3,
+        "category": "SCHEDULE",
+        "action": "BLACKLIST_LOSING_HOURS",
+        "params": {
+          "blacklisted_hours": [17, 21],
+          "preferred_hours": [18, 20]
+        },
+        "expected_impact": "Éviter -148.36€ de pertes concentrées sur ces heures"
+      },
+      {
+        "priority": 4,
+        "category": "FREQUENCY",
+        "action": "REDUCE_TRADING_FREQUENCY",
+        "params": {
+          "max_trades_per_hour": 20,
+          "min_trade_interval_seconds": 60
+        },
+        "expected_impact": "Réduction des frais et amélioration de la qualité des entrées"
+      },
+      {
+        "priority": 5,
+        "category": "AGENT",
+        "action": "LIMIT_FIBO3",
+        "params": {
+          "fibo3_tolerance": 0.5,
+          "fibo3_max_trades_per_hour": 10
+        },
+        "expected_impact": "Réduire l'impact négatif de l'agent le plus perdant"
+      }
+    ],
+    "new_config": {
+      "tp_percent": 1.0,
+      "sl_percent": 0.5,
+      "max_trades_per_hour": 20,
+      "min_trade_interval_seconds": 60,
+      "trading_hours": [18, 19, 20],
+      "blacklisted_hours": [17, 21],
+      "agent_configs": {
+        "fibo1": {"enabled": true, "tolerance": 1.0, "max_trades": 8},
+        "fibo2": {"enabled": true, "tolerance": 1.5, "max_trades": 10},
+        "fibo3": {"enabled": true, "tolerance": 0.5, "max_trades": 10}
+      }
+    }
+  }
+}

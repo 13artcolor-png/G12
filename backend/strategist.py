@@ -2,35 +2,41 @@
 """
 G12 - Strategist
 Analyse les trades et execute des corrections AUTOMATIQUEMENT
+Integre la methodologie d'analyse API pour optimisation avancee
 """
 
 import json
 import time
 import hashlib
-from datetime import datetime, timedelta
-import re
+from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Set
-from collections import defaultdict
+from typing import Dict, List
 from data.aggregator import get_aggregator
-from session_logger import get_session_logger
 from utils.telegram_service import get_telegram
 
 DATABASE_DIR = Path(__file__).parent / "database"
+SESSIONS_DIR = DATABASE_DIR / "sessions"
 TRADES_FILE = DATABASE_DIR / "trades.json"
 SUGGESTIONS_FILE = DATABASE_DIR / "strategy_suggestions.json"
 LOGS_FILE = DATABASE_DIR / "strategist_logs.json"
 AGENTS_CONFIG_FILE = DATABASE_DIR / "agents_runtime_config.json"
 SPREAD_CONFIG_FILE = DATABASE_DIR / "spread_runtime_config.json"
 ACTIONS_HISTORY_FILE = DATABASE_DIR / "strategist_actions_history.json"
-LAST_RUN_FILE = DATABASE_DIR / "strategist_last_run.json" # Added for self-learning
-INACTIVITY_STATE_FILE = DATABASE_DIR / "strategist_inactivity_state.json"  # Persiste le timer d'inactivite
+LAST_RUN_FILE = DATABASE_DIR / "strategist_last_run.json"
+INACTIVITY_STATE_FILE = DATABASE_DIR / "strategist_inactivity_state.json"
+METHODOLOGY_FILE = DATABASE_DIR / "API_ANALYSE_METHODOLOGY.json"
+SESSION_ANALYSIS_FILE = DATABASE_DIR / "last_session_analysis.json"
+STRATEGIST_CONFIG_FILE = DATABASE_DIR / "strategist_runtime_config.json"
 
 # Intervalles d'optimisation
 MIN_TRADES_BETWEEN_OPTIM = 5  # Minimum trades entre 2 optimisations
 MIN_SECONDS_BETWEEN_OPTIM = 60  # Minimum secondes entre 2 optimisations
 ACTION_COOLDOWN_HOURS = 1  # Cooldown avant de re-executer la meme action
-SELF_LEARNING_INTERVAL_HOURS = 6 # Intervalle pour le self-learning
+SELF_LEARNING_INTERVAL_HOURS = 6  # Intervalle pour le self-learning
+SESSION_ANALYSIS_INTERVAL_HOURS = 1  # Analyse des sessions toutes les heures
+
+# URL API Requesty (pour appels IA)
+REQUESTY_URL = "https://router.requesty.ai/v1/chat/completions"
 
 class Strategist:
     """Analyse les performances et execute des corrections AUTOMATIQUEMENT"""
@@ -42,10 +48,17 @@ class Strategist:
         self._last_trades_count = 0
         self._last_inactivity_reduction_time = self._load_inactivity_state()  # Persiste entre redemarrages
         self._executed_action_hashes: Dict[str, float] = {}  # hash -> timestamp
-        self._last_self_learning_run = 0 # Added for self-learning
+        self._last_self_learning_run = 0  # Intervalle self-learning
+        self._last_session_analysis_run = 0  # Intervalle analyse sessions
+        self._methodology = None  # Methodologie d'analyse chargee
+        self._session_analysis_done_at_startup = False  # Flag pour analyse au demarrage
         self._load_trades()
         self._load_action_history()
-        self._load_last_run_info() # Added for self-learning
+        self._load_last_run_info()
+        self._load_methodology()
+
+        # Analyse des sessions passees au demarrage
+        self._run_startup_session_analysis()
 
     def _load_action_history(self):
         """Charge l'historique des actions executees pour eviter les repetitions"""
@@ -114,16 +127,536 @@ class Strategist:
                 with open(LAST_RUN_FILE, 'r') as f:
                     data = json.load(f)
                     self._last_self_learning_run = data.get('last_self_learning_run', 0)
+                    self._last_session_analysis_run = data.get('last_session_analysis_run', 0)
         except Exception as e:
             print(f"[Strategist] Erreur chargement last run info: {e}")
             self._last_self_learning_run = 0
+            self._last_session_analysis_run = 0
+
+    def _load_methodology(self):
+        """Charge la methodologie d'analyse depuis API_ANALYSE_METHODOLOGY.json"""
+        try:
+            if METHODOLOGY_FILE.exists():
+                with open(METHODOLOGY_FILE, 'r', encoding='utf-8') as f:
+                    self._methodology = json.load(f)
+                print(f"[Strategist] Methodologie d'analyse chargee (v{self._methodology.get('version', '?')})")
+            else:
+                print(f"[Strategist] WARN: Fichier methodologie non trouve: {METHODOLOGY_FILE}")
+                self._methodology = None
+        except Exception as e:
+            print(f"[Strategist] Erreur chargement methodologie: {e}")
+            self._methodology = None
+
+    def _is_session_analysis_enabled(self) -> bool:
+        """Verifie si l'utilisation du rapport session est activee dans la config"""
+        try:
+            if STRATEGIST_CONFIG_FILE.exists():
+                with open(STRATEGIST_CONFIG_FILE, 'r') as f:
+                    config = json.load(f)
+                    return config.get('use_session_analysis', True)
+        except Exception:
+            pass
+        return True  # Active par defaut
+
+    def _run_startup_session_analysis(self):
+        """Execute l'analyse des sessions passees au demarrage du bot"""
+        if self._session_analysis_done_at_startup:
+            return
+
+        print("[Strategist] Analyse des sessions passees au demarrage...")
+        try:
+            # Charger les sessions passees
+            past_sessions = self._load_past_sessions(limit=5)
+            if not past_sessions:
+                print("[Strategist] Aucune session passee a analyser")
+                self._session_analysis_done_at_startup = True
+                return
+
+            # Analyser la derniere session complete
+            latest_session = past_sessions[0] if past_sessions else None
+            if latest_session:
+                print(f"[Strategist] Analyse de la session: {latest_session.get('metadata', {}).get('filename', 'unknown')}")
+                analysis_result = self._analyze_session_with_methodology(latest_session)
+
+                if analysis_result:
+                    # Toujours sauvegarder l'analyse (rapport genere meme si non utilise)
+                    self._save_session_analysis(analysis_result)
+
+                    # Appliquer les recommandations SEULEMENT si active dans la config
+                    if self._is_session_analysis_enabled():
+                        if analysis_result.get('recommended_actions'):
+                            self._apply_session_recommendations(analysis_result)
+                    else:
+                        print("[Strategist] Utilisation rapport session DESACTIVEE - recommandations non appliquees")
+
+            self._session_analysis_done_at_startup = True
+            self._last_session_analysis_run = time.time()
+            self._save_last_run_info()
+            print("[Strategist] Analyse de demarrage terminee")
+
+        except Exception as e:
+            print(f"[Strategist] Erreur analyse demarrage: {e}")
+            self._session_analysis_done_at_startup = True
+
+    def _should_run_session_analysis(self) -> bool:
+        """Verifie si l'analyse de session doit etre executee (toutes les heures)"""
+        current_time = time.time()
+        interval_seconds = SESSION_ANALYSIS_INTERVAL_HOURS * 3600
+        return (current_time - self._last_session_analysis_run) > interval_seconds
+
+    def _load_past_sessions(self, limit: int = 5) -> List[Dict]:
+        """Charge les fichiers de session depuis backend/database/sessions/"""
+        sessions = []
+        try:
+            if not SESSIONS_DIR.exists():
+                return sessions
+
+            # Lister les fichiers de session (format: G12_YYYY-MM-DD_*.json)
+            session_files = sorted(
+                [f for f in SESSIONS_DIR.glob("G12_*.json") if f.is_file()],
+                key=lambda f: f.stat().st_mtime,
+                reverse=True
+            )
+
+            for session_file in session_files[:limit]:
+                try:
+                    with open(session_file, 'r', encoding='utf-8') as f:
+                        session_data = json.load(f)
+                        sessions.append(session_data)
+                except Exception as e:
+                    print(f"[Strategist] Erreur lecture session {session_file.name}: {e}")
+
+            print(f"[Strategist] {len(sessions)} sessions passees chargees")
+        except Exception as e:
+            print(f"[Strategist] Erreur chargement sessions: {e}")
+
+        return sessions
+
+    def _analyze_session_with_methodology(self, session_data: Dict) -> Dict:
+        """
+        Analyse une session en appliquant la methodologie.
+        Calcule les metriques localement et prepare le contexte pour l'API IA.
+        """
+        if not session_data:
+            return {}
+
+        try:
+            # Extraire les donnees de la session
+            trades = session_data.get('trades', [])
+            stats = session_data.get('stats_globales', {})
+            stats_par_agent = session_data.get('stats_par_agent', {})
+            perf_horaire = session_data.get('performance_horaire', {})
+            periode = session_data.get('periode', {})
+            resultat = session_data.get('resultat', {})
+
+            if not trades and not stats.get('total_trades', 0):
+                print("[Strategist] Session sans trades, skip analyse")
+                return {}
+
+            # --- STEP 2: Calcul des metriques fondamentales ---
+            profits = [t.get('profit', 0) for t in trades if t.get('profit') is not None]
+            wins = [p for p in profits if p > 0]
+            losses = [p for p in profits if p < 0]
+
+            total_trades = len(profits) or stats.get('total_trades', 0)
+            total_wins = len(wins) or stats.get('trades_gagnants', 0)
+            total_profit = sum(profits) if profits else resultat.get('pnl_session', 0)
+
+            # Profit Factor
+            sum_wins = sum(wins) if wins else 0
+            sum_losses = abs(sum(losses)) if losses else 1
+            profit_factor = round(sum_wins / sum_losses, 2) if sum_losses > 0 else 0
+
+            # Reward/Risk Ratio
+            avg_win = sum_wins / len(wins) if wins else 0
+            avg_loss = abs(sum(losses) / len(losses)) if losses else 1
+            rr_ratio = round(avg_win / avg_loss, 2) if avg_loss > 0 else 0
+
+            # Win Rate
+            win_rate = round((total_wins / total_trades) * 100, 1) if total_trades > 0 else 0
+
+            # Frequence de trading
+            duration_minutes = periode.get('duree_minutes', 60) or 60
+            trades_per_minute = round(total_trades / duration_minutes, 3)
+
+            # --- STEP 5: Analyse des raisons de cloture ---
+            close_reasons = {}
+            for t in trades:
+                reason = t.get('close_reason', 'UNKNOWN')
+                close_reasons[reason] = close_reasons.get(reason, 0) + 1
+
+            tp_closes_pct = round((close_reasons.get('TP', 0) / total_trades) * 100, 1) if total_trades > 0 else 0
+            sl_closes_pct = round((close_reasons.get('SL', 0) / total_trades) * 100, 1) if total_trades > 0 else 0
+            sync_closes_pct = round((close_reasons.get('MT5_SYNC', 0) / total_trades) * 100, 1) if total_trades > 0 else 0
+
+            # --- STEP 7: Score de risque ---
+            risk_score = min(100, int(
+                (1 - min(profit_factor, 2) / 2) * 30 +
+                (1 - min(rr_ratio, 2) / 2) * 30 +
+                min(trades_per_minute, 2) * 20 +
+                sync_closes_pct / 5
+            ))
+
+            # --- Identification des problemes critiques ---
+            critical_issues = []
+
+            if rr_ratio < 0.8:
+                critical_issues.append({
+                    'type': 'INVERTED_RR_RATIO',
+                    'severity': 'CRITICAL',
+                    'description': 'Ratio reward/risk inverse - gains moyens inferieurs aux pertes',
+                    'metric_value': rr_ratio,
+                    'threshold': 1.0
+                })
+
+            if profit_factor < 1.0:
+                critical_issues.append({
+                    'type': 'LOW_PROFIT_FACTOR',
+                    'severity': 'CRITICAL',
+                    'description': 'Profit factor < 1.0 = strategie mathematiquement perdante',
+                    'metric_value': profit_factor,
+                    'threshold': 1.0
+                })
+
+            if sync_closes_pct > 50:
+                critical_issues.append({
+                    'type': 'EXCESSIVE_MT5_SYNC_CLOSES',
+                    'severity': 'HIGH',
+                    'description': f'{sync_closes_pct}% des trades fermes par sync plutot que TP/SL',
+                    'metric_value': sync_closes_pct,
+                    'threshold': 20.0
+                })
+
+            if trades_per_minute > 1.0:
+                critical_issues.append({
+                    'type': 'OVERTRADING',
+                    'severity': 'HIGH',
+                    'description': f'Frequence excessive ({trades_per_minute} trades/min)',
+                    'metric_value': trades_per_minute,
+                    'threshold': 0.5
+                })
+
+            if win_rate < 40:
+                critical_issues.append({
+                    'type': 'LOW_WIN_RATE',
+                    'severity': 'MEDIUM',
+                    'description': f'Win rate faible ({win_rate}%)',
+                    'metric_value': win_rate,
+                    'threshold': 40
+                })
+
+            # --- Analyse par agent ---
+            agent_analysis = {}
+            for agent_id, agent_stats in stats_par_agent.items():
+                agent_trades = agent_stats.get('trades', 0)
+                agent_profit = agent_stats.get('profit', 0)
+                agent_wins = agent_stats.get('wins', 0)
+                agent_wr = round((agent_wins / agent_trades) * 100, 1) if agent_trades > 0 else 0
+                contribution_pct = round((agent_trades / total_trades) * 100, 1) if total_trades > 0 else 0
+
+                status = 'PROFITABLE' if agent_profit > 0 and agent_wr > 50 else \
+                         'MARGINAL' if agent_profit > -10 else \
+                         'LOSING' if agent_wr > 45 else 'CRITICAL'
+
+                agent_analysis[agent_id] = {
+                    'trades': agent_trades,
+                    'profit': agent_profit,
+                    'win_rate': agent_wr,
+                    'contribution_pct': contribution_pct,
+                    'status': status
+                }
+
+                # Detection surconcentration
+                if contribution_pct > 50 and agent_profit < 0:
+                    critical_issues.append({
+                        'type': 'AGENT_OVERCONCENTRATION',
+                        'severity': 'MEDIUM',
+                        'description': f'{agent_id} = {contribution_pct}% des trades mais en perte',
+                        'metric_value': contribution_pct,
+                        'threshold': 50
+                    })
+
+            # --- Analyse horaire ---
+            losing_hours = []
+            profitable_hours = []
+            for hour_str, pnl in perf_horaire.items():
+                hour = int(hour_str) if hour_str.isdigit() else 0
+                if pnl < -30:
+                    losing_hours.append(hour)
+                elif pnl > 10:
+                    profitable_hours.append(hour)
+
+            # --- Generation des recommandations ---
+            recommended_actions = []
+            priority = 1
+
+            # Recommandation TP/SL si RR inverse
+            if rr_ratio < 0.8:
+                current_spread_config = self._load_spread_config()
+                current_tp = current_spread_config.get('tp_pct', 0.3)
+                current_sl = current_spread_config.get('sl_pct', 0.5)
+                recommended_actions.append({
+                    'priority': priority,
+                    'category': 'TP_SL',
+                    'action': 'INVERT_TP_SL_RATIO',
+                    'params': {
+                        'new_tp_percent': round(max(current_sl, 1.0), 2),
+                        'new_sl_percent': round(min(current_tp, 0.5), 2)
+                    },
+                    'expected_impact': f'Transformer RR de {rr_ratio}:1 vers 2:1 minimum'
+                })
+                priority += 1
+
+            # Recommandation frequence
+            if trades_per_minute > 1.0:
+                recommended_actions.append({
+                    'priority': priority,
+                    'category': 'FREQUENCY',
+                    'action': 'REDUCE_TRADING_FREQUENCY',
+                    'params': {
+                        'increase_cooldown_by': 30,
+                        'target_trades_per_minute': 0.3
+                    },
+                    'expected_impact': 'Reduire overtrading et ameliorer qualite des entrees'
+                })
+                priority += 1
+
+            # Recommandation agents perdants
+            for agent_id, analysis in agent_analysis.items():
+                if analysis['status'] == 'CRITICAL':
+                    recommended_actions.append({
+                        'priority': priority,
+                        'category': 'AGENT',
+                        'action': 'TIGHTEN_AGENT_PARAMETERS',
+                        'params': {
+                            'agent': agent_id,
+                            'reduce_tolerance_by': 0.5,
+                            'increase_momentum_by': 0.02
+                        },
+                        'expected_impact': f'Reduire les pertes de {agent_id}'
+                    })
+                    priority += 1
+
+            # Recommandation heures perdantes
+            if losing_hours:
+                recommended_actions.append({
+                    'priority': priority,
+                    'category': 'SCHEDULE',
+                    'action': 'BLACKLIST_LOSING_HOURS',
+                    'params': {
+                        'blacklisted_hours': losing_hours,
+                        'preferred_hours': profitable_hours
+                    },
+                    'expected_impact': 'Eviter les heures les plus perdantes'
+                })
+                priority += 1
+
+            # --- Resultat final ---
+            analysis_result = {
+                'session_analyzed': session_data.get('metadata', {}).get('filename', 'unknown'),
+                'analyzed_at': datetime.now().isoformat(),
+                'session_summary': {
+                    'pnl': round(total_profit, 2),
+                    'profit_factor': profit_factor,
+                    'rr_ratio': rr_ratio,
+                    'win_rate': win_rate,
+                    'risk_score': risk_score,
+                    'total_trades': total_trades
+                },
+                'critical_issues': critical_issues,
+                'agent_analysis': agent_analysis,
+                'close_reasons': {
+                    'TP_pct': tp_closes_pct,
+                    'SL_pct': sl_closes_pct,
+                    'MT5_SYNC_pct': sync_closes_pct
+                },
+                'recommended_actions': recommended_actions
+            }
+
+            print(f"[Strategist] Analyse session: PF={profit_factor}, RR={rr_ratio}, WR={win_rate}%, Risk={risk_score}")
+            print(f"[Strategist] {len(critical_issues)} problemes critiques, {len(recommended_actions)} recommandations")
+
+            return analysis_result
+
+        except Exception as e:
+            print(f"[Strategist] Erreur analyse session: {e}")
+            import traceback
+            traceback.print_exc()
+            return {}
+
+    def _save_session_analysis(self, analysis: Dict):
+        """Sauvegarde l'analyse de session dans un fichier"""
+        try:
+            with open(SESSION_ANALYSIS_FILE, 'w', encoding='utf-8') as f:
+                json.dump(analysis, f, indent=2, ensure_ascii=False)
+            print(f"[Strategist] Analyse sauvegardee: {SESSION_ANALYSIS_FILE.name}")
+        except Exception as e:
+            print(f"[Strategist] Erreur sauvegarde analyse: {e}")
+
+    def _apply_session_recommendations(self, analysis: Dict):
+        """
+        Applique les recommandations de l'analyse de session.
+        Respecte les permissions strategist_permissions des agents.
+        """
+        if not analysis.get('recommended_actions'):
+            return
+
+        print(f"[Strategist] Application de {len(analysis['recommended_actions'])} recommandations...")
+
+        agents_config = self._load_agents_config()
+        spread_config = self._load_spread_config()
+        applied_count = 0
+
+        for rec in analysis['recommended_actions']:
+            category = rec.get('category', '')
+            action = rec.get('action', '')
+            params = rec.get('params', {})
+
+            try:
+                if category == 'TP_SL' and action == 'INVERT_TP_SL_RATIO':
+                    # Verifier permission tp_sl sur au moins un agent
+                    has_permission = any(
+                        self._has_permission(agents_config.get(aid, {}), 'tp_sl')
+                        for aid in agents_config if agents_config.get(aid, {}).get('enabled', False)
+                    )
+                    if has_permission:
+                        new_tp = params.get('new_tp_percent', spread_config.get('tp_pct', 0.3))
+                        new_sl = params.get('new_sl_percent', spread_config.get('sl_pct', 0.5))
+
+                        # Validation: TP doit etre > SL
+                        if new_tp > new_sl:
+                            old_tp = spread_config.get('tp_pct')
+                            old_sl = spread_config.get('sl_pct')
+                            spread_config['tp_pct'] = new_tp
+                            spread_config['sl_pct'] = new_sl
+                            print(f"[Strategist] TP/SL ajuste: TP {old_tp}% -> {new_tp}%, SL {old_sl}% -> {new_sl}%")
+                            self.log_decision("SESSION_RECOMMENDATION", {
+                                'action': action,
+                                'old_tp': old_tp, 'new_tp': new_tp,
+                                'old_sl': old_sl, 'new_sl': new_sl
+                            }, "Ajustement TP/SL base sur analyse session")
+                            applied_count += 1
+
+                elif category == 'FREQUENCY' and action == 'REDUCE_TRADING_FREQUENCY':
+                    # Augmenter le cooldown de tous les agents (avec permission)
+                    increase_by = params.get('increase_cooldown_by', 30)
+                    for agent_id, config in agents_config.items():
+                        if self._has_permission(config, 'cooldown'):
+                            old_cd = config.get('cooldown_seconds', 60)
+                            config['cooldown_seconds'] = min(300, old_cd + increase_by)
+                            print(f"[Strategist] Cooldown {agent_id}: {old_cd}s -> {config['cooldown_seconds']}s")
+                    applied_count += 1
+
+                elif category == 'AGENT' and action == 'TIGHTEN_AGENT_PARAMETERS':
+                    agent_id = params.get('agent')
+                    if agent_id and agent_id in agents_config:
+                        config = agents_config[agent_id]
+
+                        # Reduire tolerance (si permission)
+                        if self._has_permission(config, 'tolerance'):
+                            reduce_by = params.get('reduce_tolerance_by', 0.5)
+                            old_tol = config.get('fibo_tolerance_pct', 1.0)
+                            config['fibo_tolerance_pct'] = max(0.3, round(old_tol - reduce_by, 2))
+                            print(f"[Strategist] Tolerance {agent_id}: {old_tol}% -> {config['fibo_tolerance_pct']}%")
+
+                        # Augmenter momentum min (si permission)
+                        if self._has_permission(config, 'momentum'):
+                            increase_by = params.get('increase_momentum_by', 0.02)
+                            old_mom = config.get('min_momentum_pct', 0.05)
+                            config['min_momentum_pct'] = min(0.15, round(old_mom + increase_by, 3))
+                            print(f"[Strategist] Momentum {agent_id}: {old_mom}% -> {config['min_momentum_pct']}%")
+
+                        applied_count += 1
+
+            except Exception as e:
+                print(f"[Strategist] Erreur application recommandation {action}: {e}")
+
+        # Sauvegarder les configs modifiees
+        if applied_count > 0:
+            self._save_agents_config(agents_config)
+            self._save_spread_config(spread_config)
+            print(f"[Strategist] {applied_count} recommandations appliquees")
+
+            # Notification Telegram
+            try:
+                telegram = get_telegram()
+                if telegram:
+                    issues_text = "\n".join([f"- {i['type']}: {i['description']}" for i in analysis.get('critical_issues', [])[:3]])
+                    telegram.send_message(
+                        f"*Strategist - Analyse Session*\n"
+                        f"PnL: {analysis['session_summary']['pnl']:.2f} EUR\n"
+                        f"Profit Factor: {analysis['session_summary']['profit_factor']}\n"
+                        f"Risk Score: {analysis['session_summary']['risk_score']}/100\n\n"
+                        f"*Problemes:*\n{issues_text or 'Aucun'}\n\n"
+                        f"*{applied_count} ajustements appliques*"
+                    )
+            except Exception:
+                pass
+
+    def run_hourly_session_analysis(self) -> Dict:
+        """
+        Execute l'analyse de session horaire.
+        Appelee par auto_optimize() si l'intervalle est ecoule.
+        Le rapport est toujours genere, mais applique seulement si active.
+        """
+        if not self._should_run_session_analysis():
+            return {'status': 'skip', 'reason': 'interval_not_reached'}
+
+        print("[Strategist] Analyse de session horaire...")
+
+        try:
+            past_sessions = self._load_past_sessions(limit=3)
+            if not past_sessions:
+                return {'status': 'skip', 'reason': 'no_sessions'}
+
+            # Analyser la session la plus recente
+            latest = past_sessions[0]
+            analysis = self._analyze_session_with_methodology(latest)
+
+            recommendations_applied = 0
+            if analysis:
+                # Toujours sauvegarder l'analyse (rapport toujours genere)
+                self._save_session_analysis(analysis)
+
+                # Appliquer les recommandations SEULEMENT si active dans la config
+                if self._is_session_analysis_enabled():
+                    self._apply_session_recommendations(analysis)
+                    recommendations_applied = len(analysis.get('recommended_actions', []))
+                else:
+                    print("[Strategist] Utilisation rapport session DESACTIVEE - recommandations non appliquees")
+
+            self._last_session_analysis_run = time.time()
+            self._save_last_run_info()
+
+            return {
+                'status': 'completed',
+                'session_analyzed': latest.get('metadata', {}).get('filename'),
+                'issues_found': len(analysis.get('critical_issues', [])),
+                'recommendations_applied': recommendations_applied,
+                'session_analysis_enabled': self._is_session_analysis_enabled()
+            }
+
+        except Exception as e:
+            print(f"[Strategist] Erreur analyse horaire: {e}")
+            return {'status': 'error', 'message': str(e)}
+
+    def get_last_session_analysis(self) -> Dict:
+        """Retourne la derniere analyse de session sauvegardee"""
+        try:
+            if SESSION_ANALYSIS_FILE.exists():
+                with open(SESSION_ANALYSIS_FILE, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+        except Exception as e:
+            print(f"[Strategist] Erreur lecture analyse: {e}")
+        return {}
 
     def _save_last_run_info(self):
-        """Sauvegarde les informations de la derniere execution (pour le self-learning)"""
+        """Sauvegarde les informations de la derniere execution (pour le self-learning et analyse sessions)"""
         try:
             with open(LAST_RUN_FILE, 'w') as f:
                 json.dump({
                     'last_self_learning_run': self._last_self_learning_run,
+                    'last_session_analysis_run': self._last_session_analysis_run,
                     'updated_at': datetime.now().isoformat()
                 }, f, indent=2)
         except Exception as e:
@@ -197,7 +730,17 @@ class Strategist:
                 result['executed_count'] += inactivity_result['executed_count']
                 result['actions'].extend(inactivity_result['actions'])
 
-        # 3. Self-Learning (if due)
+        # 3. Verification coherence positions G12 vs MT5
+        positions_result = self._check_positions_and_alert()
+        if positions_result.get('executed_count', 0) > 0:
+            if result['status'] == 'skip':
+                result['status'] = 'positions_alert'
+            result['executed_count'] += positions_result['executed_count']
+            result['actions'].extend(positions_result['actions'])
+        # Toujours inclure l'analyse des positions dans le resultat
+        result['positions_analysis'] = positions_result.get('analysis', {})
+
+        # 4. Self-Learning (if due)
         if self._should_run_self_learning():
             print("[Strategist] Lancement du Self-Learning...")
             try:
@@ -206,6 +749,13 @@ class Strategist:
                 print(f"[Strategist] Erreur self-learning: {e}")
             self._mark_self_learning_run()
 
+        # 5. Analyse de session horaire (basee sur methodologie)
+        if self._should_run_session_analysis():
+            session_result = self.run_hourly_session_analysis()
+            if session_result.get('status') == 'completed':
+                result['session_analysis'] = session_result
+                if result['status'] == 'skip':
+                    result['status'] = 'session_analyzed'
 
         # Mettre a jour les compteurs
         self._last_optimization_time = current_time
@@ -219,20 +769,21 @@ class Strategist:
         - Augmente tolerance SI: agent inactif ET historique rentable avec tolerance plus large
         - Diminue tolerance SI: agent actif mais perdant (entrees trop larges)
         - Ne change rien SI: agent performant OU pas assez de donnees
+
+        IMPORTANT: Analyse chaque agent INDIVIDUELLEMENT pour l'inactivite
+        (un agent actif ne doit pas masquer l'inactivite des autres)
         """
         current_time = time.time()
 
         # Charger les trades de la session actuelle depuis session.json
         session_trades = self._load_session_trades()
 
-        # Si nouveaux trades, reset timer
+        # Mettre a jour le compteur global (pour reference)
         if len(session_trades) > self._last_trades_count:
-            self._last_inactivity_reduction_time = current_time
-            self._save_inactivity_state()
             self._last_trades_count = len(session_trades)
-            return {'executed_count': 0}
+            self._save_inactivity_state()
 
-        # Verifier temps depuis derniere optimisation
+        # Verifier temps depuis derniere optimisation GLOBALE
         inactivity_seconds = current_time - self._last_inactivity_reduction_time
         INACTIVITY_THRESHOLD = 900  # 15 minutes
 
@@ -248,16 +799,39 @@ class Strategist:
             if not config.get('enabled', False):
                 continue
 
-            # Analyser la performance de cet agent
+            # Analyser la performance de cet agent INDIVIDUELLEMENT
             agent_trades = [t for t in session_trades if t.get('agent_id') == agent_name or t.get('agent', '').endswith(agent_name)]
 
-            if len(agent_trades) == 0:
+            # Calculer l'inactivite INDIVIDUELLE de cet agent
+            if agent_trades:
+                # Dernier trade de cet agent
+                last_trade_time = None
+                for t in reversed(agent_trades):
+                    ts = t.get('timestamp') or t.get('close_time')
+                    if ts:
+                        try:
+                            last_trade_time = datetime.fromisoformat(ts).timestamp()
+                            break
+                        except (ValueError, TypeError):
+                            pass
+                if last_trade_time:
+                    agent_inactivity = current_time - last_trade_time
+                else:
+                    agent_inactivity = inactivity_seconds
+            else:
+                # Agent n'a JAMAIS trade dans cette session
+                agent_inactivity = inactivity_seconds
+
+            # Seuil d'inactivite par agent: 20 minutes
+            AGENT_INACTIVITY_THRESHOLD = 1200  # 20 min
+
+            if len(agent_trades) == 0 or agent_inactivity > AGENT_INACTIVITY_THRESHOLD:
                 # Agent inactif - analyser pourquoi
-                action = self._analyze_inactive_agent(agent_name, config, inactivity_seconds)
+                action = self._analyze_inactive_agent(agent_name, config, agent_inactivity)
                 if action:
                     executed_actions.append(action)
-            else:
-                # Agent actif - analyser performance
+            elif len(agent_trades) >= 5:
+                # Agent actif avec assez de trades - analyser performance
                 action = self._analyze_active_agent(agent_name, config, agent_trades)
                 if action:
                     executed_actions.append(action)
@@ -285,20 +859,29 @@ class Strategist:
             print(f"[Strategist] Erreur chargement session trades: {e}")
         return []
 
+    def _has_permission(self, config: dict, permission: str) -> bool:
+        """Verifie si le Strategist a la permission de modifier un parametre"""
+        permissions = config.get('strategist_permissions', {})
+        # Par defaut, toutes les permissions sont accordees
+        return permissions.get(permission, True)
+
     def _analyze_inactive_agent(self, agent_name: str, config: dict, inactivity_seconds: float) -> dict:
         """
         Analyse un agent inactif et decide si ajuster les parametres.
         Retourne une action si un ajustement est justifie, None sinon.
+        Respecte les permissions strategist_permissions de l'agent.
         """
         changes = []
         reasons = []
         current_tolerance = config.get('fibo_tolerance_pct', 1.0)
+        current_momentum = config.get('min_momentum_pct', 0.05)
 
         # Verifier l'historique: est-ce que des tolerances plus larges ont ete rentables?
         # Pour l'instant, on verifie si la tolerance actuelle est restrictive
 
         # REGLE 1: Si tolerance < 2% et inactif > 30min, augmenter prudemment
-        if current_tolerance < 2.0 and inactivity_seconds > 1800:
+        # PERMISSION: tolerance
+        if self._has_permission(config, 'tolerance') and current_tolerance < 2.0 and inactivity_seconds > 1800:
             new_tolerance = min(2.0, round(current_tolerance + 0.5, 2))
             if new_tolerance > current_tolerance:
                 config['fibo_tolerance_pct'] = new_tolerance
@@ -312,6 +895,17 @@ class Strategist:
             # Log mais ne pas changer automatiquement
             reasons.append(f"Tolerance deja a {current_tolerance}%, verifier conditions marche")
             # Pas de changement automatique - laisser l'utilisateur decider
+
+        # REGLE 3: Si min_momentum_pct > 0.02 et inactif > 20min, reduire le seuil
+        # Le seuil de momentum est peut-etre trop restrictif
+        # PERMISSION: momentum
+        if self._has_permission(config, 'momentum') and current_momentum > 0.02 and inactivity_seconds > 1200:
+            new_momentum = max(0.02, round(current_momentum - 0.01, 3))
+            if new_momentum < current_momentum:
+                config['min_momentum_pct'] = new_momentum
+                changes.append(f"min_momentum_pct: {current_momentum} -> {new_momentum}")
+                reasons.append(f"Momentum min trop restrictif ({current_momentum}%) - reduction pour plus de trades")
+                print(f"[Strategist] {agent_name}: REDUIRE min_momentum {current_momentum}% -> {new_momentum}%")
 
         if not changes:
             return None
@@ -337,9 +931,10 @@ class Strategist:
     def _analyze_active_agent(self, agent_name: str, config: dict, trades: list) -> dict:
         """
         Analyse un agent actif et decide si ajuster les parametres.
-        - Si winrate < 40% : reduire tolerance (entrees trop larges)
+        - Si winrate < 40% : reduire tolerance ET augmenter min_momentum (trop de mauvais trades)
         - Si winrate > 70% : garder ou legere augmentation
         - Si winrate 40-70% : pas de changement
+        Respecte les permissions strategist_permissions de l'agent.
         """
         if len(trades) < 5:
             return None
@@ -354,15 +949,27 @@ class Strategist:
         changes = []
         reasons = []
         current_tolerance = config.get('fibo_tolerance_pct', 1.0)
+        current_momentum = config.get('min_momentum_pct', 0.05)
 
         # REGLE 1: Winrate < 40% et perdant = tolerance trop large
-        if winrate < 40 and total_profit < 0:
+        # PERMISSION: tolerance
+        if winrate < 40 and total_profit < 0 and self._has_permission(config, 'tolerance'):
             new_tolerance = max(0.5, round(current_tolerance - 0.5, 2))
             if new_tolerance < current_tolerance:
                 config['fibo_tolerance_pct'] = new_tolerance
                 changes.append(f"fibo_tolerance_pct: {current_tolerance} -> {new_tolerance}")
                 reasons.append(f"Winrate faible ({winrate:.0f}%) et pertes ({total_profit:.2f} EUR) - resserrer les entrees")
                 print(f"[Strategist] {agent_name}: REDUIRE tolerance {current_tolerance}% -> {new_tolerance}% (WR={winrate:.0f}%)")
+
+        # REGLE 1b: Augmenter min_momentum si winrate < 30% (trades sur mouvements trop faibles)
+        # PERMISSION: momentum
+        if winrate < 30 and current_momentum < 0.1 and self._has_permission(config, 'momentum'):
+            new_momentum = min(0.1, round(current_momentum + 0.01, 3))
+            if new_momentum > current_momentum:
+                config['min_momentum_pct'] = new_momentum
+                changes.append(f"min_momentum_pct: {current_momentum} -> {new_momentum}")
+                reasons.append(f"Trades sur mouvements trop faibles - augmenter seuil momentum")
+                print(f"[Strategist] {agent_name}: AUGMENTER min_momentum {current_momentum}% -> {new_momentum}% (WR={winrate:.0f}%)")
 
         # REGLE 2: Winrate > 70% et profitable = config optimale, ne pas toucher
         elif winrate > 70 and total_profit > 0:
@@ -412,9 +1019,12 @@ class Strategist:
         # === CORRECTION 1: Agent avec win rate < 30% -> AUGMENTER SEUILS ===
         # NOTE: Le Strategist n'a PAS le droit de desactiver les agents!
         # Il ne peut QUE ajuster les parametres de strategie.
+        # RESPECTE les permissions strategist_permissions de chaque agent.
         for agent_name, stats in by_agent.items():
             if agent_name not in agents_config:
                 continue
+
+            agent_config = agents_config[agent_name]
 
             if stats.get('win_rate', 0) < 30 and stats.get('total_trades', 0) >= 5:
                 action_hash = self._action_hash('RAISE_THRESHOLDS', agent_name, str(stats['total_trades']))
@@ -425,39 +1035,39 @@ class Strategist:
 
                 changes = []
 
-                # Augmenter min_fibo1_pct
-                if 'min_fibo1_pct' in agents_config[agent_name]:
-                    old_val = agents_config[agent_name]['min_fibo1_pct']
+                # Augmenter min_momentum_pct (PERMISSION: momentum)
+                if 'min_momentum_pct' in agent_config and self._has_permission(agent_config, 'momentum'):
+                    old_val = agent_config['min_momentum_pct']
                     new_val = max(0.05, old_val + 0.02) if old_val >= 0 else 0.05
                     if new_val != old_val:
-                        agents_config[agent_name]['min_fibo1_pct'] = round(new_val, 3)
-                        changes.append(f"min_fibo1_pct: {old_val} -> {new_val}")
+                        agent_config['min_momentum_pct'] = round(new_val, 3)
+                        changes.append(f"min_momentum_pct: {old_val} -> {new_val}")
 
-                # Reduire fibo_tolerance_pct (plus strict)
-                if 'fibo_tolerance_pct' in agents_config[agent_name]:
-                    old_val = agents_config[agent_name]['fibo_tolerance_pct']
+                # Reduire fibo_tolerance_pct (plus strict) (PERMISSION: tolerance)
+                if 'fibo_tolerance_pct' in agent_config and self._has_permission(agent_config, 'tolerance'):
+                    old_val = agent_config['fibo_tolerance_pct']
                     new_val = max(0.1, old_val - 0.1)  # Min 0.1%
                     if new_val != old_val:
-                        agents_config[agent_name]['fibo_tolerance_pct'] = round(new_val, 2)
+                        agent_config['fibo_tolerance_pct'] = round(new_val, 2)
                         changes.append(f"fibo_tolerance_pct: {old_val} -> {new_val}")
 
-                # Changer vers un niveau Fibo plus fiable
-                if 'fibo_level' in agents_config[agent_name]:
+                # Changer vers un niveau Fibo plus fiable (pas de permission specifique)
+                if 'fibo_level' in agent_config:
                     fibo_priority = ["0.618", "0.5", "0.382", "0.786", "0.236"]
-                    current = agents_config[agent_name]['fibo_level']
+                    current = agent_config['fibo_level']
                     if current in fibo_priority:
                         idx = fibo_priority.index(current)
                         if idx < len(fibo_priority) - 1:
                             new_level = fibo_priority[idx + 1]
-                            agents_config[agent_name]['fibo_level'] = new_level
+                            agent_config['fibo_level'] = new_level
                             changes.append(f"fibo_level: {current} -> {new_level}")
 
-                # Augmenter cooldown
-                if 'cooldown_seconds' in agents_config[agent_name]:
-                    old_val = agents_config[agent_name]['cooldown_seconds']
+                # Augmenter cooldown (PERMISSION: cooldown)
+                if 'cooldown_seconds' in agent_config and self._has_permission(agent_config, 'cooldown'):
+                    old_val = agent_config['cooldown_seconds']
                     new_val = min(300, old_val + 30)
                     if new_val != old_val:
-                        agents_config[agent_name]['cooldown_seconds'] = new_val
+                        agent_config['cooldown_seconds'] = new_val
                         changes.append(f"cooldown: {old_val}s -> {new_val}s")
 
                 if changes:
@@ -474,8 +1084,16 @@ class Strategist:
                     self.log_decision("ACTION_EXECUTED", action,
                         f"Agent {agent_name}: {', '.join(changes)}")
 
-        # === CORRECTION 3: Profit factor < 0.5 -> AJUSTER TP/SL ===
-        if global_stats.get('profit_factor', 0) < 0.5 and global_stats.get('total_trades', 0) >= 10:
+        # === CORRECTION 3: Profit factor < 1.0 -> AJUSTER TP/SL ===
+        # Un profit_factor < 1.0 signifie que les pertes > gains (meme avec bon win rate)
+        # PERMISSION: tp_sl (verifie sur au moins un agent actif)
+        has_tpsl_permission = any(
+            self._has_permission(agents_config.get(agent_name, {}), 'tp_sl')
+            for agent_name in agents_config
+            if agents_config.get(agent_name, {}).get('enabled', False)
+        )
+
+        if has_tpsl_permission and global_stats.get('profit_factor', 0) < 1.0 and global_stats.get('total_trades', 0) >= 10:
             action_hash = self._action_hash('ADJUST_TPSL', 'global', str(global_stats.get('total_trades', 0) // 10))
 
             if not self._was_action_executed_recently(action_hash):
@@ -495,7 +1113,7 @@ class Strategist:
                         'new_tp': new_tp,
                         'old_sl': old_sl,
                         'new_sl': new_sl,
-                        'reason': f"Profit factor {global_stats['profit_factor']} < 0.5",
+                        'reason': f"Profit factor {global_stats['profit_factor']} < 1.0 (pertes > gains)",
                         'timestamp': datetime.now().isoformat()
                     }
                     executed_actions.append(action)
@@ -674,27 +1292,230 @@ class Strategist:
         return max_count
 
     def _analyze_by_agent(self) -> Dict:
-        """Analyse par agent"""
-        by_agent = defaultdict(lambda: {'profits': []})
+        """Analyse par agent - utilise stats_*.json (source de verite MT5)
 
-        for trade in self.trades:
-            agent = trade.get('agent', trade.get('agent_id', 'unknown'))
-            by_agent[agent]['profits'].append(trade.get('profit', trade.get('profit_eur', 0)))
-
+        IMPORTANT: Lit depuis stats_*.json pour coherence avec les autres affichages.
+        Les fichiers stats_*.json sont synchronises avec l'historique MT5 reel.
+        """
         results = {}
-        for agent, data in by_agent.items():
-            profits = data['profits']
-            wins = [p for p in profits if p > 0]
-            losses = [p for p in profits if p < 0]
 
-            results[agent] = {
-                'total_trades': len(profits),
-                'total_profit': round(sum(profits), 2),
-                'win_rate': round(len(wins) / len(profits) * 100, 1) if profits else 0,
-                'profit_factor': round(sum(wins) / abs(sum(losses)), 2) if losses and sum(losses) != 0 else 0
-            }
+        for agent_id in ['fibo1', 'fibo2', 'fibo3']:
+            stats_file = DATABASE_DIR / f"stats_{agent_id}.json"
+            try:
+                if stats_file.exists():
+                    with open(stats_file, 'r') as f:
+                        stats = json.load(f)
+
+                    session_trades = stats.get('session_trades', 0)
+                    session_wins = stats.get('session_wins', 0)
+                    session_pnl = stats.get('session_pnl', 0)
+                    session_losses = session_trades - session_wins
+
+                    # Calculer profit factor approximatif
+                    # PF = gains / pertes = (wins * avg_win) / (losses * avg_loss)
+                    # Approximation: si winrate et pnl connus
+                    if session_trades > 0 and session_wins > 0 and session_losses > 0:
+                        avg_win = session_pnl / session_wins if session_pnl > 0 else 0
+                        avg_loss = abs(session_pnl) / session_losses if session_pnl < 0 else 1
+                        profit_factor = round(avg_win * session_wins / (avg_loss * session_losses), 2) if avg_loss > 0 else 0
+                    else:
+                        profit_factor = 0
+
+                    results[agent_id] = {
+                        'total_trades': session_trades,
+                        'total_profit': round(session_pnl, 2),
+                        'win_rate': round(session_wins / session_trades * 100, 1) if session_trades > 0 else 0,
+                        'profit_factor': profit_factor
+                    }
+                else:
+                    results[agent_id] = {
+                        'total_trades': 0,
+                        'total_profit': 0,
+                        'win_rate': 0,
+                        'profit_factor': 0
+                    }
+            except Exception as e:
+                print(f"[Strategist] Erreur lecture stats {agent_id}: {e}")
+                results[agent_id] = {
+                    'total_trades': 0,
+                    'total_profit': 0,
+                    'win_rate': 0,
+                    'profit_factor': 0
+                }
 
         return results
+
+    def _analyze_open_positions(self) -> Dict:
+        """
+        Analyse les positions ouvertes et detecte les incoherences G12 vs MT5.
+        Retourne un dict avec:
+        - g12_positions: positions trackees par G12 (positions_fibo*.json)
+        - mt5_positions: positions reelles sur MT5 (via aggregator)
+        - inconsistencies: liste des problemes detectes
+        - alerts: alertes critiques necessitant attention
+        """
+        result = {
+            'g12_positions': {},
+            'mt5_positions': [],
+            'inconsistencies': [],
+            'alerts': [],
+            'total_floating_pnl': 0,
+            'positions_count': {'g12': 0, 'mt5': 0}
+        }
+
+        # 1. Charger les positions G12 depuis positions_fibo*.json
+        g12_all_positions = {}
+        for agent_id in ['fibo1', 'fibo2', 'fibo3']:
+            try:
+                pos_file = DATABASE_DIR / f"positions_{agent_id}.json"
+                if pos_file.exists():
+                    with open(pos_file, 'r') as f:
+                        data = json.load(f)
+                        positions = data.get('positions', [])
+                        g12_all_positions[agent_id] = positions
+                        result['positions_count']['g12'] += len(positions)
+                else:
+                    g12_all_positions[agent_id] = []
+            except Exception as e:
+                print(f"[Strategist] Erreur lecture positions G12 {agent_id}: {e}")
+                g12_all_positions[agent_id] = []
+
+        result['g12_positions'] = g12_all_positions
+
+        # 2. Charger les positions MT5 reelles via aggregator
+        try:
+            aggregator = get_aggregator()
+            account_data = aggregator.get_account_data()
+            if account_data and account_data.get('positions'):
+                mt5_positions = account_data['positions']
+                result['mt5_positions'] = mt5_positions
+                result['positions_count']['mt5'] = len(mt5_positions)
+                result['total_floating_pnl'] = round(account_data.get('floating_pnl', 0), 2)
+        except Exception as e:
+            print(f"[Strategist] Erreur recuperation positions MT5: {e}")
+            result['alerts'].append({
+                'level': 'critical',
+                'message': f"Impossible de recuperer les positions MT5: {e}",
+                'timestamp': datetime.now().isoformat()
+            })
+
+        # 3. Comparer G12 vs MT5 pour detecter les incoherences
+        g12_tickets = set()
+        for agent_id, positions in g12_all_positions.items():
+            for pos in positions:
+                ticket = pos.get('ticket')
+                if ticket:
+                    g12_tickets.add(ticket)
+
+        mt5_tickets = set()
+        mt5_by_ticket = {}
+        for pos in result['mt5_positions']:
+            ticket = pos.get('ticket')
+            if ticket:
+                mt5_tickets.add(ticket)
+                mt5_by_ticket[ticket] = pos
+
+        # 3a. Positions dans G12 mais pas dans MT5 (fermees sans sync?)
+        orphan_g12 = g12_tickets - mt5_tickets
+        if orphan_g12:
+            for ticket in orphan_g12:
+                # Trouver l'agent
+                for agent_id, positions in g12_all_positions.items():
+                    for pos in positions:
+                        if pos.get('ticket') == ticket:
+                            result['inconsistencies'].append({
+                                'type': 'G12_ORPHAN',
+                                'ticket': ticket,
+                                'agent': agent_id,
+                                'message': f"Position #{ticket} dans G12 ({agent_id}) mais fermee sur MT5",
+                                'severity': 'warning'
+                            })
+                            break
+
+        # 3b. Positions dans MT5 mais pas dans G12 (non trackees)
+        orphan_mt5 = mt5_tickets - g12_tickets
+        if orphan_mt5:
+            for ticket in orphan_mt5:
+                mt5_pos = mt5_by_ticket.get(ticket, {})
+                agent = mt5_pos.get('_agent_id', 'unknown')
+                result['inconsistencies'].append({
+                    'type': 'MT5_UNTRACKED',
+                    'ticket': ticket,
+                    'agent': agent,
+                    'message': f"Position MT5 #{ticket} non trackee par G12",
+                    'severity': 'critical',
+                    'position': {
+                        'direction': 'BUY' if mt5_pos.get('type', 0) == 0 else 'SELL',
+                        'profit': mt5_pos.get('profit', 0),
+                        'volume': mt5_pos.get('volume', 0)
+                    }
+                })
+                result['alerts'].append({
+                    'level': 'critical',
+                    'message': f"Position MT5 #{ticket} non trackee par G12!",
+                    'ticket': ticket,
+                    'timestamp': datetime.now().isoformat()
+                })
+
+        # 3c. Verifier le nombre total de positions
+        if result['positions_count']['g12'] != result['positions_count']['mt5']:
+            result['inconsistencies'].append({
+                'type': 'COUNT_MISMATCH',
+                'message': f"Nombre positions different: G12={result['positions_count']['g12']} vs MT5={result['positions_count']['mt5']}",
+                'severity': 'warning'
+            })
+
+        # 4. Analyser le P&L flottant global
+        if result['total_floating_pnl'] < -50:  # Seuil d'alerte configurable
+            result['alerts'].append({
+                'level': 'warning',
+                'message': f"P&L flottant eleve: {result['total_floating_pnl']} EUR",
+                'timestamp': datetime.now().isoformat()
+            })
+
+        print(f"[Strategist] Analyse positions: G12={result['positions_count']['g12']}, MT5={result['positions_count']['mt5']}, Incoherences={len(result['inconsistencies'])}")
+
+        return result
+
+    def _check_positions_and_alert(self) -> Dict:
+        """
+        Verifie la coherence des positions et genere des alertes si necessaire.
+        Appelee par auto_optimize().
+        """
+        analysis = self._analyze_open_positions()
+
+        executed_actions = []
+
+        # Generer des actions pour les incoherences critiques
+        for inconsistency in analysis.get('inconsistencies', []):
+            if inconsistency.get('severity') == 'critical':
+                action = {
+                    'action': 'POSITION_INCONSISTENCY',
+                    'type': inconsistency['type'],
+                    'ticket': inconsistency.get('ticket'),
+                    'agent': inconsistency.get('agent', 'unknown'),
+                    'message': inconsistency['message'],
+                    'timestamp': datetime.now().isoformat()
+                }
+                executed_actions.append(action)
+
+                # Log l'alerte
+                self.log_decision("POSITION_ALERT", action,
+                    f"Incoherence detectee: {inconsistency['message']}")
+
+                # Envoyer notification Telegram si disponible
+                try:
+                    telegram = get_telegram()
+                    if telegram:
+                        telegram.send_alert(f"⚠️ ALERTE POSITIONS\n{inconsistency['message']}")
+                except Exception:
+                    pass
+
+        return {
+            'executed_count': len(executed_actions),
+            'actions': executed_actions,
+            'analysis': analysis
+        }
 
     def _analyze_by_session(self) -> Dict:
         """Analyse par session de marche"""

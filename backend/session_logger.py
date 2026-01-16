@@ -30,6 +30,7 @@ class SessionLogger:
         self.performance_history = {}  # agent_id -> list of snapshots
         self.balance_start = 0
         self.balance_end = 0
+        self.excluded_tickets = set()  # Tickets MT5 a ignorer lors du sync
         self._load_session()
 
     def _load_session(self):
@@ -44,20 +45,45 @@ class SessionLogger:
                     self.decisions = data.get('decisions', [])
                     self.performance_history = data.get('performance_history', {})
                     self.balance_start = data.get('balance_start', 0)
+                    # Charger les tickets exclus (convertir liste en set)
+                    self.excluded_tickets = set(data.get('excluded_tickets', []))
                     # Verifier que la session est valide
-                    if self.session_id:
+                    if self.session_id and self.start_time:
                         print(f"[SessionLogger] Session chargee: {self.session_id} ({len(self.trades)} trades)")
                         print(f"[SessionLogger] Performance history: {list(self.performance_history.keys())}")
+                        # Verifier si performance_history est desynchronise avec trades
+                        self._check_and_rebuild_history()
                     else:
-                        print("[SessionLogger] session.json invalide, aucune session active")
-                        # Ne pas demarrer automatiquement - laisser l'utilisateur choisir
+                        print("[SessionLogger] session.json invalide ou incomplete, demarrage auto...")
+                        # Demarrer automatiquement une nouvelle session
+                        self._start_new_session()
             else:
                 # Pas de session.json - chercher la session la plus recente dans sessions/
                 print("[SessionLogger] session.json non trouve, recherche dans sessions/...")
                 self._load_latest_session()
+                # Si toujours pas de session, en demarrer une
+                if not self.session_id or not self.start_time:
+                    print("[SessionLogger] Aucune session trouvee, demarrage auto...")
+                    self._start_new_session()
         except Exception as e:
             print(f"[SessionLogger] Erreur chargement session: {e}")
-            # Ne pas demarrer automatiquement en cas d'erreur
+            # Demarrer une session en cas d'erreur pour eviter les problemes
+            self._start_new_session()
+
+    def _check_and_rebuild_history(self):
+        """Verifie si performance_history doit etre reconstruit"""
+        if not self.trades:
+            return
+
+        # Compter les points dans master
+        master_points = len(self.performance_history.get('master', []))
+        trades_count = len(self.trades)
+
+        # Si on a des trades mais pas ou peu de points, reconstruire
+        # (chaque trade devrait generer ~1 point dans master)
+        if trades_count > 0 and master_points < trades_count * 0.5:
+            print(f"[SessionLogger] Performance history desynchronise: {master_points} points vs {trades_count} trades")
+            self.rebuild_performance_history()
 
     def _load_latest_session(self):
         """Charge la session la plus recente depuis le dossier sessions/"""
@@ -98,6 +124,7 @@ class SessionLogger:
                 'decisions': self.decisions[-100:],  # Garder 100 dernieres decisions
                 'performance_history': self.performance_history,
                 'balance_start': self.balance_start,
+                'excluded_tickets': list(getattr(self, 'excluded_tickets', set())),  # Tickets a ignorer lors du sync
                 'updated_at': datetime.now().isoformat()
             }
             with open(SESSION_FILE, 'w') as f:
@@ -125,6 +152,11 @@ class SessionLogger:
         if self.session_id and len(self.trades) > 0:
             self.end_session()
 
+        # IMPORTANT: Capturer les tickets MT5 existants AVANT de reset
+        # Ces tickets seront ignores lors des syncs pour ne pas reimporter les anciens trades
+        self.excluded_tickets = self._get_existing_mt5_tickets()
+        print(f"[SessionLogger] {len(self.excluded_tickets)} tickets MT5 existants exclus du sync")
+
         self._start_new_session()
         self.balance_start = balance
         self._save_session()
@@ -137,7 +169,8 @@ class SessionLogger:
             'success': True,
             'session_id': self.session_id,
             'start_time': self.start_time,
-            'stats_reset': reset_stats
+            'stats_reset': reset_stats,
+            'excluded_tickets': len(self.excluded_tickets)
         }
 
     def _reset_statistics(self):
@@ -162,7 +195,7 @@ class SessionLogger:
             print(f"[SessionLogger] Erreur reset statistiques: {e}")
 
     def end_session(self, balance: float = 0) -> Dict:
-        """Termine la session et genere le rapport ULTRA COMPLET"""
+        """Termine la session et genere le rapport COMPLET dans un fichier unique"""
         if not self.session_id:
             return {'success': False, 'message': 'Aucune session active'}
 
@@ -170,61 +203,118 @@ class SessionLogger:
         closed_positions = self._close_all_positions()
 
         self.balance_end = balance
+        end_time = datetime.now()
 
         # 2. Collecter TOUTES les donnees
         stats = self._calculate_stats()
-        
-        # Recuperer les logs du Strategist (description detaillee)
         strategist_actions = self._get_detailed_strategist_actions()
-        
-        # Analyser les horaires (Best/Worst hours)
         hourly_perf = self._analyze_hourly_performance()
-        
-        # Force le chargement de TOUTES les decisions de la session
         session_decisions = self._get_global_decisions()
 
-        # 3. Generer le resume "Ultra Complet"
+        # Charger les logs additionnels pour consolidation
+        trades_log = self._load_trades_json()
+        strategist_logs = self._get_strategist_logs()
+
+        # 3. Generer le resume
         summary = self._generate_ultra_complete_summary(stats, strategist_actions, hourly_perf)
 
-        # 4. Rapport complet (JSON)
+        # 4. Calculer le P&L reel depuis stats_*.json (source MT5)
+        pnl_from_stats = stats.get('total_profit', 0)
+        pnl_from_balance = round(self.balance_end - self.balance_start, 2) if self.balance_start > 0 else pnl_from_stats
+
+        # 5. Generer le nom de fichier chronologique avec dates et score
+        # Format: G12_YYYY-MM-DD_HHmm_to_HHmm_+XX.XX_EUR.json
+        start_dt = datetime.fromisoformat(self.start_time) if self.start_time else end_time
+        date_str = start_dt.strftime("%Y-%m-%d")
+        start_hm = start_dt.strftime("%Hh%M")
+        end_hm = end_time.strftime("%Hh%M")
+        pnl_str = f"{pnl_from_stats:+.2f}".replace('.', ',')  # +12,50 ou -3,20
+
+        filename = f"G12_{date_str}_{start_hm}_to_{end_hm}_{pnl_str}_EUR.json"
+
+        # 6. Rapport COMPLET CONSOLIDE (tout dans un seul fichier)
         report = {
-            'session_id': self.session_id,
-            'start_time': self.start_time,
-            'end_time': datetime.now().isoformat(),
-            'duration_minutes': self._get_duration_minutes(),
-            'balance_start': self.balance_start,
-            'balance_end': self.balance_end,
-            'pnl': round(self.balance_end - self.balance_start, 2),
-            'summary': summary,
-            'stats': stats,
-            'trades': self.trades,
-            'decisions': session_decisions,
-            'strategist_actions': strategist_actions,
-            'hourly_performance': hourly_perf,
-            'closed_positions_at_end': closed_positions
+            # === METADATA ===
+            "metadata": {
+                "session_id": self.session_id,
+                "filename": filename,
+                "generated_at": end_time.isoformat()
+            },
+
+            # === PERIODE ===
+            "periode": {
+                "debut": self.start_time,
+                "fin": end_time.isoformat(),
+                "duree_minutes": self._get_duration_minutes(),
+                "date": date_str,
+                "horaire": f"{start_hm} - {end_hm}"
+            },
+
+            # === SCORE / RESULTAT ===
+            "resultat": {
+                "balance_depart": self.balance_start,
+                "balance_fin": self.balance_end,
+                "pnl_session": pnl_from_stats,
+                "pnl_balance": pnl_from_balance
+            },
+
+            # === RESUME ANALYTIQUE ===
+            "analyse": {
+                "meilleur_agent": summary.get('best_agent'),
+                "pire_agent": summary.get('worst_agent'),
+                "meilleure_heure": summary.get('best_hour'),
+                "win_rate_global": summary.get('global_win_rate'),
+                "points_forts": summary.get('strong_points', []),
+                "points_faibles": summary.get('weak_points', []),
+                "nb_ajustements_strategist": summary.get('strategist_changes_count', 0)
+            },
+
+            # === STATISTIQUES GLOBALES ===
+            "stats_globales": {
+                "total_trades": stats.get('total_trades', 0),
+                "trades_gagnants": stats.get('winning_trades', 0),
+                "trades_perdants": stats.get('losing_trades', 0),
+                "win_rate": stats.get('win_rate', 0),
+                "profit_total": stats.get('total_profit', 0),
+                "profit_moyen": stats.get('avg_profit', 0),
+                "meilleur_trade": stats.get('max_profit', 0),
+                "pire_trade": stats.get('max_loss', 0)
+            },
+
+            # === STATS PAR AGENT ===
+            "stats_par_agent": stats.get('by_agent', {}),
+
+            # === PERFORMANCE HORAIRE ===
+            "performance_horaire": hourly_perf,
+
+            # === HISTORIQUE COMPLET DES TRADES ===
+            "trades": self.trades + trades_log,
+
+            # === TOUTES LES DECISIONS IA ===
+            "decisions": session_decisions,
+
+            # === ACTIONS DU STRATEGIST ===
+            "strategist": {
+                "actions_executees": strategist_actions,
+                "logs_detailles": strategist_logs
+            },
+
+            # === POSITIONS FERMEES A LA CLOTURE ===
+            "positions_fermees_fin": closed_positions
         }
 
-        # 5. Reset COMPLET du site (Archive les anciens fichiers de sessions)
-        self._archive_past_sessions()
-
-        # Sauvegarder le nouveau rapport
-        log_file = SESSIONS_DIR / f"session_{self.session_id}.json"
+        # 7. Sauvegarder le fichier unique
+        log_file = SESSIONS_DIR / filename
         try:
             with open(log_file, 'w', encoding='utf-8') as f:
                 json.dump(report, f, indent=2, ensure_ascii=False)
+            print(f"[SessionLogger] Rapport sauvegarde: {filename}")
         except Exception as e:
             print(f"[SessionLogger] Erreur sauvegarde JSON: {e}")
 
-        # Sauvegarder le resume texte
-        txt_file = SESSIONS_DIR / f"session_{self.session_id}_resume.txt"
-        try:
-            self._save_ultra_text_summary(txt_file, report)
-        except Exception as e:
-            print(f"[SessionLogger] Erreur sauvegarde texte: {e}")
-
-        # 6. Reset des logs et stats temps reel
+        # 8. Reset des logs et stats temps reel
         self._reset_agents_stats()
-        self._archive_and_clear_current_logs()
+        self._clear_runtime_logs()
 
         # Reset state
         old_id = self.session_id
@@ -233,7 +323,7 @@ class SessionLogger:
         self.trades = []
         self.decisions = []
         self.performance_history = {}
-        
+
         # Nettoyage fichier actif
         if SESSION_FILE.exists():
             try:
@@ -244,10 +334,40 @@ class SessionLogger:
         return {
             'success': True,
             'session_id': old_id,
-            'log_file': log_file.name,
-            'txt_file': txt_file.name,
+            'filename': filename,
+            'pnl': pnl_from_stats,
             'summary': summary
         }
+
+    def _load_trades_json(self) -> List[Dict]:
+        """Charge les trades depuis trades.json"""
+        try:
+            trades_file = DATABASE_DIR / "trades.json"
+            if trades_file.exists():
+                with open(trades_file, 'r') as f:
+                    data = json.load(f)
+                    return data.get('trades', [])
+        except Exception:
+            pass
+        return []
+
+    def _clear_runtime_logs(self):
+        """Vide les fichiers de logs runtime (sans archiver separement)"""
+        mapping = {
+            "trades.json": {"trades": []},
+            "decisions.json": {"decisions": []},
+            "strategist_logs.json": {"logs": []},
+            "strategist_actions_history.json": {"updated_at": None, "actions": {}}
+        }
+
+        for fname, empty in mapping.items():
+            fpath = DATABASE_DIR / fname
+            try:
+                if fpath.exists():
+                    with open(fpath, 'w') as f:
+                        json.dump(empty, f, indent=2)
+            except Exception:
+                pass
 
     def _get_detailed_strategist_actions(self) -> List[Dict]:
         """Recupere les actions reelles executees par le Strategist"""
@@ -600,6 +720,38 @@ class SessionLogger:
         except Exception as e:
             print(f"[SessionLogger] Erreur reset agents: {e}")
 
+    def _get_existing_mt5_tickets(self) -> set:
+        """Recupere tous les tickets MT5 existants (deals fermes) pour les exclure du sync"""
+        excluded = set()
+        try:
+            from core.mt5_connector import get_mt5
+
+            # Recuperer les deals des dernieres 24h pour chaque agent
+            for agent_id in ['fibo1', 'fibo2', 'fibo3']:
+                try:
+                    mt5 = get_mt5(agent_id)
+                    if not mt5.connect():
+                        continue
+
+                    # Recuperer les deals recents (24h)
+                    deals = mt5.get_history_deals()
+                    for deal in deals:
+                        ticket = deal.get('ticket')
+                        position_id = deal.get('position_id')
+                        if ticket:
+                            excluded.add(int(ticket))
+                        if position_id:
+                            excluded.add(int(position_id))
+
+                    print(f"[SessionLogger] {agent_id}: {len(deals)} deals existants trouves")
+                except Exception as e:
+                    print(f"[SessionLogger] Erreur lecture deals {agent_id}: {e}")
+
+        except Exception as e:
+            print(f"[SessionLogger] Erreur _get_existing_mt5_tickets: {e}")
+
+        return excluded
+
     def _archive_and_clear_logs(self):
         """Archive et vide les fichiers de logs pour une session vierge"""
         import shutil
@@ -688,6 +840,59 @@ class SessionLogger:
         except (ValueError, TypeError):
             return 0
 
+    def deduplicate_trades(self) -> int:
+        """
+        Supprime les doublons de trades en gardant celui avec les donnees les plus completes.
+        Un doublon est identifie par le meme position_id ou le meme ticket.
+        On garde le trade avec entry_price != 0 de preference.
+        Retourne le nombre de doublons supprimes.
+        """
+        if not self.trades:
+            return 0
+
+        # Grouper les trades par position_id ou ticket
+        trades_by_key = {}  # key -> list of trades
+        for i, trade in enumerate(self.trades):
+            ticket = trade.get('ticket')
+            pos_id = trade.get('position_id')
+
+            # Utiliser position_id si disponible, sinon ticket
+            key = pos_id if pos_id else ticket
+            if not key:
+                continue
+
+            key = int(key)
+            if key not in trades_by_key:
+                trades_by_key[key] = []
+            trades_by_key[key].append((i, trade))
+
+        # Pour chaque groupe, garder le meilleur trade
+        indices_to_remove = set()
+        for key, trade_list in trades_by_key.items():
+            if len(trade_list) <= 1:
+                continue
+
+            # Trier: trades avec entry_price valide en premier
+            trade_list.sort(key=lambda x: (
+                x[1].get('entry_price', 0) == 0,  # False (has price) comes first
+                x[1].get('close_reason', '') == 'MT5_SYNC'  # Non-SYNC comes first
+            ))
+
+            # Garder le premier (meilleur), supprimer les autres
+            best_idx, best_trade = trade_list[0]
+            for idx, trade in trade_list[1:]:
+                indices_to_remove.add(idx)
+                print(f"[SessionLogger] DEDUPE: Suppression doublon ticket={trade.get('ticket')} pos={trade.get('position_id')} reason={trade.get('close_reason')}")
+
+        if not indices_to_remove:
+            return 0
+
+        # Supprimer les doublons (en commencant par la fin pour ne pas decaler les indices)
+        self.trades = [t for i, t in enumerate(self.trades) if i not in indices_to_remove]
+        self._save_session()
+        print(f"[SessionLogger] {len(indices_to_remove)} doublons supprimes")
+        return len(indices_to_remove)
+
     def log_trade(self, trade: Dict):
         """Enregistre un trade dans la session active"""
         if not self.session_id:
@@ -720,14 +925,19 @@ class SessionLogger:
 
         print(f"[SessionLogger] Sync MT5 depuis {session_start.isoformat()}")
 
-        # Tickets deja enregistres
+        # Tickets et position_ids deja enregistres (pour eviter doublons)
+        # On garde les deux car certains trades ont ete enregistres avec ticket, d'autres avec position_id
         existing_tickets = set()
+        existing_position_ids = set()
         for trade in self.trades:
             ticket = trade.get('ticket')
+            pos_id = trade.get('position_id')
             if ticket:
                 existing_tickets.add(int(ticket))
+            if pos_id:
+                existing_position_ids.add(int(pos_id))
 
-        print(f"[SessionLogger] {len(existing_tickets)} trades deja enregistres")
+        print(f"[SessionLogger] {len(existing_tickets)} tickets, {len(existing_position_ids)} position_ids deja enregistres")
 
         # Stats par agent (pour mise a jour des stats_*.json)
         stats_by_agent = {
@@ -753,11 +963,25 @@ class SessionLogger:
 
                 for deal in deals:
                     ticket = deal.get('ticket')
+                    position_id = deal.get('position_id')
                     if not ticket:
                         continue
 
-                    # Verifier si ce trade est deja enregistre
-                    if int(ticket) in existing_tickets:
+                    # IMPORTANT: Ignorer les tickets exclus (trades d'avant le reset)
+                    # Ces trades existaient deja dans MT5 avant le demarrage de cette session
+                    is_excluded = (int(ticket) in self.excluded_tickets or
+                                   (position_id and int(position_id) in self.excluded_tickets))
+                    if is_excluded:
+                        continue  # Ne PAS compter dans les stats
+
+                    # Verifier si ce trade est deja enregistre (par ticket OU position_id)
+                    # Cela gere le cas ou certains trades ont ete enregistres avec position_id
+                    already_exists = (int(ticket) in existing_tickets or
+                                      int(ticket) in existing_position_ids or
+                                      (position_id and int(position_id) in existing_tickets) or
+                                      (position_id and int(position_id) in existing_position_ids))
+
+                    if already_exists:
                         # Deja enregistre, mais compter pour les stats
                         profit = deal.get('profit', 0)
                         stats_by_agent[agent_id]['pnl'] += profit
@@ -770,7 +994,8 @@ class SessionLogger:
                     profit = deal.get('profit', 0)
                     trade_data = {
                         'agent': agent_id,
-                        'ticket': ticket,
+                        'ticket': ticket,  # Utiliser deal ticket pour uniformite
+                        'position_id': position_id,  # Garder aussi position_id pour reference
                         'direction': deal.get('type', 'UNKNOWN'),
                         'volume': deal.get('volume', 0),
                         'entry_price': 0,  # Non disponible dans deal
@@ -782,6 +1007,8 @@ class SessionLogger:
 
                     self.trades.append(trade_data)
                     existing_tickets.add(int(ticket))
+                    if position_id:
+                        existing_position_ids.add(int(position_id))
                     new_trades_count += 1
                     total_synced_pnl += profit
 
@@ -791,7 +1018,7 @@ class SessionLogger:
                     if profit > 0:
                         stats_by_agent[agent_id]['wins'] += 1
 
-                    print(f"[SessionLogger] SYNC: {agent_id} ticket #{ticket} profit={profit:+.2f} EUR")
+                    print(f"[SessionLogger] SYNC: {agent_id} ticket #{ticket} (pos={position_id}) profit={profit:+.2f} EUR")
 
             except Exception as e:
                 print(f"[SessionLogger] Erreur sync {agent_id}: {e}")
@@ -829,15 +1056,19 @@ class SessionLogger:
         except Exception as e:
             print(f"[SessionLogger] Erreur rechargement stats agents: {e}")
 
+        # Supprimer les doublons eventuels (meme trade enregistre par G12 ET par sync)
+        duplicates_removed = self.deduplicate_trades()
+
         result = {
             'success': True,
             'new_trades': new_trades_count,
             'total_synced_pnl': round(total_synced_pnl, 2),
             'total_trades': len(self.trades),
-            'stats_by_agent': stats_by_agent
+            'stats_by_agent': stats_by_agent,
+            'duplicates_removed': duplicates_removed
         }
 
-        print(f"[SessionLogger] Sync termine: {new_trades_count} nouveaux trades, PnL total sync: {total_synced_pnl:+.2f} EUR")
+        print(f"[SessionLogger] Sync termine: {new_trades_count} nouveaux trades, PnL total sync: {total_synced_pnl:+.2f} EUR, {duplicates_removed} doublons supprimes")
         return result
 
     def log_performance_snapshot(self, agent_id: str, closed_pnl: float, floating_pnl: float):
@@ -991,6 +1222,73 @@ class SessionLogger:
         except Exception as e:
             print(f"[SessionLogger] Erreur lecture historique: {e}")
         return sessions
+
+    def rebuild_performance_history(self):
+        """Reconstruit performance_history a partir des trades enregistres
+
+        Cette fonction est utile quand:
+        - Le backend a redemarree et les snapshots n'ont pas ete enregistres
+        - On veut synchroniser les courbes avec l'historique reel des trades
+        """
+        if not self.trades:
+            print("[SessionLogger] Aucun trade a traiter pour rebuild")
+            return
+
+        print(f"[SessionLogger] Reconstruction performance_history depuis {len(self.trades)} trades...")
+
+        # Trier les trades par timestamp
+        sorted_trades = sorted(self.trades, key=lambda t: t.get('timestamp', ''))
+
+        # Reinitialiser performance_history
+        self.performance_history = {
+            "fibo1": [],
+            "fibo2": [],
+            "fibo3": [],
+            "master": []
+        }
+
+        # Accumulateurs de PnL par agent
+        cumulative_pnl = {"fibo1": 0, "fibo2": 0, "fibo3": 0}
+
+        # Parcourir les trades et creer des snapshots
+        for trade in sorted_trades:
+            agent_id = trade.get('agent', '')
+            profit = trade.get('profit', 0)
+            timestamp = trade.get('timestamp', datetime.now().isoformat())
+
+            if agent_id not in cumulative_pnl:
+                continue
+
+            # Accumuler le PnL
+            cumulative_pnl[agent_id] += profit
+
+            # Ajouter un snapshot pour cet agent
+            self.performance_history[agent_id].append({
+                'timestamp': timestamp,
+                'closed_pnl': round(cumulative_pnl[agent_id], 2),
+                'floating_pnl': 0  # Pas de floating pour les trades fermes
+            })
+
+            # Mettre a jour le master (somme de tous les agents)
+            total_pnl = sum(cumulative_pnl.values())
+            self.performance_history["master"].append({
+                'timestamp': timestamp,
+                'closed_pnl': round(total_pnl, 2),
+                'floating_pnl': 0
+            })
+
+        # Limiter a 500 points max par agent
+        for agent_id in self.performance_history:
+            if len(self.performance_history[agent_id]) > 500:
+                self.performance_history[agent_id] = self.performance_history[agent_id][-500:]
+
+        # Sauvegarder
+        self._save_session()
+
+        print(f"[SessionLogger] Performance history reconstruit:")
+        for agent_id, history in self.performance_history.items():
+            if history:
+                print(f"  - {agent_id}: {len(history)} points, dernier PnL: {history[-1]['closed_pnl']:.2f} EUR")
 
 
 # Singleton
