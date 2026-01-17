@@ -711,6 +711,29 @@
             }
         }
 
+        /* Animations pour notifications toast */
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
         .session-badge.high {
             background: rgba(239, 68, 68, 0.2);
             color: var(--accent-red);
@@ -2456,6 +2479,68 @@
         </div>
 
         <!-- ================================================================
+             SECTION PIPELINE - TRACABILITE
+             ================================================================ -->
+        <div class="section">
+            <div class="section-title collapsible"
+                style="color: var(--accent-cyan); cursor: pointer; display: flex; justify-content: space-between; align-items: center;"
+                onclick="togglePipeline()">
+                <span>📈 PIPELINE - Traçabilité Complète</span>
+                <span id="pipeline-toggle-icon" style="font-size: 24px; transition: transform 0.3s;">▼</span>
+            </div>
+
+            <div id="pipeline-content" style="display: none; margin-top: 20px;">
+                <!-- Sélecteur Agent -->
+                <div style="display: flex; gap: 12px; margin-bottom: 16px; align-items: center;">
+                    <span style="font-size: 18px; color: var(--text-primary);">Agent:</span>
+                    <button id="pipeline-btn-fibo1" class="btn btn-primary" onclick="loadPipelineForAgent('fibo1')" style="font-size: 18px;">FIBO1</button>
+                    <button id="pipeline-btn-fibo2" class="btn btn-secondary" onclick="loadPipelineForAgent('fibo2')" style="font-size: 18px;">FIBO2</button>
+                    <button id="pipeline-btn-fibo3" class="btn btn-secondary" onclick="loadPipelineForAgent('fibo3')" style="font-size: 18px;">FIBO3</button>
+                    <button class="btn btn-info" onclick="refreshPipeline()" style="font-size: 18px; margin-left: auto;">🔄 Rafraîchir</button>
+                </div>
+
+                <!-- Dernier Pipeline -->
+                <div id="pipeline-latest-container" style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 20px;">
+                    <div id="pipeline-loading" style="text-align: center; padding: 40px; color: var(--text-secondary); font-size: 18px;">
+                        Chargement du pipeline...
+                    </div>
+                    <div id="pipeline-no-data" style="display: none; text-align: center; padding: 40px; color: var(--text-secondary); font-size: 18px;">
+                        Aucun pipeline disponible. Effectuez une action (ouverture/fermeture de position) pour voir le pipeline.
+                    </div>
+                    <div id="pipeline-display" style="display: none;">
+                        <!-- En-tête -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <div>
+                                <div style="font-size: 20px; color: var(--accent-cyan); font-weight: bold;">
+                                    Action: <span id="pipeline-action-type">--</span>
+                                    <span id="pipeline-action-result" style="margin-left: 8px;">--</span>
+                                </div>
+                                <div style="font-size: 16px; color: var(--text-secondary); margin-top: 4px;">
+                                    <span id="pipeline-timestamp">--</span> •
+                                    Durée: <span id="pipeline-duration">--</span>ms
+                                </div>
+                            </div>
+                            <button class="btn btn-info" onclick="exportCurrentPipeline()" style="font-size: 18px;">📥 Export JSON</button>
+                        </div>
+
+                        <!-- Timeline Graphique -->
+                        <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 16px; margin-bottom: 20px;">
+                            <div style="font-size: 18px; color: var(--text-primary); margin-bottom: 12px; font-weight: bold;">Timeline</div>
+                            <div id="pipeline-timeline-bars" style="display: flex; flex-direction: column; gap: 8px;">
+                                <!-- Barres de progression générées dynamiquement -->
+                            </div>
+                        </div>
+
+                        <!-- Détails des Étapes -->
+                        <div id="pipeline-steps-details">
+                            <!-- Détails générés dynamiquement -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
              SECTION LABORATOIRE - REGLAGES (PLIABLE)
              ================================================================ -->
         <div class="section">
@@ -2804,6 +2889,221 @@
                     content.style.display = 'none';
                     icon.style.transform = 'rotate(0deg)';
                 }
+            }
+
+            // ============================================
+            // PIPELINE - Tracabilite complete
+            // ============================================
+            let currentPipelineAgent = 'fibo1';
+            let currentPipelineData = null;
+
+            // Toggle section Pipeline
+            function togglePipeline() {
+                const content = document.getElementById('pipeline-content');
+                const icon = document.getElementById('pipeline-toggle-icon');
+
+                if (content.style.display === 'none') {
+                    content.style.display = 'block';
+                    icon.style.transform = 'rotate(180deg)';
+                    // Charger le pipeline au premier affichage
+                    loadPipelineForAgent(currentPipelineAgent);
+                } else {
+                    content.style.display = 'none';
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            }
+
+            // Charger le pipeline pour un agent
+            async function loadPipelineForAgent(agentId) {
+                currentPipelineAgent = agentId;
+
+                // Mettre a jour les boutons
+                ['fibo1', 'fibo2', 'fibo3'].forEach(aid => {
+                    const btn = document.getElementById(`pipeline-btn-${aid}`);
+                    if (aid === agentId) {
+                        btn.className = 'btn btn-primary';
+                    } else {
+                        btn.className = 'btn btn-secondary';
+                    }
+                });
+
+                // Afficher loading
+                document.getElementById('pipeline-loading').style.display = 'block';
+                document.getElementById('pipeline-no-data').style.display = 'none';
+                document.getElementById('pipeline-display').style.display = 'none';
+
+                try {
+                    const response = await fetch(`${API_URL}/api/pipeline/latest?agent_id=${agentId}`);
+                    const data = await response.json();
+
+                    if (data.success && data.pipeline) {
+                        currentPipelineData = data.pipeline;
+                        displayPipeline(data.pipeline);
+                    } else {
+                        // Pas de pipeline
+                        document.getElementById('pipeline-loading').style.display = 'none';
+                        document.getElementById('pipeline-no-data').style.display = 'block';
+                    }
+                } catch (error) {
+                    console.error('[Pipeline] Erreur chargement:', error);
+                    document.getElementById('pipeline-loading').style.display = 'none';
+                    document.getElementById('pipeline-no-data').innerHTML = `<span style="color: var(--accent-red);">Erreur API: ${error.message}</span>`;
+                    document.getElementById('pipeline-no-data').style.display = 'block';
+                }
+            }
+
+            // Afficher un pipeline
+            function displayPipeline(pipeline) {
+                document.getElementById('pipeline-loading').style.display = 'none';
+                document.getElementById('pipeline-no-data').style.display = 'none';
+                document.getElementById('pipeline-display').style.display = 'block';
+
+                // En-tete
+                const actionType = pipeline.action_type.toUpperCase();
+                const resultAction = pipeline.result?.action || 'UNKNOWN';
+                const success = pipeline.success;
+
+                document.getElementById('pipeline-action-type').textContent = actionType;
+
+                const resultSpan = document.getElementById('pipeline-action-result');
+                resultSpan.textContent = resultAction;
+                resultSpan.style.color = success ? 'var(--accent-green)' : 'var(--accent-red)';
+
+                const timestamp = new Date(pipeline.timestamp);
+                const now = new Date();
+                const diffMin = Math.round((now - timestamp) / 60000);
+                document.getElementById('pipeline-timestamp').textContent = `il y a ${diffMin} min`;
+                document.getElementById('pipeline-duration').textContent = pipeline.total_duration_ms;
+
+                // Timeline graphique
+                renderTimelineBars(pipeline.steps, pipeline.total_duration_ms);
+
+                // Details des etapes
+                renderStepsDetails(pipeline.steps);
+            }
+
+            // Generer les barres de timeline
+            function renderTimelineBars(steps, totalDuration) {
+                const container = document.getElementById('pipeline-timeline-bars');
+                container.innerHTML = '';
+
+                steps.forEach(step => {
+                    const percentage = (step.duration_ms / totalDuration) * 100;
+                    const statusColor = step.status === 'success' ? 'var(--accent-green)' :
+                                       step.status === 'warning' ? 'var(--accent-orange)' : 'var(--accent-red)';
+                    const statusIcon = step.status === 'success' ? '✓' :
+                                      step.status === 'warning' ? '⚠' : '✗';
+
+                    const barHtml = `
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="min-width: 200px; font-size: 16px; color: var(--text-primary);">${step.name}</div>
+                            <div style="flex-grow: 1; background: rgba(255,255,255,0.1); height: 24px; border-radius: 4px; overflow: hidden; position: relative;">
+                                <div style="background: ${statusColor}; height: 100%; width: ${percentage}%; transition: width 0.5s;"></div>
+                            </div>
+                            <div style="min-width: 80px; font-size: 16px; color: var(--text-secondary); text-align: right;">${step.duration_ms}ms</div>
+                            <div style="min-width: 30px; font-size: 18px; color: ${statusColor};">${statusIcon}</div>
+                        </div>
+                    `;
+
+                    container.innerHTML += barHtml;
+                });
+            }
+
+            // Generer les details des etapes
+            function renderStepsDetails(steps) {
+                const container = document.getElementById('pipeline-steps-details');
+                container.innerHTML = '';
+
+                steps.forEach(step => {
+                    const statusColor = step.status === 'success' ? 'var(--accent-green)' :
+                                       step.status === 'warning' ? 'var(--accent-orange)' : 'var(--accent-red)';
+                    const statusIcon = step.status === 'success' ? '✓' :
+                                      step.status === 'warning' ? '⚠' : '✗';
+
+                    const detailsHtml = Object.entries(step.details || {})
+                        .map(([key, value]) => `<div style="margin-left: 20px; font-size: 16px; color: var(--text-secondary);">• ${key}: ${JSON.stringify(value)}</div>`)
+                        .join('');
+
+                    const stepHtml = `
+                        <div style="background: rgba(255,255,255,0.02); border-left: 3px solid ${statusColor}; padding: 12px; margin-bottom: 8px; border-radius: 4px;">
+                            <div style="font-size: 18px; color: ${statusColor}; font-weight: bold; margin-bottom: 4px;">
+                                ${statusIcon} ${step.step}. ${step.name} (${step.duration_ms}ms)
+                            </div>
+                            ${detailsHtml}
+                        </div>
+                    `;
+
+                    container.innerHTML += stepHtml;
+                });
+            }
+
+            // Rafraichir le pipeline
+            function refreshPipeline() {
+                loadPipelineForAgent(currentPipelineAgent);
+                showToast('🔄 Pipeline rafraîchi', 'info');
+            }
+
+            // Exporter le pipeline actuel
+            function exportCurrentPipeline() {
+                if (!currentPipelineData) {
+                    showToast('⚠ Aucun pipeline à exporter', 'warning');
+                    return;
+                }
+
+                const dataStr = JSON.stringify(currentPipelineData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `pipeline_${currentPipelineData.pipeline_id}.json`;
+                link.click();
+
+                URL.revokeObjectURL(url);
+                showToast('📥 Pipeline exporté', 'success');
+            }
+
+            // ============================================
+            // NOTIFICATIONS TOAST
+            // ============================================
+            function showToast(message, type = 'info') {
+                const container = document.getElementById('toast-container');
+                if (!container) {
+                    // Creer le container s'il n'existe pas
+                    const div = document.createElement('div');
+                    div.id = 'toast-container';
+                    div.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;';
+                    document.body.appendChild(div);
+                }
+
+                const colors = {
+                    success: 'var(--accent-green)',
+                    error: 'var(--accent-red)',
+                    warning: 'var(--accent-orange)',
+                    info: 'var(--accent-cyan)'
+                };
+
+                const toast = document.createElement('div');
+                toast.style.cssText = `
+                    background: #1a1a2e;
+                    border-left: 4px solid ${colors[type] || colors.info};
+                    padding: 16px 20px;
+                    border-radius: 8px;
+                    color: var(--text-primary);
+                    font-size: 16px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                    animation: slideInRight 0.3s;
+                    min-width: 300px;
+                `;
+                toast.textContent = message;
+
+                document.getElementById('toast-container').appendChild(toast);
+
+                // Auto-remove apres 3s
+                setTimeout(() => {
+                    toast.style.animation = 'slideOutRight 0.3s';
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
             }
 
             // ============================================
