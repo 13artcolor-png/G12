@@ -5,15 +5,17 @@ Backend API pour le dashboard
 """
 
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, status, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response, JSONResponse
 from pydantic import BaseModel
-from typing import Optional, Dict, List, Any
+from typing import Optional, Dict
 import threading
 import time
 import json
+import secrets
+import base64
 from datetime import datetime
 from pathlib import Path
 
@@ -73,13 +75,24 @@ async def lifespan(app):
         else:
             print("[Lifespan] Aucune session active - en attente de clic 'Nouvelle Session'")
 
-        # Lancer TradingLoop
+        # ***********************************************************************
+        # DEMARRAGE MANUEL DES BOUCLES DE TRADING
+        # ***********************************************************************
+        # Les boucles NE SONT PLUS lancées automatiquement au démarrage
+        # L'utilisateur doit cliquer sur "Démarrer Trading" dans le dashboard
+        # Cela permet un contrôle total sur le moment de lancement du trading
+        # ***********************************************************************
+        
+        # Initialiser les loops SANS les démarrer
         trading_loop = get_trading_loop()
-        threading.Thread(target=trading_loop.start, daemon=True).start()
-
-        # Lancer CloserLoop
         closer_loop = get_closer_loop()
-        threading.Thread(target=closer_loop.start, daemon=True).start()
+        
+        # Mettre les loops en mode PAUSE par défaut
+        trading_loop.running = False
+        closer_loop.running = False
+        
+        print("[Lifespan] ✅ Services initialises - Trading en PAUSE")
+        print("[Lifespan] 👉 Cliquez sur 'Demarrer Trading' dans le dashboard pour lancer")
 
     # Lancer les boucles dans un thread separe avec delai
     threading.Thread(target=start_loops_delayed, daemon=True).start()
@@ -101,14 +114,74 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# CORS
+# =============================================================================
+# SECURITE - HTTP Basic Authentication
+# =============================================================================
+# Charger les credentials depuis .env (avec fallback)
+import os
+AUTH_USERNAME = os.getenv("API_AUTH_USERNAME", "admin")
+AUTH_PASSWORD = os.getenv("API_AUTH_PASSWORD", "G12_secure_2026")
+
+# =============================================================================
+# CORS - Restreint au localhost uniquement
+# =============================================================================
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:8012", "http://127.0.0.1:8012"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# =============================================================================
+# MIDDLEWARE - Authentification globale pour tous les endpoints /api/*
+# =============================================================================
+@app.middleware("http")
+async def auth_middleware(request: Request, call_next):
+    """
+    Middleware d'authentification HTTP Basic pour tous les endpoints /api/*
+    Exclut la page d'accueil "/" pour permettre le chargement du dashboard
+    """
+    # Laisser passer la page d'accueil et les fichiers statiques
+    if request.url.path == "/" or not request.url.path.startswith("/api/"):
+        return await call_next(request)
+
+    # Vérifier l'authentification HTTP Basic pour tous les endpoints /api/*
+    auth_header = request.headers.get("Authorization")
+
+    if not auth_header or not auth_header.startswith("Basic "):
+        return JSONResponse(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            content={"detail": "Authentification requise"},
+            headers={"WWW-Authenticate": "Basic"},
+        )
+
+    try:
+        # Decoder les credentials
+        encoded_credentials = auth_header.split(" ")[1]
+        decoded_credentials = base64.b64decode(encoded_credentials).decode("utf-8")
+        username, password = decoded_credentials.split(":", 1)
+
+        # Vérifier les credentials (constant-time comparison)
+        correct_username = secrets.compare_digest(username, AUTH_USERNAME)
+        correct_password = secrets.compare_digest(password, AUTH_PASSWORD)
+
+        if not (correct_username and correct_password):
+            return JSONResponse(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                content={"detail": "Identifiants incorrects"},
+                headers={"WWW-Authenticate": "Basic"},
+            )
+
+    except Exception:
+        return JSONResponse(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            content={"detail": "Format d'authentification invalide"},
+            headers={"WWW-Authenticate": "Basic"},
+        )
+
+    # Authentification réussie - continuer
+    return await call_next(request)
 
 
 # =============================================================================
@@ -174,14 +247,6 @@ load_spread_config()
 # =============================================================================
 # MODELS
 # =============================================================================
-class AgentToggle(BaseModel):
-    agent_id: str
-    enabled: bool
-
-class ConfigUpdate(BaseModel):
-    key: str
-    value: Any
-
 class AgentConfigUpdate(BaseModel):
     """Validation pour les mises a jour de config agent"""
     enabled: Optional[bool] = None
@@ -442,12 +507,6 @@ async def get_agents():
     return agents_status
 
 
-@app.post("/api/agents/toggle")
-async def toggle_agent(data: AgentToggle):
-    """Active/desactive un agent (POST)"""
-    return _toggle_agent_impl(data.agent_id, data.enabled)
-
-
 @app.get("/api/agents/toggle")
 async def toggle_agent_get(agent_id: str, enabled: bool):
     """Active/desactive un agent (GET - evite blocage POST)"""
@@ -495,6 +554,26 @@ async def get_agent_decisions(agent_id: str, limit: int = 50):
     return logger.get_recent_decisions(agent_id, limit)
 
 
+@app.get("/api/agents/reload")
+async def reload_agents_config():
+    """Force le rechargement immediat de la config de tous les agents"""
+    trading_loop = get_trading_loop()
+    reloaded = []
+    
+    for agent_id, agent in trading_loop.agents.items():
+        # Forcer le rechargement en resetant le timestamp
+        agent._last_config_load = 0
+        agent.reload_config()
+        reloaded.append({
+            "agent_id": agent_id,
+            "enabled": agent.enabled,
+            "name": agent.name
+        })
+    
+    print(f"[API] Config rechargee pour {len(reloaded)} agents")
+    return {"success": True, "agents": reloaded}
+
+
 # =============================================================================
 # ENDPOINTS - TRADING
 # =============================================================================
@@ -508,6 +587,15 @@ async def start_trading(background_tasks: BackgroundTasks):
     # Si deja en cours, rien a faire
     if trading_loop.running and closer_loop.running:
         return {"success": True, "message": "Trading deja en cours"}
+
+    # IMPORTANT: Reinitialiser le timer d'inactivite du Strategist au demarrage du trading
+    # Ceci evite les fausses alertes basees sur une session precedente
+    import time
+    from strategist import get_strategist
+    strategist = get_strategist()
+    strategist._last_inactivity_reduction_time = time.time()
+    strategist._save_inactivity_state()
+    print(f"[API] Timer d'inactivite reinitialise au demarrage du trading")
 
     # Redemarrer les boucles si elles ont ete arretees
     if not trading_loop.running:
@@ -654,17 +742,6 @@ async def get_stats(days: int = 7):
 # =============================================================================
 # ENDPOINTS - CONFIG LABORATOIRE
 # =============================================================================
-@app.get("/api/config")
-async def get_config():
-    """Configuration actuelle"""
-    config_file = DATABASE_DIR / "config.json"
-    try:
-        with open(config_file, 'r') as f:
-            return json.load(f)
-    except Exception:
-        return {}
-
-
 @app.get("/api/config/all")
 async def get_all_config():
     """Toutes les configurations pour le laboratoire - charge les valeurs sauvegardees"""
@@ -854,140 +931,6 @@ async def update_strategist_config(updates: Dict):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@app.post("/api/config")
-async def update_config(updates: Dict):
-    """Met a jour la configuration generale"""
-    config_file = DATABASE_DIR / "config.json"
-    try:
-        with open(config_file, 'r') as f:
-            config = json.load(f)
-
-        config.update(updates)
-
-        with open(config_file, 'w') as f:
-            json.dump(config, f, indent=2)
-
-        return {"success": True, "config": config}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-# =============================================================================
-# ENDPOINTS - MT5 CONFIG
-# =============================================================================
-@app.get("/api/config/mt5")
-async def get_mt5_config():
-    """Recupere la configuration MT5"""
-    from config import MT5_CONFIG
-    # Ne pas renvoyer le password
-    return {
-        "login": MT5_CONFIG.get("login"),
-        "server": MT5_CONFIG.get("server"),
-        "path": MT5_CONFIG.get("path")
-    }
-
-
-@app.post("/api/config/mt5")
-async def update_mt5_config(updates: Dict):
-    """Met a jour la configuration MT5"""
-    config_file = DATABASE_DIR / "mt5_config.json"
-    try:
-        # Charger config existante
-        try:
-            with open(config_file, 'r') as f:
-                config = json.load(f)
-        except Exception:
-            config = {}
-
-        # Mettre a jour
-        for key in ['login', 'password', 'server', 'path']:
-            if key in updates and updates[key]:
-                config[key] = updates[key]
-
-        # Sauvegarder
-        with open(config_file, 'w') as f:
-            json.dump(config, f, indent=2)
-
-        return {"success": True, "message": "Configuration MT5 sauvegardee"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.post("/api/mt5/test")
-async def test_mt5_connection():
-    """Teste la connexion MT5 (premier agent actif)"""
-    mt5 = get_mt5(get_first_enabled_agent())
-    try:
-        if mt5.connect():
-            account = mt5.get_account_info()
-            return {
-                "connected": True,
-                "account": account.get("login") if account else "Unknown"
-            }
-        else:
-            return {"connected": False, "error": "Echec connexion"}
-    except Exception as e:
-        return {"connected": False, "error": str(e)}
-
-
-# =============================================================================
-# ENDPOINTS - MULTI-COMPTE (un agent = un compte)
-# =============================================================================
-@app.get("/api/accounts")
-async def get_all_accounts():
-    """Recupere tous les comptes MT5 par agent"""
-    from core.mt5_connector import get_all_mt5_accounts
-    return get_all_mt5_accounts()
-
-
-@app.get("/api/accounts/{agent_id}")
-async def get_agent_account(agent_id: str):
-    """Recupere le compte MT5 d'un agent"""
-    from core.mt5_connector import get_all_mt5_accounts
-    accounts = get_all_mt5_accounts()
-    if agent_id not in accounts:
-        raise HTTPException(status_code=404, detail=f"Agent {agent_id} non trouve")
-    return accounts[agent_id]
-
-
-@app.post("/api/accounts/{agent_id}")
-async def update_agent_account(agent_id: str, config: Dict):
-    """Met a jour le compte MT5 d'un agent"""
-    from core.mt5_connector import save_mt5_account
-
-    if agent_id not in get_agent_ids():
-        raise HTTPException(status_code=404, detail=f"Agent {agent_id} non trouve")
-
-    if save_mt5_account(agent_id, config):
-        return {"success": True, "message": f"Compte MT5 de {agent_id} mis a jour"}
-    else:
-        raise HTTPException(status_code=500, detail="Erreur sauvegarde config")
-
-
-@app.post("/api/accounts/{agent_id}/test")
-async def test_agent_account(agent_id: str):
-    """Teste la connexion MT5 d'un agent"""
-    from core.mt5_connector import get_mt5
-
-    if agent_id not in get_agent_ids():
-        raise HTTPException(status_code=404, detail=f"Agent {agent_id} non trouve")
-
-    mt5 = get_mt5(agent_id)
-    try:
-        if mt5.connect():
-            account = mt5.get_account_info()
-            return {
-                "connected": True,
-                "agent_id": agent_id,
-                "login": account.get("login") if account else None,
-                "balance": account.get("balance") if account else 0
-            }
-        else:
-            return {"connected": False, "agent_id": agent_id, "error": "Echec connexion"}
-    except Exception as e:
-        return {"connected": False, "agent_id": agent_id, "error": str(e)}
-
-
 @app.get("/api/accounts/status/all")
 async def get_all_accounts_status():
     """Status de connexion de tous les comptes (utilise le cache pour eviter reconnexions)"""
@@ -1068,15 +1011,6 @@ async def get_session():
     return logger.get_status()
 
 
-@app.post("/api/session/reload")
-async def reload_session():
-    """Recharge la session depuis session.json (utile apres modification manuelle)"""
-    from session_logger import get_session_logger
-    logger = get_session_logger()
-    logger._load_session()
-    return {"success": True, "balance_start": logger.balance_start, "session_id": logger.session_id}
-
-
 @app.post("/api/session/start")
 @app.get("/api/session/start")  # GET temporaire car POST bloque sous charge MT5
 async def start_session():
@@ -1132,38 +1066,6 @@ async def end_session():
     return {'success': True, 'message': f'Terminaison de la session {session_id} en cours...', 'session_id': session_id}
 
 
-@app.post("/api/session/sync")
-async def sync_session_with_mt5():
-    """
-    Synchronise les trades de la session avec l'historique MT5.
-    Recupere tous les trades fermes depuis le debut de la session
-    et met a jour les stats avec les VRAIS chiffres MT5.
-    """
-    from session_logger import get_session_logger
-    logger = get_session_logger()
-    return logger.sync_with_mt5_history()
-
-
-@app.post("/api/session/deduplicate")
-async def deduplicate_session_trades():
-    """
-    Supprime les doublons de trades dans la session.
-    Un doublon est un trade avec le meme position_id ou ticket.
-    Garde le trade avec les donnees les plus completes (entry_price != 0).
-    """
-    from session_logger import get_session_logger
-    logger = get_session_logger()
-    trades_before = len(logger.trades)
-    duplicates_removed = logger.deduplicate_trades()
-    trades_after = len(logger.trades)
-    return {
-        'success': True,
-        'trades_before': trades_before,
-        'trades_after': trades_after,
-        'duplicates_removed': duplicates_removed
-    }
-
-
 @app.get("/api/session/export")
 async def export_session():
     """Exporte les donnees de la session"""
@@ -1172,12 +1074,6 @@ async def export_session():
     return logger.export_session()
 
 
-@app.get("/api/session/history")
-async def get_session_history(limit: int = 10):
-    """Recupere l'historique des sessions"""
-    from session_logger import get_session_logger
-    logger = get_session_logger()
-    return logger.get_session_history(limit)
 @app.get("/api/session/performance")
 async def get_session_performance():
     """Recupere les points de performance (equite) de la session actuelle"""
@@ -1189,225 +1085,230 @@ async def get_session_performance():
     }
 
 
-@app.post("/api/session/rebuild-performance")
-async def rebuild_session_performance():
-    """Reconstruit performance_history a partir des trades enregistres"""
-    from session_logger import get_session_logger
-    logger = get_session_logger()
-
-    trades_before = len(logger.trades)
-    master_before = len(logger.performance_history.get('master', []))
-
-    logger.rebuild_performance_history()
-
-    master_after = len(logger.performance_history.get('master', []))
-
-    return {
-        "success": True,
-        "trades_count": trades_before,
-        "points_before": master_before,
-        "points_after": master_after,
-        "performance": logger.performance_history
-    }
-
-
 # =============================================================================
 # ENDPOINTS - STRATEGIST
 # =============================================================================
 @app.get("/api/strategist/analyze")
 async def strategist_analyze():
     """Analyse complete des performances"""
-    from strategist import get_strategist
-    strategist = get_strategist()
-    return strategist.analyze()
+    try:
+        from strategist import get_strategist
+        strategist = get_strategist()
+        result = strategist.analyze()
+        return result
+    except Exception as e:
+        logger.error(f"[Strategist] Erreur lors de l'analyse: {e}", exc_info=True)
+        return {
+            'status': 'error',
+            'message': str(e),
+            'suggestions': [],
+            'patterns': [],
+            'by_agent': {},
+            'by_session': {},
+            'global': None
+        }
 
 
 @app.get("/api/strategist/insights")
 async def strategist_insights():
     """Insights rapides"""
-    from strategist import get_strategist
-    strategist = get_strategist()
-    return strategist.get_quick_insights()
+    try:
+        from strategist import get_strategist
+        strategist = get_strategist()
+        result = strategist.get_quick_insights()
+        return result
+    except Exception as e:
+        logger.error(f"[Strategist] Erreur lors de get_quick_insights: {e}", exc_info=True)
+        return {
+            'status': 'error',
+            'message': str(e),
+            'summary': 'Erreur lors de la recuperation des insights',
+            'suggestions': []
+        }
 
 
 @app.get("/api/strategist/logs")
 async def strategist_logs(limit: int = 50):
     """Recupere les logs du Strategist"""
-    from strategist import get_strategist
-    strategist = get_strategist()
-    return {
-        'logs': strategist.get_logs(limit),
-        'suggestions': strategist._load_logs()[:10] if hasattr(strategist, '_load_logs') else []
-    }
+    try:
+        from strategist import get_strategist
+        strategist = get_strategist()
+        logs = strategist.get_logs(limit) if hasattr(strategist, 'get_logs') else []
+        suggestions = strategist._load_logs()[:10] if hasattr(strategist, '_load_logs') else []
+        return {
+            'logs': logs,
+            'suggestions': suggestions
+        }
+    except Exception as e:
+        logger.error(f"[Strategist] Erreur lors de get_logs: {e}", exc_info=True)
+        return {
+            'logs': [],
+            'suggestions': [],
+            'error': str(e)
+        }
 
 
 @app.post("/api/strategist/execute")
 async def strategist_execute():
     """Execute les suggestions critiques automatiquement"""
-    from strategist import get_strategist
-    strategist = get_strategist()
-    result = strategist.execute_suggestions()
-    return result
-
-
-@app.get("/api/strategist/actions")
-async def strategist_actions(limit: int = 50):
-    """Recupere les actions executees par le Strategist"""
-    from strategist import get_strategist
-    strategist = get_strategist()
-    return {
-        'actions': strategist.get_executed_actions(limit)
-    }
+    try:
+        from strategist import get_strategist
+        strategist = get_strategist()
+        result = strategist.execute_suggestions()
+        return result
+    except Exception as e:
+        logger.error(f"[Strategist] Erreur lors de execute_suggestions: {e}", exc_info=True)
+        return {
+            'status': 'error',
+            'message': str(e),
+            'executed_count': 0,
+            'actions': []
+        }
 
 
 @app.get("/api/strategist/debug")
 async def strategist_debug():
     """Debug complet: montre l'etat interne du Strategist avec profit factor et actions"""
-    import time
-    from datetime import datetime
-    from strategist import get_strategist
-    from data.aggregator import get_aggregator
-
-    strategist = get_strategist()
-    aggregator = get_aggregator()
-    current_time = time.time()
-    inactivity_seconds = current_time - strategist._last_inactivity_reduction_time
-    optim_seconds = current_time - strategist._last_optimization_time
-
-    # Charger les stats globales
-    global_stats = strategist._analyze_global()
-
-    # Recuperer l'analyse complete des positions (G12 vs MT5)
-    positions_analysis = strategist._analyze_open_positions()
-
-    # Reformater pour l'API
-    open_positions = []
     try:
-        account_data = aggregator.get_account_data()
-        if account_data and account_data.get('positions'):
-            for pos in account_data['positions']:
-                open_positions.append({
-                    'ticket': pos.get('ticket'),
-                    'agent': pos.get('_agent_id', 'unknown'),
-                    'direction': 'BUY' if pos.get('type', 0) == 0 else 'SELL',
-                    'symbol': pos.get('symbol', 'BTCUSD'),
-                    'entry_price': round(pos.get('price_open', 0), 2),
-                    'current_price': round(pos.get('price_current', 0), 2),
-                    'volume': pos.get('volume', 0),
-                    'sl': round(pos.get('sl', 0), 2),
-                    'tp': round(pos.get('tp', 0), 2),
-                    'floating_pnl': round(pos.get('profit', 0), 2)
-                })
-    except Exception as e:
-        print(f"[Strategist Debug] Erreur recuperation positions: {e}")
+        import time
+        from datetime import datetime
+        from strategist import get_strategist
+        from data.aggregator import get_aggregator
 
-    total_floating_pnl = positions_analysis.get('total_floating_pnl', 0)
-    positions_inconsistencies = positions_analysis.get('inconsistencies', [])
-    positions_alerts = positions_analysis.get('alerts', [])
+        strategist = get_strategist()
+        aggregator = get_aggregator()
+        current_time = time.time()
+        inactivity_seconds = current_time - strategist._last_inactivity_reduction_time
+        optim_seconds = current_time - strategist._last_optimization_time
 
-    # Charger les actions recentes depuis action_history.json
-    recent_actions = []
-    try:
-        import json
-        from pathlib import Path
-        action_file = Path(__file__).parent / "database" / "action_history.json"
-        if action_file.exists():
-            with open(action_file, 'r') as f:
-                data = json.load(f)
-                recent_actions = data.get('actions', [])[-10:]  # 10 dernieres
-    except Exception:
-        pass
+        # Charger les stats globales
+        global_stats = strategist._analyze_global()
 
-    # Calculer profit_factor par agent
-    agents_pf = {}
-    for agent_id in ['fibo1', 'fibo2', 'fibo3']:
-        agent_trades = [t for t in strategist.trades if t.get('agent_id') == agent_id or t.get('agent', '') == agent_id]
-        wins = [t for t in agent_trades if t.get('profit', 0) > 0]
-        losses = [t for t in agent_trades if t.get('profit', 0) < 0]
-        total_win = sum(t.get('profit', 0) for t in wins)
-        total_loss = abs(sum(t.get('profit', 0) for t in losses))
-        pf = round(total_win / total_loss, 2) if total_loss > 0 else 999
-        win_rate = round(len(wins) / len(agent_trades) * 100, 1) if agent_trades else 0
-        agents_pf[agent_id] = {
-            'trades': len(agent_trades),
-            'profit_factor': pf,
-            'win_rate': win_rate,
-            'total_pnl': round(sum(t.get('profit', 0) for t in agent_trades), 2)
+        # Recuperer l'analyse complete des positions (G12 vs MT5)
+        positions_analysis = strategist._analyze_open_positions()
+
+        # Reformater pour l'API
+        open_positions = []
+        try:
+            account_data = aggregator.get_account_data()
+            if account_data and account_data.get('positions'):
+                for pos in account_data['positions']:
+                    open_positions.append({
+                        'ticket': pos.get('ticket'),
+                        'agent': pos.get('_agent_id', 'unknown'),
+                        'direction': 'BUY' if pos.get('type', 0) == 0 else 'SELL',
+                        'symbol': pos.get('symbol', 'BTCUSD'),
+                        'entry_price': round(pos.get('price_open', 0), 2),
+                        'current_price': round(pos.get('price_current', 0), 2),
+                        'volume': pos.get('volume', 0),
+                        'sl': round(pos.get('sl', 0), 2),
+                        'tp': round(pos.get('tp', 0), 2),
+                        'floating_pnl': round(pos.get('profit', 0), 2)
+                    })
+        except Exception as e:
+            print(f"[Strategist Debug] Erreur recuperation positions: {e}")
+
+        total_floating_pnl = positions_analysis.get('total_floating_pnl', 0)
+        positions_inconsistencies = positions_analysis.get('inconsistencies', [])
+        positions_alerts = positions_analysis.get('alerts', [])
+
+        # Charger les actions recentes depuis action_history.json
+        recent_actions = []
+        try:
+            import json
+            from pathlib import Path
+            action_file = Path(__file__).parent / "database" / "action_history.json"
+            if action_file.exists():
+                with open(action_file, 'r') as f:
+                    data = json.load(f)
+                    recent_actions = data.get('actions', [])[-10:]  # 10 dernieres
+        except Exception:
+            pass
+
+        # Calculer profit_factor par agent
+        agents_pf = {}
+        for agent_id in ['fibo1', 'fibo2', 'fibo3']:
+            agent_trades = [t for t in strategist.trades if t.get('agent_id') == agent_id or t.get('agent', '') == agent_id]
+            wins = [t for t in agent_trades if t.get('profit', 0) > 0]
+            losses = [t for t in agent_trades if t.get('profit', 0) < 0]
+            total_win = sum(t.get('profit', 0) for t in wins)
+            total_loss = abs(sum(t.get('profit', 0) for t in losses))
+            pf = round(total_win / total_loss, 2) if total_loss > 0 else 999
+            win_rate = round(len(wins) / len(agent_trades) * 100, 1) if agent_trades else 0
+            agents_pf[agent_id] = {
+                'trades': len(agent_trades),
+                'profit_factor': pf,
+                'win_rate': win_rate,
+                'total_pnl': round(sum(t.get('profit', 0) for t in agent_trades), 2)
+            }
+
+        # Determiner prochaine action potentielle
+        next_action = "Aucune correction necessaire"
+        if global_stats.get('profit_factor', 999) < 1.0 and global_stats.get('total_trades', 0) >= 10:
+            next_action = f"AJUSTER_TPSL (profit_factor={global_stats.get('profit_factor')} < 1.0)"
+        elif any(agents_pf[a]['win_rate'] < 30 and agents_pf[a]['trades'] >= 5 for a in agents_pf):
+            losing_agents = [a for a in agents_pf if agents_pf[a]['win_rate'] < 30 and agents_pf[a]['trades'] >= 5]
+            next_action = f"AUGMENTER_SEUILS pour {', '.join(losing_agents)}"
+        elif inactivity_seconds >= 900:
+            next_action = "CHECK_INACTIVITE (15min+ sans action)"
+
+        return {
+            "status": "actif" if strategist._last_optimization_time > 0 else "en_attente",
+            "trades_count": len(strategist.trades),
+            "last_optimization": {
+                "timestamp": datetime.fromtimestamp(strategist._last_optimization_time).isoformat() if strategist._last_optimization_time > 0 else None,
+                "seconds_ago": int(optim_seconds),
+                "minutes_ago": round(optim_seconds / 60, 1)
+            },
+            "inactivity": {
+                "seconds": int(inactivity_seconds),
+                "minutes": round(inactivity_seconds / 60, 1),
+                "threshold_minutes": 15,
+                "would_trigger": inactivity_seconds >= 900
+            },
+            "global_stats": {
+                "profit_factor": global_stats.get('profit_factor', 0),
+                "win_rate": global_stats.get('win_rate', 0),
+                "total_trades": global_stats.get('total_trades', 0),
+                "total_pnl": global_stats.get('total_profit', 0)
+            },
+            "agents": agents_pf,
+            "next_potential_action": next_action,
+            "recent_actions": recent_actions,
+            "thresholds": {
+                "profit_factor_min": 1.0,
+                "win_rate_min": 30,
+                "min_trades_for_correction": 10
+            },
+            "open_positions": open_positions,
+            "open_positions_count": len(open_positions),
+            "total_floating_pnl": total_floating_pnl,
+            "positions_inconsistencies": positions_inconsistencies,
+            "positions_alerts": positions_alerts,
+            "positions_g12_count": positions_analysis.get('positions_count', {}).get('g12', 0),
+            "positions_mt5_count": positions_analysis.get('positions_count', {}).get('mt5', 0)
         }
-
-    # Determiner prochaine action potentielle
-    next_action = "Aucune correction necessaire"
-    if global_stats.get('profit_factor', 999) < 1.0 and global_stats.get('total_trades', 0) >= 10:
-        next_action = f"AJUSTER_TPSL (profit_factor={global_stats.get('profit_factor')} < 1.0)"
-    elif any(agents_pf[a]['win_rate'] < 30 and agents_pf[a]['trades'] >= 5 for a in agents_pf):
-        losing_agents = [a for a in agents_pf if agents_pf[a]['win_rate'] < 30 and agents_pf[a]['trades'] >= 5]
-        next_action = f"AUGMENTER_SEUILS pour {', '.join(losing_agents)}"
-    elif inactivity_seconds >= 900:
-        next_action = "CHECK_INACTIVITE (15min+ sans action)"
-
-    return {
-        "status": "actif" if strategist._last_optimization_time > 0 else "en_attente",
-        "trades_count": len(strategist.trades),
-        "last_optimization": {
-            "timestamp": datetime.fromtimestamp(strategist._last_optimization_time).isoformat() if strategist._last_optimization_time > 0 else None,
-            "seconds_ago": int(optim_seconds),
-            "minutes_ago": round(optim_seconds / 60, 1)
-        },
-        "inactivity": {
-            "seconds": int(inactivity_seconds),
-            "minutes": round(inactivity_seconds / 60, 1),
-            "threshold_minutes": 15,
-            "would_trigger": inactivity_seconds >= 900
-        },
-        "global_stats": {
-            "profit_factor": global_stats.get('profit_factor', 0),
-            "win_rate": global_stats.get('win_rate', 0),
-            "total_trades": global_stats.get('total_trades', 0),
-            "total_pnl": global_stats.get('total_profit', 0)
-        },
-        "agents": agents_pf,
-        "next_potential_action": next_action,
-        "recent_actions": recent_actions,
-        "thresholds": {
-            "profit_factor_min": 1.0,
-            "win_rate_min": 30,
-            "min_trades_for_correction": 10
-        },
-        "open_positions": open_positions,
-        "open_positions_count": len(open_positions),
-        "total_floating_pnl": total_floating_pnl,
-        "positions_inconsistencies": positions_inconsistencies,
-        "positions_alerts": positions_alerts,
-        "positions_g12_count": positions_analysis.get('positions_count', {}).get('g12', 0),
-        "positions_mt5_count": positions_analysis.get('positions_count', {}).get('mt5', 0)
-    }
-
-
-@app.post("/api/strategist/force-inactivity-check")
-async def force_inactivity_check():
-    """Force l'execution du check d'inactivite (bypass threshold)"""
-    from strategist import get_strategist
-    strategist = get_strategist()
-    # Forcer le timer a une valeur ancienne pour bypasser le seuil
-    old_time = strategist._last_inactivity_reduction_time
-    strategist._last_inactivity_reduction_time = 0  # Simule 50+ ans d'inactivite
-    result = strategist._check_inactivity_and_correct()
-    # Restaurer si aucune action n'a ete executee
-    if result.get('executed_count', 0) == 0:
-        strategist._last_inactivity_reduction_time = old_time
-    return {
-        "result": result,
-        "message": f"Check execute, {result.get('executed_count', 0)} actions"
-    }
+    except Exception as e:
+        logger.error(f"[Strategist] Erreur dans /api/strategist/debug: {e}", exc_info=True)
+        return {
+            "status": "error",
+            "error": str(e),
+            "trades_count": 0,
+            "global_stats": {"profit_factor": 0, "win_rate": 0, "total_trades": 0, "total_pnl": 0},
+            "agents": {},
+            "next_potential_action": "Erreur - Strategist non disponible",
+            "recent_actions": [],
+            "open_positions": []
+        }
 
 
 @app.post("/api/strategist/test")
 async def test_strategist():
     """Test manuel du Strategist - execute une analyse complete"""
-    from strategist import get_strategist
-    strategist = get_strategist()
-
     try:
+        from strategist import get_strategist
+        strategist = get_strategist()
+
         # 1. Recuperer les stats actuelles
         logger = get_session_logger()
         stats = logger.sync_with_mt5_history()
@@ -1513,6 +1414,213 @@ async def save_api_selections(data: Dict):
         return {"success": True, "message": "Selections sauvegardees"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# =============================================================================
+# ENDPOINTS - CHARTS EXPORT (VISION AI)
+# =============================================================================
+@app.get("/api/charts/generate")
+async def generate_chart(
+    timeframe: str = "15m",
+    candle_count: int = 100,
+    agent_id: str = "fibo1",
+    format: str = "base64"
+):
+    """
+    Genere un graphique BTCUSD
+
+    Args:
+        timeframe: 1m, 5m, 15m, 30m, 1h, 4h, 1d
+        candle_count: Nombre de bougies (10-500)
+        agent_id: Agent MT5 (fibo1, fibo2, fibo3)
+        format: base64 (JSON) ou file (PNG direct)
+
+    Returns:
+        JSON avec base64 ou fichier PNG
+    """
+    try:
+        from core.chart_generator import ChartGenerator
+
+        # Validation
+        valid_timeframes = ["1m", "5m", "15m", "30m", "1h", "4h", "1d"]
+        if timeframe not in valid_timeframes:
+            raise HTTPException(400, f"Timeframe invalide. Valeurs: {', '.join(valid_timeframes)}")
+
+        if candle_count < 10 or candle_count > 500:
+            raise HTTPException(400, "candle_count doit etre entre 10 et 500")
+
+        if agent_id not in ["fibo1", "fibo2", "fibo3"]:
+            raise HTTPException(400, "agent_id invalide (fibo1, fibo2 ou fibo3)")
+
+        # Generer graphique
+        generator = ChartGenerator(agent_id=agent_id)
+
+        if format == "base64":
+            # Retour base64
+            img_base64 = generator.generate_candlestick_chart(
+                timeframe=timeframe,
+                candle_count=candle_count,
+                return_base64=True
+            )
+
+            if not img_base64:
+                raise HTTPException(500, "Erreur generation graphique")
+
+            return {
+                "success": True,
+                "timeframe": timeframe,
+                "candle_count": candle_count,
+                "format": "base64",
+                "image": img_base64,
+                "size_kb": round(len(img_base64) / 1024, 1)
+            }
+
+        elif format == "file":
+            # Retour fichier PNG
+            filepath = generator.generate_candlestick_chart(
+                timeframe=timeframe,
+                candle_count=candle_count,
+                return_base64=False
+            )
+
+            if not filepath:
+                raise HTTPException(500, "Erreur generation graphique")
+
+            # Lire et retourner PNG
+            with open(filepath, 'rb') as f:
+                img_data = f.read()
+
+            return Response(
+                content=img_data,
+                media_type="image/png",
+                headers={
+                    "Content-Disposition": f"inline; filename=BTCUSD_{timeframe}.png"
+                }
+            )
+
+        else:
+            raise HTTPException(400, "format doit etre 'base64' ou 'file'")
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"[API] Erreur /api/charts/generate: {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(500, f"Erreur serveur: {str(e)}")
+
+
+@app.get("/api/charts/multi")
+async def generate_multi_charts(
+    timeframes: str = "1m,15m,1h",
+    candle_count: int = 100,
+    agent_id: str = "fibo1"
+):
+    """
+    Genere plusieurs graphiques en une requete
+
+    Args:
+        timeframes: Timeframes separes par virgule (ex: "1m,5m,15m")
+        candle_count: Nombre de bougies par graphique
+        agent_id: Agent MT5 (fibo1, fibo2, fibo3)
+
+    Returns:
+        JSON avec dict {timeframe: base64}
+    """
+    try:
+        from core.chart_generator import ChartGenerator
+
+        # Parser timeframes
+        tf_list = [tf.strip() for tf in timeframes.split(",") if tf.strip()]
+
+        if len(tf_list) == 0:
+            raise HTTPException(400, "Aucun timeframe specifie")
+
+        if len(tf_list) > 5:
+            raise HTTPException(400, "Maximum 5 timeframes par requete")
+
+        # Generer
+        generator = ChartGenerator(agent_id=agent_id)
+        charts = generator.generate_multi_timeframe_charts(
+            timeframes=tf_list,
+            candle_count=candle_count
+        )
+
+        return {
+            "success": True,
+            "timeframes": list(charts.keys()),
+            "charts": charts,
+            "total_size_kb": round(sum(len(img)/1024 for img in charts.values()), 1)
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"[API] Erreur /api/charts/multi: {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(500, f"Erreur serveur: {str(e)}")
+
+
+# =============================================================================
+# PIPELINE - Tracabilite complete du processus de decision
+# =============================================================================
+
+@app.get("/api/pipeline/latest")
+def get_latest_pipeline(agent_id: Optional[str] = None):
+    """
+    Recupere le dernier pipeline enregistre
+
+    Args:
+        agent_id: Filtrer par agent (optionnel)
+
+    Returns:
+        JSON du dernier pipeline ou None
+    """
+    try:
+        from utils.pipeline_logger import get_latest_pipelines
+
+        pipelines = get_latest_pipelines(agent_id=agent_id, limit=1)
+
+        if not pipelines:
+            return {"success": True, "pipeline": None}
+
+        return {"success": True, "pipeline": pipelines[0]}
+
+    except Exception as e:
+        print(f"[API] Erreur /api/pipeline/latest: {e}")
+        raise HTTPException(500, f"Erreur serveur: {str(e)}")
+
+
+@app.get("/api/pipeline/history")
+def get_pipeline_history(agent_id: Optional[str] = None, limit: int = 10):
+    """
+    Recupere l'historique des pipelines
+
+    Args:
+        agent_id: Filtrer par agent (optionnel)
+        limit: Nombre max de resultats (defaut: 10, max: 50)
+
+    Returns:
+        JSON avec liste des pipelines
+    """
+    try:
+        from utils.pipeline_logger import get_latest_pipelines
+
+        # Limiter a 50 max
+        limit = min(limit, 50)
+
+        pipelines = get_latest_pipelines(agent_id=agent_id, limit=limit)
+
+        return {
+            "success": True,
+            "count": len(pipelines),
+            "pipelines": pipelines
+        }
+
+    except Exception as e:
+        print(f"[API] Erreur /api/pipeline/history: {e}")
+        raise HTTPException(500, f"Erreur serveur: {str(e)}")
 
 
 
