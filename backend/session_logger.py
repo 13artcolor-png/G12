@@ -5,6 +5,7 @@ Gere les sessions de trading et les logs
 """
 
 import json
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, List
@@ -165,12 +166,16 @@ class SessionLogger:
         if reset_stats:
             self._reset_statistics()
 
+        # REACTIVER TOUS LES AGENTS automatiquement au demarrage d'une nouvelle session
+        self._reset_agents_to_enabled()
+
         return {
             'success': True,
             'session_id': self.session_id,
             'start_time': self.start_time,
             'stats_reset': reset_stats,
-            'excluded_tickets': len(self.excluded_tickets)
+            'excluded_tickets': len(self.excluded_tickets),
+            'agents_enabled': True
         }
 
     def _reset_statistics(self):
@@ -182,7 +187,30 @@ class SessionLogger:
                 json.dump({"trades": []}, f, indent=2)
             print("[SessionLogger] trades.json reinitialise")
 
-            # 2. Supprimer les fichiers session_*.json dans sessions/ (pas dans archived/)
+            # 2. Vider les fichiers de positions des agents (positions_fibo1/2/3.json)
+            for agent_id in ['fibo1', 'fibo2', 'fibo3']:
+                positions_file = DATABASE_DIR / f"positions_{agent_id}.json"
+                if positions_file.exists():
+                    with open(positions_file, 'w') as f:
+                        json.dump({
+                            "agent_id": agent_id,
+                            "updated_at": datetime.now().isoformat(),
+                            "positions": []
+                        }, f, indent=2)
+                    print(f"[SessionLogger] {positions_file.name} reinitialise")
+
+            # 3. Vider les positions en MEMOIRE des agents
+            try:
+                from core.trading_loop import get_trading_loop
+                trading_loop = get_trading_loop()
+                for agent_id, agent in trading_loop.agents.items():
+                    with agent._positions_lock:
+                        agent.open_positions = []
+                    print(f"[SessionLogger] {agent_id} positions memoire videes")
+            except Exception as e:
+                print(f"[SessionLogger] Avertissement - impossible de vider positions memoire: {e}")
+
+            # 4. Supprimer les fichiers session_*.json dans sessions/ (pas dans archived/)
             for session_file in SESSIONS_DIR.glob("session_*.json"):
                 try:
                     session_file.unlink()
@@ -190,9 +218,66 @@ class SessionLogger:
                 except Exception as e:
                     print(f"[SessionLogger] Erreur suppression {session_file}: {e}")
 
+            # 5. Reinitialiser le timer d'inactivite du Strategist
+            inactivity_file = DATABASE_DIR / "strategist_inactivity_state.json"
+            if inactivity_file.exists():
+                with open(inactivity_file, 'w') as f:
+                    json.dump({
+                        "last_inactivity_reduction_time": time.time(),
+                        "last_trades_count": 0,
+                        "updated_at": datetime.now().isoformat()
+                    }, f, indent=2)
+                print("[SessionLogger] strategist_inactivity_state.json reinitialise")
+
             print("[SessionLogger] Statistiques reinitalisees")
         except Exception as e:
             print(f"[SessionLogger] Erreur reset statistiques: {e}")
+
+    def _reset_agents_to_enabled(self):
+        """Reactive tous les agents au demarrage d'une nouvelle session"""
+        print("[SessionLogger] DEBUG: Entree dans _reset_agents_to_enabled")
+        try:
+            # 1. Modifier le fichier JSON
+            agents_file = DATABASE_DIR / "agents_runtime_config.json"
+            print(f"[SessionLogger] DEBUG: Fichier existe? {agents_file.exists()}")
+            if agents_file.exists():
+                with open(agents_file, 'r') as f:
+                    config = json.load(f)
+                print(f"[SessionLogger] DEBUG: Config chargee, {len(config)} agents")
+
+                # Activer tous les agents
+                for agent_id in ['fibo1', 'fibo2', 'fibo3']:
+                    if agent_id in config:
+                        config[agent_id]['enabled'] = True
+                        print(f"[SessionLogger] DEBUG: {agent_id} enabled=True dans JSON")
+
+                # Sauvegarder
+                with open(agents_file, 'w') as f:
+                    json.dump(config, f, indent=2)
+                print("[SessionLogger] DEBUG: JSON sauvegarde")
+
+            # 2. Forcer le rechargement en MEMOIRE des agents
+            print("[SessionLogger] DEBUG: Tentative acces trading_loop")
+            try:
+                from core.trading_loop import get_trading_loop
+                print("[SessionLogger] DEBUG: Import get_trading_loop OK")
+                trading_loop = get_trading_loop()
+                print(f"[SessionLogger] DEBUG: trading_loop obtenu, agents: {list(trading_loop.agents.keys())}")
+                for agent_id, agent in trading_loop.agents.items():
+                    print(f"[SessionLogger] DEBUG: Modification {agent_id}")
+                    agent.enabled = True
+                    agent._last_config_load = 0
+                    print(f"[SessionLogger] {agent_id} reactive en memoire")
+            except Exception as e:
+                print(f"[SessionLogger] Avertissement - impossible de reactiver agents en memoire: {e}")
+                import traceback
+                traceback.print_exc()
+
+            print("[SessionLogger] Tous les agents reactives automatiquement")
+        except Exception as e:
+            print(f"[SessionLogger] Erreur reactivation agents: {e}")
+            import traceback
+            traceback.print_exc()
 
     def end_session(self, balance: float = 0) -> Dict:
         """Termine la session et genere le rapport COMPLET dans un fichier unique"""
@@ -1079,42 +1164,62 @@ class SessionLogger:
         if agent_id not in self.performance_history:
             self.performance_history[agent_id] = []
 
-        timestamp = datetime.now().isoformat()
+        # Timestamp arrondi a la seconde (sans millisecondes) pour synchroniser les agents
+        now = datetime.now()
+        timestamp_sync = now.replace(microsecond=0).isoformat()
+
         snapshot = {
-            'timestamp': timestamp,
+            'timestamp': timestamp_sync,
             'closed_pnl': round(closed_pnl, 2),
             'floating_pnl': round(floating_pnl, 2)
         }
-        
-        self.performance_history[agent_id].append(snapshot)
-        
+
+        # Ajouter ou mettre a jour le snapshot de l'agent
+        # Si le dernier point a le meme timestamp, on le remplace (au lieu de creer un doublon)
+        if self.performance_history[agent_id] and \
+           self.performance_history[agent_id][-1].get('timestamp') == timestamp_sync:
+            # Mettre a jour le dernier point au lieu d'en creer un nouveau
+            self.performance_history[agent_id][-1] = snapshot
+        else:
+            # Nouveau timestamp, ajouter un nouveau point
+            self.performance_history[agent_id].append(snapshot)
+
         # Limiter a 500 points
         if len(self.performance_history[agent_id]) > 500:
             self.performance_history[agent_id] = self.performance_history[agent_id][-500:]
 
-        # --- MISE A JOUR MASTER ---
+        # --- MISE A JOUR MASTER (SYNCHRONISEE) ---
         # Somme des derniers snapshots de chaque agent
         total_closed = 0
         total_floating = 0
-        
+
         for aid in ["fibo1", "fibo2", "fibo3"]:
             if aid in self.performance_history and self.performance_history[aid]:
                 last = self.performance_history[aid][-1]
                 total_closed += last.get('closed_pnl', 0)
                 total_floating += last.get('floating_pnl', 0)
-        
+
         if "master" not in self.performance_history:
             self.performance_history["master"] = []
-            
-        self.performance_history["master"].append({
-            'timestamp': timestamp,
+
+        # Mise a jour ou creation du point master pour ce timestamp
+        master_point = {
+            'timestamp': timestamp_sync,
             'closed_pnl': round(total_closed, 2),
             'floating_pnl': round(total_floating, 2)
-        })
-        
+        }
+
+        # Si le dernier point master a le meme timestamp, le remplacer
+        if self.performance_history["master"] and \
+           self.performance_history["master"][-1].get('timestamp') == timestamp_sync:
+            self.performance_history["master"][-1] = master_point
+        else:
+            # Nouveau timestamp, ajouter un nouveau point
+            self.performance_history["master"].append(master_point)
+
         if len(self.performance_history["master"]) > 500:
             self.performance_history["master"] = self.performance_history["master"][-500:]
-            
+
         # Sauvegarder pour persistance (refresh page)
         self._save_session()
 
@@ -1195,15 +1300,109 @@ class SessionLogger:
         }
 
     def export_session(self) -> Dict:
-        """Exporte les donnees de la session actuelle"""
-        return {
-            'session_id': self.session_id,
-            'start_time': self.start_time,
-            'exported_at': datetime.now().isoformat(),
-            'stats': self._calculate_stats(),
-            'trades': self.trades,
-            'decisions': self.decisions
+        """Exporte les donnees de la session actuelle avec rapport COMPLET (meme format que end_session)"""
+        if not self.session_id:
+            return {'success': False, 'message': 'Aucune session active'}
+
+        end_time = datetime.now()
+
+        # Collecter TOUTES les donnees (meme logique que end_session)
+        stats = self._calculate_stats()
+        strategist_actions = self._get_detailed_strategist_actions()
+        hourly_perf = self._analyze_hourly_performance()
+        session_decisions = self._get_global_decisions()
+
+        # Charger les logs additionnels pour consolidation
+        trades_log = self._load_trades_json()
+        strategist_logs = self._get_strategist_logs()
+
+        # Generer le resume
+        summary = self._generate_ultra_complete_summary(stats, strategist_actions, hourly_perf)
+
+        # Calculer le P&L reel depuis stats_*.json (source MT5)
+        pnl_from_stats = stats.get('total_profit', 0)
+
+        # Generer le nom de fichier chronologique avec dates et score
+        start_dt = datetime.fromisoformat(self.start_time) if self.start_time else end_time
+        date_str = start_dt.strftime("%Y-%m-%d")
+        start_hm = start_dt.strftime("%Hh%M")
+        end_hm = end_time.strftime("%Hh%M")
+        pnl_str = f"{pnl_from_stats:+.2f}".replace('.', ',')
+
+        filename = f"G12_{date_str}_{start_hm}_to_{end_hm}_{pnl_str}_EUR.json"
+
+        # RAPPORT COMPLET CONSOLIDE (identique à end_session)
+        report = {
+            # === METADATA ===
+            "metadata": {
+                "session_id": self.session_id,
+                "filename": filename,
+                "generated_at": end_time.isoformat(),
+                "export_type": "manual_export"  # Indique que c'est un export manuel
+            },
+
+            # === PERIODE ===
+            "periode": {
+                "debut": self.start_time,
+                "fin": end_time.isoformat(),
+                "duree_minutes": self._get_duration_minutes(),
+                "date": date_str,
+                "horaire": f"{start_hm} - {end_hm}"
+            },
+
+            # === SCORE / RESULTAT ===
+            "resultat": {
+                "balance_depart": self.balance_start,
+                "balance_fin": 0,  # Non applicable pour export (session pas terminée)
+                "pnl_session": pnl_from_stats
+            },
+
+            # === RESUME ANALYTIQUE ===
+            "analyse": {
+                "meilleur_agent": summary.get('best_agent'),
+                "pire_agent": summary.get('worst_agent'),
+                "meilleure_heure": summary.get('best_hour'),
+                "win_rate_global": summary.get('global_win_rate'),
+                "points_forts": summary.get('strong_points', []),
+                "points_faibles": summary.get('weak_points', []),
+                "nb_ajustements_strategist": summary.get('strategist_changes_count', 0)
+            },
+
+            # === STATISTIQUES GLOBALES ===
+            "stats_globales": {
+                "total_trades": stats.get('total_trades', 0),
+                "trades_gagnants": stats.get('winning_trades', 0),
+                "trades_perdants": stats.get('losing_trades', 0),
+                "win_rate": stats.get('win_rate', 0),
+                "profit_total": stats.get('total_profit', 0),
+                "profit_moyen": stats.get('avg_profit', 0),
+                "meilleur_trade": stats.get('max_profit', 0),
+                "pire_trade": stats.get('max_loss', 0)
+            },
+
+            # === STATS PAR AGENT ===
+            "stats_par_agent": stats.get('by_agent', {}),
+
+            # === PERFORMANCE HORAIRE ===
+            "performance_horaire": hourly_perf,
+
+            # === HISTORIQUE COMPLET DES TRADES ===
+            "trades": self.trades + trades_log,
+
+            # === TOUTES LES DECISIONS IA ===
+            "decisions": session_decisions,
+
+            # === ACTIONS DU STRATEGIST ===
+            "strategist": {
+                "actions_executees": strategist_actions,
+                "logs_detailles": strategist_logs
+            },
+
+            # === POSITIONS OUVERTES (pour export) ===
+            "positions_ouvertes": []  # Pas de fermeture pour export
         }
+
+        return report
 
     def get_session_history(self, limit: int = 10) -> List[Dict]:
         """Retourne l'historique des sessions"""
