@@ -6,6 +6,7 @@ Classe abstraite pour les 3 agents de trading
 
 import requests
 import threading
+import time
 from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import Optional, Dict, Tuple
@@ -14,6 +15,7 @@ import sys
 sys.path.append('..')
 
 from config import API_KEYS, REQUESTY_URL, AGENTS_CONFIG, RISK_CONFIG, DATABASE_DIR
+from utils.pipeline_logger import PipelineLogger
 
 
 def load_risk_runtime_config() -> dict:
@@ -56,7 +58,11 @@ class BaseAgent(ABC):
         self.name = self.config.get("name", agent_id.upper())
         self.enabled = self.config.get("enabled", True)
         self.color = self.config.get("color", "#666666")
-        print(f"[{self.name}] Initialise avec enabled={self.enabled}")
+
+        # IMPORTANT: Au demarrage, toujours utiliser la valeur du fichier de config
+        # Ceci evite qu'un agent reste desactive suite a un auto-stop d'une session precedente
+        # La valeur enabled sera rechargee du fichier et prendra precedence sur l'etat en memoire
+        print(f"[{self.name}] Initialise avec enabled={self.enabled} (chargé depuis config fichier)")
 
         # Etat
         self.last_decision = None
@@ -179,11 +185,21 @@ class BaseAgent(ABC):
             if not hasattr(self, 'api_config'):
                 self.api_config = {}
 
-    def call_ai(self, prompt: str, system_prompt: str = None) -> Optional[str]:
-        """Appelle l'IA (via Groq Direct ou Requesty)"""
+    def call_ai(self, prompt: str, system_prompt: str = None, images_base64: dict = None) -> Optional[str]:
+        """
+        Appelle l'IA (via Groq Direct ou Requesty)
+
+        Args:
+            prompt: Prompt utilisateur
+            system_prompt: Prompt système (optionnel)
+            images_base64: Dict {timeframe: base64_image} pour analyse visuelle (optionnel)
+
+        Returns:
+            Réponse de l'IA ou None si erreur
+        """
         # Recharger la config si necessaire
         self._load_api_config()
-        
+
         try:
             if not self.api_config.get('key'):
                 print(f"[{self.name}] ERREUR: Pas de cle API configuree!")
@@ -192,6 +208,9 @@ class BaseAgent(ABC):
             provider = self.api_config.get("provider", "").lower()
             key = self.api_config['key']
             model = self.api_config.get("model", "anthropic/claude-sonnet-4-20250514")
+
+            # Détecter si le modèle supporte la vision
+            supports_vision = self._model_supports_vision(model)
 
             # --- ROUTAGE DIRECT GROQ ---
             if provider == "groq":
@@ -236,14 +255,28 @@ class BaseAgent(ABC):
             else:
                 system_prompt = learned_context # If no system_prompt, learned_context becomes the system_prompt
 
-            messages = [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": prompt}
-            ]
+            # Construction des messages (avec ou sans images)
+            if images_base64 and supports_vision:
+                # Format multi-modal (texte + images)
+                user_content = self._build_multimodal_content(prompt, images_base64, provider)
+                messages = [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_content}
+                ]
+                print(f"[{self.name}] Mode VISION activé - {len(images_base64)} graphique(s)")
+            else:
+                # Format texte simple
+                messages = [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": prompt}
+                ]
+                if images_base64 and not supports_vision:
+                    print(f"[{self.name}] WARN: Images fournies mais modèle {model} ne supporte pas la vision")
+
             payload = {
                 "model": model,
                 "messages": messages,
-                "max_tokens": 500,
+                "max_tokens": 1000,  # Augmenté pour réponses avec analyse visuelle
                 "temperature": 0.3
             }
 
@@ -275,8 +308,85 @@ class BaseAgent(ABC):
             print(f"[{self.name}] Exception API: {type(e).__name__}: {e}")
             return None
 
+    def _model_supports_vision(self, model: str) -> bool:
+        """Vérifie si un modèle supporte l'analyse d'images"""
+        model_lower = model.lower()
+
+        # Modèles vision connus
+        vision_models = [
+            "claude-3",
+            "claude-sonnet",
+            "claude-opus",
+            "gpt-4-vision",
+            "gpt-4-turbo",
+            "gpt-4o",
+            "gemini-pro-vision",
+            "gemini-1.5"
+        ]
+
+        return any(vm in model_lower for vm in vision_models)
+
+    def _build_multimodal_content(self, prompt: str, images_base64: dict, provider: str = None) -> list:
+        """
+        Construit le contenu multimodal (texte + images) selon le format de l'API
+
+        Args:
+            prompt: Texte du prompt
+            images_base64: Dict {timeframe: base64_image}
+            provider: Provider API (anthropic, openai, etc.)
+
+        Returns:
+            Liste de contenus au format API
+        """
+        # Déterminer le format selon le provider/model
+        is_anthropic = "claude" in self.api_config.get("model", "").lower()
+
+        content = []
+
+        # 1. Ajouter le texte
+        content.append({
+            "type": "text",
+            "text": prompt
+        })
+
+        # 2. Ajouter les images
+        for timeframe, img_base64 in images_base64.items():
+            if is_anthropic:
+                # Format Anthropic Claude
+                content.append({
+                    "type": "image",
+                    "source": {
+                        "type": "base64",
+                        "media_type": "image/png",
+                        "data": img_base64
+                    }
+                })
+            else:
+                # Format OpenAI / compatible
+                content.append({
+                    "type": "image_url",
+                    "image_url": {
+                        "url": f"data:image/png;base64,{img_base64}"
+                    }
+                })
+
+        return content
+
     def _check_auto_stop_thresholds(self) -> Tuple[bool, str]:
         """Verifie les seuils d'auto-desactivation (DD max, WR min)"""
+        # IMPORTANT: Ne PAS auto-stop avant que le trading ait demarre
+        # Sinon les stats d'une session precedente peuvent desactiver l'agent
+        try:
+            from core.trading_loop import get_trading_loop
+            trading_loop = get_trading_loop()
+            if not trading_loop or not trading_loop.running:
+                # Trading pas encore demarre - ignorer auto-stop
+                return True, "OK (trading pas demarre)"
+        except Exception as e:
+            print(f"[{self.name}] Erreur verification trading_loop: {e}")
+            # En cas d'erreur, autoriser quand meme (ne pas bloquer)
+            return True, "OK"
+
         # Recuperer les seuils de la config
         max_dd_pct = self.config.get("max_drawdown_pct", 10.0)  # En pourcentage (ex: 10 = 10%)
         min_wr = self.config.get("min_winrate_pct", 20.0)
@@ -437,37 +547,52 @@ class BaseAgent(ABC):
 
     def decide_open(self, context: Dict) -> Dict:
         """Decide s'il faut ouvrir une position"""
+        # === PIPELINE LOGGING ===
+        pipeline = PipelineLogger(self.agent_id, "open")
+
         # Recharger la config si modifiee
         self.reload_config()
+
+        # === ETAPE 1: Verifications preliminaires ===
+        pipeline.start_step("Verifications preliminaires")
 
         # Verifier les seuils d'auto-stop
         can_trade, stop_reason = self._check_auto_stop_thresholds()
         if not can_trade:
+            pipeline.end_step("error", {"reason": stop_reason})
             decision = {
                 "action": "HOLD",
                 "reason": stop_reason,
                 "agent": self.agent_id
             }
+            pipeline.set_result(decision)
+            pipeline.save()
             self._record_decision(decision)
             return decision
 
         # Verifier si agent desactive
         if not self.enabled:
+            pipeline.end_step("error", {"reason": "Agent desactive"})
             decision = {
                 "action": "HOLD",
                 "reason": "Agent desactive",
                 "agent": self.agent_id
             }
+            pipeline.set_result(decision)
+            pipeline.save()
             self._record_decision(decision)
             return decision
 
         # Verifier cooldown
         if self.is_in_cooldown():
+            pipeline.end_step("error", {"reason": "En cooldown"})
             decision = {
                 "action": "HOLD",
                 "reason": f"En cooldown jusqu'a {self.cooldown_until.strftime('%H:%M:%S')}",
                 "agent": self.agent_id
             }
+            pipeline.set_result(decision)
+            pipeline.save()
             self._record_decision(decision)
             return decision
 
@@ -476,35 +601,82 @@ class BaseAgent(ABC):
         consensus_bias = analysis.get("bias", "neutral")
         confidence = analysis.get("confidence", 0)
 
-        # Si le consensus est fort (>= 65%), on impose l'alignement
-        if confidence >= 65 and consensus_bias != "neutral":
-            # On laisse l'IA decider d'abord, mais on va filtrer sa reponse plus tard
-            # ou on peut injecter une contrainte forte dans le prompt.
-            pass
-
         # Verifier conditions specifiques a l'agent
         should_trade, reason = self.should_consider_trade(context)
         if not should_trade:
+            pipeline.end_step("warning", {
+                "reason": reason,
+                "spread": context.get("spread"),
+                "budget_ok": True
+            })
             decision = {
                 "action": "HOLD",
                 "reason": reason,
                 "agent": self.agent_id
             }
+            pipeline.set_result(decision)
+            pipeline.save()
             self._record_decision(decision)
             return decision
 
-        # Construire le prompt et appeler l'IA
+        # Verifications OK
+        pipeline.end_step("success", {
+            "spread_check": True,
+            "budget_check": True,
+            "cooldown_check": True,
+            "enabled_check": True
+        })
+
+        # === ETAPE 2: GENERATION DES GRAPHIQUES POUR VISION AI ===
+        pipeline.start_step("Vision AI - Generation graphiques")
+        vision_enabled = self.config.get("vision_enabled", False)
+        images_base64 = None
+
+        if vision_enabled:
+            try:
+                from core.chart_generator import generate_charts_for_context
+                timeframes = self.config.get("vision_timeframes", ["1m", "15m"])
+                images_base64 = generate_charts_for_context(timeframes)
+                if images_base64:
+                    total_bytes = sum(len(img) for img in images_base64.values())
+                    pipeline.end_step("success", {
+                        "charts_generated": len(images_base64),
+                        "timeframes": list(images_base64.keys()),
+                        "total_bytes": total_bytes
+                    })
+                    print(f"[{self.name}] Vision AI: {len(images_base64)} graphique(s) générés")
+                else:
+                    pipeline.end_step("warning", {"error": "Echec generation graphiques"})
+                    print(f"[{self.name}] Vision AI: Échec génération graphiques")
+            except Exception as e:
+                pipeline.end_step("error", {"error": str(e)})
+                print(f"[{self.name}] Erreur génération graphiques: {e}")
+                images_base64 = None
+        else:
+            pipeline.end_step("success", {"vision_disabled": True})
+
+        # === ETAPE 3: Appel API IA ===
+        pipeline.start_step("Appel API IA")
         system_prompt = self._get_system_prompt(context)
         prompt = self.get_opener_prompt(context)
 
-        response = self.call_ai(prompt, system_prompt)
+        # Mesurer le temps d'appel API
+        api_start = time.time()
+        response = self.call_ai(prompt, system_prompt, images_base64=images_base64)
+        api_duration_ms = int((time.time() - api_start) * 1000)
 
         if response is None:
+            pipeline.end_step("error", {
+                "error": "Erreur API",
+                "duration_ms": api_duration_ms
+            })
             decision = {
                 "action": "HOLD",
                 "reason": "Erreur API IA",
                 "agent": self.agent_id
             }
+            pipeline.set_result(decision)
+            pipeline.save()
             self._record_decision(decision)
             return decision
 
@@ -513,13 +685,39 @@ class BaseAgent(ABC):
         decision["agent"] = self.agent_id
         decision["raw_response"] = response
 
-        # === FILTRE FINAL DE CONSENSUS ===
+        pipeline.end_step("success", {
+            "api_duration_ms": api_duration_ms,
+            "model": self.api_config.get("model", "unknown"),
+            "action": decision.get("action"),
+            "confidence": decision.get("confidence")
+        })
+
+        # === ETAPE 4: FILTRE FINAL DE CONSENSUS ===
+        pipeline.start_step("Filtre consensus")
         if confidence >= 65 and consensus_bias != "neutral" and decision["action"] != "HOLD":
             if decision["action"] != consensus_bias.upper():
                 old_action = decision["action"]
                 decision["action"] = "HOLD"
                 decision["reason"] = f"FILTRE CONSENSUS: Agent voulait {old_action} mais le consensus est {consensus_bias} ({confidence}%)"
+                pipeline.end_step("warning", {
+                    "filtered": True,
+                    "original_action": old_action,
+                    "consensus_bias": consensus_bias,
+                    "consensus_confidence": confidence
+                })
                 print(f"[{self.name}] {decision['reason']}")
+            else:
+                pipeline.end_step("success", {
+                    "aligned": True,
+                    "consensus_bias": consensus_bias,
+                    "consensus_confidence": confidence
+                })
+        else:
+            pipeline.end_step("success", {"no_consensus_filter": True})
+
+        # === SAUVEGARDER LE PIPELINE ===
+        pipeline.set_result(decision)
+        pipeline.save()
 
         self._record_decision(decision)
         return decision
@@ -542,11 +740,26 @@ class BaseAgent(ABC):
                 "agent": self.agent_id
             }
 
+        # === GENERATION DES GRAPHIQUES POUR VISION AI ===
+        vision_enabled = self.config.get("vision_enabled", False)
+        images_base64 = None
+
+        if vision_enabled:
+            try:
+                from core.chart_generator import generate_charts_for_context
+                timeframes = self.config.get("vision_timeframes", ["1m", "15m"])
+                images_base64 = generate_charts_for_context(timeframes)
+                if images_base64:
+                    print(f"[{self.name}] Vision AI (close): {len(images_base64)} graphique(s) générés")
+            except Exception as e:
+                print(f"[{self.name}] Erreur génération graphiques (close): {e}")
+                images_base64 = None
+
         # Construire le prompt et appeler l'IA
         system_prompt = self._get_closer_system_prompt()
         prompt = self.get_closer_prompt(context, position)
 
-        response = self.call_ai(prompt, system_prompt)
+        response = self.call_ai(prompt, system_prompt, images_base64=images_base64)
 
         if response is None:
             return {
