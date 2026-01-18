@@ -1247,6 +1247,9 @@
                             ANALYSE</div>
                         <div class="data-row" style="padding: 8px 0;"><span class="data-label">Tendance</span><span
                                 id="analysis-bias" class="data-value">--</span></div>
+                        <!-- Raisons detaillees (tooltip au hover) -->
+                        <div id="analysis-reasons" style="font-size: 18px; color: #94a3b8; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.2); border-radius: 4px; display: none; max-height: 120px; overflow-y: auto;">
+                        </div>
                         <div class="data-row" style="padding: 8px 0;"><span class="data-label">Session</span><span
                                 id="current-session-name" class="data-value">--</span></div>
                         <div class="data-row" style="padding: 8px 0;"><span class="data-label">Volatilite</span><span
@@ -4941,6 +4944,15 @@
                     const biasEl = document.getElementById('analysis-bias');
                     biasEl.textContent = `${data.analysis.bias?.toUpperCase()} (${data.analysis.confidence}%)`;
                     biasEl.className = `data-value ${data.analysis.bias === 'bullish' ? 'positive' : data.analysis.bias === 'bearish' ? 'negative' : ''}`;
+
+                    // Afficher les raisons detaillees
+                    const reasonsEl = document.getElementById('analysis-reasons');
+                    if (data.analysis.reasons && data.analysis.reasons.length > 0) {
+                        reasonsEl.style.display = 'block';
+                        reasonsEl.innerHTML = data.analysis.reasons.map(r => `• ${r}`).join('<br>');
+                    } else {
+                        reasonsEl.style.display = 'none';
+                    }
                 }
 
                 // Futures

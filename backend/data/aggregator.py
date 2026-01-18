@@ -334,27 +334,53 @@ class DataAggregator:
         scores = {"bullish": 0, "bearish": 0}
         reasons = []
 
-        # 1. MACRO ENGINE (Poids: 30%)
+        # 1. PRICE MOMENTUM (Poids: 20%) - PRIORITE MAXIMALE
+        # Analyse le momentum reel du prix (Mom 1m, 3m, 5m)
+        if price_data:
+            mom_1m = price_data.get('fibo1', {}).get('1m', 0) or 0
+            mom_3m = price_data.get('fibo1', {}).get('3m', 0) or 0
+
+            # Moyenne ponderee: 1m (60%), 3m (40%)
+            avg_momentum = (mom_1m * 0.6) + (mom_3m * 0.4)
+
+            # Seuils de momentum
+            if avg_momentum > 0.05:  # +0.05% = bullish fort
+                scores['bullish'] += 20
+                reasons.append(f"Price Momentum BULLISH (1m: {mom_1m:+.2f}%, 3m: {mom_3m:+.2f}%)")
+            elif avg_momentum > 0.01:  # +0.01% = bullish modere
+                scores['bullish'] += 15
+                reasons.append(f"Price Momentum Bullish (1m: {mom_1m:+.2f}%, 3m: {mom_3m:+.2f}%)")
+            elif avg_momentum < -0.05:  # -0.05% = bearish fort
+                scores['bearish'] += 20
+                reasons.append(f"Price Momentum BEARISH (1m: {mom_1m:+.2f}%, 3m: {mom_3m:+.2f}%)")
+            elif avg_momentum < -0.01:  # -0.01% = bearish modere
+                scores['bearish'] += 15
+                reasons.append(f"Price Momentum Bearish (1m: {mom_1m:+.2f}%, 3m: {mom_3m:+.2f}%)")
+            else:
+                # Neutral - ne pas ajouter de reason
+                pass
+
+        # 2. MACRO ENGINE (Poids: 25%)
         macro = self.macro_engine.get_macro_data()
         macro_bias = macro.get('bias', 'neutral')
-        if macro_bias == 'bullish': 
-            scores['bullish'] += 30
+        if macro_bias == 'bullish':
+            scores['bullish'] += 25
             reasons.append(f"Macro Bullish (DXY/SPX correlation: {macro.get('correlation', 0):.2f})")
-        elif macro_bias == 'bearish': 
-            scores['bearish'] += 30
+        elif macro_bias == 'bearish':
+            scores['bearish'] += 25
             reasons.append(f"Macro Bearish (DXY/SPX correlation: {macro.get('correlation', 0):.2f})")
 
-        # 2. WHALE TRACKER (Poids: 25%)
+        # 3. WHALE TRACKER (Poids: 20%)
         whales = self.whale_tracker.get_whale_bias()
         whale_bias = whales.get('bias', 'neutral')
         if whale_bias == 'bullish':
-            scores['bullish'] += 25
+            scores['bullish'] += 20
             reasons.append(f"Whales Bullish: {whales.get('reason')}")
         elif whale_bias == 'bearish':
-            scores['bearish'] += 25
+            scores['bearish'] += 20
             reasons.append(f"Whales Bearish: {whales.get('reason')}")
 
-        # 3. SENTIMENT (Poids: 15%)
+        # 4. SENTIMENT (Poids: 15%)
         global_bias = sentiment_data.get('global_bias', 'neutral')
         if global_bias == 'bullish':
             scores['bullish'] += 15
@@ -363,28 +389,28 @@ class DataAggregator:
             scores['bearish'] += 15
             reasons.append(f"Sentiment Bearish (Fear&Greed: {sentiment_data.get('fear_greed_index')})")
 
-        # 4. FUTURES & ORDERBOOK (Poids: 20%)
+        # 5. FUTURES & ORDERBOOK (Poids: 15%)
         # Logic combinee funding + orderbook imbalance
         funding_rate = binance_data.get("funding", {}).get("funding_rate", 0)
         imbalance = binance_data.get("orderbook", {}).get("imbalance_pct", 0)
-        
+
         # Bullish signal
         if funding_rate < 0 or imbalance > 10:
-            scores['bullish'] += 20
+            scores['bullish'] += 15
             reasons.append(f"Futures/Orderbook Bullish (Funding: {funding_rate:.4f}%, Imb: {imbalance:.1f}%)")
         # Bearish signal
         elif funding_rate > 0.05 or imbalance < -10:
-            scores['bearish'] += 20
+            scores['bearish'] += 15
             reasons.append(f"Futures/Orderbook Bearish (Funding: {funding_rate:.4f}%, Imb: {imbalance:.1f}%)")
 
-        # 5. BTC DOMINANCE (Poids: 10%)
+        # 6. BTC DOMINANCE (Poids: 5%)
         btc_dom = sentiment_data.get('btc_dominance', 50)
         if btc_dom and btc_dom > 55:
             if macro_bias == 'bullish' or global_bias == 'bullish':
-                scores['bullish'] += 10
+                scores['bullish'] += 5
                 reasons.append(f"BTC Dominance Bullish ({btc_dom}%) - Strong market absorption")
             else:
-                scores['bearish'] += 10 # Dominance high in red market = BTC bleed
+                scores['bearish'] += 5 # Dominance high in red market = BTC bleed
                 reasons.append(f"BTC Dominance Bearish context ({btc_dom}%)")
 
         # Calcul du biais final

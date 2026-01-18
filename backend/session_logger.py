@@ -229,6 +229,15 @@ class SessionLogger:
                     }, f, indent=2)
                 print("[SessionLogger] strategist_inactivity_state.json reinitialise")
 
+            # 6. Reinitialiser l'historique de performance (courbes de graphiques)
+            self.performance_history = {
+                "fibo1": [],
+                "fibo2": [],
+                "fibo3": [],
+                "master": []
+            }
+            print("[SessionLogger] Performance history reinitialise")
+
             print("[SessionLogger] Statistiques reinitalisees")
         except Exception as e:
             print(f"[SessionLogger] Erreur reset statistiques: {e}")
