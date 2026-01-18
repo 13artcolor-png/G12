@@ -1775,9 +1775,17 @@ class Strategist:
         return self._load_logs()[:limit]
 
     def get_executed_actions(self, limit: int = 50) -> List[Dict]:
-        """Retourne les actions executees (filtrees)"""
+        """Retourne les actions executees (filtrees)
+
+        Args:
+            limit: Nombre max d'actions a retourner. Si None, retourne toutes les actions.
+        """
         logs = self._load_logs()
-        return [log for log in logs if log.get('type') == 'ACTION_EXECUTED'][:limit]
+        actions = [log for log in logs if log.get('type') == 'ACTION_EXECUTED']
+
+        if limit is None:
+            return actions
+        return actions[:limit]
 
     def get_quick_insights(self) -> Dict:
         """Retourne des insights rapides pour le dashboard"""

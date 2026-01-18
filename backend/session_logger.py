@@ -468,7 +468,8 @@ class SessionLogger:
         try:
             from strategist import get_strategist
             strat = get_strategist()
-            all_actions = strat.get_executed_actions(limit=100)
+            # Recuperer TOUTES les actions (sans limite) pour ne pas perdre les actions de la session actuelle
+            all_actions = strat.get_executed_actions(limit=None)
             if self.start_time:
                 return [a for a in all_actions if a.get('timestamp', '') >= self.start_time]
             return all_actions
