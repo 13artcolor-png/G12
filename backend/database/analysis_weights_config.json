@@ -1,0 +1,13 @@
+{
+  "updated_at": "2026-01-18T12:00:00",
+  "weights": {
+    "price_momentum": 20,
+    "macro": 25,
+    "whales": 20,
+    "sentiment": 15,
+    "futures": 15,
+    "btc_dominance": 5
+  },
+  "history": [],
+  "notes": "Ponderation du consensus multi-AI pour l'analyse de tendance. Total doit etre 100. Le Strategist peut ajuster ces valeurs selon les performances."
+}

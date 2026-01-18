@@ -6,8 +6,10 @@ Combine toutes les sources en un contexte unifie
 
 from datetime import datetime, time as dt_time
 from typing import Optional, Dict, List
+from pathlib import Path
 import sys
 import numpy as np
+import json
 sys.path.append('..')
 
 from data.binance_data import get_binance
@@ -28,6 +30,10 @@ from data.news_filter import get_news_filter
 from data.macro_engine import get_macro_engine
 from data.whale_tracker import get_whale_tracker
 
+# Chemin du fichier de configuration des poids
+DATABASE_DIR = Path(__file__).parent.parent / "database"
+WEIGHTS_CONFIG_FILE = DATABASE_DIR / "analysis_weights_config.json"
+
 
 class DataAggregator:
     """Agregge toutes les donnees en un contexte unifie pour les agents"""
@@ -42,12 +48,39 @@ class DataAggregator:
         self.whale_tracker = get_whale_tracker()
         self.last_context = None
 
+        # Charger les poids d'analyse (modifiables par Strategist)
+        self.analysis_weights = self._load_analysis_weights()
+
         # Detecteur de patterns institutionnels
         if INSTITUTIONAL_AVAILABLE:
             self.pattern_detector = InstitutionalPatternDetector(swing_lookback=5, min_swing_size=0.0003)
             print("[Aggregator] Detecteur de patterns institutionnels active")
         else:
             self.pattern_detector = None
+
+    def _load_analysis_weights(self) -> Dict:
+        """Charge les poids de ponderation pour l'analyse consensus"""
+        try:
+            if WEIGHTS_CONFIG_FILE.exists():
+                with open(WEIGHTS_CONFIG_FILE, 'r') as f:
+                    config = json.load(f)
+                    weights = config.get('weights', {})
+                    print(f"[Aggregator] Poids d'analyse charges: {weights}")
+                    return weights
+        except Exception as e:
+            print(f"[Aggregator] Erreur chargement poids analyse: {e}")
+
+        # Poids par defaut si erreur
+        default_weights = {
+            "price_momentum": 20,
+            "macro": 25,
+            "whales": 20,
+            "sentiment": 15,
+            "futures": 15,
+            "btc_dominance": 5
+        }
+        print(f"[Aggregator] Utilisation poids par defaut: {default_weights}")
+        return default_weights
 
     def get_session_status(self) -> Dict:
         """Détermine l'état de toutes les sessions (Paris time)"""
@@ -330,12 +363,20 @@ class DataAggregator:
     def _generate_analysis(self, price_data: Optional[Dict], binance_data: Dict,
                           sentiment_data: Dict, session: Dict,
                           institutional_data: Optional[Dict] = None) -> Dict:
-        """Genere une analyse globale basee sur un consensus pondere Multi-AI"""
+        """Genere une analyse globale basee sur un consensus pondere Multi-AI
+
+        Utilise les poids dynamiques depuis analysis_weights_config.json
+        Ces poids peuvent etre modifies par le Strategist pour optimiser l'analyse
+        """
         scores = {"bullish": 0, "bearish": 0}
         reasons = []
 
-        # 1. PRICE MOMENTUM (Poids: 20%) - PRIORITE MAXIMALE
+        # Charger les poids dynamiques
+        w = self.analysis_weights
+
+        # 1. PRICE MOMENTUM - PRIORITE MAXIMALE
         # Analyse le momentum reel du prix (Mom 1m, 3m, 5m)
+        weight_momentum = w.get('price_momentum', 20)
         if price_data:
             mom_1m = price_data.get('fibo1', {}).get('1m', 0) or 0
             mom_3m = price_data.get('fibo1', {}).get('3m', 0) or 0
@@ -345,72 +386,77 @@ class DataAggregator:
 
             # Seuils de momentum
             if avg_momentum > 0.05:  # +0.05% = bullish fort
-                scores['bullish'] += 20
+                scores['bullish'] += weight_momentum
                 reasons.append(f"Price Momentum BULLISH (1m: {mom_1m:+.2f}%, 3m: {mom_3m:+.2f}%)")
             elif avg_momentum > 0.01:  # +0.01% = bullish modere
-                scores['bullish'] += 15
+                scores['bullish'] += int(weight_momentum * 0.75)
                 reasons.append(f"Price Momentum Bullish (1m: {mom_1m:+.2f}%, 3m: {mom_3m:+.2f}%)")
             elif avg_momentum < -0.05:  # -0.05% = bearish fort
-                scores['bearish'] += 20
+                scores['bearish'] += weight_momentum
                 reasons.append(f"Price Momentum BEARISH (1m: {mom_1m:+.2f}%, 3m: {mom_3m:+.2f}%)")
             elif avg_momentum < -0.01:  # -0.01% = bearish modere
-                scores['bearish'] += 15
+                scores['bearish'] += int(weight_momentum * 0.75)
                 reasons.append(f"Price Momentum Bearish (1m: {mom_1m:+.2f}%, 3m: {mom_3m:+.2f}%)")
             else:
                 # Neutral - ne pas ajouter de reason
                 pass
 
-        # 2. MACRO ENGINE (Poids: 25%)
+        # 2. MACRO ENGINE
+        weight_macro = w.get('macro', 25)
         macro = self.macro_engine.get_macro_data()
         macro_bias = macro.get('bias', 'neutral')
         if macro_bias == 'bullish':
-            scores['bullish'] += 25
+            scores['bullish'] += weight_macro
             reasons.append(f"Macro Bullish (DXY/SPX correlation: {macro.get('correlation', 0):.2f})")
         elif macro_bias == 'bearish':
-            scores['bearish'] += 25
+            scores['bearish'] += weight_macro
             reasons.append(f"Macro Bearish (DXY/SPX correlation: {macro.get('correlation', 0):.2f})")
 
-        # 3. WHALE TRACKER (Poids: 20%)
+        # 3. WHALE TRACKER
+        weight_whales = w.get('whales', 20)
         whales = self.whale_tracker.get_whale_bias()
         whale_bias = whales.get('bias', 'neutral')
         if whale_bias == 'bullish':
-            scores['bullish'] += 20
+            scores['bullish'] += weight_whales
             reasons.append(f"Whales Bullish: {whales.get('reason')}")
         elif whale_bias == 'bearish':
-            scores['bearish'] += 20
+            scores['bearish'] += weight_whales
             reasons.append(f"Whales Bearish: {whales.get('reason')}")
 
-        # 4. SENTIMENT (Poids: 15%)
+        # 4. SENTIMENT
+        weight_sentiment = w.get('sentiment', 15)
         global_bias = sentiment_data.get('global_bias', 'neutral')
         if global_bias == 'bullish':
-            scores['bullish'] += 15
+            scores['bullish'] += weight_sentiment
             reasons.append(f"Sentiment Bullish (Fear&Greed: {sentiment_data.get('fear_greed_index')})")
         elif global_bias == 'bearish':
-            scores['bearish'] += 15
+            scores['bearish'] += weight_sentiment
             reasons.append(f"Sentiment Bearish (Fear&Greed: {sentiment_data.get('fear_greed_index')})")
 
-        # 5. FUTURES & ORDERBOOK (Poids: 15%)
+        # 5. FUTURES & ORDERBOOK
+        weight_futures = w.get('futures', 15)
         # Logic combinee funding + orderbook imbalance
         funding_rate = binance_data.get("funding", {}).get("funding_rate", 0)
         imbalance = binance_data.get("orderbook", {}).get("imbalance_pct", 0)
 
         # Bullish signal
         if funding_rate < 0 or imbalance > 10:
-            scores['bullish'] += 15
+            scores['bullish'] += weight_futures
             reasons.append(f"Futures/Orderbook Bullish (Funding: {funding_rate:.4f}%, Imb: {imbalance:.1f}%)")
         # Bearish signal
         elif funding_rate > 0.05 or imbalance < -10:
-            scores['bearish'] += 15
+            scores['bearish'] += weight_futures
             reasons.append(f"Futures/Orderbook Bearish (Funding: {funding_rate:.4f}%, Imb: {imbalance:.1f}%)")
 
-        # 6. BTC DOMINANCE (Poids: 5%)
+        # 6. BTC DOMINANCE
+        weight_btc_dom = w.get('btc_dominance', 5)
         btc_dom = sentiment_data.get('btc_dominance', 50)
         if btc_dom and btc_dom > 55:
             if macro_bias == 'bullish' or global_bias == 'bullish':
-                scores['bullish'] += 5
+                scores['bullish'] += weight_btc_dom
                 reasons.append(f"BTC Dominance Bullish ({btc_dom}%) - Strong market absorption")
             else:
-                scores['bearish'] += 5 # Dominance high in red market = BTC bleed
+                scores['bearish'] += weight_btc_dom  # Dominance high in red market = BTC bleed
                 reasons.append(f"BTC Dominance Bearish context ({btc_dom}%)")
 
         # Calcul du biais final
@@ -462,6 +508,11 @@ class DataAggregator:
                 return "SELL - Signaux moderement bearish"
 
         return "HOLD - Pas de signal clair"
+
+    def reload_analysis_weights(self):
+        """Recharge les poids d'analyse depuis le fichier (appele par Strategist apres modification)"""
+        self.analysis_weights = self._load_analysis_weights()
+        print("[Aggregator] Poids d'analyse recharges")
 
     def format_context_for_prompt(self, context: Dict = None) -> str:
         """Formate le contexte pour l'envoyer aux agents IA"""

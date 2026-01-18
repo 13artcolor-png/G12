@@ -27,6 +27,7 @@ INACTIVITY_STATE_FILE = DATABASE_DIR / "strategist_inactivity_state.json"
 METHODOLOGY_FILE = DATABASE_DIR / "API_ANALYSE_METHODOLOGY.json"
 SESSION_ANALYSIS_FILE = DATABASE_DIR / "last_session_analysis.json"
 STRATEGIST_CONFIG_FILE = DATABASE_DIR / "strategist_runtime_config.json"
+ANALYSIS_WEIGHTS_FILE = DATABASE_DIR / "analysis_weights_config.json"
 
 # Intervalles d'optimisation
 MIN_TRADES_BETWEEN_OPTIM = 5  # Minimum trades entre 2 optimisations
@@ -1136,6 +1137,67 @@ class Strategist:
             })
             # Ici on pourrait trigger une modification des seuils si necessaire
             # mais on va d'abord logger l'adoption du consensus.
+
+        # === AJUSTEMENT DES POIDS D'ANALYSE ===
+        # Si le win rate est bas, augmenter le poids du price momentum (plus fiable que les indicateurs externes)
+        if global_stats.get('win_rate', 0) < 40 and global_stats.get('total_trades', 0) >= 15:
+            action_hash = self._action_hash('ADJUST_ANALYSIS_WEIGHTS', 'momentum', str(global_stats.get('total_trades', 0) // 15))
+
+            if not self._was_action_executed_recently(action_hash):
+                try:
+                    if ANALYSIS_WEIGHTS_FILE.exists():
+                        with open(ANALYSIS_WEIGHTS_FILE, 'r') as f:
+                            weights_config = json.load(f)
+
+                        weights = weights_config.get('weights', {})
+                        old_weights = weights.copy()
+
+                        # Augmenter price_momentum (jusqu'a max 30%)
+                        # Reduire macro et whales (sources externes moins fiables)
+                        if weights.get('price_momentum', 20) < 30:
+                            weights['price_momentum'] = min(30, weights.get('price_momentum', 20) + 5)
+                            weights['macro'] = max(15, weights.get('macro', 25) - 3)
+                            weights['whales'] = max(15, weights.get('whales', 20) - 2)
+
+                            # Ajouter a l'historique
+                            history_entry = {
+                                'timestamp': datetime.now().isoformat(),
+                                'reason': f"Win rate {global_stats['win_rate']}% < 40%",
+                                'old_weights': old_weights,
+                                'new_weights': weights.copy()
+                            }
+                            if 'history' not in weights_config:
+                                weights_config['history'] = []
+                            weights_config['history'].append(history_entry)
+
+                            # Garder 20 dernieres entrees
+                            weights_config['history'] = weights_config['history'][-20:]
+                            weights_config['updated_at'] = datetime.now().isoformat()
+                            weights_config['weights'] = weights
+
+                            # Sauvegarder
+                            with open(ANALYSIS_WEIGHTS_FILE, 'w') as f:
+                                json.dump(weights_config, f, indent=2)
+
+                            # Recharger dans l'aggregator
+                            from data.aggregator import get_aggregator
+                            aggregator = get_aggregator()
+                            aggregator.reload_analysis_weights()
+
+                            action = {
+                                'action': 'AJUSTER_POIDS_ANALYSE',
+                                'old_weights': old_weights,
+                                'new_weights': weights,
+                                'reason': f"Win rate {global_stats['win_rate']}% faible - Priorite au price momentum",
+                                'timestamp': datetime.now().isoformat()
+                            }
+                            executed_actions.append(action)
+                            self._mark_action_executed(action_hash)
+
+                            self.log_decision("ACTION_EXECUTED", action,
+                                f"Poids analyse ajustes: momentum {old_weights.get('price_momentum')}% -> {weights['price_momentum']}%")
+                except Exception as e:
+                    print(f"[Strategist] Erreur ajustement poids analyse: {e}")
 
         # Sauvegarder les configs modifiees
         if executed_actions:
