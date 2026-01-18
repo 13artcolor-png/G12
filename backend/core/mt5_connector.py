@@ -642,9 +642,11 @@ class MT5Connector:
         if from_date is None:
             from_date = to_date - timedelta(hours=24)
 
-        # Recuperer les deals avec timeout pour eviter blocage
+        # Recuperer TOUS les deals avec timeout pour eviter blocage
+        # NOTE: history_deals_get() n'accepte PAS de parametre 'group' ou 'symbol'
+        # Il faut filtrer manuellement apres recuperation
         deals = mt5_with_timeout(
-            lambda: mt5.history_deals_get(from_date, to_date, group=f"*{self.symbol}*"),
+            lambda: mt5.history_deals_get(from_date, to_date),
             timeout=10, default=None
         )
 
@@ -653,6 +655,10 @@ class MT5Connector:
 
         result = []
         for deal in deals:
+            # Filtrer par symbole BTCUSD
+            if deal.symbol != self.symbol:
+                continue
+
             # Filtrer: ne garder que les deals de sortie (DEAL_ENTRY_OUT) avec magic 11 ou comment G12
             if deal.entry == 1:  # DEAL_ENTRY_OUT = sortie de position
                 if deal.magic == 11 or "G12" in (deal.comment or ""):

@@ -259,11 +259,34 @@ class DataAggregator:
 
                     account = agent_mt5.get_account_info()
                     if account:
-                        total_balance += account.get("balance", 0)
-                        total_equity += account.get("equity", 0)
+                        agent_balance = account.get("balance", 0)
+                        agent_equity = account.get("equity", 0)
+                        total_balance += agent_balance
+                        total_equity += agent_equity
                         total_margin_free += account.get("margin_free", 0)
                         total_profit += account.get("profit", 0)
                         accounts_data[agent_id] = account
+                        print(f"[Aggregator] {agent_id}: Balance={agent_balance:.2f} EUR, Equity={agent_equity:.2f} EUR")
+                    else:
+                        # CRITIQUE: get_account_info() a retourne None - balance ignoree!
+                        print(f"[Aggregator] ERREUR CRITIQUE: {agent_id} - get_account_info() retourne None!")
+                        print(f"[Aggregator] --> Balance de {agent_id} NON comptee dans le total!")
+
+                        # Essayer de recuperer depuis le cache MT5
+                        from core.mt5_connector import get_cached_account_info
+                        cached_account = get_cached_account_info(agent_id)
+                        if cached_account:
+                            print(f"[Aggregator] --> Utilisation du cache pour {agent_id}")
+                            agent_balance = cached_account.get("balance", 0)
+                            agent_equity = cached_account.get("equity", 0)
+                            total_balance += agent_balance
+                            total_equity += agent_equity
+                            total_margin_free += cached_account.get("margin_free", 0)
+                            total_profit += cached_account.get("profit", 0)
+                            accounts_data[agent_id] = cached_account
+                            print(f"[Aggregator] {agent_id} (cache): Balance={agent_balance:.2f} EUR, Equity={agent_equity:.2f} EUR")
+                        else:
+                            print(f"[Aggregator] --> Pas de cache disponible pour {agent_id} - BALANCE MANQUANTE!")
 
                     # Recuperer les positions de ce compte
                     positions = agent_mt5.get_positions()

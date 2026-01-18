@@ -5071,15 +5071,10 @@
                 feesEl.textContent = `${totalFees >= 0 ? '+' : ''}${totalFees.toFixed(2)} EUR`;
                 feesEl.style.color = totalFees >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
 
-                // DD Session - Drawdown max du P&L flottant pendant la session EN POURCENTAGE
-                // Tracker le pire P&L flottant depuis le début de la session
-                if (!window.sessionFloatingPnlHistory) {
-                    window.sessionFloatingPnlHistory = [];
-                }
-                window.sessionFloatingPnlHistory.push(floatingPnl);
-
-                // Calculer le DD = pire valeur négative atteinte
-                const worstFloatingPnl = Math.min(...window.sessionFloatingPnlHistory, 0);
+                // DD Session - Drawdown ACTUEL par rapport au capital de depart EN POURCENTAGE
+                // DD = (Equity actuelle - Balance start) / Balance start
+                // Si Equity > Balance start -> DD positif (profit)
+                // Si Equity < Balance start -> DD negatif (perte)
 
                 // Capital Depart et Capital Total - utiliser data.account de /api/status
                 // qui agrege deja tous les comptes MT5 correctement
@@ -5099,7 +5094,8 @@
 
                     // DD Session en pourcentage du capital de départ
                     const ddSessionEl = document.getElementById('metric-dd-session');
-                    const ddSessionPct = (worstFloatingPnl / balanceStart) * 100;
+                    const ddSessionEur = totalEquity - balanceStart;  // Ecart en EUR
+                    const ddSessionPct = (ddSessionEur / balanceStart) * 100;  // Ecart en %
                     ddSessionEl.textContent = `${ddSessionPct.toFixed(2)}%`;
                     ddSessionEl.style.color = ddSessionPct < 0 ? 'var(--accent-red)' : 'var(--accent-green)';
 

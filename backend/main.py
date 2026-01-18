@@ -90,9 +90,24 @@ async def lifespan(app):
         # Mettre les loops en mode PAUSE par défaut
         trading_loop.running = False
         closer_loop.running = False
-        
-        print("[Lifespan] ✅ Services initialises - Trading en PAUSE")
-        print("[Lifespan] 👉 Cliquez sur 'Demarrer Trading' dans le dashboard pour lancer")
+
+        # SYNCHRONISATION INITIALE MT5 meme en PAUSE
+        # Cela permet d'afficher les trades fermes dans les stats meme sans demarrer le trading
+        print("[Lifespan] Synchronisation initiale MT5...")
+        try:
+            session_logger = get_session_logger()
+            sync_result = session_logger.sync_with_mt5_history()
+            if sync_result.get('success'):
+                total_trades = sync_result.get('total_trades', 0)
+                total_pnl = sync_result.get('total_synced_pnl', 0)
+                print(f"[Lifespan] Sync MT5 OK: {total_trades} trades, P&L={total_pnl:+.2f} EUR")
+            else:
+                print(f"[Lifespan] Sync MT5: {sync_result.get('message', 'pas de session active')}")
+        except Exception as e:
+            print(f"[Lifespan] Erreur sync MT5: {e}")
+
+        print("[Lifespan] Services initialises - Trading en PAUSE")
+        print("[Lifespan] Cliquez sur 'Demarrer Trading' dans le dashboard pour lancer")
 
     # Lancer les boucles dans un thread separe avec delai
     threading.Thread(target=start_loops_delayed, daemon=True).start()
