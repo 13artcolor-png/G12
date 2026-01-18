@@ -506,6 +506,7 @@
             gap: 16px;
             margin-bottom: 30px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         /* Tables */
@@ -1125,12 +1126,6 @@
             <span id="header-floating-pnl" class="status-badge">P&L: -- EUR</span>
             <span id="header-dd-session" class="status-badge">DD: --%</span>
             <span id="header-positions" class="status-badge">Pos: -- / --</span>
-            <span id="session-badge" class="session-badge">Session: --</span>
-            <span id="mt5-status" class="status-badge disconnected">MT5: Deconnecte</span>
-            <div id="trading-status" class="trading-indicator trading-stopped">
-                <span class="indicator-dot"></span>
-                <span class="indicator-text">TRADING ARRETE</span>
-            </div>
         </div>
     </header>
 
@@ -1146,45 +1141,11 @@
             <button class="btn btn-secondary" onclick="closeAllPositions()">Fermer Toutes Positions</button>
             <button class="btn btn-secondary" onclick="refreshData()">Rafraichir</button>
             <button class="btn btn-warning" onclick="restartBackend()" style="background: #f59e0b; border-color: #f59e0b;">Redemarrer Backend</button>
-        </div>
-
-        <!-- Metrics -->
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <div id="metric-floating-pnl" class="metric-value">-- EUR</div>
-                <div class="metric-label">P&L Flottant</div>
-            </div>
-            <div class="metric-card">
-                <div id="metric-dd-session" class="metric-value">--%</div>
-                <div class="metric-label">DD Session</div>
-            </div>
-            <div class="metric-card">
-                <div id="metric-start-capital" class="metric-value">-- EUR</div>
-                <div class="metric-label">Capital Depart</div>
-            </div>
-            <div class="metric-card">
-                <div id="metric-total-capital" class="metric-value">-- EUR</div>
-                <div class="metric-label">Capital Total</div>
-            </div>
-            <div class="metric-card">
-                <div id="metric-pnl" class="metric-value">-- EUR</div>
-                <div class="metric-label">P&L Session</div>
-            </div>
-            <div class="metric-card">
-                <div id="metric-winrate" class="metric-value">--%</div>
-                <div class="metric-label">Win Rate</div>
-            </div>
-            <div class="metric-card">
-                <div id="metric-fees" class="metric-value">-- EUR</div>
-                <div class="metric-label">Frais</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">
-                    <span id="metric-positions-open" style="color: var(--accent-yellow);">--</span>
-                    <span style="color: var(--accent-blue);"> / </span>
-                    <span id="metric-positions-total" style="color: var(--accent-blue);">--</span>
-                </div>
-                <div class="metric-label">Positions (Ouv/Total)</div>
+            <span id="session-badge" class="session-badge">Session: --</span>
+            <span id="mt5-status" class="status-badge disconnected">MT5: Deconnecte</span>
+            <div id="trading-status" class="trading-indicator trading-stopped">
+                <span class="indicator-dot"></span>
+                <span class="indicator-text">TRADING ARRETE</span>
             </div>
         </div>
 
@@ -1431,11 +1392,15 @@
                             </label>
                         </div>
                     </div>
-                    <div class="agent-stats">
+                    <!-- P&L sur sa propre ligne -->
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 8px;">
                         <div class="stat-item">
                             <div id="fibo1-pnl" class="stat-value" style="font-size: 36px;">0.00</div>
-                            <div class="stat-label">P&L EUR</div>
+                            <div class="stat-label">Flottant / P&L session</div>
                         </div>
+                    </div>
+                    <!-- 3 stats sur la deuxieme ligne -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
                         <div class="stat-item">
                             <div id="fibo1-position-trades" class="stat-value">-- / --</div>
                             <div class="stat-label">Position/Trades</div>
@@ -1743,11 +1708,15 @@
                             </label>
                         </div>
                     </div>
-                    <div class="agent-stats">
+                    <!-- P&L sur sa propre ligne -->
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 8px;">
                         <div class="stat-item">
                             <div id="fibo2-pnl" class="stat-value" style="font-size: 36px;">0.00</div>
-                            <div class="stat-label">P&L EUR</div>
+                            <div class="stat-label">Flottant / P&L session</div>
                         </div>
+                    </div>
+                    <!-- 3 stats sur la deuxieme ligne -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
                         <div class="stat-item">
                             <div id="fibo2-position-trades" class="stat-value">-- / --</div>
                             <div class="stat-label">Position/Trades</div>
@@ -2055,11 +2024,15 @@
                             </label>
                         </div>
                     </div>
-                    <div class="agent-stats">
+                    <!-- P&L sur sa propre ligne -->
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 8px;">
                         <div class="stat-item">
                             <div id="fibo3-pnl" class="stat-value" style="font-size: 36px;">0.00</div>
-                            <div class="stat-label">P&L EUR</div>
+                            <div class="stat-label">Flottant / P&L session</div>
                         </div>
+                    </div>
+                    <!-- 3 stats sur la deuxieme ligne -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
                         <div class="stat-item">
                             <div id="fibo3-position-trades" class="stat-value">-- / --</div>
                             <div class="stat-label">Position/Trades</div>
@@ -2350,7 +2323,7 @@
             <div class="card">
                 <table>
                     <thead>
-                        <tr style="font-size: 22.5px;">
+                        <tr style="font-size: 27px;">
                             <th>Agent</th>
                             <th>Trades</th>
                             <th>Wins</th>
@@ -3430,7 +3403,15 @@
                 // Charger les donnees completes du Strategist
                 try {
                     console.log(`[showInactivityAlertModal] Chargement donnees Strategist...`);
-                    const response = await fetch(`${API_URL}/api/strategist/debug`);
+
+                    // Timeout de 30 secondes pour cet endpoint (peut être long avec beaucoup de positions)
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 30000);
+
+                    const response = await fetch(`${API_URL}/api/strategist/debug`, {
+                        signal: controller.signal
+                    });
+                    clearTimeout(timeoutId);
 
                     if (!response.ok) {
                         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -3894,8 +3875,9 @@
                 data.open.push(closedPnl + openPnl); // Open = closed + unrealized
                 data.timestamps.push(new Date());
 
-                // Limiter a 500 points max pour le detail (se contracte automatiquement)
-                if (data.closed.length > 500) {
+                // Limiter a 50000 points max (environ 28h de donnees)
+                // IMPORTANT: Ne pas limiter trop bas sinon perd le debut de session
+                if (data.closed.length > 50000) {
                     data.closed.shift();
                     data.open.shift();
                     data.timestamps.shift();
@@ -4855,16 +4837,23 @@
                     });
                     clearTimeout(timeoutId);
 
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
                     const data = await response.json();
                     updateUI(data);
                 } catch (error) {
                     if (error.name === 'AbortError') {
-                        console.error('Erreur refresh: Timeout');
+                        console.error('[API] Erreur refresh: Timeout (10s)');
+                        document.getElementById('mt5-status').textContent = 'API: Timeout';
                     } else {
-                        console.error('Erreur refresh:', error);
+                        console.error('[API] Erreur refresh:', error);
+                        console.error('[API] Message:', error.message);
+                        console.error('[API] Stack:', error.stack);
+                        document.getElementById('mt5-status').textContent = 'API: Erreur';
                     }
                     document.getElementById('mt5-status').className = 'status-badge disconnected';
-                    document.getElementById('mt5-status').textContent = 'API: Erreur';
                 } finally {
                     isRefreshing = false;
                 }
@@ -5033,13 +5022,13 @@
 
                 if (data.agents) {
                     // FIBO1
-                    updateAgent('fibo1', data.agents.fibo1, mt5Positions);
+                    updateAgent('fibo1', data.agents.fibo1, mt5Positions, data.account);
 
                     // FIBO2
-                    updateAgent('fibo2', data.agents.fibo2, mt5Positions);
+                    updateAgent('fibo2', data.agents.fibo2, mt5Positions, data.account);
 
                     // FIBO3
-                    updateAgent('fibo3', data.agents.fibo3, mt5Positions);
+                    updateAgent('fibo3', data.agents.fibo3, mt5Positions, data.account);
 
                     // Calcul Open P&L Total (Somme de toutes les positions MT5)
                     totalOpenPnl = mt5Positions.reduce((sum, pos) => sum + (pos.profit || 0), 0);
@@ -5058,7 +5047,10 @@
                         updateStats(data.stats);
 
                         // Metrics - Win Rate
-                        document.getElementById('metric-winrate').textContent = `${data.stats.win_rate || 0}%`;
+                        const winrateEl = document.getElementById('metric-winrate');
+                        if (winrateEl) {
+                            winrateEl.textContent = `${data.stats.win_rate || 0}%`;
+                        }
 
                         // P&L Session = stats.total_profit (source unique: stats_*.json synchronise avec MT5)
                         // Utilise la meme source que le tableau Stat Session pour coherence
@@ -5066,8 +5058,10 @@
                         totalClosedPnl = pnlSession;  // Mettre a jour pour le graphique
 
                         const pnlEl = document.getElementById('metric-pnl');
-                        pnlEl.textContent = `${pnlSession >= 0 ? '+' : ''}${pnlSession.toFixed(2)} EUR`;
-                        pnlEl.style.color = pnlSession >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                        if (pnlEl) {
+                            pnlEl.textContent = `${pnlSession >= 0 ? '+' : ''}${pnlSession.toFixed(2)} EUR`;
+                            pnlEl.style.color = pnlSession >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                        }
 
                         // Mise a jour du graphique MASTER avec source unique
                         updateAgentChartData('master', totalClosedPnl, totalOpenPnl);
@@ -5094,8 +5088,10 @@
                     console.log(`[P&L] Calcule depuis positions (${data.positions.length}): ${floatingPnl.toFixed(2)} EUR`);
                 }
                 const floatingPnlEl = document.getElementById('metric-floating-pnl');
-                floatingPnlEl.textContent = `${floatingPnl >= 0 ? '+' : ''}${floatingPnl.toFixed(2)} EUR`;
-                floatingPnlEl.style.color = floatingPnl >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                if (floatingPnlEl) {
+                    floatingPnlEl.textContent = `${floatingPnl >= 0 ? '+' : ''}${floatingPnl.toFixed(2)} EUR`;
+                    floatingPnlEl.style.color = floatingPnl >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                }
 
                 // Mise a jour du badge header P&L Flottant
                 const headerPnlEl = document.getElementById('header-floating-pnl');
@@ -5111,14 +5107,18 @@
                     console.log(`[Frais] Cumul swap de ${data.positions.length} positions: ${totalFees.toFixed(2)} EUR`);
                 }
                 const feesEl = document.getElementById('metric-fees');
-                feesEl.textContent = `${totalFees >= 0 ? '+' : ''}${totalFees.toFixed(2)} EUR`;
-                feesEl.style.color = totalFees >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                if (feesEl) {
+                    feesEl.textContent = `${totalFees >= 0 ? '+' : ''}${totalFees.toFixed(2)} EUR`;
+                    feesEl.style.color = totalFees >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                }
 
                 // Metrique Positions (Ouvertes / Total)
                 const openPositions = data.positions?.length || 0;
                 const totalTrades = (data.stats?.total_trades || 0) + openPositions;
-                document.getElementById('metric-positions-open').textContent = openPositions;
-                document.getElementById('metric-positions-total').textContent = totalTrades;
+                const metricPosOpenEl = document.getElementById('metric-positions-open');
+                const metricPosTotalEl = document.getElementById('metric-positions-total');
+                if (metricPosOpenEl) metricPosOpenEl.textContent = openPositions;
+                if (metricPosTotalEl) metricPosTotalEl.textContent = totalTrades;
 
                 // Mise a jour du badge header Positions
                 const headerPosEl = document.getElementById('header-positions');
@@ -5140,20 +5140,26 @@
                 if (data.account && data.account.equity > 0) {
                     // Capital Total = equity totale (balance + P&L flottant)
                     const totalEquity = data.account.equity;
-                    totalCapitalEl.textContent = `${totalEquity.toFixed(2)} EUR`;
-                    totalCapitalEl.style.color = 'var(--text-primary)';
+                    if (totalCapitalEl) {
+                        totalCapitalEl.textContent = `${totalEquity.toFixed(2)} EUR`;
+                        totalCapitalEl.style.color = 'var(--text-primary)';
+                    }
 
                     // Capital Depart = balance au debut de la session G12
                     // Si pas de balance_start, utiliser l'equity actuelle (pas de session active)
                     const balanceStart = data.g11_session?.balance_start || totalEquity;
-                    startCapitalEl.textContent = `${balanceStart.toFixed(2)} EUR`;
+                    if (startCapitalEl) {
+                        startCapitalEl.textContent = `${balanceStart.toFixed(2)} EUR`;
+                    }
 
                     // DD Session en pourcentage du capital de départ
                     const ddSessionEl = document.getElementById('metric-dd-session');
                     const ddSessionEur = totalEquity - balanceStart;  // Ecart en EUR
                     const ddSessionPct = (ddSessionEur / balanceStart) * 100;  // Ecart en %
-                    ddSessionEl.textContent = `${ddSessionPct.toFixed(2)}%`;
-                    ddSessionEl.style.color = ddSessionPct < 0 ? 'var(--accent-red)' : 'var(--accent-green)';
+                    if (ddSessionEl) {
+                        ddSessionEl.textContent = `${ddSessionPct.toFixed(2)}%`;
+                        ddSessionEl.style.color = ddSessionPct < 0 ? 'var(--accent-red)' : 'var(--accent-green)';
+                    }
 
                     // Mise a jour du badge header DD%
                     const headerDdEl = document.getElementById('header-dd-session');
@@ -5224,13 +5230,17 @@
                 const totalCapitalEl = document.getElementById('metric-total-capital');
 
                 if (connectedCount > 0) {
-                    startCapitalEl.textContent = `${totalCapital.toFixed(2)} EUR`;
-                    totalCapitalEl.textContent = `${totalCapital.toFixed(2)} EUR`;
-                    totalCapitalEl.style.color = 'var(--text-primary)';
+                    if (startCapitalEl) startCapitalEl.textContent = `${totalCapital.toFixed(2)} EUR`;
+                    if (totalCapitalEl) {
+                        totalCapitalEl.textContent = `${totalCapital.toFixed(2)} EUR`;
+                        totalCapitalEl.style.color = 'var(--text-primary)';
+                    }
                 } else {
-                    startCapitalEl.textContent = '-- EUR';
-                    totalCapitalEl.textContent = '-- EUR';
-                    totalCapitalEl.style.color = 'var(--text-secondary)';
+                    if (startCapitalEl) startCapitalEl.textContent = '-- EUR';
+                    if (totalCapitalEl) {
+                        totalCapitalEl.textContent = '-- EUR';
+                        totalCapitalEl.style.color = 'var(--text-secondary)';
+                    }
                 }
             }
 
@@ -5281,9 +5291,11 @@
                 container.innerHTML = positions.map(pos => {
                     // Extraire le nom de l'agent depuis le commentaire (format: "G12_fibo" -> "FIBO2")
                     let agentName = '';
+                    let agentId = '';
                     if (pos.comment) {
                         const match = pos.comment.match(/G12_(\w+)/i);
                         if (match) {
+                            agentId = match[1].toLowerCase();
                             agentName = match[1].toUpperCase();
                         }
                     }
@@ -5295,9 +5307,16 @@
                             <span class="position-direction ${pos.type?.toLowerCase()}">${pos.type}</span>
                             ${agentName ? `<span class="position-agent">${agentName}</span>` : ''}
                         </div>
-                        <span class="position-profit" style="color: ${pos.profit >= 0 ? 'var(--accent-green)' : 'var(--accent-red)'}">
-                            ${pos.profit >= 0 ? '+' : ''}${pos.profit?.toFixed(2)} EUR
-                        </span>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span class="position-profit" style="color: ${pos.profit >= 0 ? 'var(--accent-green)' : 'var(--accent-red)'}">
+                                ${pos.profit >= 0 ? '+' : ''}${pos.profit?.toFixed(2)} EUR
+                            </span>
+                            <button class="btn btn-danger" style="font-size: 18px; padding: 6px 12px;"
+                                onclick="closePosition(${pos.ticket}, '${agentId}')"
+                                title="Fermer manuellement cette position">
+                                Fermer
+                            </button>
+                        </div>
                     </div>
                     <div style="display: flex; gap: 16px; font-size: 18px;">
                         <span><span style="color: var(--text-secondary);">Entry:</span> $${pos.price_open?.toLocaleString()}</span>
@@ -5320,10 +5339,15 @@
                     return;
                 }
 
-                // Stocker les decisions pour les afficher au clic
-                window._lastDecisions = decisions.slice(0, 10);
+                // Afficher TOUTES les decisions de la session (pas de limite)
+                // Ajouter scroll si trop de decisions
+                container.style.maxHeight = '400px';
+                container.style.overflowY = 'auto';
 
-                container.innerHTML = decisions.slice(0, 10).map((d, index) => {
+                // Stocker toutes les decisions
+                window._lastDecisions = decisions;
+
+                container.innerHTML = decisions.map((d, index) => {
                     // Couleur selon la decision
                     let actionColor = 'var(--text-secondary)';
                     let actionBg = 'rgba(148,163,184,0.2)';
@@ -5410,7 +5434,7 @@
                 document.body.appendChild(modal);
             }
 
-            function updateAgent(id, agent, mt5Positions = []) {
+            function updateAgent(id, agent, mt5Positions = [], accountData = null) {
                 if (!agent) return;
 
                 // Mise a jour de l'aspect brillant/terne
@@ -5476,8 +5500,11 @@
                 const sessionPnl = agent.session_pnl || 0;
                 const totalPnl = sessionPnl + openPnl;  // P&L total = ferme + flottant
                 const pnlEl = document.getElementById(`${id}-pnl`);
-                pnlEl.textContent = `${totalPnl >= 0 ? '+' : ''}${totalPnl.toFixed(2)}`;
-                pnlEl.style.color = totalPnl >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+
+                // Afficher "P&L Total / P&L Session" avec coloration
+                const totalColor = totalPnl >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                const sessionColor = sessionPnl >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                pnlEl.innerHTML = `<span style="color: ${totalColor}">${totalPnl >= 0 ? '+' : ''}${totalPnl.toFixed(2)}</span> / <span style="color: ${sessionColor}">${sessionPnl >= 0 ? '+' : ''}${sessionPnl.toFixed(2)}</span>`;
 
                 // Position/Trades = positions ouvertes / total trades
                 const closedTrades = agent.session_trades || 0;
@@ -5489,16 +5516,22 @@
                 // Win Rate
                 document.getElementById(`${id}-winrate`).textContent = `${agent.win_rate || 0}%`;
 
-                // DD (Drawdown) - Calculer depuis balance de depart de cet agent
+                // DD (Drawdown) - Calculer depuis balance MT5 actuelle
                 const ddEl = document.getElementById(`${id}-dd`);
-                if (agent.balance_start && agent.balance_start > 0) {
-                    // DD = (equity actuelle - balance start) / balance start * 100
-                    // equity = balance + P&L flottant
-                    const currentBalance = agent.balance || agent.balance_start;
-                    const currentEquity = currentBalance + openPnl;
-                    const ddPct = ((currentEquity - agent.balance_start) / agent.balance_start) * 100;
-                    ddEl.textContent = `${ddPct >= 0 ? '+' : ''}${ddPct.toFixed(2)}%`;
-                    ddEl.style.color = ddPct < 0 ? 'var(--accent-red)' : 'var(--accent-green)';
+                if (accountData && accountData.accounts && accountData.accounts[id]) {
+                    const agentAccount = accountData.accounts[id];
+                    const balance = agentAccount.balance || 0;
+
+                    if (balance > 0) {
+                        // DD% = (session_pnl / balance) * 100
+                        // Le session_pnl représente déjà le gain/perte depuis le début de session
+                        const ddPct = (sessionPnl / balance) * 100;
+                        ddEl.textContent = `${ddPct >= 0 ? '+' : ''}${ddPct.toFixed(2)}%`;
+                        ddEl.style.color = ddPct < 0 ? 'var(--accent-red)' : 'var(--accent-green)';
+                    } else {
+                        ddEl.textContent = '--%';
+                        ddEl.style.color = 'var(--text-secondary)';
+                    }
                 } else {
                     ddEl.textContent = '--%';
                     ddEl.style.color = 'var(--text-secondary)';
@@ -5573,7 +5606,7 @@
                     const pnl = s.total_profit || 0;
 
                     html += `
-                    <tr>
+                    <tr style="font-size: 22px;">
                         <td style="font-weight: 600; text-transform: uppercase;">${agentId}</td>
                         <td>${s.total_trades || 0}</td>
                         <td style="color: var(--accent-green)">${s.winning_trades || 0}</td>
@@ -5583,7 +5616,7 @@
                             ${pnl >= 0 ? '+' : ''}${pnl.toFixed(2)} EUR
                         </td>
                         <td>${s.avg_profit?.toFixed(2) || '0.00'} EUR</td>
-                        <td><button onclick="showAgentTrades('${agentId}')" class="btn btn-secondary" style="font-size: 18px; padding: 4px 10px;">Details</button></td>
+                        <td><button onclick="showAgentTrades('${agentId}')" class="btn btn-secondary" style="padding: 4px 10px;">Details</button></td>
                     </tr>
                 `;
                 });
@@ -5591,7 +5624,7 @@
                 // Total row
                 const totalPnl = stats.total_profit || 0;
                 html += `
-                <tr style="background: var(--bg-input); font-weight: 600; font-size: 22.5px;">
+                <tr style="background: var(--bg-input); font-weight: 600; font-size: 27px;">
                     <td>TOTAL</td>
                     <td>${stats.total_trades || 0}</td>
                     <td style="color: var(--accent-green)">${stats.total_wins || 0}</td>
@@ -5601,7 +5634,7 @@
                         ${totalPnl >= 0 ? '+' : ''}${totalPnl.toFixed(2)} EUR
                     </td>
                     <td>--</td>
-                    <td><button onclick="showAgentTrades('all')" class="btn btn-primary" style="font-size: 22.5px; padding: 4px 10px;">Tous</button></td>
+                    <td><button onclick="showAgentTrades('all')" class="btn btn-primary" style="padding: 4px 10px;">Tous</button></td>
                 </tr>
             `;
 
@@ -5653,6 +5686,71 @@
                     alert('Erreur: ' + error.message);
                     btn.disabled = false;
                     btn.textContent = originalText;
+                }
+            }
+
+            async function closePosition(ticket, agentId) {
+                if (!confirm(`Fermer manuellement la position #${ticket}?`)) return;
+
+                // Trouver et marquer visuellement la position en cours de fermeture
+                const positionRows = document.querySelectorAll('.position-row');
+                let positionElement = null;
+                positionRows.forEach(row => {
+                    if (row.innerHTML.includes(`closePosition(${ticket}`)) {
+                        positionElement = row;
+                        row.style.opacity = '0.5';
+                        row.style.pointerEvents = 'none';
+                    }
+                });
+
+                try {
+                    const response = await fetch(`${API_URL}/api/position/close/${ticket}`, {
+                        method: 'POST'
+                    });
+                    const result = await response.json();
+
+                    if (result.success) {
+                        // Supprimer immediatement la position du DOM (feedback visuel instantané)
+                        if (positionElement) {
+                            positionElement.style.transition = 'opacity 0.3s';
+                            positionElement.style.opacity = '0';
+                            setTimeout(() => {
+                                positionElement.remove();
+                                // Mettre à jour le compteur
+                                const count = document.querySelectorAll('.position-row').length;
+                                document.getElementById('positions-count').textContent = count;
+                                if (count === 0) {
+                                    document.getElementById('positions-container').innerHTML = `
+                                        <div style="color: var(--text-secondary); font-size: 18px; text-align: center; padding: 30px;">
+                                            Aucune position ouverte
+                                        </div>
+                                    `;
+                                }
+                            }, 300);
+                        }
+
+                        // Attendre 2 secondes pour que MT5 se mette à jour, puis rafraîchir
+                        setTimeout(() => {
+                            refreshData();
+                        }, 2000);
+
+                        alert(`Position #${ticket} fermée manuellement`);
+                    } else {
+                        // Restaurer l'affichage en cas d'erreur
+                        if (positionElement) {
+                            positionElement.style.opacity = '1';
+                            positionElement.style.pointerEvents = 'auto';
+                        }
+                        alert(`Erreur: ${result.message}`);
+                    }
+                } catch (error) {
+                    console.error('Erreur fermeture position:', error);
+                    // Restaurer l'affichage en cas d'erreur
+                    if (positionElement) {
+                        positionElement.style.opacity = '1';
+                        positionElement.style.pointerEvents = 'auto';
+                    }
+                    alert('Erreur: ' + error.message);
                 }
             }
 
