@@ -1302,8 +1302,38 @@ class Strategist:
                         except Exception:
                             continue
 
+            # 4. Charger les POSITIONS OUVERTES (pour comptage total)
+            # Les positions ouvertes sont incluses dans le comptage total
+            # mais avec profit flottant actuel (pas definitif)
+            open_positions_count = 0
+            for agent_id in ['fibo1', 'fibo2', 'fibo3']:
+                positions_file = DATABASE_DIR / f"positions_{agent_id}.json"
+                if positions_file.exists():
+                    try:
+                        with open(positions_file, 'r') as f:
+                            positions = json.load(f)
+                            for pos in positions:
+                                # Ajouter position comme trade avec marqueur "open"
+                                trade = {
+                                    'ticket': pos.get('ticket'),
+                                    'agent_id': agent_id,
+                                    'symbol': pos.get('symbol', 'BTCUSD'),
+                                    'direction': 'BUY' if pos.get('type', 0) == 0 else 'SELL',
+                                    'price_open': pos.get('price_open', 0),
+                                    'volume': pos.get('volume', 0),
+                                    'profit': pos.get('profit', 0),  # Profit flottant actuel
+                                    'profit_eur': pos.get('profit', 0),
+                                    'timestamp': pos.get('time', ''),
+                                    'open_position': True  # Marqueur pour distinguer des trades fermés
+                                }
+                                trades.append(trade)
+                                open_positions_count += 1
+                    except Exception as e:
+                        print(f"[Strategist] Erreur chargement positions {agent_id}: {e}")
+
             self.trades = trades
-            print(f"[Strategist] {len(self.trades)} trades charges")
+            closed_trades = len(trades) - open_positions_count
+            print(f"[Strategist] {len(self.trades)} trades charges ({closed_trades} fermes + {open_positions_count} ouverts)")
         except Exception as e:
             print(f"[Strategist] Erreur chargement trades: {e}")
             self.trades = []
