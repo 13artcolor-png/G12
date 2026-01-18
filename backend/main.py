@@ -455,6 +455,21 @@ async def get_status():
         except Exception:
             pass
 
+        # Trading loop status (IMPORTANT pour afficher "TRADING ACTIF" dans l'UI)
+        trading_status = {}
+        closer_status = {}
+        try:
+            trading_loop = get_trading_loop()
+            trading_status = trading_loop.get_status()
+        except Exception as e:
+            print(f"[API] Erreur trading loop (fallback): {e}")
+
+        try:
+            closer_loop = get_closer_loop()
+            closer_status = closer_loop.get_status()
+        except Exception as e:
+            print(f"[API] Erreur closer loop (fallback): {e}")
+
         return {
             "timestamp": datetime.now().isoformat(),
             "mt5": {"connected": bool(account_data), "account": None},
@@ -471,14 +486,28 @@ async def get_status():
             "positions": account_data.get("positions", []),
             "agents": {},
             "risk": {},
-            "loops": {"trading": {}, "closer": {}},
+            "loops": {"trading": trading_status, "closer": closer_status},
             "stats": {},
             "decisions": []
         }
     except Exception as e:
         print(f"[API] Erreur fallback status: {e}")
 
-    # Fallback ultime
+    # Fallback ultime - essayer au moins de recuperer le statut des loops
+    trading_status_fallback = {}
+    closer_status_fallback = {}
+    try:
+        trading_loop = get_trading_loop()
+        trading_status_fallback = trading_loop.get_status()
+    except Exception:
+        pass
+
+    try:
+        closer_loop = get_closer_loop()
+        closer_status_fallback = closer_loop.get_status()
+    except Exception:
+        pass
+
     return {
         "timestamp": datetime.now().isoformat(),
         "mt5": {"connected": False, "account": None},
@@ -495,7 +524,7 @@ async def get_status():
         "positions": [],
         "agents": {},
         "risk": {},
-        "loops": {"trading": {}, "closer": {}},
+        "loops": {"trading": trading_status_fallback, "closer": closer_status_fallback},
         "stats": {},
         "decisions": []
     }
