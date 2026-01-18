@@ -1157,14 +1157,9 @@
         <!-- DONNEES MARCHE - UNE SEULE fenetre pliable -->
         <div class="card section" style="border-left: 4px solid var(--accent-blue); margin-bottom: 20px;">
             <div class="card-title"
-                style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;"
+                style="cursor: pointer; display: flex; justify-content: flex-end; align-items: center;"
                 onclick="toggleSection('market-data')">
-                <span style="color: var(--accent-blue);">Donnees Marche (Prix + Futures + Sentiment)</span>
-                <div style="display: flex; align-items: center; gap: 20px;">
-                    <span id="price-value-header" style="font-size: 28px; font-weight: 700; color: #fff;">$--</span>
-                    <span id="price-change-header" style="font-size: 18px; color: var(--text-secondary);">--</span>
-                    <span id="market-data-icon" class="collapsible-icon">▼</span>
-                </div>
+                <span id="market-data-icon" class="collapsible-icon">▼</span>
             </div>
             <div id="market-data-content" class="collapsible-content">
                 <!-- Prix central (visible uniquement quand deplie) -->
@@ -4922,7 +4917,12 @@
                     const price = data.price.price;
                     const priceFormatted = `$${price?.toLocaleString('en-US', { minimumFractionDigits: 2 }) || '--'}`;
                     document.getElementById('price-value').textContent = priceFormatted;
-                    document.getElementById('price-value-header').textContent = priceFormatted;
+
+                    // Header price (supprimé, garder pour compatibilité)
+                    const priceHeaderEl = document.getElementById('price-value-header');
+                    if (priceHeaderEl) {
+                        priceHeaderEl.textContent = priceFormatted;
+                    }
 
                     const mom1m = data.price.fibo1?.['1m'];
                     const changeEl = document.getElementById('price-change');
@@ -4932,9 +4932,11 @@
                         const changeText = `${sign}${mom1m.toFixed(3)}% (1min)`;
                         changeEl.textContent = changeText;
                         changeEl.className = `price-change ${mom1m >= 0 ? 'positive' : 'negative'}`;
-                        // Mettre a jour aussi le header (visible quand plie)
-                        changeHeaderEl.textContent = changeText;
-                        changeHeaderEl.style.color = mom1m >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                        // Mettre a jour aussi le header (visible quand plie) - supprimé, garder pour compatibilité
+                        if (changeHeaderEl) {
+                            changeHeaderEl.textContent = changeText;
+                            changeHeaderEl.style.color = mom1m >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                        }
                     }
 
                     document.getElementById('spread-value').textContent = `${data.price.spread_points || '--'} pts`;
