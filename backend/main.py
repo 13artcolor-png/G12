@@ -357,15 +357,19 @@ def _build_status_data():
         except Exception as e:
             print(f"[API] Erreur risk manager: {e}")
 
-        # Logger stats
-        global_stats = {}
+        # Session stats (depuis stats_fibo*.json de la session actuelle)
+        session_stats = {}
         recent_decisions = []
         try:
+            from session_logger import get_session_logger
+            session_logger_inst = get_session_logger()
+            session_stats = session_logger_inst.get_session_stats()
+
+            # Decisions recentes depuis le logger
             logger = get_logger()
-            global_stats = logger.get_global_stats(7)
             recent_decisions = logger.get_recent_decisions(limit=20)
         except Exception as e:
-            print(f"[API] Erreur logger: {e}")
+            print(f"[API] Erreur session stats: {e}")
 
         return {
             "timestamp": datetime.now().isoformat(),
@@ -390,7 +394,7 @@ def _build_status_data():
                 "trading": trading_status,
                 "closer": closer_status
             },
-            "stats": global_stats,
+            "stats": session_stats,
             "decisions": recent_decisions
         }
     except Exception as e:
@@ -646,6 +650,34 @@ async def close_all_positions():
     closer_loop = get_closer_loop()
     result = closer_loop.close_all()
     return result
+
+
+@app.post("/api/restart")
+async def restart_backend():
+    """Redémarre le backend en exécutant le script restart_backend.bat"""
+    import subprocess
+    import os
+
+    try:
+        # Chemin du script de redémarrage
+        script_path = os.path.join(os.path.dirname(__file__), "..", "restart_backend.bat")
+
+        # Lancer le script en arrière-plan (détaché)
+        subprocess.Popen(
+            [script_path],
+            shell=True,
+            stdin=None,
+            stdout=None,
+            stderr=None,
+            close_fds=True,
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP if os.name == 'nt' else 0
+        )
+
+        print("[API] Script de redémarrage lancé")
+        return {"success": True, "message": "Redémarrage du backend en cours..."}
+    except Exception as e:
+        print(f"[API] Erreur redémarrage: {e}")
+        return {"success": False, "message": f"Erreur: {str(e)}"}
 
 
 # =============================================================================
@@ -1410,6 +1442,7 @@ async def test_strategist():
     """Test manuel du Strategist - execute une analyse complete"""
     try:
         from strategist import get_strategist
+        from session_logger import get_session_logger
         strategist = get_strategist()
 
         # 1. Recuperer les stats actuelles

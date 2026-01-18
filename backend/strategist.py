@@ -804,23 +804,33 @@ class Strategist:
             agent_trades = [t for t in session_trades if t.get('agent_id') == agent_name or t.get('agent', '').endswith(agent_name)]
 
             # Calculer l'inactivite INDIVIDUELLE de cet agent
-            if agent_trades:
-                # Dernier trade de cet agent
-                last_trade_time = None
-                for t in reversed(agent_trades):
-                    ts = t.get('timestamp') or t.get('close_time')
-                    if ts:
-                        try:
-                            last_trade_time = datetime.fromisoformat(ts).timestamp()
-                            break
-                        except (ValueError, TypeError):
-                            pass
-                if last_trade_time:
-                    agent_inactivity = current_time - last_trade_time
-                else:
-                    agent_inactivity = inactivity_seconds
+            # IMPORTANT: Surveiller les OUVERTURES de position (decisions BUY/SELL)
+            # pas les FERMETURES (trades), car les fermetures sont automatiques (TP/SL)
+            last_open_decision_time = None
+            try:
+                decisions_file = DATABASE_DIR / "decisions.json"
+                if decisions_file.exists():
+                    with open(decisions_file, 'r') as f:
+                        decisions_data = json.load(f)
+                        # Chercher derniere decision BUY/SELL executee de cet agent
+                        for decision in reversed(decisions_data.get('decisions', [])):
+                            if (decision.get('agent_id') == agent_name and
+                                decision.get('decision') in ['BUY', 'SELL', 'BUY_LIMIT', 'SELL_LIMIT'] and
+                                decision.get('executed') == True):
+                                ts = decision.get('timestamp')
+                                if ts:
+                                    try:
+                                        last_open_decision_time = datetime.fromisoformat(ts).timestamp()
+                                        break
+                                    except (ValueError, TypeError):
+                                        pass
+            except Exception as e:
+                print(f"[Strategist] Erreur lecture decisions.json: {e}")
+
+            if last_open_decision_time:
+                agent_inactivity = current_time - last_open_decision_time
             else:
-                # Agent n'a JAMAIS trade dans cette session
+                # Agent n'a JAMAIS ouvert de position dans cette session
                 agent_inactivity = inactivity_seconds
 
             # Seuil d'inactivite par agent: 20 minutes
