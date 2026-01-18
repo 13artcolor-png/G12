@@ -66,6 +66,12 @@ A chaque nouvelle requete de l'utilisateur:
     - Si un problème revient, c'est que la correction était insuffisante : analyser et traiter la cause profonde.
     - Ne jamais demander de relancer le bot si l'origine du problème n'a pas été corrigée.
     - Cette règle est PRIORITAIRE et INALIÉNABLE.
+- **RÈGLE ABSOLUE : PERSISTENCE DES SESSIONS**
+    - Une session G12 CONTINUE jusqu'à ce que l'utilisateur clique sur "Nouvelle Session"
+    - Relancer start.bat ou actualiser le dashboard NE DOIT JAMAIS créer une nouvelle session
+    - Le système doit TOUJOURS restaurer la session existante (session.json)
+    - Seul le bouton "Nouvelle Session" du dashboard peut clôturer une session
+    - Cette règle garantit la continuité des statistiques et graphiques
 - G12 n'est PAS un robot de trading classique
 - C'est un LABORATOIRE de recherche de strategies adaptatives
 - L'objectif est de decouvrir des strategies EXPONENTIELLES rentables

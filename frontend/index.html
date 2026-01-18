@@ -4749,8 +4749,8 @@
                 loadAllConfigs();
                 loadAgentAccounts();
                 loadApiKeys();  // Charger les cles API
-                // NE PAS charger l'historique des graphiques au demarrage (anciennes donnees)
-                // loadChartHistory(); // DESACTIVE - cause le probleme des anciennes courbes
+                // Charger l'historique des graphiques de la session actuelle
+                loadChartHistory(); // Restaure les 170 points de performance depuis le debut de la session
                 loadInactivitySettings(); // Charger les parametres d'alerte inactivite
                 loadStrategistSessionAnalysisConfig(); // Charger config rapport session
                 // Initialiser les graphiques
@@ -7073,7 +7073,7 @@
                 loadAgentAccounts();
                 loadSessionInfo();
                 loadStrategistInsights();
-                // loadChartHistory(); // DESACTIVE - cause le probleme des anciennes courbes
+                loadChartHistory(); // Restaure l'historique des graphiques de la session actuelle
             });
         </script>
         <style>
