@@ -79,6 +79,13 @@ class TradingLoop:
         self.running = True
         print("[TradingLoop] Demarrage...")
 
+        # IMPORTANT: Recharger la config de tous les agents au demarrage
+        # Ceci garantit que les agents utilisent la config fichier et pas un etat en memoire d'une session precedente
+        print("[TradingLoop] Rechargement config agents...")
+        for agent_id, agent in self.agents.items():
+            agent.reload_config()
+            print(f"[TradingLoop] {agent.name}: enabled={agent.enabled}")
+
         # Connexion MT5
         if not self.mt5.connect():
             print("[TradingLoop] Impossible de se connecter a MT5")

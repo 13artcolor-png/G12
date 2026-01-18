@@ -10,9 +10,10 @@ A chaque nouvelle requete de l'utilisateur:
 3. Ne JAMAIS faire de "fix rapide" sans chercher la cause racine
 4. Ne JAMAIS mettre de donnees fictives/manuelles
 5. Ne JAMAIS dire "c'est corrige" sans preuve
-6. ne jamais supposer , toujours chercher le probleme a la racie , ne pas faire : au cas ou . 
-7 Ne jamais supprimer des lignes de code non verifiées . si une ligne de code doit etre supprimée , verifie que ces ligne ne serviraient pas dans un autre processus. 
+6. ne jamais supposer , toujours chercher le probleme a la racie , ne pas faire : au cas ou .
+7. Ne jamais supprimer des lignes de code non verifiées . si une ligne de code doit etre supprimée , verifie que ces ligne ne serviraient pas dans un autre processus.
 8. Supprime tous les fichiers TMP créés inutiles , ca poulue l'appli.
+9. **UTILISER WebSearch AU MOINDRE DOUTE** - Ne JAMAIS deviner ou faire plusieurs tentatives. Si tu n'es pas 100% sur de la syntaxe/methode, utilise WebSearch IMMEDIATEMENT pour trouver la bonne facon de faire. Exemples: batch scripts Windows, commandes shell specifiques, syntaxe d'un framework, etc.
 
 
 ## Rappel des violations a ne plus commettre
@@ -21,6 +22,7 @@ A chaque nouvelle requete de l'utilisateur:
 - Ne pas mettre de valeurs manuelles dans les fichiers de config (balance_start, etc.)
 - Ne pas proposer de "pansement" - toujours la cause racine
 - Ne pas agir avant de comprendre le probleme
+- **NE JAMAIS DEVINER - Utiliser WebSearch immediatement si incertain** (exemple: 6 tentatives ratees pour stop.bat au lieu de chercher sur le web des le debut)
 
 
 
@@ -190,3 +192,4 @@ configuration
 8. Aucune taille de police < 18px (rappel)
 9. Verifier toutes les implementations a chaque creation d'element
 10. Ne JAMAIS affirmer qu'un fix frontend fonctionne sans test utilisateur
+11. **WebSearch au moindre doute - ZERO tentative a l'aveugle** - Si tu n'es pas certain a 100% de la syntaxe ou methode, cherche sur le web AVANT de coder. Ne jamais faire 2+ tentatives ratees.

@@ -1,18 +1,26 @@
 @echo off
-title G12 - Arret
-color 0C
+setlocal enabledelayedexpansion
 
-echo ============================================================
-echo                G12 - Arret en cours
-echo ============================================================
-echo.
+REM Trouver le PID sur le port 8012
+set "pid="
+for /f "tokens=5" %%P in ('netstat -ano ^| findstr ":8012" ^| findstr "LISTENING"') do set "pid=%%P"
 
-echo Arret des processus Python G12...
-taskkill /F /FI "WINDOWTITLE eq G12*" 2>nul
-taskkill /F /IM python.exe /FI "WINDOWTITLE eq G12*" 2>nul
+REM Si aucun processus trouve, quitter
+if "!pid!"=="" (
+    echo Aucun processus G12 trouve.
+    timeout /t 2 /nobreak >nul
+    exit
+)
 
-echo.
-echo G12 arrete.
-echo.
+REM Tuer le processus
+taskkill /F /PID !pid! >nul 2>&1
 
-timeout /t 2
+if !errorlevel! equ 0 (
+    echo G12 arrete.
+) else (
+    echo Erreur: Executez en tant qu'Administrateur.
+)
+
+timeout /t 2 /nobreak >nul
+endlocal
+exit

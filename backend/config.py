@@ -165,7 +165,7 @@ SESSIONS = {
 # FASTAPI (CONSTANTES)
 # =============================================================================
 API_CONFIG = {
-    "host": "0.0.0.0",
+    "host": "127.0.0.1",  # Localhost uniquement (securite)
     "port": 8012,
     "reload": False
 }

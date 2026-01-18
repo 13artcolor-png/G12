@@ -83,15 +83,52 @@ class DataAggregator:
         return default_weights
 
     def get_session_status(self) -> Dict:
-        """Détermine l'état de toutes les sessions (Paris time)"""
+        """Détermine l'état de toutes les sessions (Paris time) avec volatilité réelle et gestion week-end"""
         now = datetime.now()
         current_time = now.time()
-        
+        current_day = now.weekday()  # 0=Lundi, 6=Dimanche
+
         status = {
             "active_session": None,
             "sessions": {}
         }
 
+        # Calculer la volatilité REELLE du marché (pas la valeur statique)
+        real_volatility_pct = self.mt5.calculate_volatility("1h", 24)
+
+        # Classifier la volatilité selon des seuils réalistes pour BTC
+        if real_volatility_pct is not None:
+            if real_volatility_pct < 0.8:
+                real_volatility = "low"
+            elif real_volatility_pct < 1.5:
+                real_volatility = "medium"
+            else:
+                real_volatility = "high"
+            print(f"[Aggregator] Volatilite reelle: {real_volatility_pct:.2f}% -> {real_volatility.upper()}")
+        else:
+            real_volatility = "medium"  # Valeur par défaut si calcul impossible
+
+        # WEEK-END (samedi=5, dimanche=6): Pas de session institutionnelle
+        if current_day >= 5:
+            day_name = "Samedi" if current_day == 5 else "Dimanche"
+            print(f"[Aggregator] {day_name} detecte - Pas de session institutionnelle (marches Forex fermes)")
+
+            status["active_session"] = "weekend"
+            status["id"] = "weekend"
+            status["name"] = "Week-end"
+            status["volatility"] = real_volatility
+
+            # Marquer toutes les sessions comme inactives
+            for session_id, session in SESSIONS.items():
+                status["sessions"][session_id] = {
+                    "name": session["name"],
+                    "active": False,
+                    "volatility": real_volatility
+                }
+
+            return status
+
+        # SEMAINE (lundi à vendredi): Sessions normales
         for session_id, session in SESSIONS.items():
             start = dt_time.fromisoformat(session["start"])
             end = dt_time.fromisoformat(session["end"])
@@ -103,24 +140,24 @@ class DataAggregator:
             else:
                 if current_time >= start or current_time <= end:
                     is_active = True
-            
+
             status["sessions"][session_id] = {
                 "name": session["name"],
                 "active": is_active,
-                "volatility": session["volatility"]
+                "volatility": real_volatility  # Utiliser la volatilité REELLE au lieu de la statique
             }
-            
+
             if is_active:
                 status["active_session"] = session_id
                 # Copie des infos pour la compatibilité
                 status["id"] = session_id
                 status["name"] = session["name"]
-                status["volatility"] = session["volatility"]
+                status["volatility"] = real_volatility  # Volatilité réelle dynamique
 
         if not status["active_session"]:
             status["id"] = "unknown"
             status["name"] = "Unknown"
-            status["volatility"] = "medium"
+            status["volatility"] = real_volatility
 
         return status
 

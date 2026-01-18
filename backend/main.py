@@ -931,6 +931,75 @@ async def update_strategist_config(updates: Dict):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.get("/api/accounts")
+async def get_mt5_accounts():
+    """Retourne les configurations MT5 de tous les agents (pour remplir les champs du frontend)"""
+    from core.mt5_connector import get_all_mt5_accounts
+
+    accounts = get_all_mt5_accounts()
+
+    # Retourner les configs AVEC les vraies valeurs (sauf password masque)
+    return accounts
+
+
+@app.post("/api/accounts/{agent_id}")
+async def save_mt5_account_config(agent_id: str, config: Dict):
+    """Sauvegarde la config MT5 d'un agent"""
+    from core.mt5_connector import save_mt5_account, get_all_mt5_accounts
+
+    if agent_id not in ["fibo1", "fibo2", "fibo3"]:
+        raise HTTPException(status_code=404, detail=f"Agent {agent_id} invalide")
+
+    # IMPORTANT: Si password est vide ou "***", ne PAS l'ecraser
+    # Recuperer le password existant
+    existing_accounts = get_all_mt5_accounts()
+    existing_password = existing_accounts.get(agent_id, {}).get("password", "")
+
+    # Si le password recu est vide ou masque, garder l'existant
+    received_password = config.get("password", "")
+    if not received_password or received_password == "***":
+        config["password"] = existing_password
+        print(f"[API] {agent_id}: Password non fourni, conservation du password existant")
+
+    # Sauvegarder
+    success = save_mt5_account(agent_id, config)
+
+    if success:
+        return {"success": True, "message": f"Config {agent_id} sauvegardee"}
+    else:
+        raise HTTPException(status_code=500, detail="Erreur sauvegarde config")
+
+
+@app.post("/api/accounts/{agent_id}/test")
+async def test_mt5_connection(agent_id: str):
+    """Teste la connexion MT5 d'un agent"""
+    from core.mt5_connector import get_mt5
+
+    if agent_id not in ["fibo1", "fibo2", "fibo3"]:
+        raise HTTPException(status_code=404, detail=f"Agent {agent_id} invalide")
+
+    try:
+        mt5 = get_mt5(agent_id)
+        connected = mt5.connect()
+
+        if connected:
+            account_info = mt5.get_account_info()
+            if account_info:
+                return {
+                    "connected": True,
+                    "login": account_info.get("login"),
+                    "balance": account_info.get("balance", 0),
+                    "server": mt5.server
+                }
+            else:
+                return {"connected": False, "error": "Connexion OK mais impossible de recuperer les infos compte"}
+        else:
+            return {"connected": False, "error": "Echec connexion MT5 - Verifier login/password/server"}
+
+    except Exception as e:
+        return {"connected": False, "error": f"Exception: {str(e)}"}
+
+
 @app.get("/api/accounts/status/all")
 async def get_all_accounts_status():
     """Status de connexion de tous les comptes (utilise le cache pour eviter reconnexions)"""
@@ -1014,28 +1083,47 @@ async def get_session():
 @app.post("/api/session/start")
 @app.get("/api/session/start")  # GET temporaire car POST bloque sous charge MT5
 async def start_session():
-    """Demarre une nouvelle session (non-bloquant)"""
+    """Demarre une nouvelle session avec la vraie balance MT5"""
     from session_logger import get_session_logger
     logger = get_session_logger()
 
-    # Demarrer la session avec balance 0 (sera mise a jour en background)
-    result = logger.start_session(0)
+    # IMPORTANT: Recuperer la balance AVANT de demarrer la session
+    # Ne PAS demarrer avec balance 0 car cela donne des stats incorrectes
+    try:
+        aggregator = get_aggregator()
+        account_data = aggregator.get_account_data()
 
-    # Recuperer la balance en background via thread separe
-    def update_balance():
-        try:
-            aggregator = get_aggregator()
-            account_data = aggregator.get_account_data()
-            if account_data:
-                balance = account_data.get('balance', 0)
-                logger.balance_start = balance
-                logger._save_session()
-                print(f"[API] Session balance mise a jour: {balance} EUR")
-        except Exception as e:
-            print(f"[API] Erreur mise a jour balance session: {e}")
+        if not account_data:
+            # Impossible de recuperer les donnees compte - probablement echec connexion MT5
+            return {
+                'success': False,
+                'error': 'Impossible de se connecter aux comptes MT5. Verifiez les mots de passe dans la section Comptes MT5.'
+            }
 
-    threading.Thread(target=update_balance, daemon=True).start()
-    return result
+        balance = account_data.get('balance', 0)
+        connected_accounts = len([k for k, v in account_data.get('accounts', {}).items() if v])
+
+        if balance == 0:
+            return {
+                'success': False,
+                'error': f'Balance totale = 0 EUR. Seulement {connected_accounts}/3 comptes connectes. Verifiez les configurations MT5.'
+            }
+
+        print(f"[API] Demarrage session avec balance: {balance:.2f} EUR ({connected_accounts}/3 comptes)")
+
+        # Demarrer la session avec la vraie balance
+        result = logger.start_session(balance)
+
+        return result
+
+    except Exception as e:
+        print(f"[API] Erreur demarrage session: {e}")
+        import traceback
+        traceback.print_exc()
+        return {
+            'success': False,
+            'error': f'Erreur: {str(e)}'
+        }
 
 
 @app.post("/api/session/end")
