@@ -5673,19 +5673,36 @@
                 btn.disabled = true;
                 btn.textContent = 'Redemarrage...';
 
-                try {
-                    // Appeler l'endpoint de redemarrage
-                    await fetch(`${API_URL}/api/restart`, { method: 'POST' });
+                // IMPORTANT: Arrêter l'auto-refresh AVANT de redémarrer
+                // Sinon les requêtes toutes les 2s causent des timeouts pendant le redémarrage
+                if (refreshInterval) {
+                    clearInterval(refreshInterval);
+                    refreshInterval = null;
+                    console.log('[Restart] Auto-refresh arrêté pour éviter les timeouts');
+                }
 
-                    // Attendre 5 secondes pour que le backend redémarre
+                try {
+                    // Appeler l'endpoint de redemarrage (avec timeout court car le serveur va couper)
+                    fetch(`${API_URL}/api/restart`, {
+                        method: 'POST',
+                        signal: AbortSignal.timeout(3000)
+                    }).catch(() => {
+                        // Ignorer l'erreur car le serveur va couper la connexion
+                        console.log('[Restart] Serveur en cours de redémarrage...');
+                    });
+
+                    // Attendre 8 secondes pour que le backend redémarre complètement
                     setTimeout(() => {
+                        console.log('[Restart] Rechargement de la page...');
                         window.location.reload();
-                    }, 5000);
+                    }, 8000);
                 } catch (error) {
                     console.error('Erreur restart backend:', error);
                     alert('Erreur: ' + error.message);
                     btn.disabled = false;
                     btn.textContent = originalText;
+                    // Redémarrer l'auto-refresh si échec
+                    startAutoRefresh();
                 }
             }
 

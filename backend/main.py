@@ -365,9 +365,9 @@ def _build_status_data():
             session_logger_inst = get_session_logger()
             session_stats = session_logger_inst.get_session_stats()
 
-            # Decisions recentes depuis le logger
+            # Decisions de la session (toutes)
             logger = get_logger()
-            recent_decisions = logger.get_recent_decisions(limit=20)
+            recent_decisions = logger.get_recent_decisions(limit=5000)  # Augmenté pour toute la session
         except Exception as e:
             print(f"[API] Erreur session stats: {e}")
 
@@ -650,6 +650,52 @@ async def close_all_positions():
     closer_loop = get_closer_loop()
     result = closer_loop.close_all()
     return result
+
+
+@app.post("/api/position/close/{ticket}")
+async def close_position_by_ticket(ticket: int):
+    """Ferme une position specifique par son ticket"""
+    try:
+        from core.mt5_connector import get_mt5
+        from core.trading_loop import get_trading_loop
+
+        closer_loop = get_closer_loop()
+        trading_loop = get_trading_loop()
+
+        # Chercher la position sur tous les comptes agents
+        for agent_id in ["fibo1", "fibo2", "fibo3"]:
+            try:
+                agent_mt5 = get_mt5(agent_id)
+                if agent_mt5.connect():
+                    positions = agent_mt5.get_positions()
+                    agent = trading_loop.agents.get(agent_id)
+
+                    for position in positions:
+                        if position.get("ticket") == ticket:
+                            # Position trouvée - la fermer
+                            closer_loop._close_position(position, "MANUAL_CLOSE", trading_loop, agent)
+                            return {
+                                "success": True,
+                                "message": f"Position #{ticket} fermée manuellement",
+                                "ticket": ticket,
+                                "agent": agent_id
+                            }
+            except Exception as e:
+                print(f"[API] Erreur fermeture position {ticket} sur {agent_id}: {e}")
+
+        return {
+            "success": False,
+            "message": f"Position #{ticket} non trouvée",
+            "ticket": ticket
+        }
+
+    except Exception as e:
+        print(f"[API] Erreur fermeture position: {e}")
+        return {
+            "success": False,
+            "message": str(e),
+            "ticket": ticket
+        }
 
 
 @app.post("/api/restart")
@@ -1268,17 +1314,19 @@ async def strategist_logs(limit: int = 50):
     try:
         from strategist import get_strategist
         strategist = get_strategist()
+
+        # Charger les logs une seule fois (pas deux fois comme avant)
         logs = strategist.get_logs(limit) if hasattr(strategist, 'get_logs') else []
-        suggestions = strategist._load_logs()[:10] if hasattr(strategist, '_load_logs') else []
+
         return {
             'logs': logs,
-            'suggestions': suggestions
+            'total_logs': len(logs)
         }
     except Exception as e:
         logger.error(f"[Strategist] Erreur lors de get_logs: {e}", exc_info=True)
         return {
             'logs': [],
-            'suggestions': [],
+            'total_logs': 0,
             'error': str(e)
         }
 
