@@ -72,9 +72,8 @@ class G12Logger:
         trades = data.get("trades", [])
         trades.insert(0, trade)
 
-        # Limiter la taille
-        if len(trades) > self.max_trades:
-            trades = trades[:self.max_trades]
+        # PAS DE LIMITE - trades.json contient TOUS les trades de la session active
+        # La rotation se fait uniquement lors de end_session() qui archive tout
 
         data["trades"] = trades
         self._save_json(self.trades_file, data)

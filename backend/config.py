@@ -175,7 +175,7 @@ API_CONFIG = {
 # =============================================================================
 LOG_CONFIG = {
     "level": "INFO",
-    "max_trades_history": 1000,
+    "max_trades_history": 1000,  # NON UTILISE - trades.json conserve TOUS les trades de session
     "max_decisions_history": 5000
 }
 # =============================================================================
