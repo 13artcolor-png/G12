@@ -26,9 +26,24 @@ class Fibo2Agent(BaseAgent):
 
     def _get_higher_timeframe(self) -> str:
         """Retourne la timeframe superieure pour le calcul Fibo"""
-        # La timeframe signal de l'agent determine la timeframe superieure
+        # PRIORITE: Utiliser higher_timeframe depuis la config si defini
+        higher_tf = self.config.get("higher_timeframe")
+        
+        if higher_tf:
+            # Convertir le format MT5 (M15, M30, H1) vers format Binance (15m, 30m, 1h)
+            tf_conversion = {
+                "M1": "1m",
+                "M5": "5m",
+                "M15": "15m",
+                "M30": "30m",
+                "H1": "1h",
+                "H4": "4h",
+                "D1": "1d"
+            }
+            return tf_conversion.get(higher_tf, higher_tf.lower())
+        
+        # FALLBACK: Mapping automatique si higher_timeframe non defini
         signal_tf = self.config.get("signal_timeframe", "M15")
-
         tf_map = {
             "M1": "15m",   # M1 -> M15
             "M5": "1h",    # M5 -> H1
