@@ -25,6 +25,7 @@ class SessionLogger:
 
     def __init__(self):
         self.session_id = None
+        self.session_number = None  # Numero sequentiel de la session (1, 2, 3...)
         self.start_time = None
         self.trades = []
         self.decisions = []
@@ -34,6 +35,31 @@ class SessionLogger:
         self.excluded_tickets = set()  # Tickets MT5 a ignorer lors du sync
         self._load_session()
 
+    def _get_next_session_number(self) -> int:
+        """Calcule le numero de la prochaine session en lisant les fichiers dans sessions/"""
+        try:
+            # Lister tous les fichiers G12_*.json dans sessions/
+            session_files = list(SESSIONS_DIR.glob("G12_*.json"))
+            if not session_files:
+                return 1  # Premiere session
+            
+            # Extraire les numeros de session depuis les metadatas des fichiers
+            max_number = 0
+            for filepath in session_files:
+                try:
+                    with open(filepath, 'r') as f:
+                        data = json.load(f)
+                        session_num = data.get('metadata', {}).get('session_number', 0)
+                        if session_num > max_number:
+                            max_number = session_num
+                except Exception:
+                    continue
+            
+            return max_number + 1
+        except Exception as e:
+            print(f"[SessionLogger] Erreur calcul session_number: {e}")
+            return 1
+
     def _load_session(self):
         """Charge la session active depuis session.json"""
         try:
@@ -41,6 +67,7 @@ class SessionLogger:
                 with open(SESSION_FILE, 'r') as f:
                     data = json.load(f)
                     self.session_id = data.get('id')
+                    self.session_number = data.get('session_number')
                     self.start_time = data.get('start_time')
                     self.trades = data.get('trades', [])
                     self.decisions = data.get('decisions', [])
@@ -120,6 +147,7 @@ class SessionLogger:
         try:
             data = {
                 'id': self.session_id,
+                'session_number': self.session_number,
                 'start_time': self.start_time,
                 'trades': self.trades,
                 'decisions': self.decisions[-100:],  # Garder 100 dernieres decisions
@@ -136,6 +164,7 @@ class SessionLogger:
     def _start_new_session(self):
         """Demarre une nouvelle session"""
         self.session_id = datetime.now().strftime("%Y%m%d_%H%M%S")
+        self.session_number = self._get_next_session_number()
         self.start_time = datetime.now().isoformat()
         self.trades = []
         self.performance_history = {
@@ -145,7 +174,7 @@ class SessionLogger:
             "master": []
         }
         self._save_session()
-        print(f"[SessionLogger] Nouvelle session: {self.session_id}")
+        print(f"[SessionLogger] Nouvelle session: {self.session_id} (Session #{self.session_number})")
 
     def start_session(self, balance: float = 0, reset_stats: bool = True) -> Dict:
         """Demarre une nouvelle session (appel API)"""
@@ -331,6 +360,7 @@ class SessionLogger:
             # === METADATA ===
             "metadata": {
                 "session_id": self.session_id,
+                "session_number": self.session_number,
                 "filename": filename,
                 "generated_at": end_time.isoformat()
             },
@@ -1052,11 +1082,51 @@ class SessionLogger:
                     print(f"[SessionLogger] Impossible de connecter {agent_id}")
                     continue
 
-                # Recuperer les deals depuis le debut de la session
-                deals = mt5.get_history_deals(from_date=session_start)
-                print(f"[SessionLogger] {agent_id}: {len(deals)} deals trouves dans MT5")
+                # IMPORTANT: Recuperer position par position au lieu de par date
+                # car history_deals_get(from_date, to_date) a un delai pour les fermetures recentes
+                # Methode en 2 etapes:
+                # 1) Trouver tous les position_id de BTCUSD dans la periode
+                # 2) Pour chaque position, recuperer TOUS ses deals (pas de delai)
 
-                for deal in deals:
+                # Etape 1: Trouver tous les position_id
+                btcusd_positions = mt5.get_all_positions_ids(session_start, datetime.now())
+                if not btcusd_positions:
+                    print(f"[SessionLogger] {agent_id}: Aucune position BTCUSD trouvee")
+                    continue
+
+                print(f"[SessionLogger] {agent_id}: {len(btcusd_positions)} positions BTCUSD trouvees")
+
+                # Etape 2: Pour chaque position, recuperer TOUS ses deals
+                deals_to_process = []
+                for pos_id in btcusd_positions:
+                    pos_deals = mt5.get_deals_by_position(pos_id)
+                    if not pos_deals:
+                        continue
+
+                    # Verifier si position fermee (a un deal OUT)
+                    has_out = any(d['entry'] == 1 for d in pos_deals)
+                    if has_out:
+                        # Calculer profit total
+                        total_profit = sum(d['profit'] for d in pos_deals)
+                        # Trouver le deal de fermeture
+                        for d in pos_deals:
+                            if d['entry'] == 1:  # OUT
+                                dt = datetime.fromtimestamp(d['time'])
+                                if dt >= session_start:
+                                    deals_to_process.append({
+                                        'ticket': d['ticket'],
+                                        'position_id': pos_id,
+                                        'type': d['type'],
+                                        'volume': d['volume'],
+                                        'price': d['price'],
+                                        'profit': total_profit,
+                                        'time': d['time']
+                                    })
+                                break
+
+                print(f"[SessionLogger] {agent_id}: {len(deals_to_process)} fermetures pendant la session")
+
+                for deal in deals_to_process:
                     ticket = deal.get('ticket')
                     position_id = deal.get('position_id')
                     if not ticket:
@@ -1257,6 +1327,7 @@ class SessionLogger:
         if not self.session_id:
             return {
                 'id': None,
+                'session_number': None,
                 'active': False,
                 'message': 'Aucune session active. Cliquez sur "Nouvelle" pour demarrer.',
                 'start_time': None,
@@ -1299,6 +1370,7 @@ class SessionLogger:
 
         return {
             'id': self.session_id,
+            'session_number': self.session_number,
             'active': True,
             'start_time': self.start_time,
             'duration_minutes': self._get_duration_minutes(),
@@ -1307,6 +1379,63 @@ class SessionLogger:
             'win_rate': win_rate,
             'by_agent': by_agent,
             'balance_start': self.balance_start
+        }
+
+    def get_session_stats(self) -> Dict:
+        """
+        Retourne les stats de session pour l'API /api/status.
+        Format attendu par le frontend pour afficher le tableau "Stat Session".
+        """
+        # Si pas de session active, retourner stats vides
+        if not self.session_id:
+            return {}
+
+        # Lire les stats depuis stats_*.json (source unique de verite synchronisee avec MT5)
+        agents_stats = {}
+        total_pnl = 0
+        total_trades = 0
+        total_wins = 0
+        total_losses = 0
+
+        for agent_id in ['fibo1', 'fibo2', 'fibo3']:
+            stats_file = DATABASE_DIR / f"stats_{agent_id}.json"
+            if stats_file.exists():
+                try:
+                    with open(stats_file, 'r') as f:
+                        agent_stats = json.load(f)
+
+                    pnl = agent_stats.get('session_pnl', 0)
+                    trades = agent_stats.get('session_trades', 0)
+                    wins = agent_stats.get('session_wins', 0)
+                    losses = trades - wins
+
+                    agents_stats[agent_id] = {
+                        'total_profit': round(pnl, 2),
+                        'total_trades': trades,
+                        'winning_trades': wins,
+                        'losing_trades': losses,
+                        'win_rate': round((wins / trades * 100), 1) if trades > 0 else 0,
+                        'avg_profit': round(pnl / trades, 2) if trades > 0 else 0
+                    }
+
+                    total_pnl += pnl
+                    total_trades += trades
+                    total_wins += wins
+                    total_losses += losses
+
+                except Exception as e:
+                    print(f"[SessionLogger] Erreur lecture stats_{agent_id}.json pour API: {e}")
+
+        # Calculer win rate global
+        win_rate = round((total_wins / total_trades * 100), 1) if total_trades > 0 else 0
+
+        return {
+            'agents': agents_stats,
+            'total_profit': round(total_pnl, 2),
+            'total_trades': total_trades,
+            'total_wins': total_wins,
+            'total_losses': total_losses,
+            'win_rate': win_rate
         }
 
     def export_session(self) -> Dict:

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <!-- Version: 2026-01-17-19h00 - Polices axes augmentées 50% + marges ajustées -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -718,6 +719,7 @@
                 transform: translateX(400px);
                 opacity: 0;
             }
+
             to {
                 transform: translateX(0);
                 opacity: 1;
@@ -729,6 +731,7 @@
                 transform: translateX(0);
                 opacity: 1;
             }
+
             to {
                 transform: translateX(400px);
                 opacity: 0;
@@ -1121,7 +1124,7 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <h1>G12 - BTCUSD Trading Bot</h1>
+        <h1 id="main-title">G12 - BTCUSD Trading Bot</h1>
     </header>
 
     <div class="container">
@@ -1135,12 +1138,62 @@
             <button id="btn-stop" class="btn btn-danger" onclick="stopTrading()">Arreter Trading</button>
             <button class="btn btn-secondary" onclick="closeAllPositions()">Fermer Toutes Positions</button>
             <button class="btn btn-secondary" onclick="refreshData()">Rafraichir</button>
-            <button class="btn btn-warning" onclick="restartBackend()" style="background: #f59e0b; border-color: #f59e0b;">Redemarrer Backend</button>
+            <button class="btn btn-warning" onclick="restartBackend()"
+                style="background: #f59e0b; border-color: #f59e0b;">Redemarrer Backend</button>
             <span id="session-badge" class="session-badge">Session: --</span>
             <span id="mt5-status" class="status-badge disconnected">MT5: Deconnecte</span>
             <div id="trading-status" class="trading-indicator trading-stopped">
                 <span class="indicator-dot"></span>
                 <span class="indicator-text">TRADING ARRETE</span>
+            </div>
+        </div>
+
+        <!-- METRIQUES SESSION - 2 lignes de stats principales -->
+        <div class="card" style="padding: 20px; margin-bottom: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; color: var(--text-secondary); margin-bottom: 8px;">P&L Flottant</div>
+                    <div id="metric-pnl-floating"
+                        style="font-size: 28px; font-weight: 700; color: var(--text-primary);">0.00 EUR</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; color: var(--text-secondary); margin-bottom: 8px;">DD Session</div>
+                    <div id="metric-dd" style="font-size: 28px; font-weight: 700; color: var(--text-primary);">0.00%
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; color: var(--text-secondary); margin-bottom: 8px;">Capital Depart</div>
+                    <div id="metric-start-capital"
+                        style="font-size: 28px; font-weight: 700; color: var(--text-primary);">0.00 EUR</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; color: var(--text-secondary); margin-bottom: 8px;">Capital Total</div>
+                    <div id="metric-total-capital"
+                        style="font-size: 28px; font-weight: 700; color: var(--text-primary);">0.00 EUR</div>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; color: var(--text-secondary); margin-bottom: 8px;">P&L Session</div>
+                    <div id="metric-pnl" style="font-size: 28px; font-weight: 700; color: var(--accent-green);">+0.00
+                        EUR</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; color: var(--text-secondary); margin-bottom: 8px;">Win Rate</div>
+                    <div id="metric-winrate" style="font-size: 28px; font-weight: 700; color: var(--text-primary);">0%
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; color: var(--text-secondary); margin-bottom: 8px;">Frais</div>
+                    <div id="metric-fees" style="font-size: 28px; font-weight: 700; color: var(--text-primary);">+0.00
+                        EUR</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 18px; color: var(--text-secondary); margin-bottom: 8px;">Positions
+                        (Ouv/total)</div>
+                    <div id="metric-positions" style="font-size: 28px; font-weight: 700; color: var(--text-primary);">0
+                        / 0</div>
+                </div>
             </div>
         </div>
 
@@ -1154,171 +1207,185 @@
             </div>
             <div id="panel-analyse-content" class="collapsible-content">
 
-        <!-- DONNEES MARCHE - UNE SEULE fenetre pliable -->
-        <div class="card section" style="border-left: 4px solid var(--accent-blue); margin-bottom: 20px;">
-            <div class="card-title"
-                style="cursor: pointer; display: flex; justify-content: flex-end; align-items: center;"
-                onclick="toggleSection('market-data')">
-                <span id="market-data-icon" class="collapsible-icon">▼</span>
-            </div>
-            <div id="market-data-content" class="collapsible-content">
-                <!-- Grille de donnees -->
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding: 0 20px;">
-                    <!-- Col 1: Prix -->
-                    <div style="padding: 12px; background: rgba(59,130,246,0.05); border-radius: 8px;">
-                        <div
-                            style="font-size: 18px; color: var(--accent-blue); margin-bottom: 12px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
-                            PRIX</div>
-                        <!-- Prix BTC et variation -->
-                        <div style="text-align: center; padding: 8px 0; margin-bottom: 8px;">
-                            <div id="price-value" style="font-size: 28px; font-weight: 700;">$--</div>
-                            <div id="price-change" class="price-change" style="font-size: 18px;">--</div>
+                <!-- DONNEES MARCHE - UNE SEULE fenetre pliable -->
+                <div class="card section" style="border-left: 4px solid var(--accent-blue); margin-bottom: 20px;">
+                    <div class="card-title"
+                        style="cursor: pointer; display: flex; justify-content: flex-end; align-items: center;"
+                        onclick="toggleSection('market-data')">
+                        <span id="market-data-icon" class="collapsible-icon">▼</span>
+                    </div>
+                    <div id="market-data-content" class="collapsible-content">
+                        <!-- Grille de donnees -->
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding: 0 20px;">
+                            <!-- Col 1: Prix -->
+                            <div style="padding: 12px; background: rgba(59,130,246,0.05); border-radius: 8px;">
+                                <div
+                                    style="font-size: 18px; color: var(--accent-blue); margin-bottom: 12px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                                    PRIX</div>
+                                <!-- Prix BTC et variation -->
+                                <div style="text-align: center; padding: 8px 0; margin-bottom: 8px;">
+                                    <div id="price-value" style="font-size: 28px; font-weight: 700;">$--</div>
+                                    <div id="price-change" class="price-change" style="font-size: 18px;">--</div>
+                                </div>
+                                <div class="data-row" style="padding: 8px 0;"><span
+                                        class="data-label">Spread</span><span id="spread-value"
+                                        class="data-value">--</span></div>
+                                <div class="data-row" style="padding: 8px 0;"><span class="data-label">Mom
+                                        1m</span><span id="mom-1m" class="data-value">--</span></div>
+                                <div class="data-row" style="padding: 8px 0;"><span class="data-label">Mom
+                                        5m</span><span id="mom-5m" class="data-value">--</span></div>
+                                <div class="data-row" style="padding: 8px 0;"><span
+                                        class="data-label">Volatilite</span><span id="volatility"
+                                        class="data-value">--</span></div>
+                            </div>
+                            <!-- Col 2: Futures -->
+                            <div style="padding: 12px; background: rgba(245,158,11,0.05); border-radius: 8px;">
+                                <div
+                                    style="font-size: 18px; color: var(--accent-orange); margin-bottom: 12px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                                    FUTURES</div>
+                                <div class="data-row" style="padding: 8px 0;"><span
+                                        class="data-label">Funding</span><span id="funding-rate"
+                                        class="data-value">--</span></div>
+                                <div class="data-row" style="padding: 8px 0;"><span class="data-label">OI 1h</span><span
+                                        id="oi-change" class="data-value">--</span></div>
+                                <div class="data-row" style="padding: 8px 0;"><span class="data-label">L/S
+                                        Ratio</span><span id="ls-ratio" class="data-value">--</span></div>
+                                <div class="data-row" style="padding: 8px 0;"><span
+                                        class="data-label">Orderbook</span><span id="orderbook-bias"
+                                        class="data-value">--</span></div>
+                            </div>
+                            <!-- Col 3: Sentiment -->
+                            <div style="padding: 12px; background: rgba(16,185,129,0.05); border-radius: 8px;">
+                                <div
+                                    style="font-size: 18px; color: var(--accent-green); margin-bottom: 12px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                                    SENTIMENT</div>
+                                <div class="data-row" style="padding: 8px 0;"><span
+                                        class="data-label">Fear/Greed</span><span id="fg-value"
+                                        class="data-value">--</span></div>
+                                <div class="gauge" style="margin: 8px 0; height: 16px;">
+                                    <div id="fg-marker" class="gauge-marker"
+                                        style="left: 50%; height: 20px; top: -2px;"></div>
+                                </div>
+                                <div class="data-row" style="padding: 8px 0;"><span class="data-label">News</span><span
+                                        id="news-sentiment" class="data-value">--</span></div>
+                                <div class="data-row" style="padding: 8px 0;"><span class="data-label">Bias</span><span
+                                        id="global-bias" class="data-value">--</span></div>
+                            </div>
+                            <!-- Col 4: Analyse -->
+                            <div style="padding: 12px; background: rgba(139,92,246,0.05); border-radius: 8px;">
+                                <div
+                                    style="font-size: 18px; color: var(--accent-purple); margin-bottom: 12px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                                    ANALYSE</div>
+                                <div class="data-row" style="padding: 8px 0;"><span
+                                        class="data-label">Tendance</span><span id="analysis-bias"
+                                        class="data-value">--</span></div>
+                                <!-- Raisons detaillees (tooltip au hover) -->
+                                <div id="analysis-reasons"
+                                    style="font-size: 18px; color: #94a3b8; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.2); border-radius: 4px; display: none; max-height: 120px; overflow-y: auto;">
+                                </div>
+                                <div class="data-row" style="padding: 8px 0;"><span
+                                        class="data-label">Session</span><span id="current-session-name"
+                                        class="data-value">--</span></div>
+                                <div class="data-row" style="padding: 8px 0;"><span
+                                        class="data-label">Volatilite</span><span id="session-volatility"
+                                        class="data-value">--</span></div>
+                            </div>
                         </div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">Spread</span><span
-                                id="spread-value" class="data-value">--</span></div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">Mom 1m</span><span
-                                id="mom-1m" class="data-value">--</span></div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">Mom 5m</span><span
-                                id="mom-5m" class="data-value">--</span></div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">Volatilite</span><span
-                                id="volatility" class="data-value">--</span></div>
                     </div>
-                    <!-- Col 2: Futures -->
-                    <div style="padding: 12px; background: rgba(245,158,11,0.05); border-radius: 8px;">
-                        <div
-                            style="font-size: 18px; color: var(--accent-orange); margin-bottom: 12px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
-                            FUTURES</div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">Funding</span><span
-                                id="funding-rate" class="data-value">--</span></div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">OI 1h</span><span
-                                id="oi-change" class="data-value">--</span></div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">L/S Ratio</span><span
-                                id="ls-ratio" class="data-value">--</span></div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">Orderbook</span><span
-                                id="orderbook-bias" class="data-value">--</span></div>
-                    </div>
-                    <!-- Col 3: Sentiment -->
-                    <div style="padding: 12px; background: rgba(16,185,129,0.05); border-radius: 8px;">
-                        <div
-                            style="font-size: 18px; color: var(--accent-green); margin-bottom: 12px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
-                            SENTIMENT</div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">Fear/Greed</span><span
-                                id="fg-value" class="data-value">--</span></div>
-                        <div class="gauge" style="margin: 8px 0; height: 16px;">
-                            <div id="fg-marker" class="gauge-marker" style="left: 50%; height: 20px; top: -2px;"></div>
+                </div>
+
+                <!-- Main Grid: Compte + Positions + Decisions -->
+                <div class="grid-3-equal">
+                    <!-- Account - Multi-compte -->
+                    <div class="card section">
+                        <div class="card-title">Comptes MT5</div>
+                        <!-- FIBO1 -->
+                        <div style="margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">
+                            <div style="font-size: 18px; font-weight: 600; color: #3b82f6; margin-bottom: 4px;">FIBO1
+                            </div>
+                            <div class="data-row" style="padding: 2px 0;">
+                                <span class="data-label">Login</span>
+                                <span id="mt5-fibo1-login" class="data-value" style="font-size: 18px;">--</span>
+                            </div>
+                            <div class="data-row" style="padding: 2px 0;">
+                                <span class="data-label">Balance</span>
+                                <span id="mt5-fibo1-balance" class="data-value" style="font-size: 18px;">-- EUR</span>
+                            </div>
+                            <div class="data-row" style="padding: 2px 0;">
+                                <span class="data-label">Equity</span>
+                                <span id="mt5-fibo1-equity" class="data-value" style="font-size: 18px;">-- EUR</span>
+                            </div>
                         </div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">News</span><span
-                                id="news-sentiment" class="data-value">--</span></div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">Bias</span><span
-                                id="global-bias" class="data-value">--</span></div>
-                    </div>
-                    <!-- Col 4: Analyse -->
-                    <div style="padding: 12px; background: rgba(139,92,246,0.05); border-radius: 8px;">
-                        <div
-                            style="font-size: 18px; color: var(--accent-purple); margin-bottom: 12px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
-                            ANALYSE</div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">Tendance</span><span
-                                id="analysis-bias" class="data-value">--</span></div>
-                        <!-- Raisons detaillees (tooltip au hover) -->
-                        <div id="analysis-reasons" style="font-size: 18px; color: #94a3b8; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.2); border-radius: 4px; display: none; max-height: 120px; overflow-y: auto;">
+                        <!-- FIBO2 -->
+                        <div style="margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">
+                            <div style="font-size: 18px; font-weight: 600; color: #10b981; margin-bottom: 4px;">FIBO2
+                            </div>
+                            <div class="data-row" style="padding: 2px 0;">
+                                <span class="data-label">Login</span>
+                                <span id="mt5-fibo2-login" class="data-value" style="font-size: 18px;">--</span>
+                            </div>
+                            <div class="data-row" style="padding: 2px 0;">
+                                <span class="data-label">Balance</span>
+                                <span id="mt5-fibo2-balance" class="data-value" style="font-size: 18px;">-- EUR</span>
+                            </div>
+                            <div class="data-row" style="padding: 2px 0;">
+                                <span class="data-label">Equity</span>
+                                <span id="mt5-fibo2-equity" class="data-value" style="font-size: 18px;">-- EUR</span>
+                            </div>
                         </div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">Session</span><span
-                                id="current-session-name" class="data-value">--</span></div>
-                        <div class="data-row" style="padding: 8px 0;"><span class="data-label">Volatilite</span><span
-                                id="session-volatility" class="data-value">--</span></div>
+                        <!-- FIBO3 -->
+                        <div style="margin-bottom: 8px;">
+                            <div style="font-size: 18px; font-weight: 600; color: #f59e0b; margin-bottom: 4px;">FIBO3
+                            </div>
+                            <div class="data-row" style="padding: 2px 0;">
+                                <span class="data-label">Login</span>
+                                <span id="mt5-fibo3-login" class="data-value" style="font-size: 18px;">--</span>
+                            </div>
+                            <div class="data-row" style="padding: 2px 0;">
+                                <span class="data-label">Balance</span>
+                                <span id="mt5-fibo3-balance" class="data-value" style="font-size: 18px;">-- EUR</span>
+                            </div>
+                            <div class="data-row" style="padding: 2px 0;">
+                                <span class="data-label">Equity</span>
+                                <span id="mt5-fibo3-equity" class="data-value" style="font-size: 18px;">-- EUR</span>
+                            </div>
+                        </div>
+                        <!-- Total -->
+                        <div style="border-top: 2px solid var(--accent-blue); padding-top: 8px; margin-top: 8px;">
+                            <div class="data-row">
+                                <span class="data-label" style="font-weight: 700;">TOTAL Balance</span>
+                                <span id="mt5-total-balance" class="data-value"
+                                    style="font-size: 20px; color: var(--accent-blue);">-- EUR</span>
+                            </div>
+                            <div class="data-row">
+                                <span class="data-label">Positions</span>
+                                <span id="position-count" class="data-value">0</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Main Grid: Compte + Positions + Decisions -->
-        <div class="grid-3-equal">
-            <!-- Account - Multi-compte -->
-            <div class="card section">
-                <div class="card-title">Comptes MT5</div>
-                <!-- FIBO1 -->
-                <div style="margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">
-                    <div style="font-size: 18px; font-weight: 600; color: #3b82f6; margin-bottom: 4px;">FIBO1</div>
-                    <div class="data-row" style="padding: 2px 0;">
-                        <span class="data-label">Login</span>
-                        <span id="mt5-fibo1-login" class="data-value" style="font-size: 18px;">--</span>
+                    <!-- Positions -->
+                    <div class="card section">
+                        <div class="card-title">Positions Ouvertes (<span id="positions-count">0</span>)</div>
+                        <div id="positions-container">
+                            <div
+                                style="color: var(--text-secondary); font-size: 18px; text-align: center; padding: 20px;">
+                                Aucune position
+                            </div>
+                        </div>
                     </div>
-                    <div class="data-row" style="padding: 2px 0;">
-                        <span class="data-label">Balance</span>
-                        <span id="mt5-fibo1-balance" class="data-value" style="font-size: 18px;">-- EUR</span>
-                    </div>
-                    <div class="data-row" style="padding: 2px 0;">
-                        <span class="data-label">Equity</span>
-                        <span id="mt5-fibo1-equity" class="data-value" style="font-size: 18px;">-- EUR</span>
-                    </div>
-                </div>
-                <!-- FIBO2 -->
-                <div style="margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">
-                    <div style="font-size: 18px; font-weight: 600; color: #10b981; margin-bottom: 4px;">FIBO2</div>
-                    <div class="data-row" style="padding: 2px 0;">
-                        <span class="data-label">Login</span>
-                        <span id="mt5-fibo2-login" class="data-value" style="font-size: 18px;">--</span>
-                    </div>
-                    <div class="data-row" style="padding: 2px 0;">
-                        <span class="data-label">Balance</span>
-                        <span id="mt5-fibo2-balance" class="data-value" style="font-size: 18px;">-- EUR</span>
-                    </div>
-                    <div class="data-row" style="padding: 2px 0;">
-                        <span class="data-label">Equity</span>
-                        <span id="mt5-fibo2-equity" class="data-value" style="font-size: 18px;">-- EUR</span>
-                    </div>
-                </div>
-                <!-- FIBO3 -->
-                <div style="margin-bottom: 8px;">
-                    <div style="font-size: 18px; font-weight: 600; color: #f59e0b; margin-bottom: 4px;">FIBO3
-                    </div>
-                    <div class="data-row" style="padding: 2px 0;">
-                        <span class="data-label">Login</span>
-                        <span id="mt5-fibo3-login" class="data-value" style="font-size: 18px;">--</span>
-                    </div>
-                    <div class="data-row" style="padding: 2px 0;">
-                        <span class="data-label">Balance</span>
-                        <span id="mt5-fibo3-balance" class="data-value" style="font-size: 18px;">-- EUR</span>
-                    </div>
-                    <div class="data-row" style="padding: 2px 0;">
-                        <span class="data-label">Equity</span>
-                        <span id="mt5-fibo3-equity" class="data-value" style="font-size: 18px;">-- EUR</span>
-                    </div>
-                </div>
-                <!-- Total -->
-                <div style="border-top: 2px solid var(--accent-blue); padding-top: 8px; margin-top: 8px;">
-                    <div class="data-row">
-                        <span class="data-label" style="font-weight: 700;">TOTAL Balance</span>
-                        <span id="mt5-total-balance" class="data-value"
-                            style="font-size: 20px; color: var(--accent-blue);">-- EUR</span>
-                    </div>
-                    <div class="data-row">
-                        <span class="data-label">Positions</span>
-                        <span id="position-count" class="data-value">0</span>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Positions -->
-            <div class="card section">
-                <div class="card-title">Positions Ouvertes (<span id="positions-count">0</span>)</div>
-                <div id="positions-container">
-                    <div style="color: var(--text-secondary); font-size: 18px; text-align: center; padding: 20px;">
-                        Aucune position
+                    <!-- Activity Log -->
+                    <div class="card section">
+                        <div class="card-title">Dernieres Decisions</div>
+                        <div id="decisions-log">
+                            <div
+                                style="color: var(--text-secondary); font-size: 18px; text-align: center; padding: 20px;">
+                                Aucune decision
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Activity Log -->
-            <div class="card section">
-                <div class="card-title">Dernieres Decisions</div>
-                <div id="decisions-log">
-                    <div style="color: var(--text-secondary); font-size: 18px; text-align: center; padding: 20px;">
-                        Aucune decision
-                    </div>
-                </div>
-            </div>
-        </div>
 
             </div><!-- Fin panel-analyse-content -->
         </div><!-- Fin Panel Analyse -->
@@ -1594,9 +1661,12 @@
 
                                 <!-- === VISION AI === -->
                                 <div style="border-top: 2px solid #3b82f6; margin: 12px 0; padding-top: 12px;">
-                                    <div style="font-size: 20px; font-weight: 600; color: #3b82f6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                    <div
+                                        style="font-size: 20px; font-weight: 600; color: #3b82f6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                                         📊 Vision AI
-                                        <span style="font-size: 14px; font-weight: 400; color: var(--text-secondary);">(Analyse graphiques)</span>
+                                        <span
+                                            style="font-size: 14px; font-weight: 400; color: var(--text-secondary);">(Analyse
+                                            graphiques)</span>
                                     </div>
                                     <div class="config-row">
                                         <label style="font-size: 18px;">Activer Vision <span class="tooltip-icon"
@@ -1612,11 +1682,12 @@
                                                 title="Timeframes des graphiques envoyés à l'IA (séparés par virgule). Ex: 1m,15m">?</span></label>
                                         <input type="text" id="cfg-fibo1-vision_timeframes" value="1m,15m"
                                             style="width: 160px; padding: 10px; font-size: 18px;"
-                                            placeholder="1m,15m,1h"
-                                            onchange="saveAgentConfig('fibo1')">
+                                            placeholder="1m,15m,1h" onchange="saveAgentConfig('fibo1')">
                                     </div>
-                                    <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4;">
-                                        ⚠️ Coût API: ~3-5x plus élevé | Modèles compatibles: Claude 3/4, GPT-4 Vision, Gemini Pro Vision
+                                    <div
+                                        style="font-size: 14px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4;">
+                                        ⚠️ Coût API: ~3-5x plus élevé | Modèles compatibles: Claude 3/4, GPT-4 Vision,
+                                        Gemini Pro Vision
                                     </div>
                                 </div>
 
@@ -1910,9 +1981,12 @@
 
                                 <!-- === VISION AI === -->
                                 <div style="border-top: 2px solid #10b981; margin: 12px 0; padding-top: 12px;">
-                                    <div style="font-size: 20px; font-weight: 600; color: #10b981; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                    <div
+                                        style="font-size: 20px; font-weight: 600; color: #10b981; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                                         📊 Vision AI
-                                        <span style="font-size: 14px; font-weight: 400; color: var(--text-secondary);">(Analyse graphiques)</span>
+                                        <span
+                                            style="font-size: 14px; font-weight: 400; color: var(--text-secondary);">(Analyse
+                                            graphiques)</span>
                                     </div>
                                     <div class="config-row">
                                         <label style="font-size: 18px;">Activer Vision <span class="tooltip-icon"
@@ -1928,11 +2002,12 @@
                                                 title="Timeframes des graphiques envoyés à l'IA (séparés par virgule). Ex: 5m,15m">?</span></label>
                                         <input type="text" id="cfg-fibo2-vision_timeframes" value="5m,15m"
                                             style="width: 160px; padding: 10px; font-size: 18px;"
-                                            placeholder="5m,15m,1h"
-                                            onchange="saveAgentConfig('fibo2')">
+                                            placeholder="5m,15m,1h" onchange="saveAgentConfig('fibo2')">
                                     </div>
-                                    <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4;">
-                                        ⚠️ Coût API: ~3-5x plus élevé | Modèles compatibles: Claude 3/4, GPT-4 Vision, Gemini Pro Vision
+                                    <div
+                                        style="font-size: 14px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4;">
+                                        ⚠️ Coût API: ~3-5x plus élevé | Modèles compatibles: Claude 3/4, GPT-4 Vision,
+                                        Gemini Pro Vision
                                     </div>
                                 </div>
 
@@ -2226,9 +2301,12 @@
 
                                 <!-- === VISION AI === -->
                                 <div style="border-top: 2px solid #f59e0b; margin: 12px 0; padding-top: 12px;">
-                                    <div style="font-size: 20px; font-weight: 600; color: #f59e0b; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                    <div
+                                        style="font-size: 20px; font-weight: 600; color: #f59e0b; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
                                         📊 Vision AI
-                                        <span style="font-size: 14px; font-weight: 400; color: var(--text-secondary);">(Analyse graphiques)</span>
+                                        <span
+                                            style="font-size: 14px; font-weight: 400; color: var(--text-secondary);">(Analyse
+                                            graphiques)</span>
                                     </div>
                                     <div class="config-row">
                                         <label style="font-size: 18px;">Activer Vision <span class="tooltip-icon"
@@ -2244,11 +2322,12 @@
                                                 title="Timeframes des graphiques envoyés à l'IA (séparés par virgule). Ex: 15m,1h">?</span></label>
                                         <input type="text" id="cfg-fibo3-vision_timeframes" value="15m,1h"
                                             style="width: 160px; padding: 10px; font-size: 18px;"
-                                            placeholder="15m,1h,4h"
-                                            onchange="saveAgentConfig('fibo3')">
+                                            placeholder="15m,1h,4h" onchange="saveAgentConfig('fibo3')">
                                     </div>
-                                    <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4;">
-                                        ⚠️ Coût API: ~3-5x plus élevé | Modèles compatibles: Claude 3/4, GPT-4 Vision, Gemini Pro Vision
+                                    <div
+                                        style="font-size: 14px; color: var(--text-secondary); margin-top: 4px; line-height: 1.4;">
+                                        ⚠️ Coût API: ~3-5x plus élevé | Modèles compatibles: Claude 3/4, GPT-4 Vision,
+                                        Gemini Pro Vision
                                     </div>
                                 </div>
 
@@ -2428,12 +2507,10 @@
                             Chargement...
                         </div>
                         <div style="margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                            <button class="btn btn-primary" style="font-size: 18px;"
-                                onclick="testStrategist()">
+                            <button class="btn btn-primary" style="font-size: 18px;" onclick="testStrategist()">
                                 Tester Maintenant
                             </button>
-                            <button class="btn btn-secondary" style="font-size: 18px;"
-                                onclick="openStrategistAlert()">
+                            <button class="btn btn-secondary" style="font-size: 18px;" onclick="openStrategistAlert()">
                                 Ouvrir Alerte
                             </button>
                         </div>
@@ -2487,23 +2564,32 @@
                 <!-- Sélecteur Agent -->
                 <div style="display: flex; gap: 12px; margin-bottom: 16px; align-items: center;">
                     <span style="font-size: 18px; color: var(--text-primary);">Agent:</span>
-                    <button id="pipeline-btn-fibo1" class="btn btn-primary" onclick="loadPipelineForAgent('fibo1')" style="font-size: 18px;">FIBO1</button>
-                    <button id="pipeline-btn-fibo2" class="btn btn-secondary" onclick="loadPipelineForAgent('fibo2')" style="font-size: 18px;">FIBO2</button>
-                    <button id="pipeline-btn-fibo3" class="btn btn-secondary" onclick="loadPipelineForAgent('fibo3')" style="font-size: 18px;">FIBO3</button>
-                    <button class="btn btn-info" onclick="refreshPipeline()" style="font-size: 18px; margin-left: auto;">🔄 Rafraîchir</button>
+                    <button id="pipeline-btn-fibo1" class="btn btn-primary" onclick="loadPipelineForAgent('fibo1')"
+                        style="font-size: 18px;">FIBO1</button>
+                    <button id="pipeline-btn-fibo2" class="btn btn-secondary" onclick="loadPipelineForAgent('fibo2')"
+                        style="font-size: 18px;">FIBO2</button>
+                    <button id="pipeline-btn-fibo3" class="btn btn-secondary" onclick="loadPipelineForAgent('fibo3')"
+                        style="font-size: 18px;">FIBO3</button>
+                    <button class="btn btn-info" onclick="refreshPipeline()"
+                        style="font-size: 18px; margin-left: auto;">🔄 Rafraîchir</button>
                 </div>
 
                 <!-- Dernier Pipeline -->
-                <div id="pipeline-latest-container" style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 20px;">
-                    <div id="pipeline-loading" style="text-align: center; padding: 40px; color: var(--text-secondary); font-size: 18px;">
+                <div id="pipeline-latest-container"
+                    style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 20px;">
+                    <div id="pipeline-loading"
+                        style="text-align: center; padding: 40px; color: var(--text-secondary); font-size: 18px;">
                         Chargement du pipeline...
                     </div>
-                    <div id="pipeline-no-data" style="display: none; text-align: center; padding: 40px; color: var(--text-secondary); font-size: 18px;">
-                        Aucun pipeline disponible. Effectuez une action (ouverture/fermeture de position) pour voir le pipeline.
+                    <div id="pipeline-no-data"
+                        style="display: none; text-align: center; padding: 40px; color: var(--text-secondary); font-size: 18px;">
+                        Aucun pipeline disponible. Effectuez une action (ouverture/fermeture de position) pour voir le
+                        pipeline.
                     </div>
                     <div id="pipeline-display" style="display: none;">
                         <!-- En-tête -->
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                             <div>
                                 <div style="font-size: 20px; color: var(--accent-cyan); font-weight: bold;">
                                     Action: <span id="pipeline-action-type">--</span>
@@ -2514,12 +2600,16 @@
                                     Durée: <span id="pipeline-duration">--</span>ms
                                 </div>
                             </div>
-                            <button class="btn btn-info" onclick="exportCurrentPipeline()" style="font-size: 18px;">📥 Export JSON</button>
+                            <button class="btn btn-info" onclick="exportCurrentPipeline()" style="font-size: 18px;">📥
+                                Export JSON</button>
                         </div>
 
                         <!-- Timeline Graphique -->
-                        <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 16px; margin-bottom: 20px;">
-                            <div style="font-size: 18px; color: var(--text-primary); margin-bottom: 12px; font-weight: bold;">Timeline</div>
+                        <div
+                            style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 16px; margin-bottom: 20px;">
+                            <div
+                                style="font-size: 18px; color: var(--text-primary); margin-bottom: 12px; font-weight: bold;">
+                                Timeline</div>
                             <div id="pipeline-timeline-bars" style="display: flex; flex-direction: column; gap: 8px;">
                                 <!-- Barres de progression générées dynamiquement -->
                             </div>
@@ -2852,7 +2942,7 @@
 
             // Wrapper pour fetch() qui ajoute automatiquement l'authentification
             const originalFetch = window.fetch;
-            window.fetch = function(url, options = {}) {
+            window.fetch = function (url, options = {}) {
                 // Ajouter l'en-tête d'authentification pour toutes les requêtes vers /api/*
                 if (typeof url === 'string' && url.includes('/api/')) {
                     options.headers = options.headers || {};
@@ -2984,9 +3074,9 @@
                 steps.forEach(step => {
                     const percentage = (step.duration_ms / totalDuration) * 100;
                     const statusColor = step.status === 'success' ? 'var(--accent-green)' :
-                                       step.status === 'warning' ? 'var(--accent-orange)' : 'var(--accent-red)';
+                        step.status === 'warning' ? 'var(--accent-orange)' : 'var(--accent-red)';
                     const statusIcon = step.status === 'success' ? '✓' :
-                                      step.status === 'warning' ? '⚠' : '✗';
+                        step.status === 'warning' ? '⚠' : '✗';
 
                     const barHtml = `
                         <div style="display: flex; align-items: center; gap: 12px;">
@@ -3010,9 +3100,9 @@
 
                 steps.forEach(step => {
                     const statusColor = step.status === 'success' ? 'var(--accent-green)' :
-                                       step.status === 'warning' ? 'var(--accent-orange)' : 'var(--accent-red)';
+                        step.status === 'warning' ? 'var(--accent-orange)' : 'var(--accent-red)';
                     const statusIcon = step.status === 'success' ? '✓' :
-                                      step.status === 'warning' ? '⚠' : '✗';
+                        step.status === 'warning' ? '⚠' : '✗';
 
                     const detailsHtml = Object.entries(step.details || {})
                         .map(([key, value]) => `<div style="margin-left: 20px; font-size: 16px; color: var(--text-secondary);">• ${key}: ${JSON.stringify(value)}</div>`)
@@ -5083,10 +5173,34 @@
                     floatingPnl = data.positions.reduce((sum, pos) => sum + (pos.profit || 0), 0);
                     console.log(`[P&L] Calcule depuis positions (${data.positions.length}): ${floatingPnl.toFixed(2)} EUR`);
                 }
-                const floatingPnlEl = document.getElementById('metric-floating-pnl');
+                const floatingPnlEl = document.getElementById('metric-pnl-floating');
                 if (floatingPnlEl) {
                     floatingPnlEl.textContent = `${floatingPnl >= 0 ? '+' : ''}${floatingPnl.toFixed(2)} EUR`;
                     floatingPnlEl.style.color = floatingPnl >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                }
+
+                // Positions (Ouv/total) - Calculer positions ouvertes et total trades
+                const positionsCount = data.positions?.length || 0;
+                const tradesTotal = data.stats?.total_trades || 0;
+                const metricPosEl = document.getElementById('metric-positions');
+                if (metricPosEl) {
+                    metricPosEl.textContent = `${positionsCount} / ${tradesTotal}`;
+                    metricPosEl.style.color = positionsCount > 0 ? 'var(--accent-yellow)' : 'var(--text-primary)';
+                }
+
+                // Frais - Calculer depuis les positions ouvertes (swap + commission)
+                let totalFees = 0;
+                if (data.positions) {
+                    totalFees = data.positions.reduce((sum, pos) => {
+                        const swap = pos.swap || 0;
+                        const commission = pos.commission || 0;
+                        return sum + swap + commission;
+                    }, 0);
+                }
+                const metricFeesEl = document.getElementById('metric-fees');
+                if (metricFeesEl) {
+                    metricFeesEl.textContent = `${totalFees >= 0 ? '+' : ''}${totalFees.toFixed(2)} EUR`;
+                    metricFeesEl.style.color = totalFees >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
                 }
 
                 // Mise a jour du badge header P&L Flottant
@@ -5094,18 +5208,6 @@
                 if (headerPnlEl) {
                     headerPnlEl.textContent = `P&L: ${floatingPnl >= 0 ? '+' : ''}${floatingPnl.toFixed(2)} EUR`;
                     headerPnlEl.style.color = floatingPnl >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
-                }
-
-                // Frais (Swap) - Calculer le cumul des frais de toutes les positions ouvertes
-                let totalFees = 0;
-                if (data.positions && data.positions.length > 0) {
-                    totalFees = data.positions.reduce((sum, pos) => sum + (pos.swap || 0), 0);
-                    console.log(`[Frais] Cumul swap de ${data.positions.length} positions: ${totalFees.toFixed(2)} EUR`);
-                }
-                const feesEl = document.getElementById('metric-fees');
-                if (feesEl) {
-                    feesEl.textContent = `${totalFees >= 0 ? '+' : ''}${totalFees.toFixed(2)} EUR`;
-                    feesEl.style.color = totalFees >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
                 }
 
                 // Metrique Positions (Ouvertes / Total)
@@ -5146,6 +5248,15 @@
                     const balanceStart = data.g11_session?.balance_start || totalEquity;
                     if (startCapitalEl) {
                         startCapitalEl.textContent = `${balanceStart.toFixed(2)} EUR`;
+                    }
+
+                    // Mettre à jour le titre avec le numéro de session
+                    const sessionNumber = data.g11_session?.session_number;
+                    const mainTitle = document.getElementById('main-title');
+                    if (mainTitle && sessionNumber) {
+                        mainTitle.textContent = `G12 - BTCUSD Trading Bot - Session ${sessionNumber}`;
+                    } else if (mainTitle) {
+                        mainTitle.textContent = 'G12 - BTCUSD Trading Bot';
                     }
 
                     // DD Session en pourcentage du capital de départ
